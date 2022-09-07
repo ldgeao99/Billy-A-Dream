@@ -45,4 +45,34 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- 관리자페이지 대분류카테고리 요청처리 -->
+	<servlet>
+		<servlet-name>lcategory</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/lcategory-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>lcategory</servlet-name>
+		<url-pattern>*.lcate</url-pattern>
+	</servlet-mapping>
+	<!-- 관리자페이지 소분류카테고리 요청처리 -->
+	<servlet>
+		<servlet-name>scategory</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/scategory-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>scategory</servlet-name>
+		<url-pattern>*.scate</url-pattern>
+	</servlet-mapping>
 </web-app>
