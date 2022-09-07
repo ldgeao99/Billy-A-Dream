@@ -4,4 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
 <configuration>
 
+	<mappers><!-- 하나만 있을때도 쓸 수 있다. -->
+		<mapper resource="mybatis/lcategory.xml"/>
+	</mappers>
 </configuration>
