@@ -1,0 +1,16 @@
+sql 기본 설정
+
+관리자 계정 접속 
+사용자명 : sys
+비밀번호 : oracle as sysdba
+
+alter session set "_oracle_script"=true;
+
+create user billy identified by dream account unlock;
+
+grant connect, resource to billy;
+
+grant create table, create sequence to billy;
+
+alter user billy default tablespace users quota unlimited on users;
+
