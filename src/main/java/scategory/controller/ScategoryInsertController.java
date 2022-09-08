@@ -1,4 +1,4 @@
-package lcategory.controller;
+package scategory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import lcategory.model.LcategoryBean;
 import lcategory.model.LcategoryDao;
+import scategory.model.ScategoryBean;
 
 @Controller
-public class LcategoryInsertController {
-	private final String command="insert.lcate";
-	private String getPage="insertLcate";
-	private String gotoPage="redirect:/list.lcate";
+public class ScategoryInsertController {
+	private final String command="insert.scate";
+	private String getPage="insertScate";
+	private String gotoPage="redirect:/list.scate";
 	
 	@Autowired
 	LcategoryDao lcategoryDao;
@@ -24,8 +24,8 @@ public class LcategoryInsertController {
 		return getPage;
 	}
 	@RequestMapping(value = command,method = RequestMethod.POST)
-	public String gotoInsert(@ModelAttribute("lcategory") LcategoryBean lcategory) {
-		lcategoryDao.insertLcategory(lcategory);
+	public String gotoInsert(@ModelAttribute("scategory") ScategoryBean scategory) {
+		
 		return gotoPage;
 	}
 }

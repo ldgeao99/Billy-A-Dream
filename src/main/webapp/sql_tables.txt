@@ -16,12 +16,14 @@ alter user billy default tablespace users quota unlimited on users;
 
 --대분류 카테고리
 
+drop table lcategory;
 create table lcategory(
 no number primary key, 
 name varchar2(40),
-order number
+order_num number
 );
 
+drop sequence lcate_seq;
 create sequence lcate_seq
   increment by 1
   start with 1
@@ -29,11 +31,11 @@ create sequence lcate_seq
   maxvalue 10000
   nocache;
 
-insert into lcategory values(lcate.nextval,"모바일",1);
+insert into lcategory values(lcate_seq.nextval,'모바일',1);
 
-insert into lcategory values(lcate.nextval,"PC/노트북",2);
+insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
 
-insert into lcategory values(lcate.nextval,"카메라/DSLR",3);
+insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
 
 --소분류 카테고리
 
@@ -41,7 +43,7 @@ create table scategory(
 no number primary key, 
 name varchar2(40),
 lcate_no number,
-order number,
+order_num number,
 search_count number 
 );
 
@@ -52,12 +54,12 @@ create sequence scate_seq
   maxvalue 10000
   nocache;
 
-insert into scategory(no,name,lcate_no,order,search_count) values(scate_seq.nextval,"스마트폰",1,1,0);
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트폰',1,1,0);
 
-insert into scategory(no,name,lcate_no,order,search_count) values(scate_seq.nextval,"스마트워치",1,2,0);
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트워치',1,2,0);
 
-insert into scategory(no,name,lcate_no,order,search_count) values(scate_seq.nextval,"모니터",2,1,0);
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'모니터',2,1,0);
 
-insert into scategory(no,name,lcate_no,order,search_count) values(scate_seq.nextval,"노트북",2,2,0);
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'노트북',2,2,0);
 
-insert into scategory(no,name,lcate_no,order,search_count) values(scate_seq.nextval,"필름카메라",3,1,0);
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'필름카메라',3,1,0);
