@@ -1,0 +1,54 @@
+@layout('layouts/_default')
+@set('menu', 'forms')
+@set('sub', 'select')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Select</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>Customize the native select with custom CSS that changes the element’s initial appearance.</p>
+    <select class="form-select" aria-label="Default select example">
+      <option selected>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Sizing</h3>
+    <p>You may also choose from small and large custom selects.</p>
+    <select class="form-select form-select-lg" aria-label=".form-select-lg example">
+      <option selected>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+    <select class="form-select form-select-sm mt-3" aria-label=".form-select-sm example">
+      <option selected>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Disabled</h3>
+    <p>Add the <code>disabled</code> boolean attribute on a select to give it a grayed out appearance and remove pointer events.</p>
+    <select class="form-select" aria-label="Disabled select example" disabled>
+      <option selected>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+</div>
+@endsection

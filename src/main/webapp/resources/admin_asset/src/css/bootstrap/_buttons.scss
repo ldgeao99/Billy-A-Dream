@@ -1,0 +1,16 @@
+.btn-light {
+  @include button-variant(
+    #fff, // background
+    $input-border-color, // border
+    $body-color, // color
+    $gray-50, // hover-background
+    $input-border-color, // hover-border
+    $body-color, // hover-color
+    $gray-100, // active-background
+    $input-border-color, // active-border
+    $body-color, // active-color
+    #fff, // disabled-background
+    $input-border-color, // disabled-border
+    $text-muted, // disabled-color
+  )
+}

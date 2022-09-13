@@ -1,0 +1,99 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'buttons')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Buttons</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-12">
+    <h3 class="fw-black">Basic</h3>
+    <p>Bootstrap includes several predefined button styles, each serving its own semantic purpose.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-secondary">Secondary</button>
+      <button type="button" class="btn btn-success">Success</button>
+      <button type="button" class="btn btn-danger">Danger</button>
+      <button type="button" class="btn btn-warning">Warning</button>
+      <button type="button" class="btn btn-info">Info</button>
+      <button type="button" class="btn btn-dark">Dark</button>
+      <button type="button" class="btn btn-light">Light</button>
+      <button type="button" class="btn btn-link">Link</button>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Outline</h3>
+    <p>The outline button style removes all background images or colors from a button and gives it a lighter look.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-primary">Primary</button>
+      <button type="button" class="btn btn-outline-secondary">Secondary</button>
+      <button type="button" class="btn btn-outline-success">Success</button>
+      <button type="button" class="btn btn-outline-danger">Danger</button>
+      <button type="button" class="btn btn-outline-warning">Warning</button>
+      <button type="button" class="btn btn-outline-info">Info</button>
+      <button type="button" class="btn btn-outline-dark">Dark</button>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Sizes</h3>
+    <p>Larger or smaller buttons available.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-primary btn-sm">Smaller</button>
+      <button type="button" class="btn btn-primary">Default</button>
+      <button type="button" class="btn btn-primary btn-lg">Larger</button>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Leading icon</h3>
+    <p>Use icon in a button before the label.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2">
+        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" /></svg>
+        Download
+      </button>
+      <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
+        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" /></svg>
+        Upload
+      </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Trailing icon</h3>
+    <p>Use icon in a button after the label.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
+        Share
+        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" /></svg>
+      </button>
+      <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2">
+        Next
+        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
+      </button>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Disabled</h3>
+    <p>Make buttons look inactive.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-primary" disabled>Disabled button</button>
+      <a href="#" class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true">Disabled link</a>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Toggle states</h3>
+    <p>Toggle a button’s <code>active</code> state.</p>
+    <div class="hstack flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-primary" data-bs-toggle="button" autocomplete="off">Toggle button</button>
+      <a href="#" class="btn btn-outline-primary" role="button" data-bs-toggle="button">Toggle link</a>
+    </div>
+  </div>
+</div>
+@endsection

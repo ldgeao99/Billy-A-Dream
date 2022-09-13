@@ -1,0 +1,48 @@
+{
+  "title": "Mimity admin",
+  "folder": {
+    "css": "assets/css/",
+    "js": "assets/js/",
+    "img": "assets/img/",
+    "vendor": "assets/vendor/"
+  },
+  "desktop": "xl",
+  "inner_desktop": "lg",
+  "todos": [
+    {
+      "title": "Meeting date and time",
+      "done": true,
+      "important": false
+    },
+    {
+      "title": "Review action items from previous meeting",
+      "done": true,
+      "important": false
+    },
+    {
+      "title": "Review progress of project A",
+      "done": true,
+      "important": true
+    },
+    {
+      "title": "Decide on direction for project B",
+      "done": false,
+      "important": false
+    },
+    {
+      "title": "Discuss posibility of project C",
+      "done": false,
+      "important": false
+    },
+    {
+      "title": "Next steps for project A",
+      "done": false,
+      "important": false
+    },
+    {
+      "title": "Next steps for project B",
+      "done": false,
+      "important": false
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-forms')
+@set('sub', 'wysiwyg-editor')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">WYSIWYG editor</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-4 row-cols-1">
+  <div class="col">
+    <h3 class="fw-black">Example</h3>
+    <textarea class="summernote"><p>Hello World!</p>
+<p>Some initial <b>bold</b> text</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed expedita deserunt perferendis eaque quia blanditiis porro quas ipsum officiis earum? Dignissimos, delectus. Voluptas impedit obcaecati quidem, tempore beatae totam sint provident quis molestiae odio voluptatum animi laboriosam, eveniet debitis reiciendis? Similique, porro itaque! Quis quisquam earum vitae ratione. Repellendus saepe maxime quisquam nostrum! Maxime tempore illum accusamus fugiat placeat ratione velit voluptate deserunt nobis repellendus vitae laboriosam molestias commodi molestiae consequuntur sint iste, eaque qui aut incidunt, provident laudantium, et amet? Reiciendis, culpa. Consectetur accusantium id explicabo? Illum corporis iusto, ipsa optio est provident, dolor rerum animi et necessitatibus labore?</p>
+    </textarea>
+  </div>
+  <div class="col">
+    <h3 class="fw-black">Air-mode</h3>
+    <textarea class="summernote-air">
+      <p>This is an Air-mode editable area.</p>
+      <ul>
+        <li>Select a text to reveal the toolbar.</li>
+        <li>Edit rich document on-the-fly, so elastic!</li>
+      </ul>
+      <p>End of air-mode area</p>
+    </textarea>
+  </div>
+  <div class="col">
+    <h3 class="fw-black">Validation</h3>
+    <form class="was-validated">
+      <textarea class="summernote" required></textarea>
+      <div class="invalid-feedback">Example invalid feedback text</div>
+    </form>
+  </div>
+</div>
+@endsection
+
+@section('lib-css')
+<link rel="stylesheet" href="{{ folder.vendor }}summernote/summernote-lite.css">
+<link rel="stylesheet" href="{{ folder.css }}summernote-lite.css">
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}jquery/jquery.slim.js"></script>
+<script src="{{ folder.vendor }}summernote/summernote-lite.js"></script>
+<script>
+$(function () {
+
+  summernoteStyle()
+
+  $('.summernote').summernote({
+    minHeight: 100,
+    callbacks: {
+      onChange: function (contents, $editable) {
+        // fix https://github.com/summernote/summernote/issues/2631
+        if ($(this).summernote('isEmpty') && contents != '') {
+          $(this).summernote('code', '')
+        }
+      }
+    }
+  })
+
+  $('.summernote-air').summernote({
+    airMode: true
+  })
+
+})
+</script>
+@endsection

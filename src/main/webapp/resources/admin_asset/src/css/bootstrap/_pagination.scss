@@ -1,0 +1,25 @@
+.pagination {
+  margin-bottom: 0;
+}
+.page-link {
+  line-height: $input-btn-line-height;
+  min-width: add($pagination-padding-x * 2, ($pagination-border-width * 2) + 9px);
+  text-align: center;
+  .pagination-sm & {
+    min-width: add($pagination-padding-x-sm * 2, ($pagination-border-width * 2) + 9px);
+  }
+}
+.pagination-sm .page-link {
+  min-height: $input-height-sm;
+}
+.pagination-borderless {
+  .page-item.active .page-link,
+  .page-item.disabled .page-link,
+  .page-link {
+    border-color: transparent;
+  }
+  .page-item.active .page-link {
+    border-color: $pagination-active-border-color;
+    border-width: 0 0 $pagination-border-width 0;
+  }
+}

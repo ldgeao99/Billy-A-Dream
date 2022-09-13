@@ -1,0 +1,37 @@
+.todo-item {
+  padding: 0;
+  .form-check-input {
+    position: absolute;
+    left: $card-cap-padding-x;
+    font-size: 1.75rem;
+    border-radius: 50%;
+    @include media-breakpoint-up(sm) {
+      top: 50%;
+      margin-top: -1rem;
+    }
+    &:focus {
+      border-color: rgba(#000, .25);
+      box-shadow: none;
+    }
+    &:checked {
+      background-color: $gray-300;
+      border-color: $gray-300;
+      + div {
+        text-decoration: line-through;
+        text-decoration-color: $gray-300;
+        h5, p, .btn {
+          color: $gray-300 !important;
+        }
+      }
+    }
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem .5rem ($card-cap-padding-x + 2rem);
+  }
+  a {
+    color: inherit;
+  }
+}

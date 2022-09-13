@@ -1,0 +1,120 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'accordion')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Accordion</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>Click the accordions below to expand/collapse the accordion content.</p>
+    <div class="accordion" id="accordionBasic">
+      <div class="accordion-item">
+        <h6 class="accordion-header" id="headingBasicOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBasicOne" aria-expanded="false" aria-controls="collapseBasicOne">
+            <div class="d-flex flex-column">
+              <h6 class="text-reset">Connected devices</h6>
+              <small class="text-secondary">2 issues to fix</small>
+            </div>
+          </button>
+        </h6>
+        <div id="collapseBasicOne" class="accordion-collapse collapse" aria-labelledby="headingBasicOne" data-bs-parent="#accordionBasic">
+          <div class="accordion-body text-secondary">
+            Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h6 class="accordion-header" id="headingBasicTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBasicTwo" aria-expanded="false" aria-controls="collapseBasicTwo">
+            <div class="d-flex flex-column">
+              <h6 class="text-reset">Application permissions</h6>
+              <small class="text-secondary">4 apps allowed to track you</small>
+            </div>
+          </button>
+        </h6>
+        <div id="collapseBasicTwo" class="accordion-collapse collapse" aria-labelledby="headingBasicTwo" data-bs-parent="#accordionBasic">
+          <div class="accordion-body text-secondary">
+            Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h6 class="accordion-header" id="headingBasicThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBasicThree" aria-expanded="false" aria-controls="collapseBasicThree">
+            <div class="d-flex flex-column">
+              <h6 class="text-reset">Authentication & recovery</h6>
+              <small class="text-secondary">Unrecognized errors 2</small>
+            </div>
+          </button>
+        </h6>
+        <div id="collapseBasicThree" class="accordion-collapse collapse" aria-labelledby="headingBasicThree" data-bs-parent="#accordionBasic">
+          <div class="accordion-body text-secondary">
+            Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Flush</h3>
+    <p>Removed the default <code>background-color</code>, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.</p>
+    <div class="accordion accordion-flush" id="accordionFlush">
+      <div class="accordion-item">
+        <h6 class="accordion-header" id="headingFlushOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlushOne" aria-expanded="false" aria-controls="collapseFlushOne">
+            <div class="d-flex flex-column">
+              <h6 class="text-reset">Connected devices</h6>
+              <small class="text-secondary">2 issues to fix</small>
+            </div>
+          </button>
+        </h6>
+        <div id="collapseFlushOne" class="accordion-collapse collapse" aria-labelledby="headingFlushOne" data-bs-parent="#accordionFlush">
+          <div class="accordion-body text-secondary">
+            Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h6 class="accordion-header" id="headingFlushTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlushTwo" aria-expanded="false" aria-controls="collapseFlushTwo">
+            <div class="d-flex flex-column">
+              <h6 class="text-reset">Application permissions</h6>
+              <small class="text-secondary">4 apps allowed to track you</small>
+            </div>
+          </button>
+        </h6>
+        <div id="collapseFlushTwo" class="accordion-collapse collapse" aria-labelledby="headingFlushTwo" data-bs-parent="#accordionFlush">
+          <div class="accordion-body text-secondary">
+            Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h6 class="accordion-header" id="headingFlushThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlushThree" aria-expanded="false" aria-controls="collapseFlushThree">
+            <div class="d-flex flex-column">
+              <h6 class="text-reset">Authentication & recovery</h6>
+              <small class="text-secondary">Unrecognized errors 2</small>
+            </div>
+          </button>
+        </h6>
+        <div id="collapseFlushThree" class="accordion-collapse collapse" aria-labelledby="headingFlushThree" data-bs-parent="#accordionFlush">
+          <div class="accordion-body text-secondary">
+            Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content. It's also called placeholder (or filler) text.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

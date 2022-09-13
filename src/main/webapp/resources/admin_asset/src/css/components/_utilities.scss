@@ -1,0 +1,29 @@
+.max-h-\[300px\] {
+  max-height: 300px;
+}
+.fw-black {
+  font-weight: 900;
+}
+.divider-text {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: $text-muted;
+  font-size: 11px;
+  letter-spacing: .5px;
+  margin: 15px 0;
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background-color: $border-color;
+  }
+  &::before {
+    margin-right: 10px;
+  }
+  &::after {
+    margin-left: 10px;
+  }
+}

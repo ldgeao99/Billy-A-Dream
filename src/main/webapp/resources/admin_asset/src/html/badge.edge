@@ -1,0 +1,64 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'badge')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Badge</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>Badge is a small count and labeling component.</p>
+    <p>
+      <span class="badge bg-primary">Primary</span>
+      <span class="badge bg-secondary">Secondary</span>
+      <span class="badge bg-success">Success</span>
+      <span class="badge bg-danger">Danger</span>
+      <span class="badge bg-warning text-dark">Warning</span>
+      <span class="badge bg-info">Info</span>
+      <span class="badge bg-light text-dark">Light</span>
+      <span class="badge bg-dark">Dark</span>
+    </p>
+    <p>
+      <span class="badge rounded-pill bg-primary">Primary</span>
+      <span class="badge rounded-pill bg-secondary">Secondary</span>
+      <span class="badge rounded-pill bg-success">Success</span>
+      <span class="badge rounded-pill bg-danger">Danger</span>
+      <span class="badge rounded-pill bg-warning text-dark">Warning</span>
+      <span class="badge rounded-pill bg-info">Info</span>
+      <span class="badge rounded-pill bg-light text-dark">Light</span>
+      <span class="badge rounded-pill bg-dark">Dark</span>
+    </p>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Pairings</h3>
+    <p>Badges can be used as part of links or buttons to provide a counter or label.</p>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <button type="button" class="btn btn-primary">
+          Bootstrap <span class="badge bg-light text-dark">v5</span>
+        </button>
+      </li>
+      <li class="list-inline-item">
+        <button type="button" class="btn btn-outline-primary position-relative">
+          <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" /><path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" /></svg>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3 <span class="visually-hidden">unread messages</span></span>
+        </button>
+      </li>
+    </ul>
+    <p>
+      <a href="javascript:void(0)"><span class="badge rounded-pill bg-secondary">html</span></a>
+      <a href="javascript:void(0)"><span class="badge rounded-pill bg-light text-dark">css</span></a>
+      <a href="javascript:void(0)"><span class="badge rounded-pill bg-light text-dark">javascript</span></a>
+    </p>
+  </div>
+</div>
+@endsection

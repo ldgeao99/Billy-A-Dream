@@ -1,0 +1,281 @@
+@layout('layouts/_default')
+@set('menu', 'content')
+@set('sub', 'typography')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Content</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Typography</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="vstack gap-5">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Headings</h3>
+      <p>All HTML headings, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code></p>
+      <hr>
+      <h1>Heading 1</h1>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, officia maiores incidunt repellat quos itaque nisi, provident ut assumenda ipsam vel fuga voluptatem quia ea nulla error optio, totam praesentium. Corrupti non iste recusandae vitae. Corrupti, quidem optio adipisci rem veniam perspiciatis voluptates harum? Veritatis quas accusantium nemo dolor blanditiis!</p>
+      <h2>Heading 2</h2>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, officia maiores incidunt repellat quos itaque nisi, provident ut assumenda ipsam vel fuga voluptatem quia ea nulla error optio, totam praesentium. Corrupti non iste recusandae vitae. Corrupti, quidem optio adipisci rem veniam perspiciatis voluptates harum? Veritatis quas accusantium nemo dolor blanditiis!</p>
+      <h3>Heading 3</h3>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, officia maiores incidunt repellat quos itaque nisi, provident ut assumenda ipsam vel fuga voluptatem quia ea nulla error optio, totam praesentium. Corrupti non iste recusandae vitae. Corrupti, quidem optio adipisci rem veniam perspiciatis voluptates harum? Veritatis quas accusantium nemo dolor blanditiis!</p>
+      <h4>Heading 4</h4>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, officia maiores incidunt repellat quos itaque nisi, provident ut assumenda ipsam vel fuga voluptatem quia ea nulla error optio, totam praesentium. Corrupti non iste recusandae vitae. Corrupti, quidem optio adipisci rem veniam perspiciatis voluptates harum? Veritatis quas accusantium nemo dolor blanditiis!</p>
+      <h5>Heading 5</h5>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, officia maiores incidunt repellat quos itaque nisi, provident ut assumenda ipsam vel fuga voluptatem quia ea nulla error optio, totam praesentium. Corrupti non iste recusandae vitae. Corrupti, quidem optio adipisci rem veniam perspiciatis voluptates harum? Veritatis quas accusantium nemo dolor blanditiis!</p>
+      <h6>Heading 6</h6>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, officia maiores incidunt repellat quos itaque nisi, provident ut assumenda ipsam vel fuga voluptatem quia ea nulla error optio, totam praesentium. Corrupti non iste recusandae vitae. Corrupti, quidem optio adipisci rem veniam perspiciatis voluptates harum? Veritatis quas accusantium nemo dolor blanditiis!</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Display headings</h3>
+      <p>Traditional heading elements are designed to work best in the meat of your page content. When you need a heading to stand out, consider using a display heading—a larger, slightly more opinionated heading style.</p>
+      <hr>
+      <h1 class="display-1">Display 1</h1>
+      <h1 class="display-2">Display 2</h1>
+      <h1 class="display-3">Display 3</h1>
+      <h1 class="display-4">Display 4</h1>
+      <h1 class="display-5">Display 5</h1>
+      <h3 class="fw-black">Display 6</h3>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Lead</h3>
+      <p>Make a paragraph stand out by adding <code>.lead</code>.</p>
+      <hr>
+      <p class="lead">
+        This is a lead paragraph. It stands out from regular paragraphs.
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Inline text elements</h3>
+      <p>Styling for common inline HTML5 elements.</p>
+      <hr>
+      <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+      <p><del>This line of text is meant to be treated as deleted text.</del></p>
+      <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+      <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+      <p><u>This line of text will render as underlined.</u></p>
+      <p><small>This line of text is meant to be treated as fine print.</small></p>
+      <p><strong>This line rendered as bold text.</strong></p>
+      <p><em>This line rendered as italicized text.</em></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Abbreviations</h3>
+      <p>Stylized implementation of HTML’s <code>&lt;abbr&gt;</code> element for abbreviations and acronyms to show the expanded version on hover.</p>
+      <hr>
+      <p><abbr title="attribute">attr</abbr></p>
+      <p><abbr title="HyperText Markup Language" class="initialism">HTML</abbr></p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Blockquotes</h3>
+      <p>For quoting blocks of content from another source within your document.</p>
+      <hr>
+      <blockquote class="blockquote">
+        <p>A well-known quote, contained in a blockquote element.</p>
+      </blockquote>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Naming a source</h3>
+      <p>The HTML spec requires that blockquote attribution be placed outside the <code>&lt;blockquote&gt;</code>. When providing attribution, wrap your <code>&lt;blockquote&gt;</code> in a <code>&lt;figure&gt;</code> and use a <code>&lt;figcaption&gt;</code> or a block level element (e.g., <code>&lt;p&gt;</code>) with the <code>.blockquote-footer</code> class. Be sure to wrap the name of the source work in <code>&lt;cite&gt;</code> as well.</p>
+      <hr>
+      <figure>
+        <blockquote class="blockquote">
+          <p>A well-known quote, contained in a blockquote element.</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Lists</h3>
+      <hr>
+      <p>All lists—<code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and <code>&lt;dl&gt;</code>—have their <code>margin-top</code> removed and a <code>margin-bottom: 1rem</code>. Nested lists have no <code>margin-bottom</code>. We’ve also reset the <code>padding-left</code> on <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code> elements.</p>
+      <ul>
+        <li>All lists have their top margin removed</li>
+        <li>And their bottom margin normalized</li>
+        <li>Nested lists have no bottom margin
+          <ul>
+            <li>This way they have a more even appearance</li>
+            <li>Particularly when followed by more list items</li>
+          </ul>
+        </li>
+        <li>The left padding has also been reset</li>
+      </ul>
+      <ol>
+        <li>Here’s an ordered list</li>
+        <li>With a few list items</li>
+        <li>It has the same overall look</li>
+        <li>As the previous unordered list</li>
+      </ol>
+      <p class="mt-5">For simpler styling, clear hierarchy, and better spacing, description lists have updated <code>margin</code>s. <code>&lt;dd&gt;</code>s reset <code>margin-left</code> to <code>0</code> and add <code>margin-bottom: .5rem</code>. <code>&lt;dt&gt;</code>s are <strong>bolded</strong>.</p>
+      <dl>
+        <dt>Description lists</dt>
+        <dd>A description list is perfect for defining terms.</dd>
+        <dt>Term</dt>
+        <dd>Definition for the term.</dd>
+        <dd>A second definition for the same term.</dd>
+        <dt>Another term</dt>
+        <dd>Definition for this other term.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Unstyled list</h3>
+      <p>Remove the default <code>list-style</code> and left margin on list items (immediate children only). This only applies to immediate children list items, meaning you will need to add the class for any nested lists as well.</p>
+      <hr>
+      <ul class="list-unstyled">
+        <li>This is a list.</li>
+        <li>It appears completely unstyled.</li>
+        <li>Structurally, it's still a list.</li>
+        <li>However, this style only applies to immediate child elements.</li>
+        <li>Nested lists:
+          <ul>
+            <li>are unaffected by this style</li>
+            <li>will still show a bullet</li>
+            <li>and have appropriate left margin</li>
+          </ul>
+        </li>
+        <li>This may still come in handy in some situations.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Inline list</h3>
+      <p>Remove a list’s bullets and apply some light <code>margin</code> with a combination of two classes, <code>.list-inline</code> and <code>.list-inline-item</code>.</p>
+      <hr>
+      <ul class="list-inline">
+        <li class="list-inline-item">This is a list item.</li>
+        <li class="list-inline-item">And another one.</li>
+        <li class="list-inline-item">But they're displayed inline.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Description list alignment</h3>
+      <p>Align terms and descriptions horizontally by using our grid system’s predefined classes (or semantic mixins). For longer terms, you can optionally add a <code>.text-truncate</code> class to truncate the text with an ellipsis.</p>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-3">Description lists</dt>
+        <dd class="col-sm-9">A description list is perfect for defining terms.</dd>
+
+        <dt class="col-sm-3">Term</dt>
+        <dd class="col-sm-9">
+          <p>Definition for the term.</p>
+          <p>And some more placeholder definition text.</p>
+        </dd>
+
+        <dt class="col-sm-3">Another term</dt>
+        <dd class="col-sm-9">This definition is short, so no extra paragraphs or anything.</dd>
+
+        <dt class="col-sm-3 text-truncate">Truncated term is truncated</dt>
+        <dd class="col-sm-9">This can be useful when space is tight. Adds an ellipsis at the end.</dd>
+
+        <dt class="col-sm-3">Nesting</dt>
+        <dd class="col-sm-9">
+          <dl class="row">
+            <dt class="col-sm-4">Nested definition list</dt>
+            <dd class="col-sm-8">I heard you like definition lists. Let me put a definition list inside your definition list.</dd>
+          </dl>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Inline code</h3>
+      <p>Wrap inline snippets of code with <code>&lt;code&gt;</code>. Be sure to escape HTML angle brackets.</p>
+      <hr>
+      For example, <code>&lt;section&gt;</code> should be wrapped as inline.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Code blocks</h3>
+      <p>Use <code>&lt;pre&gt;</code>s for multiple lines of code.</p>
+      <hr>
+      <pre><code>&lt;p&gt;Sample text here...&lt;/p&gt;
+&lt;p&gt;And another line of sample text here...&lt;/p&gt;</code></pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Variables</h3>
+      <p>For indicating variables use the <code>&lt;var&gt;</code> tag.</p>
+      <hr>
+      <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">User input</h3>
+      <p>Use the <code>&lt;kbd&gt;</code> to indicate input that is typically entered via keyboard.</p>
+      <hr>
+      To switch directories, type <kbd>cd</kbd> followed by the name of the directory.<br>
+      To edit settings, press <kbd><kbd>ctrl</kbd> + <kbd>,</kbd></kbd>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Sample output</h3>
+      <p>For indicating sample output from a program use the <code>&lt;samp&gt;</code> tag.</p>
+      <hr>
+      <samp>This text is meant to be treated as sample output from a computer program.</samp>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Address</h3>
+      <p>The <code>&lt;address&gt;</code> element is updated to reset the browser default <code>font-style</code> from <code>italic</code> to <code>normal</code>. <code>line-height</code> is also now inherited, and <code>margin-bottom: 1rem</code> has been added. <code>&lt;address&gt;</code>s are for presenting contact information for the nearest ancestor (or an entire body of work). Preserve formatting by ending lines with <code>&lt;br&gt;</code>.</p>
+      <hr>
+      <address>
+        <strong>Twitter, Inc.</strong><br>
+        1355 Market St, Suite 900<br>
+        San Francisco, CA 94103<br>
+        <abbr title="Phone">P:</abbr> (123) 456-7890
+      </address>
+      <address>
+        <strong>Full Name</strong><br>
+        <a href="mailto:first.last@example.com">first.last@example.com</a>
+      </address>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-black">Summary</h3>
+      <p>The default <code>cursor</code> on summary is <code>text</code>, so we reset that to <code>pointer</code> to convey that the element can be interacted with by clicking on it.</p>
+      <hr>
+      <details>
+        <summary>Some details</summary>
+        <p>More info about the details.</p>
+      </details>
+      <details>
+        <summary>Even more details</summary>
+        <p>Here are even more details about the details.</p>
+      </details>
+    </div>
+  </div>
+</div>
+@endsection

@@ -1,0 +1,96 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-forms')
+@set('sub', 'input-mask')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Input mask</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="card">
+  <div class="card-body">
+    <div class="row g-5">
+      <div class="col-sm-6 col-md-4">
+        <div class="vstack gap-4">
+          <div>
+            <label class="form-label">Decimal</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="decimal" data-inputmask-digits="2" data-inputmask-groupSeparator=",">
+          </div>
+          <div>
+            <label class="form-label">Percentage</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="percentage">
+          </div>
+          <div>
+            <label class="form-label">Email formatting</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="email">
+          </div>
+          <div>
+            <label class="form-label">Currency</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="currency">
+          </div>
+          <div>
+            <label class="form-label">URL</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="url">
+          </div>
+          <div>
+            <label class="form-label">IP Address</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="ip">
+          </div>
+          <div>
+            <label class="form-label">MAC Address</label>
+            <input class="form-control inputmask" type="text" data-inputmask-alias="mac">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="vstack gap-4">
+          <div>
+            <label class="form-label">Date formatting</label>
+            <div class="vstack gap-2">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm" placeholder="yyyy-mm">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" placeholder="dd/mm/yyyy">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/yyyy" placeholder="mm/yyyy">
+            </div>
+          </div>
+          <div>
+            <label class="form-label">Time formatting</label>
+            <div class="vstack gap-2">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="HH:MM:ss" placeholder="HH:MM:ss">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="HH:MM" placeholder="HH:MM">
+            </div>
+          </div>
+          <div>
+            <label class="form-label">DateTime formatting</label>
+            <div class="vstack gap-2">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss" placeholder="yyyy-mm-dd HH:MM:ss">
+              <input class="form-control inputmask" type="text" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd HH:MM" placeholder="yyyy-mm-dd HH:MM">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <label class="form-label">Prefix and Suffix</label>
+        <div class="vstack gap-2">
+          <input class="form-control inputmask" type="text" data-inputmask-mask="invoice-*{*}">
+          <input class="form-control inputmask mt-2" type="text" data-inputmask-mask="*{*}.jpeg">
+          <input class="form-control inputmask mt-2" type="text" data-inputmask-mask="www.*{*}.com">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}inputmask/inputmask.js"></script>
+<script>
+Inputmask().mask(document.querySelectorAll('.inputmask'))
+</script>
+@endsection

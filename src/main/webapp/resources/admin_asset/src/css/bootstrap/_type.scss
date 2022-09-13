@@ -1,0 +1,12 @@
+.blockquote {
+  font-style: italic;
+  font-weight: 500;
+  padding-left: 1em;
+  border-left: .25rem solid $gray-200;
+  p:first-of-type:before {
+    content: open-quote;
+  }
+  p:last-of-type:after {
+    content: close-quote;
+  }
+}

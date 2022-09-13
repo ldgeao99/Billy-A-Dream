@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ folder.img }}favicon.ico" type="image/x-icon" />
+  <title>{{ title }}</title>
+
+  <!-- Required CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap">
+  <link rel="stylesheet" href="{{ folder.css }}simplebar.css">
+  <link rel="stylesheet" href="{{ folder.css }}style.css">
+  <link rel="stylesheet" href="{{ folder.css }}sidebar-dark.css" id="sidebar-theme"> <!-- available themes: dark, light, cyan, green, indigo, red -->
+
+  @!section('lib-css')
+</head>
+
+<body class="preloading">
+
+  <!-- Wrapper -->
+  <div id="wrapper" class="fixed-sidebar fixed-navbar"> <!-- available options: fixed-sidebar, fixed-navbar, fixed-footer, mini-sidebar -->
+
+    <!-- Sidebar -->
+    <div class="offcanvas offcanvas-start navbar-dark text-nowrap" tabindex="-1" id="sidebar" aria-label="sidebar">
+    {{--  <div class="offcanvas offcanvas-start navbar-light text-nowrap" tabindex="-1" id="sidebar" aria-label="sidebar">  --}}
+      <div class="offcanvas-header px-3">
+        <a href="javascript:void(0)" class="logo nav-link px-0 d-flex align-items-center">
+          @svg('src/img/logo.svg', 'width="24" height="24"')
+          <span class="h5 mb-0 text-reset ms-3">{{ title }}</span>
+        </a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body px-2 py-3 h-100" data-simplebar>
+        <ul class="navbar-nav mb-4" id="mainMenu">
+          <li class="nav-label px-2 small mt-3"><small>MENU</small></li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'dashboard' ? ' active' : '' }}" href="#dashboard-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'dashboard' ? 'true' : 'false' }}" aria-controls="dashboard-collapse">
+              @svg('node_modules/heroicons/outline/home.svg')
+              <span class="me-auto">Dashboard</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'dashboard' ? ' show' : '' }}" id="dashboard-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'dashboard-ecommerce' ? ' active' : '' }}" href="index.html">Ecommerce</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'dashboard-analytics' ? ' active' : '' }}" href="dashboard-analytics.html">Analytics</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'dashboard-crm' ? ' active' : '' }}" href="dashboard-crm.html">CRM</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'calendar' ? ' active' : '' }}" href="calendar.html">
+              @svg('node_modules/heroicons/outline/calendar.svg')
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'chat' ? ' active' : '' }}" href="chat.html">
+              @svg('node_modules/heroicons/outline/chat-alt.svg')
+              <span>Chat</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'email' ? ' active' : '' }}" href="email.html">
+              @svg('node_modules/heroicons/outline/mail.svg')
+              <span>Email</span>
+              <span class="badge rounded-pill ms-auto">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'file-manager' ? ' active' : '' }}" href="file-manager.html">
+              @svg('node_modules/heroicons/outline/folder.svg')
+              <span>File manager</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'forum' ? ' active' : '' }}" href="forum.html">
+              @svg('node_modules/heroicons/outline/chat-alt-2.svg')
+              <span>Forum</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'invoice' ? ' active' : '' }}" href="invoice.html">
+              @svg('node_modules/heroicons/outline/document-text.svg')
+              <span>Invoice</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'photos' ? ' active' : '' }}" href="photos.html">
+              @svg('node_modules/heroicons/outline/photograph.svg')
+              <span>Photos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'pricing' ? ' active' : '' }}" href="pricing.html">
+              @svg('node_modules/heroicons/outline/tag.svg')
+              <span>Pricing</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3{{ menu === 'todo' ? ' active' : '' }}" href="todo.html">
+              @svg('node_modules/heroicons/outline/clipboard-check.svg')
+              <span>Todo</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'blog' ? ' active' : '' }}" href="#blog-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'blog' ? 'true' : 'false' }}" aria-controls="blog-collapse">
+              @svg('node_modules/heroicons/outline/rss.svg')
+              <span class="me-auto">Blog</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'blog' ? ' show' : '' }}" id="blog-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'post-all' ? ' active' : '' }}" href="post-all.html">All posts</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'post-new' ? ' active' : '' }}" href="post-new.html">Add new post</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-label px-2 small mt-3"><small>PAGES</small></li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle" href="#authentication-collapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="authentication-collapse">
+              @svg('node_modules/heroicons/outline/lock-closed.svg')
+              <span class="me-auto">Authentication</span>
+            </a>
+            <div class="ms-5 collapse" id="authentication-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="signin.html">Sign in</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="forgot-password.html">Forgot password</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle" href="#error-collapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="error-collapse">
+              @svg('node_modules/heroicons/outline/exclamation-circle.svg')
+              <span class="me-auto">Error</span>
+            </a>
+            <div class="ms-5 collapse" id="error-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="error-404.html">Page not found</a></li>
+                <li class="nav-item"><a class="nav-link" href="error-500.html">Internal server error</a></li>
+                <li class="nav-item"><a class="nav-link" href="error-503.html">Service unavailable</a></li>
+                <li class="nav-item"><a class="nav-link" href="error-505.html">Forbidden access</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'user' ? ' active' : '' }}" href="#user-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'user' ? 'true' : 'false' }}" aria-controls="user-collapse">
+              @svg('node_modules/heroicons/outline/users.svg')
+              <span class="me-auto">User</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'user' ? ' show' : '' }}" id="user-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'user-settings' ? ' active' : '' }}" href="user-settings.html">User settings</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'user-list' ? ' active' : '' }}" href="user-list.html">User list</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-label px-2 small mt-3"><small>BOOTSTRAP</small></li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'content' ? ' active' : '' }}" href="#content-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'content' ? 'true' : 'false' }}" aria-controls="content-collapse">
+              @svg('node_modules/heroicons/outline/table.svg')
+              <span class="me-auto">Content</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'content' ? ' show' : '' }}" id="content-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'typography' ? ' active' : '' }}" href="typography.html">Typography</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'images' ? ' active' : '' }}" href="images.html">Images</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'tables' ? ' active' : '' }}" href="tables.html">Tables</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'components' ? ' active' : '' }}" href="#components-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'components' ? 'true' : 'false' }}" aria-controls="components-collapse">
+              @svg('node_modules/heroicons/outline/cube.svg')
+              <span class="me-auto">Components</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'components' ? ' show' : '' }}" id="components-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'accordion' ? ' active' : '' }}" href="accordion.html">Accordion</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'alerts' ? ' active' : '' }}" href="alerts.html">Alerts</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'badge' ? ' active' : '' }}" href="badge.html">Badge</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'breadcrumb' ? ' active' : '' }}" href="breadcrumb.html">Breadcrumb</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'buttons' ? ' active' : '' }}" href="buttons.html">Buttons</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'button-group' ? ' active' : '' }}" href="button-group.html">Button group</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'card' ? ' active' : '' }}" href="card.html">Card</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'carousel' ? ' active' : '' }}" href="carousel.html">Carousel</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'collapse' ? ' active' : '' }}" href="collapse.html">Collapse</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'dropdowns' ? ' active' : '' }}" href="dropdowns.html">Dropdowns</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'list-group' ? ' active' : '' }}" href="list-group.html">List group</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'modal' ? ' active' : '' }}" href="modal.html">Modal</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'navs-tabs' ? ' active' : '' }}" href="navs-tabs.html">Navs and tabs</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'navbar' ? ' active' : '' }}" href="navbar.html">Navbar</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'offcanvas' ? ' active' : '' }}" href="offcanvas.html">Offcanvas</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'pagination' ? ' active' : '' }}" href="pagination.html">Pagination</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'placeholders' ? ' active' : '' }}" href="placeholders.html">Placeholders</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'popovers' ? ' active' : '' }}" href="popovers.html">Popovers</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'progress' ? ' active' : '' }}" href="progress.html">Progress</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'scrollspy' ? ' active' : '' }}" href="scrollspy.html">Scrollspy</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'spinners' ? ' active' : '' }}" href="spinners.html">Spinners</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'toasts' ? ' active' : '' }}" href="toasts.html">Toasts</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'tooltips' ? ' active' : '' }}" href="tooltips.html">Tooltips</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'forms' ? ' active' : '' }}" href="#forms-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'forms' ? 'true' : 'false' }}" aria-controls="forms-collapse">
+              @svg('node_modules/heroicons/outline/document-text.svg')
+              <span class="me-auto">Forms</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'forms' ? ' show' : '' }}" id="forms-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'form-control' ? ' active' : '' }}" href="form-control.html">Form control</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'select' ? ' active' : '' }}" href="select.html">Select</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'checks-radios' ? ' active' : '' }}" href="checks-radios.html">Checks and radios</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'range' ? ' active' : '' }}" href="range.html">Range</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'input-group' ? ' active' : '' }}" href="input-group.html">Input group</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'floating-labels' ? ' active' : '' }}" href="floating-labels.html">Floating labels</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'layout' ? ' active' : '' }}" href="layout.html">Layout</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'validation' ? ' active' : '' }}" href="validation.html">Validation</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-label px-2 small mt-3"><small>ADVANCED</small></li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'advanced-components' ? ' active' : '' }}" href="#advanced-components-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'advanced-components' ? 'true' : 'false' }}" aria-controls="advanced-components-collapse">
+              @svg('node_modules/heroicons/outline/collection.svg')
+              <span class="me-auto">Components</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'advanced-components' ? ' show' : '' }}" id="advanced-components-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'datatables' ? ' active' : '' }}" href="datatables.html">DataTables</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'sortable-list' ? ' active' : '' }}" href="sortable-list.html">Sortable list</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'stepper' ? ' active' : '' }}" href="stepper.html">Stepper</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'timeline' ? ' active' : '' }}" href="timeline.html">Timeline</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'touch-slider' ? ' active' : '' }}" href="touch-slider.html">Touch slider</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'treeview' ? ' active' : '' }}" href="treeview.html">Treeview</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle{{ menu === 'advanced-forms' ? ' active' : '' }}" href="#advanced-forms-collapse" data-bs-toggle="collapse" role="button" aria-expanded="{{ menu === 'advanced-forms' ? 'true' : 'false' }}" aria-controls="advanced-forms-collapse">
+              @svg('node_modules/heroicons/outline/pencil-alt.svg')
+              <span class="me-auto">Forms</span>
+            </a>
+            <div class="ms-5 collapse{{ menu === 'advanced-forms' ? ' show' : '' }}" id="advanced-forms-collapse" data-bs-parent="#mainMenu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link{{ sub === 'autocomplete' ? ' active' : '' }}" href="autocomplete.html">Autocomplete</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'autosize' ? ' active' : '' }}" href="autosize.html">Autosize textarea</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'color-picker' ? ' active' : '' }}" href="color-picker.html">Color picker</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'date-picker' ? ' active' : '' }}" href="date-picker.html">Date picker</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'dropdown-select' ? ' active' : '' }}" href="dropdown-select.html">Dropdown select</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'input-mask' ? ' active' : '' }}" href="input-mask.html">Input mask</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'input-touchspin' ? ' active' : '' }}" href="input-touchspin.html">Input touchspin</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'markdown' ? ' active' : '' }}" href="markdown.html">Markdown</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'range-slider' ? ' active' : '' }}" href="range-slider.html">Range slider</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'tag-input' ? ' active' : '' }}" href="tag-input.html">Tag input</a></li>
+                <li class="nav-item"><a class="nav-link{{ sub === 'wysiwyg-editor' ? ' active' : '' }}" href="wysiwyg-editor.html">WYSIWYG editor</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Main header -->
+      <div id="main-header">
+        <nav class="navbar navbar-expand navbar-light bg-white gap-4">
+          <button type="button" class="btn btn-light d-none d-{{ desktop }}-flex" data-toggle="mini-sidebar">
+            @svg('node_modules/heroicons/solid/menu-alt-1.svg')
+          </button>
+          <button type="button" class="btn btn-light d-flex d-{{ desktop }}-none me-3" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            @svg('node_modules/heroicons/solid/menu.svg')
+          </button>
+          <ul class="navbar-nav align-items-center ms-auto">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle no-caret" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                @svg('node_modules/heroicons/solid/search.svg')
+              </a>
+              <div class="dropdown-menu dropdown-menu-end p-3">
+                <form><input type="text" class="form-control border-0 shadow-none px-3" placeholder="Search..." autofocus></form>
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header d-flex justify-content-between">
+                  Recently searched:
+                  <a href="javascript:void(0)" class="text-muted ms-5">Clear</a>
+                </h6>
+                <div class="max-h-[300px] overflow-auto">
+                  <a class="dropdown-item" href="javascript:void(0)">Calendar</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Chat</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Email</a>
+                  <a class="dropdown-item" href="javascript:void(0)">File manager</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Forum</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Invoice</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Photos</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Pricing</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Todo</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Blog</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                  <a class="dropdown-item" href="javascript:void(0)">Profile</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle no-caret" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <div class="position-relative">
+                  @svg('node_modules/heroicons/solid/bell.svg')
+                  <span class="badge bg-danger position-absolute top-0 start-100 translate-middle p-1">
+                    <span class="visually-hidden">unread notifications</span>
+                  </span>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <h6 class="dropdown-header d-flex justify-content-between">
+                  5 New notifications
+                  <a href="javascript:void(0)" class="text-muted ms-5">Clear</a>
+                </h6>
+                <div class="dropdown-divider"></div>
+                <div class="max-h-[300px] overflow-auto">
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    @svg('node_modules/heroicons/outline/user.svg', 'class="text-muted"')
+                    <div class="vstack">
+                      <p class="mb-0">New customer registered</p>
+                      <small class="text-muted">5 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    @svg('node_modules/heroicons/outline/shopping-bag.svg', 'class="text-muted"')
+                    <div class="vstack">
+                      <p class="mb-0">New order received</p>
+                      <small class="text-muted">11 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    @svg('node_modules/heroicons/outline/puzzle.svg', 'class="text-muted"')
+                    <div class="vstack">
+                      <p class="mb-0">Plugin updates available <span class="badge rounded-pill ms-1 bg-secondary align-bottom">3</span></p>
+                      <small class="text-muted">30 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    @svg('node_modules/heroicons/outline/download.svg', 'class="text-muted"')
+                    <div class="vstack">
+                      <p class="mb-0">Download completed</p>
+                      <small class="text-muted">35 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    @svg('node_modules/heroicons/outline/clipboard-list.svg', 'class="text-muted"')
+                    <div class="vstack">
+                      <p class="mb-0">Weekly usage report</p>
+                      <small class="text-muted">40 min ago</small>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item vr mx-3"></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle no-caret py-0 pe-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{ folder.img }}user/user1.svg" width="32" alt="User" class="rounded-circle" loading="lazy">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
+                <li><a class="dropdown-item" href="user-settings.html">Settings</a></li>
+                <li><div class="dropdown-divider"></div></li>
+                <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- /Main header -->
+
+      <!-- Main body -->
+      <div id="main-body">
+        @!section('breadcrumb')
+        @!section('body')
+      </div>
+      <!-- /Main body -->
+
+      <!-- Main footer -->
+      <div id="main-footer">
+        <nav class="navbar navbar-expand navbar-light bg-white small shadow-sm">
+          <span class="navbar-text">
+            2021 &copy; {{ title }}
+          </span>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link">Help</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- /Main footer -->
+
+    </div>
+    <!-- /Main -->
+
+  </div>
+  <!-- /Wrapper -->
+
+  <!-- Required JS -->
+  <script src="{{ folder.vendor }}bootstrap/bootstrap.bundle.js"></script>
+  <script src="{{ folder.vendor }}simplebar/simplebar.js"></script>
+  <script src="{{ folder.js }}script.js"></script>
+
+  <script src="{{ folder.js }}settings.js"></script>
+
+  @!section('lib-js')
+</body>
+
+</html>

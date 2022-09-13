@@ -1,0 +1,84 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'breadcrumb')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Breadcrumb</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>Indicate the current page’s location within a navigational hierarchy.</p>
+    <div class="vstack gap-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+      </nav>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0)">
+              <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
+            </a>
+          </li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Dividers</h3>
+    <p>Dividers can be changed by modifying a local CSS custom property <code>--bs-breadcrumb-divider</code>.</p>
+    <div class="vstack gap-3">
+      <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '\203A'">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+      <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '\00BB'">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+      <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '\279C'">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+      <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '\27A4'">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+@endsection

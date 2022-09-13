@@ -1,0 +1,137 @@
+@layout('layouts/_default')
+@set('menu', 'invoice')
+
+@section('body')
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4># Company, Inc.</h4>
+      <span>2021/08/20</span>
+    </div>
+    <hr>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+      <div class="col">
+        <span class="text-secondary">From</span>
+        <address class="small">
+          <strong>Admin, Inc.</strong><br>
+          795 Folsom Ave, Suite 600<br>
+          San Francisco, CA 94107<br>
+          Phone: (804) 123-5432<br>
+          Email: rur@jujtol.ao
+        </address>
+      </div>
+      <div class="col">
+        <span class="text-secondary">To</span>
+        <address class="small">
+          <strong>John Doe</strong><br>
+          795 Folsom Ave, Suite 600<br>
+          San Francisco, CA 94107<br>
+          Phone: (555) 539-1037<br>
+          Email: dipivweb@nudjad.ke
+        </address>
+      </div>
+      <div class="col">
+        <ul class="list-unstyled">
+          <li><strong>Invoice #007612</strong></li>
+          <li>&nbsp;</li>
+          <li><strong>Order ID:</strong> 4F3S8J</li>
+          <li><strong>Payment Due:</strong> 2021/08/20</li>
+          <li><strong>Account:</strong> 968-34567</li>
+        </ul>
+      </div>
+    </div>
+    <div class="table-responsive my-3">
+      <table class="table table-striped table-sm small">
+        <thead>
+          <tr>
+            <th class="text-center">Qty</th>
+            <th>Product</th>
+            <th>Serial #</th>
+            <th>Description</th>
+            <th class="text-end">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td class="text-nowrap">Call of Duty</td>
+            <td class="text-nowrap">455-981-221</td>
+            <td>El snort testosterone trophy driving gloves handsome</td>
+            <td class="text-nowrap text-end">$64.50</td>
+          </tr>
+          <tr>
+            <td class="text-center">1</td>
+            <td class="text-nowrap">Need for Speed IV</td>
+            <td class="text-nowrap">247-925-726</td>
+            <td>Wes Anderson umami biodiesel</td>
+            <td class="text-nowrap text-end">$50.00</td>
+          </tr>
+          <tr>
+            <td class="text-center">1</td>
+            <td class="text-nowrap">Monsters DVD</td>
+            <td class="text-nowrap">735-845-642</td>
+            <td>Terry Richardson helvetica tousled street art master</td>
+            <td class="text-nowrap text-end">$10.70</td>
+          </tr>
+          <tr>
+            <td class="text-center">1</td>
+            <td class="text-nowrap">Grown Ups Blue Ray</td>
+            <td class="text-nowrap">422-568-642</td>
+            <td>Tousled lomo letterpress</td>
+            <td class="text-nowrap text-end">$25.99</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 g-4">
+      <div class="col">
+        <p class="lead">Payment Methods:</p>
+        <img src="{{ folder.img }}payments/cc-visa-brands.svg" alt="visa" width="45" loading="lazy">
+        <img src="{{ folder.img }}payments/cc-mastercard-brands.svg" alt="mastercard" width="45" loading="lazy">
+        <img src="{{ folder.img }}payments/cc-amex-brands.svg" alt="amex" width="45" loading="lazy">
+        <img src="{{ folder.img }}payments/cc-paypal-brands.svg" alt="paypal" width="45" loading="lazy">
+        <p class="text-secondary small mb-0 mt-3">Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.</p>
+      </div>
+      <div class="col">
+        <p class="lead">Amount Due 2021/08/20</p>
+        <div class="table-responsive">
+          <table class="table table-sm small">
+            <tbody>
+              <tr>
+                <th class="w-50">Subtotal:</th>
+                <td>$250.30</td>
+              </tr>
+              <tr>
+                <th>Tax (9.3%)</th>
+                <td>$10.34</td>
+              </tr>
+              <tr>
+                <th>Shipping:</th>
+                <td>$5.80</td>
+              </tr>
+              <tr>
+                <th>Total:</th>
+                <td>$265.24</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-sm-row mt-3">
+      <button class="btn btn-light d-flex gap-2 mt-1 mt-sm-0" type="button">
+        @svg('node_modules/heroicons/solid/printer.svg')
+        Print
+      </button>
+      <button class="btn btn-primary d-flex gap-2 ms-sm-auto mt-1 mt-sm-0" type="button">
+        @svg('node_modules/heroicons/solid/download.svg')
+        Generate PDF
+      </button>
+      <button class="btn btn-success d-flex gap-2 ms-sm-1 mt-1 mt-sm-0" type="button">
+        @svg('node_modules/heroicons/solid/credit-card.svg')
+        Submit Payment
+      </button>
+    </div>
+  </div>
+</div>
+@endsection

@@ -1,0 +1,10 @@
+.breadcrumb {
+  align-items: center;
+}
+.breadcrumb-item a {
+  color: $body-color;
+  text-decoration: none;
+  &:hover {
+    color: $gray-900;
+  }
+}

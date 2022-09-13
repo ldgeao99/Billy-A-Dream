@@ -1,0 +1,38 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-forms')
+@set('sub', 'autosize')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Autosize textarea</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Example</h3>
+    <p>Automatically adjust textarea height.</p>
+    <textarea class="form-control autosize" placeholder="Try typing something..."></textarea>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Filled</h3>
+    <p>Works on filled textareas as well.</p>
+    <div class="vstack gap-2">
+      <textarea class="form-control autosize" placeholder="Try typing something...">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of English to emphasise design elements over content.</textarea>
+      <textarea class="form-control autosize" placeholder="Try typing something...">Lorem ipsum is mostly a part of a Latin text by the classical author and philosopher Cicero. Its words and letters have been changed by addition or removal, so to deliberately render its content nonsensical; it's not genuine, correct, or comprehensible Latin anymore.</textarea>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}autosize/autosize.js"></script>
+<script>
+autosize(document.querySelectorAll('textarea.autosize'))
+</script>
+@endsection

@@ -1,0 +1,118 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'offcanvas')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Offcanvas</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-12">
+    <h3 class="fw-black">Example</h3>
+    <p>Build hidden sidebars into your project for navigation, shopping carts, and more</p>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Menu</button>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="list-group list-group-flush">
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Tasks</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Messages</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">New Post</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Settings</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Starred</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Placement</h3>
+    <p>Places offcanvas on the left (shown previously), right, or bottom.</p>
+    <div class="vstack gap-1 align-items-start">
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExampleTop" aria-controls="offcanvasExampleTop">Top</button>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExampleRight" aria-controls="offcanvasExampleRight">Right</button>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExampleBottom" aria-controls="offcanvasExampleBottom">Bottom</button>
+    </div>
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasExampleTop" aria-labelledby="offcanvasExampleTopLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleTopLabel">User agreement</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga autem ea porro cum maiores modi incidunt consectetur voluptatem distinctio quibusdam, eos quae est perferendis cumque illo placeat quasi pariatur. Autem facilis ducimus voluptatibus alias odio, suscipit delectus maiores. Sint ad cum amet unde sunt? Accusamus accusantium molestiae autem quas ab harum, assumenda quo consequuntur, exercitationem magni maxime saepe eius totam ad et non alias eum pariatur rem eaque odio aspernatur laudantium reprehenderit fugiat. Earum odit corporis quibusdam provident officiis esse voluptatum aliquam? Sapiente assumenda vel tempora omnis facilis laboriosam? Perspiciatis aspernatur delectus, alias in iste sed? Similique, debitis neque. Atque?</p>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExampleRight" aria-labelledby="offcanvasExampleRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleRightLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="list-group list-group-flush">
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Tasks</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Messages</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">New Post</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Settings</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Starred</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasExampleBottom" aria-labelledby="offcanvasExampleBottomLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleBottomLabel">User agreement</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga autem ea porro cum maiores modi incidunt consectetur voluptatem distinctio quibusdam, eos quae est perferendis cumque illo placeat quasi pariatur. Autem facilis ducimus voluptatibus alias odio, suscipit delectus maiores. Sint ad cum amet unde sunt? Accusamus accusantium molestiae autem quas ab harum, assumenda quo consequuntur, exercitationem magni maxime saepe eius totam ad et non alias eum pariatur rem eaque odio aspernatur laudantium reprehenderit fugiat. Earum odit corporis quibusdam provident officiis esse voluptatum aliquam? Sapiente assumenda vel tempora omnis facilis laboriosam? Perspiciatis aspernatur delectus, alias in iste sed? Similique, debitis neque. Atque?</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Backdrop</h3>
+    <p>Scrolling the <code>&lt;body&gt;</code> element is disabled when an offcanvas and its backdrop are visible. Use the <code>data-bs-scroll</code> attribute to toggle <code>&lt;body&gt;</code> scrolling and <code>data-bs-backdrop</code> to toggle the backdrop.</p>
+    <div class="vstack gap-1 align-items-start">
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Enable backdrop (default)</button>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+    </div>
+    <div class="offcanvas offcanvas-start shadow" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Colored with scrolling</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Try scrolling the rest of the page to see this option in action.</p>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas with backdrop</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>.....</p>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdroped with scrolling</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Try scrolling the rest of the page to see this option in action.</p>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

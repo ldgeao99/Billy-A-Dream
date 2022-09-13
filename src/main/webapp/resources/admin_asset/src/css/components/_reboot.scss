@@ -1,0 +1,6 @@
+:root {
+  --main-body-padding: #{$main-body-padding};
+  @include media-breakpoint-down(sm) {
+    --main-body-padding: #{$main-body-padding-sm};
+  }
+}

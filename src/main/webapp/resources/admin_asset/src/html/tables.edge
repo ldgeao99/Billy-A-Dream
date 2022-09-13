@@ -1,0 +1,492 @@
+@layout('layouts/_default')
+@set('menu', 'content')
+@set('sub', 'tables')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Content</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tables</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-12">
+    <h3 class="fw-black">Basic</h3>
+    <p>Using the most basic table markup, here’s how <code>.table</code>-based tables look.</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Title</th>
+            <th scope="col">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <h6 class="mb-0">Cody Fisher</h6>
+              <small class="text-secondary">cody.fisher@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0 text-dark">Product Directives Officer</p>
+              <small class="text-secondary">Intranet</small>
+            </td>
+            <td class="align-middle">Owner</td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-0">Esther Howard</h6>
+              <small class="text-secondary">esther.howard@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0 text-dark">Forward Response Developer</p>
+              <small class="text-secondary">Directives</small>
+            </td>
+            <td class="align-middle">Member</td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-0">Cameron Williamson</h6>
+              <small class="text-secondary">cameron.williamson@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0 text-dark">Internal Applications Engineer</p>
+              <small class="text-secondary">Security</small>
+            </td>
+            <td class="align-middle">Member</td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-0">Bernard Lane</h6>
+              <small class="text-secondary">bernard.lane@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0 text-dark">Human Resources</p>
+              <small class="text-secondary">Director</small>
+            </td>
+            <td class="align-middle">Owner</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-12">
+    <h3 class="fw-black">Dark</h3>
+    <p>Opt into darker tables.</p>
+    <div class="table-responsive">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Title</th>
+            <th scope="col">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <h6 class="mb-0 text-white">Cody Fisher</h6>
+              <small class="text-muted">cody.fisher@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0">Product Directives Officer</p>
+              <small class="text-muted">Intranet</small>
+            </td>
+            <td class="align-middle">Owner</td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-0 text-white">Esther Howard</h6>
+              <small class="text-muted">esther.howard@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0">Forward Response Developer</p>
+              <small class="text-muted">Directives</small>
+            </td>
+            <td class="align-middle">Member</td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-0 text-white">Cameron Williamson</h6>
+              <small class="text-muted">cameron.williamson@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0">Internal Applications Engineer</p>
+              <small class="text-muted">Security</small>
+            </td>
+            <td class="align-middle">Member</td>
+          </tr>
+          <tr>
+            <td>
+              <h6 class="mb-0 text-white">Bernard Lane</h6>
+              <small class="text-muted">bernard.lane@example.com</small>
+            </td>
+            <td>
+              <p class="mb-0">Human Resources</p>
+              <small class="text-muted">Director</small>
+            </td>
+            <td class="align-middle">Owner</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Striped rows</h3>
+    <p>Add zebra-striping to any table row.</p>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Hoverable rows</h3>
+    <p>Enable a hover state on table rows.</p>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Active tables</h3>
+    <p>Highlight a table row or cell.</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td class="table-active">63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr class="table-active">
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Bordered tables</h3>
+    <p>Borders on all sides of the table and cells.</p>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Borderless tables</h3>
+    <p>Table without borders.</p>
+    <div class="table-responsive">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Small tables</h3>
+    <p>Make any table more compact by cutting all cell padding in half.</p>
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Table head</h3>
+    <p>Make <code>&lt;thead&gt;</code>s appear light or dark gray.</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-secondary">
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Browser</th>
+            <th scope="col">Market share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>63.62%</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>19.09%</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>3.77%</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>3.42%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Table foot</h3>
+    <p>Set of rows summarizing the columns of the table.</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Items</th>
+            <th scope="col">Expenditure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Donuts</td>
+            <td>3,000</td>
+          </tr>
+          <tr>
+            <td>Stationery</td>
+            <td>18,000</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="fw-bold">Totals</td>
+            <td class="fw-bold">21,000</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Captions</h3>
+    <p>A caption functions like a heading for a table. It helps users with screen readers to find a table and understand what it’s about and decide if they want to read it.</p>
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <caption>Browser Market Share Worldwide</caption>
+            <thead>
+              <tr>
+                <th scope="col">Browser</th>
+                <th scope="col">Market share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chrome</td>
+                <td>63.62%</td>
+              </tr>
+              <tr>
+                <td>Safari</td>
+                <td>19.09%</td>
+              </tr>
+              <tr>
+                <td>Firefox</td>
+                <td>3.77%</td>
+              </tr>
+              <tr>
+                <td>Edge</td>
+                <td>3.42%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table caption-top mb-0">
+            <caption>Browser Market Share Worldwide</caption>
+            <thead>
+              <tr>
+                <th scope="col">Browser</th>
+                <th scope="col">Market share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chrome</td>
+                <td>63.62%</td>
+              </tr>
+              <tr>
+                <td>Safari</td>
+                <td>19.09%</td>
+              </tr>
+              <tr>
+                <td>Firefox</td>
+                <td>3.77%</td>
+              </tr>
+              <tr>
+                <td>Edge</td>
+                <td>3.42%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

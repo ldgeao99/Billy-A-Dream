@@ -1,0 +1,194 @@
+@use "sass:math";
+// Color system
+$gray-50  : #f9fafb;
+$gray-100 : #f3f4f6;
+$gray-200 : #e5e7eb;
+$gray-300 : #d1d5db;
+$gray-400 : #9ca3af;
+$gray-500 : #6b7280;
+$gray-600 : #4b5563;
+$gray-700 : #374151;
+$gray-800 : #1f2937;
+$gray-900 : #111827;
+
+$primary   : #6366f1;
+$secondary : $gray-500;
+$success   : #16a34a;
+$info      : #0891B2;
+$warning   : #facc15;
+$danger    : #ef4444;
+$light     : $gray-100;
+$dark      : $gray-800;
+
+$min-contrast-ratio: 3;
+
+
+// Options
+$enable-validation-icons: false;
+
+
+// Components
+$caret-width         : .25em;
+$border-color        : $gray-300;
+$list-inline-padding : 1rem;
+$component-active-bg : $primary;
+$box-shadow          : rgb(0 0 0 / 10%) 0px 6px 24px;
+$box-shadow-sm       : rgb(0 0 0 / 10%) 0px 4px 12px;
+$box-shadow-lg       : rgb(0 0 0 / 10%) 0px 8px 36px;
+
+
+// Typography
+$font-family-base       : Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-size-base         : .875rem;
+$text-muted             : $gray-400;
+$headings-color         : $dark;
+$display-font-weight    : 900;
+$headings-margin-bottom : .5em;
+
+
+// Body
+$body-bg    : $gray-50;
+$body-color : $gray-600;
+
+
+// Links
+$link-color: $gray-900;
+
+
+// Tables
+$table-group-separator-color : inherit;
+
+
+// Code
+$code-color : $gray-900;
+
+
+// Buttons + Forms
+$input-btn-padding-y: .5rem;
+$input-btn-line-height: math.div(20, 14); // 14px is from $font-size-base
+$input-btn-focus-width: .125rem;
+
+
+// Buttons
+$btn-padding-x: 1rem;
+$btn-font-weight: 500;
+$btn-padding-x-sm: .625rem;
+$btn-padding-x-lg: 1.3125rem;
+
+
+// Forms
+$input-bg                              : #fff;
+$input-border-color                    : $border-color;
+$input-placeholder-color               : $text-muted;
+$form-label-font-size                  : calc(1em - 2px);
+$form-label-font-weight                : 300;
+$input-group-addon-bg                  : $gray-100;
+$input-disabled-bg                     : $gray-100;
+$form-check-input-width                : math.div(16, 14) * 1em;
+$form-check-input-checked-border-color : transparent;
+$form-range-track-height               : .25rem;
+$form-range-track-bg                   : $gray-200;
+$form-range-thumb-disabled-bg          : $text-muted;
+$input-focus-border-color              : $component-active-bg;
+
+$form-validation-states: (
+  "invalid": (
+    "color": $danger,
+    "icon": '',
+  )
+);
+
+
+// Accordion
+$accordion-icon-width       : 1rem;
+$accordion-button-active-bg : transparent;
+
+
+// Alerts
+$alert-bg-scale: -90%;
+$alert-border-scale: -90%;
+$alert-link-font-weight: 400;
+
+
+// Breadcrumbs
+$breadcrumb-active-color: $text-muted;
+$breadcrumb-divider-color: $breadcrumb-active-color;
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-item-padding-x: .75rem;
+
+
+// Dropdowns
+$dropdown-min-width           : 8rem;
+$dropdown-link-color          : $body-color;
+$dropdown-link-hover-color    : $dropdown-link-color;
+$dropdown-link-hover-bg       : $gray-100;
+$dropdown-link-disabled-color : $gray-300;
+// $dropdown-header-color        : $gray-500;
+$dropdown-border-color        : rgba(#000, .075);
+$dropdown-link-active-color   : $dropdown-link-hover-color;
+$dropdown-link-active-bg      : $gray-200;
+
+
+// List group
+$list-group-color          : $body-color;
+$list-group-disabled-color : $text-muted;
+$list-group-item-bg-scale  : -90%;
+
+
+// Modals
+$modal-content-border-width : 0;
+$modal-fade-transform       : translate(0, -.5rem) scale(.95);
+$modal-transition           : transform .2s ease-out;
+
+
+// Navbar
+$navbar-light-color: $body-color;
+$navbar-light-hover-color: $component-active-bg;
+$navbar-light-active-color: $component-active-bg;
+$navbar-light-brand-color: $gray-900;
+$navbar-dark-color: $gray-400;
+
+
+// Navs
+$nav-link-color                    : $navbar-light-color;
+$nav-link-hover-color              : $navbar-light-hover-color;
+$nav-link-disabled-color           : $text-muted;
+$nav-tabs-border-color             : transparent;
+$nav-tabs-link-hover-border-color  : none;
+$nav-tabs-link-active-bg           : transparent;
+$nav-tabs-link-active-color        : $primary;
+$nav-tabs-link-active-border-color : $nav-tabs-border-color $nav-tabs-border-color $nav-tabs-link-active-color;
+
+
+// Pagination
+$pagination-bg                  : #fff;
+$pagination-disabled-color      : $text-muted;
+$pagination-color               : $body-color;
+$pagination-hover-color         : $pagination-color;
+$pagination-hover-bg            : $gray-100;
+$pagination-focus-color         : $pagination-hover-color;
+$pagination-focus-bg            : $pagination-bg;
+$pagination-padding-y           : $input-btn-padding-y;
+$pagination-padding-y-lg        : .5rem; // based on $input-btn-padding-y-lg
+$pagination-padding-x-lg        : 1rem; // based on $input-btn-padding-x-lg
+$pagination-active-bg           : tint-color($component-active-bg, 90%);
+$pagination-active-color        : $component-active-bg;
+$pagination-active-border-color : $component-active-bg;
+
+
+// Badges
+$badge-font-size: .8em;
+
+
+// Cards
+$card-border-width: 0;
+$card-cap-bg: #fff;
+
+
+// Popovers
+$popover-border-width: 0;
+$popover-header-bg: transparent;
+
+
+// Tooltips
+$tooltip-bg: #616161;

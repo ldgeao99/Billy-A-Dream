@@ -1,0 +1,67 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-forms')
+@set('sub', 'tag-input')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tag input</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>Enter a comma-separated list of tags.</p>
+    <input type="text" name="tags" class="form-control tagin" value="dark mode,favicon,media queries,svg,svg icons">
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Placeholder</h3>
+    <p>Set placeholder using <code>data-placeholder</code> attribute.</p>
+    <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add a color... (then press comma)">
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Custom Separator</h3>
+    <p>Set separator using <code>data-separator</code> attribute.<br>Example tags using 'space' separator.
+    </p>
+    <input type="text" name="tags" class="form-control tagin" data-separator=" " value="red green blue" data-placeholder="Add a color... (then press space)">
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Duplicates</h3>
+    <p>Add <code>data-duplicate="true"</code> to remove duplicates validation.</p>
+    <input type="text" name="tags" class="form-control tagin" data-duplicate="true" value="html,html,css,css,js,js">
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Transform</h3>
+    <p>Sometimes we need to transform tags.<br>Example transform using <code>toUpperCase</code>.
+    </p>
+    <input type="text" name="tags" class="form-control tagin" data-transform="input => input.toUpperCase()" value="HTML,CSS">
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Validation</h3>
+    <p>Supports bootstrap custom validation styles.</p>
+    <form class="was-validated">
+      <input type="text" name="tags" class="form-control tagin" required>
+      <div class="invalid-feedback">Example invalid feedback text</div>
+    </form>
+  </div>
+</div>
+@endsection
+
+@section('lib-css')
+<link rel="stylesheet" href="{{ folder.css }}tagin.css">
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}tagin/tagin.js"></script>
+<script>
+// Enable tagin on all '.tagin'
+for (const el of document.querySelectorAll('.tagin')) {
+  tagin(el)
+}
+</script>
+@endsection

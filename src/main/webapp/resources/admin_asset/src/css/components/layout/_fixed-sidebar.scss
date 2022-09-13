@@ -1,0 +1,12 @@
+@include media-breakpoint-up($desktop) {
+  .fixed-sidebar {
+    #sidebar {
+      position: fixed;
+      height: $vh100;
+      z-index: $zindex-fixed + 1;
+    }
+    #main {
+      margin-left: $sidebar-width;
+    }
+  }
+}

@@ -1,0 +1,264 @@
+@layout('layouts/_default')
+@set('menu', 'forms')
+@set('sub', 'validation')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Validation</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6 col-lg-4">
+    <h3 class="fw-black">Custom styles</h3>
+    <p>Provide valuable, actionable feedback to your users with HTML5 form validation, via custom styles.</p>
+    <form class="row row-cols-1 g-3 needs-validation" novalidate>
+      <div class="col">
+        <label for="validationText" class="form-label">Text</label>
+        <input type="text" class="form-control" id="validationText" required>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationInputGroup" class="form-label">Input group</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control" id="validationInputGroup" required>
+          <div class="invalid-feedback">
+            Example invalid feedback text
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationFile" class="form-label">File input</label>
+        <input type="file" class="form-control" id="validationFile" required>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationSelect" class="form-label">Select</label>
+        <select class="form-select" id="validationSelect" required>
+          <option selected disabled value="">Choose...</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationTextarea" class="form-label">Textarea</label>
+        <textarea class="form-control" id="validationTextarea" required></textarea>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Checkbox</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="validationCheckbox" required>
+          <label class="form-check-label" for="validationCheckbox">
+            Check
+          </label>
+          <div class="invalid-feedback">
+            Example invalid feedback text
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Radio</label>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationRadio1" name="radio" required>
+          <label class="form-check-label" for="validationRadio1">Radio 1</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationRadio2" name="radio" required>
+          <label class="form-check-label" for="validationRadio2">Radio 2</label>
+          <div class="invalid-feedback">Example invalid feedback text</div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <h3 class="fw-black">Server side</h3>
+    <p>Indicate invalid form fields with <code>.is-invalid</code>. Note that <code>.invalid-feedback</code> is also supported with these classes.</p>
+    <form class="row row-cols-1 g-3">
+      <div class="col">
+        <label for="validationTextServer" class="form-label">Text</label>
+        <input type="text" class="form-control is-invalid" id="validationTextServer" required>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationInputGroupServer" class="form-label">Input group</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control is-invalid" id="validationInputGroupServer" required>
+          <div class="invalid-feedback">
+            Example invalid feedback text
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationInputFileServer" class="form-label">File input</label>
+        <input type="file" class="form-control is-invalid" id="validationInputFileServer" required>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationSelectServer" class="form-label">Select</label>
+        <select class="form-select is-invalid" id="validationSelectServer" required>
+          <option selected disabled value="">Choose...</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationTextareaServer" class="form-label">Textarea</label>
+        <textarea class="form-control is-invalid" id="validationTextareaServer" required></textarea>
+        <div class="invalid-feedback">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Checkbox</label>
+        <div class="form-check">
+          <input class="form-check-input is-invalid" type="checkbox" id="validationCheckboxServer" required>
+          <label class="form-check-label" for="validationCheckboxServer">
+            Check
+          </label>
+          <div class="invalid-feedback">
+            Example invalid feedback text
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Radio</label>
+        <div class="form-check">
+          <input type="radio" class="form-check-input is-invalid" id="validationRadioServer1" name="radio" required>
+          <label class="form-check-label" for="validationRadioServer1">Radio 1</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input is-invalid" id="validationRadioServer2" name="radio" required>
+          <label class="form-check-label" for="validationRadioServer2">Radio 2</label>
+          <div class="invalid-feedback">Example invalid feedback text</div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <h3 class="fw-black">Tooltips</h3>
+    <p>Swap the <code>.{valid|invalid}-feedback</code> classes for <code>.{valid|invalid}-tooltip</code> classes to display validation feedback in a styled tooltip.</p>
+    <form class="row row-cols-1 g-3 needs-validation" novalidate>
+      <div class="col position-relative">
+        <label for="validationTextTooltip" class="form-label">Text</label>
+        <input type="text" class="form-control" id="validationTextTooltip" required>
+        <div class="invalid-tooltip">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label for="validationInputGroupTooltip" class="form-label">Input group</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control" id="validationInputGroupTooltip" required>
+          <div class="invalid-tooltip">
+            Example invalid feedback text
+          </div>
+        </div>
+      </div>
+      <div class="col position-relative">
+        <label for="validationInputFileTooltip" class="form-label">File input</label>
+        <input type="file" class="form-control" id="validationInputFileTooltip" required>
+        <div class="invalid-tooltip">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col position-relative">
+        <label for="validationSelectTooltip" class="form-label">Select</label>
+        <select class="form-select" id="validationSelectTooltip" required>
+          <option selected disabled value="">Choose...</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+        <div class="invalid-tooltip">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col position-relative">
+        <label for="validationTextareaTooltip" class="form-label">Textarea</label>
+        <textarea class="form-control" id="validationTextareaTooltip" required></textarea>
+        <div class="invalid-tooltip">
+          Example invalid feedback text
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Checkbox</label>
+        <div class="form-check position-relative">
+          <input class="form-check-input" type="checkbox" id="validationCheckboxTooltip" required>
+          <label class="form-check-label" for="validationCheckboxTooltip">
+            Check
+          </label>
+          <div class="invalid-tooltip">
+            Example invalid feedback text
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Radio</label>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationRadioTooltip1" name="radio" required>
+          <label class="form-check-label" for="validationRadioTooltip1">Radio 1</label>
+        </div>
+        <div class="form-check position-relative">
+          <input type="radio" class="form-check-input" id="validationRadioTooltip2" name="radio" required>
+          <label class="form-check-label" for="validationRadioTooltip2">Radio 2</label>
+          <div class="invalid-tooltip">Example invalid feedback text</div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </div>
+    </form>
+  </div>
+</div>
+@endsection
+
+@section('lib-js')
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  document.querySelectorAll('.needs-validation').forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    })
+  })
+})()
+</script>
+@endsection

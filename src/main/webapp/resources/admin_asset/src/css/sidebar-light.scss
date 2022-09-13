@@ -1,0 +1,32 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "bootstrap/variables";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+#sidebar {
+  box-shadow: 0 10px 30px 0 rgb(82 63 105 / 5%);
+  &.navbar-light {
+    background-color: #fff;
+    // Svg icon color
+    .navbar-nav .nav-link:not(.active):not(:hover):not(.disabled) > svg {
+      color: $gray-400;
+    }
+    // Link active style
+    .navbar-nav .show > .nav-link,
+    .navbar-nav .nav-link.active {
+      background-color: rgba(#000, .075);
+      @include border-radius($border-radius);
+      color: $dark;
+    }
+    // Submenu link active style
+    .navbar-nav .navbar-nav .show > .nav-link,
+    .navbar-nav .navbar-nav .nav-link.active {
+      background-color: transparent;
+      color: $primary;
+    }
+    // Badge default color
+    .badge:not([class^="bg-"]) {
+      background-color: $dark;
+    }
+  }
+}

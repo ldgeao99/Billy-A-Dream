@@ -1,0 +1,184 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-components')
+@set('sub', 'treeview')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Treeview</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>Use treeview in a simple basic list.</p>
+    <ul>
+      <li>
+        <span class="dropdown-toggle" role="button" data-bs-toggle="collapse" data-bs-target="#projectsCollapse" aria-expanded="true" aria-controls="projectsCollapse">
+          Projects
+        </span>
+        <ul class="collapse show" id="projectsCollapse">
+          <li>Project_01</li>
+          <li>Project_02</li>
+          <li>Project_03</li>
+          <li>
+            <span class="dropdown-toggle" role="button" data-bs-toggle="collapse" data-bs-target="#personalCollapse" aria-expanded="false" aria-controls="personalCollapse">
+              Personal
+            </span>
+            <ul class="collapse" id="personalCollapse">
+              <li>Angular</li>
+              <li>
+                <span class="dropdown-toggle" role="button" data-bs-toggle="collapse" data-bs-target="#reactCollapse" aria-expanded="false" aria-controls="reactCollapse">
+                  React
+                </span>
+                <ul class="collapse" id="reactCollapse">
+                  <li>Redux</li>
+                  <li>Next.js</li>
+                </ul>
+              </li>
+              <li>
+                <span class="dropdown-toggle" role="button" data-bs-toggle="collapse" data-bs-target="#vueCollapse" aria-expanded="false" aria-controls="vueCollapse">
+                  Vue
+                </span>
+                <ul class="collapse" id="vueCollapse">
+                  <li>Vuex</li>
+                  <li>Nuxt.js</li>
+                </ul>
+              </li>
+              <li>Svelte</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span class="dropdown-toggle" role="button" data-bs-toggle="collapse" data-bs-target="#downloadsCollapse" aria-expanded="false" aria-controls="downloadsCollapse">
+          Downloads
+        </span>
+        <ul class="collapse" id="downloadsCollapse">
+          <li>Games</li>
+          <li>
+            <span class="dropdown-toggle" role="button" data-bs-toggle="collapse" data-bs-target="#musicCollapse" aria-expanded="false" aria-controls="musicCollapse">
+              Music
+            </span>
+            <ul class="collapse" id="musicCollapse">
+              <li>Hip hop</li>
+              <li>Jazz</li>
+              <li>Pop</li>
+              <li>Rock</li>
+            </ul>
+          </li>
+          <li>Pictures</li>
+          <li>Videos</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Folder style</h3>
+    <p>Use treeview as a folder tree.</p>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="#design-collapse" class="nav-link px-0 dropdown-toggle d-flex align-items-center gap-3" data-bs-toggle="collapse" role="button" aria-expanded="false"  aria-controls="design-collapse">
+          @svg('node_modules/heroicons/outline/folder.svg')
+          Design
+        </a>
+        <div class="ms-5 collapse" id="design-collapse">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Illustration
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Logo
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Packaging
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Website
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#projects-collapse" class="nav-link px-0 dropdown-toggle d-flex align-items-center gap-3" data-bs-toggle="collapse" role="button" aria-expanded="true"  aria-controls="projects-collapse">
+          @svg('node_modules/heroicons/outline/folder.svg')
+          Projects
+        </a>
+        <div class="ms-5 collapse show" id="projects-collapse">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Project_01
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Project_02
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Project_03
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#personal-collapse" class="nav-link px-0 dropdown-toggle d-flex align-items-center gap-3" data-bs-toggle="collapse" role="button" aria-expanded="false"  aria-controls="personal-collapse">
+                @svg('node_modules/heroicons/outline/folder.svg')
+                Personal
+              </a>
+              <div class="ms-5 collapse" id="personal-collapse">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                      @svg('node_modules/heroicons/outline/folder.svg')
+                      Angular
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                      @svg('node_modules/heroicons/outline/folder.svg')
+                      React
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                      @svg('node_modules/heroicons/outline/folder.svg')
+                      Vue
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link px-0 d-flex align-items-center gap-3">
+                      @svg('node_modules/heroicons/outline/folder.svg')
+                      Svelte
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+@endsection

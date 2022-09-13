@@ -1,0 +1,66 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-components')
+@set('sub', 'timeline')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Timeline</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Example</h3>
+    <p>Simple timeline example.</p>
+    <div class="timeline gap-3">
+      <div class="timeline-item">
+        <div class="popover bs-popover-end">
+          <div class="popover-arrow"></div>
+          <div class="popover-body">
+            <p class="mb-1 small text-muted">12 min ago</p>
+            <h6>12 Invoices have been paid</h6>
+            <p>Invoices have been paid to the company.</p>
+            <a href="javascript:" class="d-inline-flex gap-2 link-secondary">
+              <img src="{{  folder.img }}fileicon/pdf.svg" alt="file" width="19" height="19" loading="lazy">
+              invoice.pdf
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="popover bs-popover-end">
+          <div class="popover-arrow"></div>
+          <div class="popover-body">
+            <p class="mb-1 small text-muted">45 min ago</p>
+            <h6>Client Meeting</h6>
+            <p>Project meeting with john @10:15am.</p>
+            <div class="d-flex align-items-center gap-2">
+              <img src="{{  folder.img }}user/user1.svg" alt="user" class="flex-shrink-0 rounded-circle" width="38" height="38" loading="lazy">
+              <div>
+                <p class="mb-0">John Doe (Client)</p>
+                <p class="mb-0 text-muted">CEO of Infibeam</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="popover bs-popover-end">
+          <div class="popover-arrow"></div>
+          <div class="popover-body">
+            <p class="mb-1 small text-muted">2 hours ago</p>
+            <h6>Financial Report</h6>
+            <p>Click the button below to read financial reports</p>
+            <button class="btn btn-sm btn-outline-primary" type="button">Show report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

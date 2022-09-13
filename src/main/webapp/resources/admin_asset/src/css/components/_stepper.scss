@@ -1,0 +1,7 @@
+.stepper-nav button {
+  cursor: default;
+  &:hover,
+  &:focus {
+    color: inherit;
+  }
+}

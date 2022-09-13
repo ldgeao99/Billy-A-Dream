@@ -1,0 +1,129 @@
+@layout('layouts/_default')
+@set('menu', 'todo')
+
+@section('body')
+<div id="inner-wrapper">
+  <div id="inner-sidebar" style="width: 13.75rem">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <button class="btn btn-info w-100 d-flex align-items-center justify-content-center gap-1" type="button" data-bs-toggle="modal" data-bs-target="#taskModal">
+          @svg('node_modules/heroicons/solid/plus.svg')
+          New Task
+        </button>
+        <button type="button" aria-label="Close" class="btn-close ms-3 d-{{ inner_desktop }}-none shadow-none" data-toggle="inner-sidebar-expand"></button>
+      </div>
+      <div class="card-body px-0" data-simplebar>
+        <div class="nav flex-column">
+          @component('components/_nav-link-inner-sidebar', { icon: 'view-list', text: 'All', active: true })
+          <span class="badge rounded-pill bg-info ms-auto">7</span>
+          @endcomponent
+          @component('components/_nav-link-inner-sidebar', { icon: 'check-circle', text: 'Done' })
+          <span class="badge rounded-pill bg-light text-muted ms-auto">3</span>
+          @endcomponent
+          @component('components/_nav-link-inner-sidebar', { icon: 'exclamation-circle', text: 'Important' })
+          <span class="badge rounded-pill bg-light text-muted ms-auto">1</span>
+          @endcomponent
+          @!component('components/_nav-link-inner-sidebar', { icon: 'archive', text: 'Archive' })
+          @!component('components/_nav-link-inner-sidebar', { icon: 'trash', text: 'Trash' })
+        </div>
+      </div>
+      <div class="card-footer d-none d-{{ inner_desktop }}-block">
+        <img src="{{ folder.img }}todo.svg" alt="" class="w-100" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <div id="inner-main">
+    <div class="card">
+      <div class="card-header d-flex align-items-center gap-3">
+        @!component('components/_btn-toggle-inner-sidebar', { inner_desktop })
+        <form><input type="text" class="form-control border-0 px-0 shadow-none" placeholder="Search todo"></form>
+      </div>
+      <div class="card-body p-0" data-simplebar>
+        <ul class="list-group list-group-flush">
+          @each(todo in todos)
+          <li class="list-group-item todo-item">
+            <input class="form-check-input" type="checkbox"{{ todo.done ? ' checked' : '' }}>
+            <div class="gap-1 gap-sm-3">
+              <div class="vstack ms-2 ms-sm-3">
+                <h5 class="mb-1">
+                  @if(todo.important)
+                  @svg('node_modules/heroicons/solid/exclamation-circle.svg', 'width="21" height="21" class="text-warning align-text-top me-1"')
+                  @endif
+                  {{ todo.title }}
+                </h5>
+                <p class="mb-0 small text-secondary">Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing.</p>
+              </div>
+              <div class="dropdown">
+                <button class="btn dropdown-toggle no-caret px-0 d-flex link-secondary shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  @svg('node_modules/heroicons/solid/dots-vertical.svg')
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="javascript:void(0)">Edit</a></li>
+                  <li><a class="dropdown-item" href="javascript:void(0)">Delete</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          @endeach
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Task modal -->
+<div class="modal fade" id="taskModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">New Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" novalidate id="taskForm">
+          <div class="mb-3">
+            <label for="taskTitle" class="form-label">Title</label>
+            <input type="text" name="taskTitle" class="form-control" id="taskTitle" required autofocus>
+            <div class="invalid-feedback">Task title is required.</div>
+          </div>
+          <div class="mb-3">
+            <label for="taskDescription" class="form-label">Description</label>
+            <textarea class="form-control autosize" name="taskMessage"></textarea>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="taskImportant">
+            <label class="form-check-label" for="taskImportant">
+              Important
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" form="taskForm" class="btn btn-info px-5">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}autosize/autosize.js"></script>
+<script>
+autosize(document.querySelectorAll('textarea.autosize'))
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+void (function () {
+  document.querySelectorAll('.needs-validation').forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    })
+  })
+})()
+</script>
+@endsection

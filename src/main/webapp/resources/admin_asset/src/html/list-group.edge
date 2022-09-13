@@ -1,0 +1,162 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'list-group')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">List group</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Basic</h3>
+    <p>The most basic list group is an unordered list with list items.</p>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <h6 class="mb-0">Adam Wathan</h6>
+        <small class="text-secondary">Tailwindcss Creator</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Addy Osmani</h6>
+        <small class="text-secondary">GoogleChrome Engineer</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Caleb Porzio</h6>
+        <small class="text-secondary">Alpinejs Creator</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Evan You</h6>
+        <small class="text-secondary">Vuejs Creator</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Rich Harris</h6>
+        <small class="text-secondary">Svelte Creator</small>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Flush</h3>
+    <p>Remove some borders to render list group items edge-to-edge in a parent container.</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h6 class="mb-0">Adam Wathan</h6>
+        <small class="text-secondary">Tailwindcss Creator</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Addy Osmani</h6>
+        <small class="text-secondary">GoogleChrome Engineer</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Caleb Porzio</h6>
+        <small class="text-secondary">Alpinejs Creator</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Evan You</h6>
+        <small class="text-secondary">Vuejs Creator</small>
+      </li>
+      <li class="list-group-item">
+        <h6 class="mb-0">Rich Harris</h6>
+        <small class="text-secondary">Svelte Creator</small>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Numbered</h3>
+    <p>Add numbered lists to group items.</p>
+    <ul class="list-group list-group-numbered">
+      <li class="list-group-item d-flex">
+        <div class="ms-3">
+          <h6 class="mb-0">Adam Wathan</h6>
+          <small class="text-secondary">Tailwindcss Creator</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="ms-3">
+          <h6 class="mb-0">Addy Osmani</h6>
+          <small class="text-secondary">GoogleChrome Engineer</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="ms-3">
+          <h6 class="mb-0">Caleb Porzio</h6>
+          <small class="text-secondary">Alpinejs Creator</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="ms-3">
+          <h6 class="mb-0">Evan You</h6>
+          <small class="text-secondary">Vuejs Creator</small>
+        </div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="ms-3">
+          <h6 class="mb-0">Rich Harris</h6>
+          <small class="text-secondary">Svelte Creator</small>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Checkboxes and radios</h3>
+    <p>Place checkboxes and radios within list group items.</p>
+    <div class="list-group">
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Pickles
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Tomato
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Lettuce
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Cheese
+      </label>
+    </div>
+    <div class="list-group mt-3">
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="radio" name="method" value="1">
+        Visa
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="radio" name="method" value="1">
+        MasterCard
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="radio" name="method" value="1">
+        American Express
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="radio" name="method" value="1">
+        Paypal
+      </label>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Items</h3>
+    <div class="list-group">
+      <div class="list-group-item active" aria-current="true">An active item</div>
+      <div class="list-group-item">A second item</div>
+      <div class="list-group-item">And a third one</div>
+      <div class="list-group-item disabled" aria-disabled="true">A disabled item</div>
+      <a href="javascript:void(0)" class="list-group-item list-group-item-action">A link item</a>
+      <a href="javascript:void(0)" class="list-group-item list-group-item-action">Another link item</a>
+      <button type="button" class="list-group-item list-group-item-action">A button item</button>
+      <button type="button" class="list-group-item list-group-item-action">Another button item</button>
+      <div class="list-group-item list-group-item-success">A simple success list group item</div>
+      <div class="list-group-item list-group-item-warning">A simple warning list group item</div>
+      <div class="list-group-item list-group-item-danger">A simple danger list group item</div>
+    </div>
+  </div>
+</div>
+@endsection

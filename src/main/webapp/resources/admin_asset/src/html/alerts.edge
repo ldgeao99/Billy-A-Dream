@@ -1,0 +1,81 @@
+@layout('layouts/_default')
+@set('menu', 'components')
+@set('sub', 'alerts')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Alerts</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-6">
+    <h3 class="fw-black">Example</h3>
+    <p>
+      Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+    </p>
+    <div class="alert alert-primary d-flex" role="alert">
+      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>
+      <div class="ms-3">
+        <h6 class="text-reset">Big news</h6>
+        We're excited to announce a brand new product. <a href="javascript:void(0)" class="alert-link">More</a>
+      </div>
+    </div>
+    <div class="alert alert-success d-flex" role="alert">
+      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="ms-3">
+        <h6 class="text-reset">Congratulation</h6>
+        You have successfully submitted the application.
+      </div>
+    </div>
+    <div class="alert alert-danger d-flex" role="alert">
+      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="ms-3">
+        <h6 class="text-reset">Error</h6>
+        There was a problem sending your email. Please try again.
+      </div>
+    </div>
+    <div class="alert alert-warning d-flex" role="alert">
+      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="ms-3">
+        <h6 class="text-reset">Warning</h6>
+        You have reached your limit. Please upgrade to premium.
+      </div>
+    </div>
+    <div class="alert alert-info d-flex" role="alert">
+      <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="ms-3">
+        <h6 class="text-reset">Information</h6>
+        Your profile has been updated.
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="fw-black">Dismissing</h3>
+    <p>
+      It’s possible to dismiss any alert inline.
+    </p>
+    <div class="alert alert-success alert-dismissible fade show d-flex" role="alert">
+      <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="ms-3">
+        Successfully uploaded.
+      </div>
+      <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-info alert-dismissible fade show d-flex" role="alert">
+      <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="ms-3">
+        <h6 class="text-reset">Information</h6>
+        <p class="mb-1s">Your profile has been updated.</p>
+        <a href="javascript:void(0)" class="alert-link me-3">View profile</a>
+        <a href="#" class="alert-link" data-bs-dismiss="alert">Dismiss</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

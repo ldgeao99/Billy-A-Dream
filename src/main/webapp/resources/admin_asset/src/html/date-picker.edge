@@ -1,0 +1,140 @@
+@layout('layouts/_default')
+@set('menu', 'advanced-forms')
+@set('sub', 'date-picker')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced forms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Date picker</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-5">
+  <div class="col-md-4">
+    <h3 class="fw-black">Basic</h3>
+    <p>Focus on the input to open date picker.</p>
+    <input type="text" class="form-control datepicker" placeholder="Choose date">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">DateTime</h3>
+    <p>Enable date and time picker.</p>
+    <input type="text" class="form-control datetimepicker" placeholder="Choose date">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">Allow input</h3>
+    <p>Allows the user to enter a date directly into the input field. By default, direct entry is disabled.</p>
+    <input type="text" class="form-control datepicker-input" autocomplete="off" placeholder="yyyy-mm-dd">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">External elements</h3>
+    <p>Use custom elements to trigger the state of the calendar.</p>
+    <div class="input-group datepicker-wrap">
+      <input type="text" class="form-control" placeholder="yyyy-mm-dd" autocomplete="off" data-input>
+      <span class="input-group-text" role="button" data-toggle>
+        <svg class="text-secondary" width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg>
+      </span>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">Date range</h3>
+    <p>Select a range of dates using the range calendar.</p>
+    <input type="text" class="form-control daterangepicker" placeholder="Choose date range">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">Multiple dates</h3>
+    <p>It is possible to select multiple dates.</p>
+    <input type="text" class="form-control datepicker-multiple" placeholder="Choose dates">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">Month picker</h3>
+    <p>Show a month-only calendar view.</p>
+    <input type="text" class="form-control monthpicker" placeholder="Choose date">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">Time picker</h3>
+    <p>Enable time picker only.</p>
+    <input type="text" class="form-control timepicker" placeholder="Choose time">
+  </div>
+  <div class="col-md-4">
+    <h3 class="fw-black">Inline</h3>
+    <p>Display the calendar in an always-open state.</p>
+    <input type="text" class="form-control datepicker-inline" placeholder="Choose date">
+  </div>
+</div>
+@endsection
+
+@section('lib-css')
+<link rel="stylesheet" href="{{ folder.css }}flatpickr.css">
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}flatpickr/flatpickr.js"></script>
+<script src="{{ folder.vendor }}flatpickr/plugins/monthSelect/index.js"></script>
+<script>
+// Basic
+flatpickr('.datepicker')
+
+// Datetime
+flatpickr('.datetimepicker', {
+  enableTime: true
+})
+
+// Allow Input
+flatpickr('.datepicker-input', {
+  allowInput: true
+})
+
+// External elements
+flatpickr('.datepicker-wrap', {
+  allowInput: true,
+  clickOpens: false,
+  wrap: true,
+})
+
+// Date Range
+flatpickr('.daterangepicker', {
+  mode: 'range'
+})
+
+// Multiple Dates
+flatpickr('.datepicker-multiple', {
+  mode: 'multiple'
+})
+
+// Month Picker
+flatpickr('.monthpicker', {
+  plugins: [
+    new monthSelectPlugin({
+      shorthand: true,
+      dateFormat: 'Y-m',
+      altFormat: 'Y-m',
+    })
+  ]
+})
+
+// Time Picker
+flatpickr('.timepicker', {
+  enableTime: true,
+  noCalendar: true,
+  dateFormat: 'H:i',
+  minuteIncrement: 1,
+})
+
+// Inline
+flatpickr('.datepicker-inline', {
+  inline: true,
+})
+
+// Disable mouse wheel on year input, since it doesn't updated when scrolling
+document.addEventListener('wheel', function () {
+  const el = document.activeElement
+  if (el.classList.contains('cur-year') || el.classList.contains('flatpickr-minute') || el.classList.contains('flatpickr-hour')) {
+    el.blur()
+  }
+})
+</script>
+@endsection

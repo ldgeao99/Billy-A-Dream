@@ -1,0 +1,259 @@
+@layout('layouts/_default')
+@set('menu', 'user')
+@set('sub', 'user-settings')
+
+@section('breadcrumb')
+<nav aria-label="breadcrumb" id="main-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+    <li class="breadcrumb-item active" aria-current="page">User settings</li>
+  </ol>
+</nav>
+@endsection
+
+@section('body')
+<div class="row g-4">
+  <div class="col-md-4 col-lg-3 d-none d-md-block">
+    <div class="card h-100">
+      <div class="card-body navbar-light">
+        <div class="navbar-nav nav">
+          <a data-bs-toggle="pill" class="nav-link d-flex align-items-center gap-3 active" href="#profile" role="tab" aria-selected="true">
+            @svg('node_modules/heroicons/outline/user.svg')
+            Profile
+          </a>
+          <a data-bs-toggle="pill" class="nav-link d-flex align-items-center gap-3" href="#account" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/outline/cog.svg')
+            Account
+          </a>
+          <a data-bs-toggle="pill" class="nav-link d-flex align-items-center gap-3" href="#security" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/outline/shield-check.svg')
+            Security
+          </a>
+          <a data-bs-toggle="pill" class="nav-link d-flex align-items-center gap-3" href="#notification" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/outline/bell.svg')
+            Notification
+          </a>
+          <a data-bs-toggle="pill" class="nav-link d-flex align-items-center gap-3" href="#billing" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/outline/credit-card.svg')
+            Billing
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 col-lg-9">
+    <div class="card h-100">
+      <div class="card-header d-flex d-md-none border-bottom">
+        <div class="nav nav-pills" role="tablist">
+          <button data-bs-toggle="pill" class="nav-link d-flex align-items-center active" data-bs-target="#profile" type="button" role="tab" aria-selected="true">
+            @svg('node_modules/heroicons/solid/user.svg')
+          </button>
+          <button data-bs-toggle="pill" class="nav-link d-flex align-items-center" data-bs-target="#account" type="button" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/solid/cog.svg')
+          </button>
+          <button data-bs-toggle="pill" class="nav-link d-flex align-items-center" data-bs-target="#security" type="button" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/solid/shield-check.svg')
+          </button>
+          <button data-bs-toggle="pill" class="nav-link d-flex align-items-center" data-bs-target="#notification" type="button" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/solid/bell.svg')
+          </button>
+          <button data-bs-toggle="pill" class="nav-link d-flex align-items-center" data-bs-target="#billing" type="button" role="tab" aria-selected="false">
+            @svg('node_modules/heroicons/solid/credit-card.svg')
+          </button>
+        </div>
+      </div>
+      <div class="card-body tab-content">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel">
+          <h3 class="fw-black">Profile</h3>
+          <p class="small text-secondary mb-4">
+            This information will be displayed publicy so be careful what you share.
+          </p>
+          <form>
+            <div class="d-flex flex-column flex-lg-row gap-4">
+              <div class="order-1 order-lg-0">
+                <div class="mb-4">
+                  <label class="form-label" for="fullName">Full Name</label>
+                  <input type="text" class="form-control" id="fullName" aria-describedby="fullNameHelp" placeholder="Enter your fullname" value="Kenneth Valdez">
+                  <small id="fullNameHelp" class="form-text">Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label" for="bio">Your Bio</label>
+                  <textarea class="form-control autosize" id="bio" placeholder="Write something about you">A front-end developer that focus more on user interface design, a web interface wizard, a connector of awesomeness.</textarea>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label" for="url">URL</label>
+                  <input type="text" class="form-control" id="url" placeholder="Enter your website address" value="http://benije.ke/pozzivkij">
+                </div>
+                <div class="mb-4">
+                  <label class="form-label" for="location">Location</label>
+                  <input type="text" class="form-control" id="location" placeholder="Enter your location" value="Bay Area, San Francisco, CA">
+                </div>
+                <div class="mb-4 small text-muted">
+                  All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
+                </div>
+                <button type="button" class="btn btn-primary">Update Profile</button>
+                <button type="reset" class="btn btn-light">Reset Changes</button>
+              </div>
+              <div class="order-0 order-lg-1 d-flex flex-column align-items-start align-items-lg-center gap-2">
+                <label class="form-label text-center">Photo</label>
+                <img src="{{ folder.img }}user/user1.svg" alt="User" width="150" class="rounded-circle" loading="lazy">
+                <button class="btn btn-sm btn-light" type="button">Change</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="account" role="tabpanel">
+          <h3 class="fw-black">Account</h3>
+          <p class="small text-secondary mb-4">
+            This information will be displayed publicy so be careful what you share.
+          </p>
+          <form>
+            <div class="mb-4">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username" value="kennethvaldez">
+              <small id="usernameHelp" class="form-text">After changing your username, your old username becomes available for anyone else to claim.</small>
+            </div>
+            <hr>
+            <div class="mb-4">
+              <label class="form-label" class="d-block text-danger">Delete Account</label>
+              <p class="text-muted small">Once you delete your account, there is no going back. Please be certain.</p>
+            </div>
+            <button class="btn btn-danger" type="button">Delete Account</button>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="security" role="tabpanel">
+          <h3 class="fw-black">Security</h3>
+          <p class="small text-secondary mb-4">
+            This information will determine the level of security of your account.
+          </p>
+          <form>
+            <label class="form-label d-block">Change Password</label>
+            <div class="d-flex flex-column gap-1">
+              <input type="text" class="form-control" placeholder="Enter your old password">
+              <input type="text" class="form-control" placeholder="New password">
+              <input type="text" class="form-control" placeholder="Confirm new password">
+            </div>
+          </form>
+          <hr>
+          <form>
+            <label class="form-label d-block">Two Factor Authentication</label>
+            <button class="btn btn-info" type="button">Enable two-factor authentication</button>
+            <p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
+          </form>
+          <hr>
+          <form>
+            <label class="form-label d-block">Sessions</label>
+            <p class="small text-secondary">This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.</p>
+            <ul class="list-group">
+              <li class="list-group-item d-flex align-items-center">
+                <div>
+                  <h6 class="mb-0">San Francisco City 190.24.335.55</h6>
+                  <small class="text-muted">Your current session seen in United States</small>
+                </div>
+                <button class="btn btn-light btn-sm ms-auto text-nowrap" type="button">More info</button>
+              </li>
+            </ul>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="notification" role="tabpanel">
+          <h3 class="fw-black">Notification</h3>
+          <p class="small text-secondary mb-4">
+            Manage how information is displayed on your account.
+          </p>
+          <form>
+            <div class="mb-4">
+              <label class="form-label d-block mb-0">Security Alerts</label>
+              <div class="small text-muted mb-3">Receive security alert notifications via email</div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="customCheck1" checked>
+                <label class="form-check-label" for="customCheck1">Email each time a vulnerability is found</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="customCheck2" checked>
+                <label class="form-check-label" for="customCheck2">Email a digest summary of vulnerability</label>
+              </div>
+            </div>
+            <div>
+              <label class="form-label d-block">SMS Notifications</label>
+              <ul class="list-group">
+                <li class="list-group-item d-flex align-items-center">
+                  Comments
+                  <div class="ms-auto">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="customSwitch1" checked>
+                      <label class="form-check-label" for="customSwitch1"></label>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  Updates From People
+                  <div class="ms-auto">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="customSwitch2">
+                      <label class="form-check-label" for="customSwitch2"></label>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  Reminders
+                  <div class="ms-auto">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="customSwitch3" checked>
+                      <label class="form-check-label" for="customSwitch3"></label>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  Events
+                  <div class="ms-auto">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="customSwitch4" checked>
+                      <label class="form-check-label" for="customSwitch4"></label>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  Pages You Follow
+                  <div class="ms-auto">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="customSwitch5">
+                      <label class="form-check-label" for="customSwitch5"></label>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="billing" role="tabpanel">
+          <h3 class="fw-black">Billing</h3>
+          <p class="small text-secondary mb-4">
+            Update your billing information.
+          </p>
+          <form>
+            <div class="mb-4">
+              <label class="form-label d-block mb-0">Payment Method</label>
+              <div class="small text-muted mb-3">You have not added a payment method</div>
+              <button class="btn btn-info" type="button">Add Payment Method</button>
+            </div>
+            <div>
+              <label class="form-label d-block">Payment History</label>
+              <div class="alert alert-info small text-center mb-0">
+                You have not made any payment.
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}autosize/autosize.js"></script>
+<script>
+autosize(document.querySelectorAll('textarea.autosize'))
+</script>
+@endsection

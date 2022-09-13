@@ -1,0 +1,16 @@
+#main-header {
+  .navbar {
+    box-shadow: 0 10px 30px 0 rgb(82 63 105 / 5%);
+  }
+  @include media-breakpoint-down(sm) {
+    .dropdown {
+      position: static;
+      .dropdown-menu {
+        margin-top: -$navbar-padding-y;
+        margin-right: var(--main-body-padding);
+        margin-left: var(--main-body-padding);
+        max-width: calc(100% - var(--main-body-padding) - var(--main-body-padding));
+      }
+    }
+  }
+}

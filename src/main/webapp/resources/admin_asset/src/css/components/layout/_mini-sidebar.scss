@@ -1,0 +1,34 @@
+@include media-breakpoint-up($desktop) {
+  .mini-sidebar {
+    #sidebar {
+      width: $sidebar-width-mini;
+      // Hide text, caret, submenu, nav-label
+      &:not(:hover) {
+        .nav-link > span,
+        .dropdown-toggle::after,
+        .collapse.show,
+        .nav-label {
+          display: none;
+        }
+      }
+      // expand on hover
+      &:hover {
+        width: $sidebar-width;
+        + #main {
+          width: calc(100% - #{$sidebar-width});
+        }
+      }
+    }
+    #main {
+      width: calc(100% - #{$sidebar-width-mini});
+    }
+  }
+  .mini-sidebar.fixed-sidebar {
+    #main {
+      margin-left: $sidebar-width-mini;
+    }
+    #sidebar:hover + #main {
+      width: calc(100% - #{$sidebar-width-mini});
+    }
+  }
+}

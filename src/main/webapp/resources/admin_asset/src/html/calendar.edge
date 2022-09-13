@@ -1,0 +1,222 @@
+@layout('layouts/_default')
+@set('menu', 'calendar')
+
+@section('body')
+<div class="row g-4">
+  <div class="col-{{ desktop }}-3">
+    <div class="card h-100">
+      <div class="card-body">
+        <p>Draggable Events</p>
+        <div id="externalEvents" class="row row-cols-auto g-2">
+          <div class="col"><span class="fc-event badge bg-primary p-2 rounded-pill">Event 1</span></div>
+          <div class="col"><span class="fc-event badge bg-secondary p-2 rounded-pill">Event 2</span></div>
+          <div class="col"><span class="fc-event badge bg-success p-2 rounded-pill">Event 3</span></div>
+          <div class="col"><span class="fc-event badge bg-info p-2 rounded-pill">Event 4</span></div>
+          <div class="col"><span class="fc-event badge bg-danger p-2 rounded-pill">Event 5</span></div>
+        </div>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" id="removeAfterDrop">
+          <label class="form-check-label small" for="removeAfterDrop">
+            Remove after drop
+          </label>
+        </div>
+        <hr>
+        <form id="createEvent" class="d-flexs" novalidate>
+          <div class="mb-3">
+            <label for="eventName" class="form-label">Add an draggable event</label>
+            <div class="input-group">
+              <div class="input-group-text p-0 overflow-hidden">
+                <input type="color" class="form-control form-control-color border-0 rounded-0" id="color" value="#6366f1">
+              </div>
+              <input type="text" class="form-control" placeholder="Event name" id="eventName" required>
+              <div class="invalid-feedback">Event name can't be empty.</div>
+            </div>
+          </div>
+          <button class="btn btn-primary w-100">Add</button>
+        </form>
+      </div>
+      <div class="card-footer d-none d-{{ desktop }}-block">
+        <img src="{{ folder.img }}events.svg" alt="" class="w-100" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <div class="col-{{ desktop }}-9">
+    <div class="card">
+      <div class="card-body">
+        <div id="exampleCalendar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('lib-css')
+<link rel="stylesheet" href="{{ folder.css }}fullcalendar.css">
+<link rel="stylesheet" href="{{ folder.css }}color-picker.css">
+@endsection
+
+@section('lib-js')
+<script src="{{ folder.vendor }}fullcalendar/main.js"></script>
+<script src="{{ folder.vendor }}color-picker/index.js"></script>
+<script>
+// Example events
+const currentMonth = ('0' + (new Date().getMonth() + 1)).slice(-2)
+const currentYear = new Date().getFullYear()
+const exampleEvents = [
+  {
+    title : 'All Day Event',
+    start : `${currentYear}-${currentMonth}-01`,
+    backgroundColor : 'red',
+    borderColor     : 'red',
+  },
+  {
+    title : 'Long Event',
+    start : `${currentYear}-${currentMonth}-07`,
+    end : `${currentYear}-${currentMonth}-10`,
+    backgroundColor : 'orange',
+    borderColor     : 'orange',
+  },
+  {
+    groupId : '999',
+    title : 'Repeating Event',
+    start : `${currentYear}-${currentMonth}-09T16:00:00+00:00`,
+    backgroundColor : 'purple',
+    borderColor     : 'purple',
+  },
+  {
+    groupId : '999',
+    title : 'Repeating Event',
+    start : `${currentYear}-${currentMonth}-16T16:00:00+00:00`,
+    backgroundColor : 'purple',
+    borderColor     : 'purple',
+  },
+  {
+    title : 'Conference',
+    start : `${currentYear}-${currentMonth}-03`,
+    end : `${currentYear}-${currentMonth}-05`,
+    backgroundColor : 'cadetblue',
+    borderColor     : 'cadetblue',
+  },
+  {
+    title : 'Meeting',
+    start : `${currentYear}-${currentMonth}-04T10:30:00+00:00`,
+    end : `${currentYear}-${currentMonth}-04T12:30:00+00:00`,
+    backgroundColor : 'green',
+    borderColor     : 'green',
+  },
+  {
+    title : 'Lunch',
+    start : `${currentYear}-${currentMonth}-04T12:00:00+00:00`,
+    backgroundColor : 'pink',
+    borderColor     : 'pink',
+  },
+  {
+    title : 'Birthday Party',
+    start : `${currentYear}-${currentMonth}-05T07:00:00+00:00`,
+    backgroundColor : 'teal',
+    borderColor     : 'teal',
+  },
+  {
+    url : 'http:\/\/google.com\/',
+    title : 'Click for Google',
+    start : `${currentYear}-${currentMonth}-28`,
+    backgroundColor : 'indigo',
+    borderColor     : 'indigo',
+  }
+]
+
+// Initialize the calendar
+const exampleCalendar = new FullCalendar.Calendar(document.getElementById('exampleCalendar'), {
+  events: exampleEvents,
+  headerToolbar: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+  },
+  themeSystem: 'bootstrap',
+  bootstrapFontAwesome: false,
+  buttonText: {
+    today: 'Today',
+    month: 'Month',
+    week: 'Week',
+    day: 'Day',
+    list: 'List',
+    prev: '❮',
+    next: '❯',
+  },
+  dayMaxEvents: true, // allow "more" link when too many events
+  editable: true,
+  droppable: true,
+  drop: info => {
+    if (document.getElementById('removeAfterDrop').checked) {
+      info.draggedEl.parentNode.remove()
+    }
+  },
+  selectable: true,
+  select: function(info) {
+    const clickedEnd = new Date(info.endStr).addDays(-1).yyyymmdd()
+    let eventName
+    if (info.startStr == clickedEnd) {
+      eventName = prompt(`Create an event on ${info.startStr}.\nEnter event name:`)
+    } else {
+      eventName = prompt(`Create an event from ${info.startStr} to ${clickedEnd}.\nEnter event name:`)
+    }
+    if (eventName) {
+      exampleCalendar.addEvent({
+        title: eventName,
+        start: info.startStr,
+        end: info.endStr,
+      })
+    }
+  }
+})
+exampleCalendar.render()
+
+// Initialize the external events
+new FullCalendar.Draggable(document.getElementById('externalEvents'), {
+  itemSelector: '.fc-event',
+  eventData: el => ({
+    title : el.innerText,
+    backgroundColor : window.getComputedStyle(el).getPropertyValue('background-color'),
+    borderColor     : window.getComputedStyle(el).getPropertyValue('background-color'),
+    textColor       : window.getComputedStyle(el).getPropertyValue('color'),
+  }),
+})
+
+// Create draggable event
+document.querySelector('#createEvent').addEventListener('submit', function (e) {
+  if (this.checkValidity()) {
+    const value = this.querySelector('input[type="text"]').value
+    const color = this.querySelector('#color').value
+    document.querySelector('#externalEvents')
+      .insertAdjacentHTML('afterbegin', `<div class="col"><span class="fc-event badge p-2 rounded-pill" style="background-color:${color}">${value}</span></div>`)
+    this.classList.remove('was-validated')
+    this.reset()
+  } else {
+    this.classList.add('was-validated')
+  }
+  e.preventDefault()
+  e.stopPropagation()
+})
+
+// Override HTML5 color input
+const picker = new CP(document.querySelector('#color'))
+picker.on('change', function (r, g, b) {
+  this.source.value = this.color(r, g, b, 1) // HTML5 color input does not support alpha channel
+})
+picker.source.addEventListener('click', e => e.preventDefault()) // Prevent showing native color picker pane
+picker.self.classList.add('no-alpha')
+
+// Some example prototypes for Date
+Date.prototype.addDays = function (days) {
+  const date = new Date(this.valueOf())
+  date.setDate(date.getDate() + days)
+  return date
+}
+Date.prototype.yyyymmdd = function () {
+  const m = ('0' + (this.getMonth() + 1)).slice(-2)
+  const d = ('0' + this.getDate()).slice(-2)
+  return `${this.getFullYear()}-${m}-${d}`
+}
+</script>
+@endsection

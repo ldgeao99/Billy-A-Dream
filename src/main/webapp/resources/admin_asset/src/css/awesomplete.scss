@@ -1,0 +1,60 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "bootstrap/variables";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+@import "../../node_modules/awesomplete/awesomplete";
+
+.awesomplete {
+  width: 100%;
+  mark {
+    padding: 0;
+    background: $dropdown-bg;
+    font-weight: 700;
+  }
+  > ul {
+    border: $dropdown-border-width solid $dropdown-border-color;
+    box-shadow: $dropdown-box-shadow;
+    overflow: hidden;
+    background: $dropdown-bg;
+    padding: $dropdown-padding-y 0;
+    @include border-radius($dropdown-border-radius);
+    z-index: $zindex-dropdown;
+    > li {
+      font-size: $dropdown-font-size;
+      padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+      color: $dropdown-link-color;
+      &[aria-selected="true"] {
+        color: $dropdown-link-active-color;
+        @include gradient-bg($dropdown-link-active-bg);
+        mark {
+          color: $dropdown-link-active-color;
+          @include gradient-bg($dropdown-link-active-bg);
+        }
+      }
+      &:hover {
+        color: $dropdown-link-hover-color;
+        @include gradient-bg($dropdown-link-hover-bg);
+        mark {
+          color: $dropdown-link-hover-color;
+          @include gradient-bg($dropdown-link-hover-bg);
+        }
+      }
+    }
+  }
+  .awesomplete-dropup ~ ul {
+    bottom: 100%;
+    margin: 0 0 .2em 0;
+  }
+}
+
+.input-group > .awesomplete {
+  flex: 1 1 auto;
+  width: 1%;
+  &:not(:last-child) > .form-control { @include border-end-radius(0); }
+  &:not(:first-child) > .form-control { @include border-start-radius(0); }
+}
+
+.input-group.focus > .awesomplete {
+  z-index: 3;
+}

@@ -1,0 +1,33 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "bootstrap/variables";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+@import "../../node_modules/@splidejs/splide/dist/css/splide.min";
+
+.splide__arrow {
+  // background: $gray-500;
+  // background-size: 70%;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  background: transparent;
+  color: $carousel-control-color;
+  opacity: $carousel-control-opacity;
+  width: $carousel-control-icon-width;
+  height: $carousel-control-icon-width;
+  svg {
+    display: none;
+  }
+  &.splide__arrow--prev {
+    background-image: escape-svg($carousel-control-prev-icon-bg);
+    .splide--ttb & {
+      transform: rotate(90deg);
+    }
+  }
+  &.splide__arrow--next {
+    background-image: escape-svg($carousel-control-next-icon-bg);
+    .splide--ttb & {
+      transform: rotate(90deg);
+    }
+  }
+}
