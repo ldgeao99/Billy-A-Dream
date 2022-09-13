@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<%@include file="/taglib.jsp" %>
+<html lang="ko">
     <head>
         <!--Required Meta Tags-->
         <meta charset="utf-8">
@@ -7,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="description">
         <!-- Title Of Site -->
-        <title>Home Demo20 - Optimal Multipurpose eCommerce Bootstrap 5 Html Template</title>
+        <title>Billy A Dream</title>
         <!-- Favicon -->
         <link rel="shortcut icon" href="resources/assets/images/favicon.png" />
         <!-- Plugins CSS -->
@@ -70,7 +72,7 @@
                                 <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
                                 <!--End Mobile Toggle-->
                                 <!--Logo-->
-                                <div class="logo"><a href="index.html"><img class="logo-img mh-100" src="resources/assets/images/logo-demo20.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" width="120" /><span class="logo-txt d-none">Optimal</span></a></div>
+                                <div class="logo"><a href="home"><img class="logo-img mh-100" src="resources/assets/images/logo-demo20.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" width="120" /><span class="logo-txt d-none">Optimal</span></a></div>
                                 <!--End Logo-->
                             </div>
                             <!--End Logo / Menu Toggle-->
@@ -116,10 +118,16 @@
                                 <div class="user-link iconset flex-lg-column"><i class="icon an an-user-expand"></i><span class="text d-none d-lg-flex">MY ACCOUNT</span></div>
                                 <div id="userLinks" class="mt-lg-3">
                                     <ul class="user-links">
-                                        <li><a href="login.mb">Login</a></li>
-                                        <li><a href="register.html">Sign Up</a></li>
-                                        <li><a href="my-wishlist.html">Wishlist</a></li>
-                                        <li><a href="compare-style1.html">Compare</a></li>
+                                    	<c:if test="${id == null}">
+                                       	 	<li><a href="login.mb">Login</a></li>
+                                        	<li><a href="register.mb">Sign Up</a></li>
+                                    	</c:if>
+                                    	<c:if test="${not empty id }">
+                                        	<li><a href="mypage.mb">Mypage</a></li>
+                                        	<li><a href="my-wishlist.mb">Wishlist</a></li>
+                                        	<li><a href="compare-style1.mb">Compare</a></li>
+                                        	<li><a href="out.mb">Logout</a></li>
+                                    	</c:if>
                                     </ul>
                                 </div>
                                 <!--End Setting Dropdown-->
@@ -1026,7 +1034,7 @@
                                         <div class="slideshow-content-in text-center">
                                             <div class="wrap-caption animation style2 whiteText">
                                                 <p class="ss-small-title mb-1">FRESH ADDITION</p>
-                                                <h2 class="mega-title ss-mega-title">We fulfill your dream home</h2>
+                                                <h2 class="mega-title ss-mega-title">Billy A Dream</h2>
                                                 <span class="mega-subtitle ss-sub-title">Furniture that works for you with best price</span>
                                                 <div class="ss-btnWrap">
                                                     <a class="btn btn-lg rounded-0 btn-outline-primary" href="shop-right-sidebar.html">BUY FURNITURE</a>
