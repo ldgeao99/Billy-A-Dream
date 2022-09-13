@@ -15,7 +15,6 @@ import lcategory.model.LcategoryDao;
 public class LcategoryListController {
 	private final String command="list.lcate";
 	private String getPage="listLcate";
-	private String gotoPage="redirect:/list.lcate";
 	
 	@Autowired
 	LcategoryDao lcategoryDao;

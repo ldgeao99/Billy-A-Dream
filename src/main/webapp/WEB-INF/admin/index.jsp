@@ -6,16 +6,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
-  <title>Mimity admin</title>
+  <link rel="icon" href="resources/admin_asset/img/favicon.ico" type="image/x-icon" />
+  <title>Billy A Dream Admin</title>
 
   <!-- Required CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap">
-  <link rel="stylesheet" href="assets/css/simplebar.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/sidebar-dark.css" id="sidebar-theme"> <!-- available themes: dark, light, cyan, green, indigo, red -->
+  <link rel="stylesheet" href="resources/admin_asset/css/simplebar.css">
+  <link rel="stylesheet" href="resources/admin_asset/css/style.css">
+  <link rel="stylesheet" href="resources/admin_asset/css/sidebar-dark.css" id="sidebar-theme"> <!-- available themes: dark, light, cyan, green, indigo, red -->
 
 </head>
 
@@ -34,7 +34,7 @@
             <rect width="90" height="90" rx="25" fill="#6366F1" />
             <path d="M63.312 29.16C63.568 29.64 63.712 30.072 63.744 30.456C63.808 30.84 63.84 31.4 63.84 32.136V58.776C63.84 60.984 63.232 62.28 62.016 62.664C61.408 62.856 60.64 62.952 59.712 62.952C58.784 62.952 58.048 62.872 57.504 62.712C56.96 62.552 56.544 62.36 56.256 62.136C55.968 61.912 55.744 61.592 55.584 61.176C55.424 60.632 55.344 59.8 55.344 58.68V42.6C54.544 43.592 53.376 45.176 51.84 47.352C50.304 49.496 49.328 50.84 48.912 51.384C48.496 51.928 48.208 52.312 48.048 52.536C47.888 52.728 47.488 53.016 46.848 53.4C46.24 53.752 45.568 53.928 44.832 53.928C44.128 53.928 43.472 53.768 42.864 53.448C42.288 53.096 41.872 52.76 41.616 52.44L41.232 51.912C40.592 51.112 39.328 49.416 37.44 46.824C35.552 44.2 34.528 42.792 34.368 42.6V58.776C34.368 59.512 34.336 60.072 34.272 60.456C34.24 60.808 34.096 61.208 33.84 61.656C33.36 62.52 32.112 62.952 30.096 62.952C28.144 62.952 26.928 62.52 26.448 61.656C26.192 61.208 26.032 60.792 25.968 60.408C25.936 60.024 25.92 59.448 25.92 58.68V32.04C25.92 31.304 25.936 30.76 25.968 30.408C26.032 30.024 26.192 29.592 26.448 29.112C26.928 28.28 28.176 27.864 30.192 27.864C31.056 27.864 31.792 27.976 32.4 28.2C33.04 28.392 33.456 28.6 33.648 28.824L33.936 29.112L44.832 43.416C50.272 36.216 53.904 31.464 55.728 29.16C56.272 28.296 57.552 27.864 59.568 27.864C61.616 27.864 62.864 28.296 63.312 29.16Z" fill="white" />
           </svg>
-          <span class="h5 mb-0 text-reset ms-3">Mimity admin</span>
+          <span class="h5 mb-0 text-reset ms-3">Welcome Admin</span>
         </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -53,6 +53,21 @@
                 <li class="nav-item"><a class="nav-link active" href="index.html">Ecommerce</a></li>
                 <li class="nav-item"><a class="nav-link" href="dashboard-analytics.html">Analytics</a></li>
                 <li class="nav-item"><a class="nav-link" href="dashboard-crm.html">CRM</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle" href="#dashboard-collapse2" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="dashboard-collapse">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span class="me-auto">카테고리</span>
+            </a>
+            <div class="ms-5 collapse show" id="dashboard-collapse2">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">카테고리 추가</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard-analytics.html">카테고리 수정</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard-crm.html">카테고리 삭제</a></li>
               </ul>
             </div>
           </li>
@@ -422,7 +437,7 @@
             <li class="nav-item vr mx-3"></li>
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle no-caret py-0 pe-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="assets/img/user/user1.svg" width="32" alt="User" class="rounded-circle" loading="lazy">
+                <img src="resources/admin_asset/img/user/user1.svg" width="32" alt="User" class="rounded-circle" loading="lazy">
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
@@ -554,31 +569,31 @@
               </div>
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <img src="assets/img/browser/chrome.svg" alt="" width="30" height="30" loading="lazy">
+                  <img src="resources/admin_asset/img/browser/chrome.svg" alt="" width="30" height="30" loading="lazy">
                   <span class="ms-2">Google Chrome</span>
                   <span class="ms-auto me-2">54.4%</span>
                   <div id="browser-stat-1"></div>
                 </div>
                 <div class="d-flex align-items-center mt-2">
-                  <img src="assets/img/browser/firefox.svg" alt="" width="30" height="30" loading="lazy">
+                  <img src="resources/admin_asset/img/browser/firefox.svg" alt="" width="30" height="30" loading="lazy">
                   <span class="ms-2">Mozilla Firefox</span>
                   <span class="ms-auto me-2">6.1%</span>
                   <div id="browser-stat-2"></div>
                 </div>
                 <div class="d-flex align-items-center mt-2">
-                  <img src="assets/img/browser/safari.svg" alt="" width="30" height="30" loading="lazy">
+                  <img src="resources/admin_asset/img/browser/safari.svg" alt="" width="30" height="30" loading="lazy">
                   <span class="ms-2">Apple Safari</span>
                   <span class="ms-auto me-2">14.6%</span>
                   <div id="browser-stat-3"></div>
                 </div>
                 <div class="d-flex align-items-center mt-2">
-                  <img src="assets/img/browser/ie.svg" alt="" width="30" height="30" loading="lazy">
+                  <img src="resources/admin_asset/img/browser/ie.svg" alt="" width="30" height="30" loading="lazy">
                   <span class="ms-2">Internet Explorer</span>
                   <span class="ms-auto me-2">4.2%</span>
                   <div id="browser-stat-4"></div>
                 </div>
                 <div class="d-flex align-items-center mt-2">
-                  <img src="assets/img/browser/opera.svg" alt="" width="30" height="30" loading="lazy">
+                  <img src="resources/admin_asset/img/browser/opera.svg" alt="" width="30" height="30" loading="lazy">
                   <span class="ms-2">Opera Mini</span>
                   <span class="ms-auto me-2">8.4%</span>
                   <div id="browser-stat-5"></div>
@@ -713,13 +728,13 @@
   <!-- /Wrapper -->
 
   <!-- Required JS -->
-  <script src="assets/vendor/bootstrap/bootstrap.bundle.js"></script>
-  <script src="assets/vendor/simplebar/simplebar.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script src="resources/admin_asset/vendor/bootstrap/bootstrap.bundle.js"></script>
+  <script src="resources/admin_asset/vendor/simplebar/simplebar.js"></script>
+  <script src="resources/admin_asset/js/script.js"></script>
 
-  <script src="assets/js/settings.js"></script>
+  <script src="resources/admin_asset/js/settings.js"></script>
 
-  <script src="assets/vendor/apexcharts/apexcharts.js"></script>
+  <script src="resources/admin_asset/vendor/apexcharts/apexcharts.js"></script>
   <script>
     new ApexCharts(document.querySelector('#orders'), {
       chart: {
