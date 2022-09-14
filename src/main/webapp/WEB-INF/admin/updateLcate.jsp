@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp"%>     
-    
-  
 <%@ include file="top.jsp"%>     
 <!-- Main -->
     <div id="main">
@@ -139,57 +137,7 @@
       <div id="main-body">
 
         <div id="inner-wrapper">
-          <div id="inner-sidebar" style="width: 13.75rem">
-            <div class="card">
-              <div class="card-header d-flex align-items-center">
-                <button class="btn btn-info w-100 d-flex align-items-center justify-content-center gap-1" type="button" data-bs-toggle="modal" data-bs-target="#taskModal">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-                  </svg>
-                  카테고리 추가하기
-                </button>
-                <button type="button" aria-label="Close" class="btn-close ms-3 d-lg-none shadow-none" data-toggle="inner-sidebar-expand"></button>
-              </div>
-              <div class="card-body px-0" data-simplebar>
-                <div class="nav flex-column">
-                  <a href="javascript:void(0)" class="nav-link link-secondary d-flex align-items-center gap-3 px-3 text-dark fw-bold">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                    </svg>
-                    All <span class="badge rounded-pill bg-info ms-auto">7</span>
-                  </a>
-                  <a href="javascript:void(0)" class="nav-link link-secondary d-flex align-items-center gap-3 px-3">
-                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Done <span class="badge rounded-pill bg-light text-muted ms-auto">3</span>
-                  </a>
-                  <a href="javascript:void(0)" class="nav-link link-secondary d-flex align-items-center gap-3 px-3">
-                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Important <span class="badge rounded-pill bg-light text-muted ms-auto">1</span>
-                  </a>
-                  <a href="javascript:void(0)" class="nav-link link-secondary d-flex align-items-center gap-3 px-3">
-                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                    </svg>
-                    Archive
-                  </a>
-
-                  <a href="javascript:void(0)" class="nav-link link-secondary d-flex align-items-center gap-3 px-3">
-                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                    Trash
-                  </a>
-                </div>
-              </div>
-              <div class="card-footer d-none d-lg-block">
-                <img src="resources/admin_asset/img/todo.svg" alt="" class="w-100" loading="lazy">
-              </div>
-            </div>
-          </div>
+          
           <div id="inner-main">
             <div class="card">
               <div class="card-header d-flex align-items-center gap-3"><button class="btn link-secondary px-0 d-none d-lg-flex shadow-none" type="button" data-toggle="inner-sidebar-collapse">
@@ -210,44 +158,62 @@
               </div>
               <div class="card-body p-0" data-simplebar>
                 <ul class="list-group list-group-flush">
-                  	<c:forEach items="${lists }" var="firstList">
-						<c:forEach items="${firstList }" var="scate" varStatus="i">
-             <c:if test="${i.count eq 1}">
-                  <li class="list-group-item todo-item lcategory">
-	
-                    <div class="gap-1 gap-sm-3">
-                      <div class="vstack ms-2 ms-sm-3">
-                        <h5 class="mb-3">
-                         
-					<b>대분류 : ${scate.lcate_name}</b>
-                        </h5>
-                      </div>
-                   </div>
-                  </li>    
-			</c:if>
+                  	<c:forEach items="${lists }" var="lcate" varStatus="i">
+                  	
                   <li class="list-group-item todo-item">
-                    
                     <div class="gap-1 gap-sm-3">
+                    
+                    <!-- 아래로 내리는 버튼 -->
+                <c:if test="${lcate.order_num eq maxOrder_num}">    
+                    <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2" disabled onclick="updateOrder_num(${lcate.no},1,${lcate.order_num })">
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
+                </svg>
+                
+              </button>
+              </c:if>
+                <c:if test="${lcate.order_num ne maxOrder_num}">    
+                    <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2" onclick="updateOrder_num(${lcate.no},1,${lcate.order_num })">
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
+                </svg>
+                
+              </button>
+              </c:if>
+                    <!-- 위로 올리는 버튼 -->
+              <c:if test="${i.count eq 1}">
+              <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2" disabled onclick="updateOrder_num(${lcate.no},-1,${lcate.order_num })">
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                </svg>
+                
+              </button>
+              </c:if>
+              <c:if test="${i.count ne 1}">
+              <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2" onclick="updateOrder_num(${lcate.no},-1,${lcate.order_num })">
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                </svg>
+                
+              </button>
+              </c:if>
                       <div class="vstack ms-2 ms-sm-3">
                         <h5 class="mb-3">
-                          ${scate.name }
+                          ${lcate.name }
                         </h5>
                       </div>
                       <div class="dropdown">
-                        <button class="btn dropdown-toggle no-caret px-0 d-flex link-secondary shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                          </svg>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="javascript:void(0)">Edit</a></li>
-                          <li><a class="dropdown-item" href="delete.lcate?no=${lcate.no }">Delete</a></li>
-                        </ul>
+                      <button id="getTaskModal" class="btn btn-info w-100 d-flex align-items-center justify-content-center gap-1" type="button" data-bs-toggle="modal" data-bs-target="#taskModal" data-id="${lcate.no }">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                  </svg>
+                  카테고리 수정하기
+                </button>  
+                        
                       </div>
                     </div>
                   </li>
 					</c:forEach>
-				</c:forEach>
                   
                 </ul>
               </div>
@@ -260,27 +226,16 @@
           <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header border-0">
-                <h5 class="modal-title">소분류 카테고리 추가하기</h5>
+                <h5 class="modal-title">대분류 카테고리 수정하기</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form class="needs-validation" novalidate id="taskForm" action="insert.scate" method="post">
-                  <div class="mb-3">
-                    <label for="taskTitle" class="form-label">대분류 카테고리</label>
-                    <select class="form-select form-select-lg" name="lcate_no" required autofocus>
-            			<option value="">대분류 카테고리 선택하기</option>
-                    	<c:forEach items="${list }" var="lcate">
-						
-            			<option value="${lcate.no }">${lcate.name }</option>
-            			
-            			</c:forEach> 
-                    </select>
-                    <div class="invalid-feedback">카테고리를 선택해주세요.</div>
-                    </div>
+                <form class="needs-validation" novalidate id="taskForm" action="update.lcate" method="post">
                   <div class="mb-3">
                     <label for="taskTitle" class="form-label">이름</label>
-                    <input type="text" name="name" class="form-control" id="name" required autofocus>
-                    <div class="invalid-feedback">이름을 입력해주세요.</div>
+                    <input type="text" name="name" class="form-control" id="name" required autofocus >
+                    <input type="hidden" name="no" id="no">
+                    <div class="invalid-feedback">Task title is required.</div>
                   </div>
                  
                  
@@ -288,7 +243,7 @@
               </div>
               <div class="modal-footer border-0">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소하기</button>
-                <button type="submit" form="taskForm" class="btn btn-info px-5">추가하기</button>
+                <button type="submit" form="taskForm" class="btn btn-info px-5">수정하기</button>
               </div>
             </div>
           </div>
@@ -323,8 +278,9 @@
   <!-- Required JS -->
   <script src="resources/admin_asset/vendor/bootstrap/bootstrap.bundle.js"></script>
   <script src="resources/admin_asset/vendor/simplebar/simplebar.js"></script>
-  <script src="resources/admin_asset/js/script.js"></script>
-
+  <script src="resources/admin_asset/js/script.js">
+  </script>
+	
   <script src="resources/admin_asset/js/settings.js"></script>
 
   <script src="resources/admin_asset/vendor/autosize/autosize.js"></script>
@@ -344,15 +300,26 @@
         })
       })
     })()
+   
   </script>
 <script type="text/javascript">
-	function updateOrder_num(order_num){
-		location.href="update.lcate?order_num="+order_num;
+	function updateOrder_num(no,val,order_num){
+		location.href="updateOrder_num.lcate?no="+no+"&val="+val+"&order_num="+order_num;
 	}
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(document).on("click", "#getTaskModal", function () {
+		
+		  var data = $(this).data('id');
+		    $("#no").val(data);
+		    
+})
+
 </script>
 </body>
 
 </html>
-
-
+listLcate.jsp<br>
 

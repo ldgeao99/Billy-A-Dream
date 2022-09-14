@@ -22,8 +22,8 @@ public class LcategoryListController {
 	@RequestMapping(value = command,method = RequestMethod.GET)
 	public String getInsert(Model model) {
 		List<LcategoryBean> lists=lcategoryDao.selectLcategoryList();
-		int maxOrder_num=lcategoryDao.selectMaxOrder();
 		model.addAttribute("lists", lists);
+		int maxOrder_num=lcategoryDao.selectMaxOrder();
 		model.addAttribute("maxOrder_num", maxOrder_num);
 		return getPage;
 	}

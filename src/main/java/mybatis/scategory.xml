@@ -8,7 +8,8 @@
 		values(scate_seq.nextval,#{name},#{lcate_no},#{order_num})
 	</insert>
 	<select id="SelectScategoryList" resultType="scategory.model.ScategoryBean">
-		select * from scategory 
+		select * 
+		from scategory 
 		where lcate_no=#{lcate_no} 
 		order by order_num
 	</select>
@@ -16,4 +17,27 @@
 		delete scategory 
 		where no=#{no}
 	</delete>
+	<delete id="DeleteAllScategory">
+		delete scategory 
+		where lcate_no=#{no}
+	</delete>
+	<select id="SelectMaxOrder" resultType="int">
+		select count(order_num) from scategory where lcate_no=#{lcate_no}
+	</select>
+	<select id="SelectNextScategory" resultType="scategory.model.ScategoryBean">
+		select * from scategory where order_num=#{order_num} and lcate_no=#{lcate_no}
+	</select>
+	<update id="AfterUpdateOrder_num">
+		update scategory set order_num=order_num-#{order_num} where no=#{no}
+	</update>
+	<update id="UpdateOrder_num">
+		update scategory set order_num=order_num+#{order_num} where no=#{no}
+	</update>
+	<update id="UpdateScategory">
+		update scategory set name=#{name} where no=#{no}
+	</update>
+	<update id="ChangeLcategory">
+		update scategory set lcate_no=#{lcate_no},order_num=#{order_num} where no=#{no}
+	</update>
+	
 </mapper>

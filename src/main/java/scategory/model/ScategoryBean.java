@@ -7,15 +7,21 @@ public class ScategoryBean {
 	private int order_num; //2차 순서
 	private int search_count; //조회수
 	private String lcate_name;
+	private int maxOrder_num; 
+	
+	public int getMaxOrder_num() {
+		return maxOrder_num;
+	}
+	public void setMaxOrder_num(int maxOrder_num) {
+		this.maxOrder_num = maxOrder_num;
+	}
 	public String getLcate_name() {
 		return lcate_name;
 	}
 	public void setLcate_name(String lcate_name) {
 		this.lcate_name = lcate_name;
 	}
-	ScategoryBean(){
-		System.out.println("ScategoryBean생성자");
-	}
+	
 	public int getNo() {
 		return no;
 	}

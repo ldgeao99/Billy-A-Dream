@@ -1,8 +1,7 @@
-sql 湲곕낯 �꽕�젙
+sql 테이블
 
-愿�由ъ옄 怨꾩젙 �젒�냽 
-�궗�슜�옄紐� : sys
-鍮꾨�踰덊샇 : oracle as sysdba
+sys
+oracle as sysdba
 
 alter session set "_oracle_script"=true;
 
@@ -14,7 +13,7 @@ grant create table, create sequence to billy;
 
 alter user billy default tablespace users quota unlimited on users;
 
---��遺꾨쪟 移댄뀒怨좊━
+--대분류 카테고리
 
 drop table lcategory;
 create table lcategory(
@@ -37,8 +36,8 @@ insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
 
 insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
 
---�냼遺꾨쪟 移댄뀒怨좊━
-
+--소분류 카테고리
+drop table scategory;
 create table scategory(
 no number primary key, 
 name varchar2(40),
@@ -46,7 +45,7 @@ lcate_no number,
 order_num number,
 search_count number 
 );
-
+drop sequence scate_seq;
 create sequence scate_seq
   increment by 1
   start with 1
@@ -91,4 +90,3 @@ create sequence member_seq
 insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'admin','admin','관리자','인천시 계양구','admin@naver.com','01012345678');
 insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'123','123','손님','인천시 계양구','123@naver.com','01012340000');
 insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'id','1234','박찬호','인천시 계양구','123@naver.com','01022533481');
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream

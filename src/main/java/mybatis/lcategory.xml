@@ -12,13 +12,19 @@
 	<select id="SelectLcategoryList" resultType="lcategory.model.LcategoryBean">
 		select * from lcategory order by order_num
 	</select>
-	<select id="SelectNameByOrder_num" resultType="String">
-		select name from lcategory where order_num=#{order_num}
+	<select id="SelectNextLcategory" resultType="lcategory.model.LcategoryBean">
+		select * from lcategory where order_num=#{order_num}
 	</select>
 	<update id="AfterUpdateOrder_num">
-		update lcategory set order_num=order_num-1 where name=#{name}
+		update lcategory set order_num=order_num-#{order_num} where no=#{no}
 	</update>
 	<update id="UpdateOrder_num">
-		update lcategory set order_num=order_num+1 where order_num=#{order_num}
+		update lcategory set order_num=order_num+#{order_num} where no=#{no}
 	</update>
+	<update id="UpdateLcategory">
+		update lcategory set name=#{name} where no=#{no}
+	</update>
+	<delete id="DeleteLcategory">
+		delete lcategory where no=#{no}
+	</delete>
 </mapper>

@@ -30,8 +30,10 @@ public class ScategoryListController {
 		List<List<ScategoryBean>> lists=new ArrayList<List<ScategoryBean>>();
 		for(LcategoryBean lcate : list) {
 			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
-			for(ScategoryBean sc : scate)
+			for(ScategoryBean sc : scate) {
 				sc.setLcate_name(lcate.getName());
+				sc.setMaxOrder_num(scategoryDao.selectMaxOrder(sc));
+			}
 			
 			lists.add(scate);
 		}

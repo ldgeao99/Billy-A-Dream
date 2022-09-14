@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lcategory.model.LcategoryDao;
 import scategory.model.ScategoryBean;
+import scategory.model.ScategoryDao;
 
 @Controller
 public class ScategoryInsertController {
@@ -17,6 +19,8 @@ public class ScategoryInsertController {
 	
 	@Autowired
 	LcategoryDao lcategoryDao;
+	@Autowired
+	ScategoryDao scategoryDao;
 	
 	@RequestMapping(value = command,method = RequestMethod.GET)
 	public String getInsert() {
@@ -24,8 +28,12 @@ public class ScategoryInsertController {
 		return getPage;
 	}
 	@RequestMapping(value = command,method = RequestMethod.POST)
-	public String gotoInsert(@ModelAttribute("scategory") ScategoryBean scategory) {
-		
+	public String gotoInsert(@RequestParam("lcate_no") int lcate_no,
+			@RequestParam("name") String name) {
+		ScategoryBean scategory=new ScategoryBean();
+		scategory.setLcate_no(lcate_no);
+		scategory.setName(name);
+		scategoryDao.insertScategory(scategory);
 		return gotoPage;
 	}
 }
