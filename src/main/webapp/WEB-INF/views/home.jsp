@@ -119,14 +119,14 @@
                                 <div id="userLinks" class="mt-lg-3">
                                     <ul class="user-links">
                                     	<c:if test="${id == null}">
-                                       	 	<li><a href="login.mb">Login</a></li>
-                                        	<li><a href="register.mb">Sign Up</a></li>
+                                       	 	<li><a href="login.mb">로그인</a></li>
+                                        	<li><a href="register.mb">회원가입</a></li>
                                     	</c:if>
                                     	<c:if test="${not empty id }">
-                                        	<li><a href="mypage.mb">Mypage</a></li>
-                                        	<li><a href="my-wishlist.mb">Wishlist</a></li>
+                                        	<li><a href="mypage.mb">마이페이지</a></li>
+                                        	<li><a href="my-wishlist.mb">관심목록</a></li>
                                         	<li><a href="compare-style1.mb">Compare</a></li>
-                                        	<li><a href="out.mb">Logout</a></li>
+                                        	<li><a href="out.mb">로그아웃</a></li>
                                     	</c:if>
                                     </ul>
                                 </div>
