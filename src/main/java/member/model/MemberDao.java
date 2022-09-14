@@ -15,10 +15,10 @@ public class MemberDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate; 
 
-	public String getPwById(String id) {
+	public MemberBean getById(String id) {
 		
-		String pw = sqlSessionTemplate.selectOne(namespace+".login",id);
-		return pw;
+		MemberBean mb = sqlSessionTemplate.selectOne(namespace+".login",id);
+		return mb;
 	}
 	public int idCheck(String id) {
 		
@@ -36,4 +36,20 @@ public class MemberDao {
 		
 		return id;
 	}
+	public int FindPW(Map<String, String> map) {
+		
+		int result = sqlSessionTemplate.selectOne(namespace+".FindPw",map);
+		return result;
+	}
+	public int resetPW(Map<String, String> map) {
+		
+		int result = sqlSessionTemplate.update(namespace+".resetPw",map);
+		return result;
+	}
+	public void deleteMember(String id) {
+		
+		int result = sqlSessionTemplate.delete(namespace+".deleteMember",id);
+		System.out.println("삭제한 결과 :"+result);
+	}
+	
 }
