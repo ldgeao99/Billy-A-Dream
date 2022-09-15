@@ -76,10 +76,11 @@ add2_sigungu varchar2(20),
 add3_eubmyeon varchar2(20),
 add4_donglee varchar2(20),
 email varchar2(30),
-hp number,
+hp varchar2(11),
 isblacklist char(1) default 0,
 rating number default 0,
-wishpnum varchar2(200)
+wishpnum varchar2(200),
+coupon varchar2(200)
 );
 col mno for 99;
 col id for a10;
@@ -90,7 +91,7 @@ col add2_sigungu for a10;
 col add3_eubmyeon for a10;
 col add4_donglee for a10;
 col email for a10;
-col hp for 9999999999;
+col hp for a11;
 col isblacklist for 9;
 col rating for 9;
 
