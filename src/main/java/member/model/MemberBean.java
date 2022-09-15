@@ -1,35 +1,20 @@
 package member.model;
 
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 public class MemberBean {
 	private int mno;
-	@NotBlank(message = "아이디를 입력하세요")
 	private String id;
-	
-	@Pattern(regexp ="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "최소 8자,최소 하나의 문자와 숫자를 입력하세요")
 	private String pw;
-	
-	@NotBlank(message = "이름을 입력하세요")
 	private String name;
-	
-	@NotBlank(message = "주소를 입력하세요")
-	private String postcode;
-	private String address;
-	
-	@NotBlank(message = "주소를 입력하세요")
-	private String detailaddress;
-	@Pattern(regexp = "^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+" , message = "올바르지 않은 형식의 이메일입니다")
+	private String add1_sido;
+	private String add2_sigungu;
+	private String add3_eubmyeon;
+	private String add4_donglee;
 	private String email;
-	@Pattern(regexp = "(01[016789])([1-9]{1}[0-9]{2,3})([0-9]{4})$" , message = "올바르지 않은 형식의 번호입니다")
 	private String hp; // 핸드폰번호
 	private String isblacklist; // 블랙리스트
 	private int rating;
-	
 	//유효성검사후 다시 쓰기 위해
-	@NotBlank(message = "재확인 비밀번호를 입력하세요")
 	private String repw;
 	
 	
@@ -39,17 +24,29 @@ public class MemberBean {
 	public void setRepw(String repw) {
 		this.repw = repw;
 	}
-	public String getPostcode() {
-		return postcode;
+	public String getAdd1_sido() {
+		return add1_sido;
 	}
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
+	public void setAdd1_sido(String add1_sido) {
+		this.add1_sido = add1_sido;
 	}
-	public String getDetailaddress() {
-		return detailaddress;
+	public String getAdd2_sigungu() {
+		return add2_sigungu;
 	}
-	public void setDetailaddress(String detailaddress) {
-		this.detailaddress = detailaddress;
+	public void setAdd2_sigungu(String add2_sigungu) {
+		this.add2_sigungu = add2_sigungu;
+	}
+	public String getAdd3_eubmyeon() {
+		return add3_eubmyeon;
+	}
+	public void setAdd3_eubmyeon(String add3_eubmyeon) {
+		this.add3_eubmyeon = add3_eubmyeon;
+	}
+	public String getAdd4_donglee() {
+		return add4_donglee;
+	}
+	public void setAdd4_donglee(String add4_donglee) {
+		this.add4_donglee = add4_donglee;
 	}
 	public int getMno() {
 		return mno;
@@ -74,12 +71,6 @@ public class MemberBean {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getEmail() {
 		return email;
