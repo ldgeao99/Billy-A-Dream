@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<!-- 어노테이션을 활용한 유효성 검사할 때 필요함 -->
+	<mvc:annotation-driven/>
+	
+	<!-- ViewResolver 설정, *.mv 요청이 들어오면 앞에 prefix의 값을 붙이고 뒤에 suffix의 값을 붙여서 해당 url로 이동하게 함 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/product/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 컨트롤러를 찾기위해 album 패키지 하위의 모든 파일을 훑어봐라, album.xxx, album.x.y.z 등등 다 포함 -->
+	<context:component-scan base-package="product"></context:component-scan>
+
+	<!-- 클라이언트가 상품이미지를 올릴때, 서버측에서 request로 못받았고, MultipartRequest로 받아줘야 했음. 당시 객체생성 = 업로드 실행을 의미했음 -->
+	<!-- 파일 업로드 할 때 필요한 부분 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<property name="maxUploadSize" value="10485760" /> <!-- 최대 사이즈를 10M로 지정  --><!-- setter 통한 주입 -->
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+
+</beans>
