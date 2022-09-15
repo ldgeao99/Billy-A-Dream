@@ -1,11 +1,27 @@
 package scategory.model;
 
 public class ScategoryBean {
-	private int no;
+	private int no; //이건 필요할까
 	private String name;
-	private int lcate_no;
-	private int order;
-	private int search_count;
+	private int lcate_no; //1차 순서 대분류에 따름
+	private int order_num; //2차 순서
+	private int search_count; //조회수
+	private String lcate_name;
+	private int maxOrder_num; 
+	
+	public int getMaxOrder_num() {
+		return maxOrder_num;
+	}
+	public void setMaxOrder_num(int maxOrder_num) {
+		this.maxOrder_num = maxOrder_num;
+	}
+	public String getLcate_name() {
+		return lcate_name;
+	}
+	public void setLcate_name(String lcate_name) {
+		this.lcate_name = lcate_name;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -24,11 +40,11 @@ public class ScategoryBean {
 	public void setLcate_no(int lcate_no) {
 		this.lcate_no = lcate_no;
 	}
-	public int getOrder() {
-		return order;
+	public int getOrder_num() {
+		return order_num;
 	}
-	public void setOrder(int order) {
-		this.order = order;
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
 	}
 	public int getSearch_count() {
 		return search_count;

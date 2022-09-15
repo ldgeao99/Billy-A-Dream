@@ -10,6 +10,7 @@
 	
 	<mappers><!-- 하나만 있을때도 쓸 수 있다. -->
 		<mapper resource="mybatis/lcategory.xml"/>
+		<mapper resource="mybatis/scategory.xml"/>
 		<mapper resource="mybatis/member.xml"/>
 		<mapper resource="mybatis/memberIp.xml"/>
 	</mappers>
