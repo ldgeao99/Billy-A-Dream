@@ -21,7 +21,7 @@ public class ScategoryUpdateController {
 	private final String command="update.scate";
 	private final String command2="updateOrder_num.scate";
 	private final String command3="updateLcate_no.scate";
-	private String getPage="updateScate";
+	private String getPage="admin/updateScate";
 	private String gotoPage="redirect:/update.scate";
 
 	@Autowired

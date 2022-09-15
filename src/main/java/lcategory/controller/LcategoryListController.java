@@ -14,7 +14,7 @@ import lcategory.model.LcategoryDao;
 @Controller
 public class LcategoryListController {
 	private final String command="list.lcate";
-	private String getPage="listLcate";
+	private String getPage="admin/listLcate";
 	
 	@Autowired
 	LcategoryDao lcategoryDao;

@@ -12,7 +12,7 @@ import lcategory.model.LcategoryDao;
 @Controller
 public class LcategoryInsertController {
 	private final String command="insert.lcate";
-	private String getPage="insertLcate";
+	private String getPage="admin/insertLcate";
 	private String gotoPage="redirect:/list.lcate";
 	
 	@Autowired

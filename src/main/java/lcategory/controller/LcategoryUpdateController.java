@@ -18,7 +18,7 @@ import lcategory.model.LcategoryDao;
 public class LcategoryUpdateController {
 	private final String command="update.lcate";
 	private final String command2="updateOrder_num.lcate";
-	private String getPage="updateLcate";
+	private String getPage="admin/updateLcate";
 	private String gotoPage="redirect:/update.lcate";
 
 	@Autowired

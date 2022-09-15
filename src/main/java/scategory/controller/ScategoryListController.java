@@ -17,7 +17,7 @@ import scategory.model.ScategoryDao;
 @Controller
 public class ScategoryListController {
 	private final String command="list.scate";
-	private String getPage="listScate";
+	private String getPage="admin/listScate";
 	
 	@Autowired
 	LcategoryDao lcategoryDao;

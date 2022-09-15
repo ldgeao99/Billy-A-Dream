@@ -14,7 +14,7 @@ import scategory.model.ScategoryDao;
 @Controller
 public class ScategoryInsertController {
 	private final String command="insert.scate";
-	private String getPage="insertScate";
+	private String getPage="admin/insertScate";
 	private String gotoPage="redirect:/list.scate";
 	
 	@Autowired
