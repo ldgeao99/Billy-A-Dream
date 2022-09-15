@@ -5,11 +5,13 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="member.model.MemberBean" alias="MyMember"/>
+		<typeAlias type="member.model.MemberIpBean" alias="MyMemberIp"/>
 	</typeAliases>
 	
 	<mappers><!-- 하나만 있을때도 쓸 수 있다. -->
 		<mapper resource="mybatis/lcategory.xml"/>
 		<mapper resource="mybatis/member.xml"/>
-		<mapper resource="mybatis/product.xml"/>
+		<mapper resource="mybatis/memberIp.xml"/>
+    <mapper resource="mybatis/product.xml"/>
 	</mappers>
 </configuration>
