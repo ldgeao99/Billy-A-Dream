@@ -8,16 +8,36 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="description">
+        
         <!-- Title Of Site -->
         <title>Billy A Dream</title>
+        
         <!-- Favicon -->
         <link rel="shortcut icon" href="resources/assets/images/favicon.png" />
+        
         <!-- Plugins CSS -->
         <link rel="stylesheet" href="resources/assets/css/plugins.css" />
+        
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="resources/assets/css/style.css" />
         <link rel="stylesheet" href="resources/assets/css/responsive.css" />
+        
+        <!-- 오른쪽 상단 아이콘 관련 -->
+        <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
+        <script>
+        	function gotoSellPage(){
+        		location.href = "insert.prd";
+        	}
+        </script>
+        <style>
+	        i {
+	    		font-size: 1rem;
+			}
+		</style>
+		
     </head>
+
+
 
     <body class="template-index index-demo20">
         <!-- Page Loader -->
@@ -82,7 +102,16 @@
                                 <div class="wishlist-link iconset d-none"><i class="icon an an-heart-l"></i><span class="wishlist-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle">0</span><span class="tooltip-label">Wishlist</span></div>
                                 <!--End Wishlist-->
                                 <!--Setting Dropdown-->
-                                <div class="user-link iconset flex-lg-column"><i class="icon an an-user-expand"></i><span class="text d-none d-lg-flex">MY ACCOUNT</span></div>
+                                
+                                <!-- 상단 오른편 판매하기 버튼 -->
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-solid fa-won-sign" onClick="gotoSellPage()"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="gotoSellPage()">판매하기</span>
+                                </div>
+                               
+                                
+                                <!-- 상단 오른편 마이페이지 버튼 -->
+                                <div class="user-link iconset flex-lg-column"><i class="fa-regular fa-user"></i><span class="text d-none d-lg-flex">마이페이지</span></div>
                                 <div id="userLinks" class="mt-lg-3">
                                     <ul class="user-links">
                                     	<c:if test="${id == null}">
@@ -98,15 +127,19 @@
                                     </ul>
                                 </div>
                                 <!--End Setting Dropdown-->
+                                
                                 <!--Minicart Drawer-->
+                                
+                                <!-- 상단 오른편 관심목록 버튼 -->
                                 <div class="header-cart iconset flex-lg-column">
                                     <a href="#" class="site-header__cart btn-minicart d-flex-justify-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
-                                        <i class="icon an an-sq-bag"></i><span class="text d-none d-lg-flex">MY CART</span><span class="site-cart-count counter d-flex-center justify-content-center position-absolute rounded-circle">2</span>
+                                        <i class="fa-regular fa-heart"></i><span class="text d-none d-lg-flex">관심목록</span><span class="site-cart-count counter d-flex-center justify-content-center position-absolute rounded-circle">2</span>
                                     </a>
                                 </div>
                                 <!--End Minicart Drawer-->
                                 <!--Setting Dropdown-->
-                                <div class="setting-link iconset flex-lg-column pe-0"><i class="icon an an-globe"></i><span class="tooltip-label">Settings</span></div>
+
+                                
                                 <div id="settingsBox" class="mt-lg-3">
                                     <div class="currency-picker">
                                         <span class="ttl">Select Currency</span>
