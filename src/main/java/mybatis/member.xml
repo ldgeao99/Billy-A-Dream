@@ -34,4 +34,9 @@
 		delete member where id = #{id}
 	</delete>
 	
+	
+	<update id="updateMember">
+		update member set id=#{id}, pw = #{pw} , add1_sido = #{add1_sido} , add2_sigungu = #{add2_sigungu} , add3_eubmyeon = #{add3_eubmyeon},
+		add4_donglee = #{add4_donglee} , email = #{email} , hp = #{hp} where mno = #{mno}
+	</update>
 </mapper>

@@ -1,5 +1,6 @@
 <%@page import="java.net.Inet4Address"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@include file = "categoryTop.jsp" %>
 
 <style>
 	tr{
@@ -173,8 +174,7 @@ function authNumCheck (){
 	
 }
 </script>
-<!doctype html>
-<%@include file = "/categoryTop.jsp" %>
+
 
             <!--Body Container-->
             <div id="page-content">   

@@ -51,5 +51,11 @@ public class MemberDao {
 		int result = sqlSessionTemplate.delete(namespace+".deleteMember",id);
 		System.out.println("삭제한 결과 :"+result);
 	}
+	public void updateMember(MemberBean mb) {
+
+		int result = sqlSessionTemplate.update(namespace+".updateMember",mb);
+		
+		System.out.println("업데이트한 결과 :"+result);
+	}
 	
 }

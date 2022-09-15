@@ -1,5 +1,15 @@
+<%@page import="member.model.MemberBean"%>
+<%@page import="member.model.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@include file = "/taglib.jsp" %>
+<%@include file = "../common/common.jsp" %>
+<%
+	String id = (String)session.getAttribute("id"); // 아이디
+	System.out.println("id : "+id); 
+	
+%>
+<c:set var="id" value="<%=id %>"></c:set>
+
+<!doctype html>
 <html lang="ko">
     <head>
         <!--Required Meta Tags-->
