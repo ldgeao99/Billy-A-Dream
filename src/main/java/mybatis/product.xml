@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 복사해서 가져온 부분 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product.model.SQL"> <!-- 여기에서 namespace 속성으로  들어간 텍스트는 AlbumBean 클래스와 아무상관이 없다. 마음대로 아무거나 써도 됨 -->
+	
+ 	<!-- category를 입력받고 있지 않으므로 category 를 null로 입력하라는 의미임. jdbcType=VARCHAR는. -->
+ 	<insert id="InsertProduct">
+ 		insert into products(no, seller_no, images, name, lcategory_no, scategory_no, add1_sido, add2_sigungu, add3_eubmyeon, add4_donglee, day_price, rentday_minimum, components, description, end_day)
+ 		values(products_seq.nextval, 1, #{images}, #{name}, 2, 3, #{add1_sido}, #{add2_sigungu}, #{add3_eubmyeon}, #{add4_donglee}, #{day_price}, #{rentday_minimum}, #{components}, #{description}, #{end_day})
+ 	</insert>
+ 	
+</mapper>
