@@ -13,17 +13,17 @@
         <!-- Title Of Site -->
         <title>Vendor Uploads - Optimal Multipurpose eCommerce Bootstrap 5 Html Template</title>
         <!-- Favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.png" />
+        <link rel="shortcut icon" href="resources/assets/images/favicon.png" />
         <!-- Plugins CSS -->
-        <link rel="stylesheet" href="assets/css/plugins.css" />
+        <link rel="stylesheet" href="resources/assets/css/plugins.css" />
         <!-- Main Style CSS -->
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <link rel="stylesheet" href="assets/css/responsive.css" />
+        <link rel="stylesheet" href="resources/assets/css/style.css" />
+        <link rel="stylesheet" href="resources/assets/css/responsive.css" />
     </head>
 
     <body class="vendor-uploads-page">
         <!-- Page Loader -->
-        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..." /></div>
+        <div id="pre-loader"><img src="resources/assets/images/loader.gif" alt="Loading..." /></div>
         <!-- End Page Loader -->
 
         <!--Page Wrapper-->
@@ -51,7 +51,7 @@
                                 <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
                                 <!--End Mobile Toggle-->
                                 <!--Logo-->
-                                <div class="logo mx-lg-auto"><a href="index.html"><img class="logo-img" src="assets/images/logo.svg" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" /><span class="logo-txt d-none">Optimal</span></a></div>
+                                <div class="logo mx-lg-auto"><a href="index.html"><img class="logo-img" src="resources/assets/images/logo.svg" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" /><span class="logo-txt d-none">Optimal</span></a></div>
                                 <!--End Logo-->
                             </div>
                             <!--End Logo / Menu Toggle-->
@@ -159,7 +159,7 @@
                                                                     <div class="row mm-Banners mt-3">
                                                                         <div class="col-md-12 col-lg-12 imageCol text-center">
                                                                             <div class="menubox position-relative">
-                                                                                <a href="index-demo5.html" class="mb-0"><img class="blur-up lazyload" src="assets/images/megamenu/megamenu-banner7.png" data-src="assets/images/megamenu/megamenu-banner7.png" alt="image"/></a>
+                                                                                <a href="index-demo5.html" class="mb-0"><img class="blur-up lazyload" src="resources/assets/images/megamenu/megamenu-banner7.png" data-src="resources/assets/images/megamenu/megamenu-banner7.png" alt="image"/></a>
                                                                                 <p class="position-absolute bottom-0 start-50 translate-middle-x"><a href="index-demo5.html" class="title text-uppercase mb-3">Kids Store</a></p>
                                                                             </div>
                                                                         </div>
@@ -171,7 +171,7 @@
                                                             <div class="row mm-Banners">
                                                                 <div class="col-md-12 col-lg-12 imageCol text-center">
                                                                     <div class="menubox position-relative">
-                                                                        <a href="index-demo6.html" class="mb-0"><img class="blur-up lazyload" src="assets/images/megamenu/megamenu-banner8.png" data-src="assets/images/megamenu/megamenu-banner8.png" alt="image"/></a>
+                                                                        <a href="index-demo6.html" class="mb-0"><img class="blur-up lazyload" src="resources/assets/images/megamenu/megamenu-banner8.png" data-src="resources/assets/images/megamenu/megamenu-banner8.png" alt="image"/></a>
                                                                         <p class="position-absolute bottom-0 start-50 translate-middle-x"><a href="index-demo6.html" class="title text-uppercase">Single Product Layout</a></p>
                                                                     </div>
                                                                 </div>
@@ -236,16 +236,16 @@
                                                     </div>
                                                     <div class="row clear mt-4">
                                                         <div class="col-md-3 col-lg-3">
-                                                            <a href="shop-left-sidebar.html"><img src="assets/images/megamenu/megamenu-banner4-1.jpg" data-src="assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
+                                                            <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
                                                         </div>
                                                         <div class="col-md-3 col-lg-3">
-                                                            <a href="shop-left-sidebar.html"><img src="assets/images/megamenu/megamenu-banner4-1.jpg" data-src="assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
+                                                            <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
                                                         </div>
                                                         <div class="col-md-3 col-lg-3">
-                                                            <a href="shop-left-sidebar.html"><img src="assets/images/megamenu/megamenu-banner4-1.jpg" data-src="assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
+                                                            <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
                                                         </div>
                                                         <div class="col-md-3 col-lg-3">
-                                                            <a href="shop-left-sidebar.html"><img src="assets/images/megamenu/megamenu-banner4-1.jpg" data-src="assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
+                                                            <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,18 +283,18 @@
                                                         </div>
                                                         <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Top Brands</a>
                                                             <div class="menu-brand-logo">
-                                                                <a href="brands-style2.html"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                                <a href="brands-style2.html"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                                <a href="brands-style2.html"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                                                <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                                                <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                                                <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
                                                             </div>
                                                             <div class="menu-brand-logo">
-                                                                <a href="brands-style2.html"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                                <a href="brands-style2.html"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                                <a href="brands-style2.html"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                                                <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                                                <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                                                <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
                                                             </div>
                                                         </div>
                                                         <div class="lvl-1 col-md-3 col-lg-3 p-0">
-                                                            <a href="shop-left-sidebar.html"><img src="assets/images/megamenu/megamenu-banner3.jpg" alt="image"/></a>
+                                                            <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner3.jpg" alt="image"/></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -351,16 +351,16 @@
                                                     </div>
                                                     <div class="row clear mt-4">
                                                         <div class="col-md-3 col-lg-3">
-                                                            <img src="assets/images/megamenu/megamenu-store.png" data-src="assets/images/megamenu/megamenu-elements.png" alt="image"/>
+                                                            <img src="resources/assets/images/megamenu/megamenu-store.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
                                                         </div>
                                                         <div class="col-md-3 col-lg-3">
-                                                            <img src="assets/images/megamenu/megamenu-elements.png" data-src="assets/images/megamenu/megamenu-elements.png" alt="image"/>
+                                                            <img src="resources/assets/images/megamenu/megamenu-elements.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
                                                         </div>
                                                         <div class="col-md-3 col-lg-3">
-                                                            <img src="assets/images/megamenu/megamenu-pages.png" data-src="assets/images/megamenu/megamenu-elements.png" alt="image"/>
+                                                            <img src="resources/assets/images/megamenu/megamenu-pages.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
                                                         </div>
                                                         <div class="col-md-3 col-lg-3">
-                                                            <img src="assets/images/megamenu/megamenu-fast.png" data-src="assets/images/megamenu/megamenu-elements.png" alt="image"/>
+                                                            <img src="resources/assets/images/megamenu/megamenu-fast.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -759,7 +759,7 @@
                                 <div class="card dashboard-profile position-relative">
                                     <div class="card-image position-relative bg-blue">
                                         <div class="img-thumbnail position-absolute top-50 start-50 translate-middle col-10 bg-white text-center p-4">
-                                            <img src="assets/images/footer-logo.png" class="center-xy img-fluid" alt="Logo Brand" />
+                                            <img src="resources/assets/images/footer-logo.png" class="center-xy img-fluid" alt="Logo Brand" />
                                             <h3 class="my-3 d-none">Optimal Store</h3>
                                             <p class="mt-3 mb-0">54 followers | 46 review</p>
                                             <p class="email d-flex-center justify-content-center mt-2"><i class="an an-envelope-l me-2"></i> <a href="mailto:sales@yousite.com">sales@yousite.com</a></p>
@@ -782,7 +782,7 @@
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                     <div class="vendor-img-upload">
                                         <div class="imagePreview position-relative text-center border p-1 mb-3">
-                                            <img class="image-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit" />
+                                            <img class="image-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit" />
                                             <div class="thumb-edit">
                                                 <label for="imageUpload1" class="d-flex-center justify-content-center z-index-3 position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                 <input type="file" id="imageUpload1" class="vd-image-upload d-none" accept=".png, .jpg, .jpeg">
@@ -791,7 +791,7 @@
                                         <div class="row g-2 thumb-upload-set px-3 mb-4">
                                             <div class="col-4 col-sm-3 col-md-2 col-lg-4 thumb-upload">
                                                 <div class="thumb-preview position-relative border p-1">
-                                                    <img class="thumb-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                    <img class="thumb-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
                                                     <div class="thumb-edit">
                                                         <label for="thumbUpload1" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                         <input type="file" id="thumbUpload1" class="vd-image-upload d-none" accept=".png, .jpg, .jpeg">
@@ -800,7 +800,7 @@
                                             </div>
                                             <div class="col-4 col-sm-3 col-md-2 col-lg-4 thumb-upload">
                                                 <div class="thumb-preview position-relative border p-1">
-                                                    <img class="thumb-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                    <img class="thumb-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
                                                     <div class="thumb-edit">
                                                         <label for="thumbUpload2" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                         <input type="file" id="thumbUpload2" class="thumb-upload d-none" accept=".png, .jpg, .jpeg">
@@ -809,7 +809,7 @@
                                             </div>
                                             <div class="col-4 col-sm-3 col-md-2 col-lg-4 thumb-upload">
                                                 <div class="thumb-preview position-relative border p-1">
-                                                    <img class="thumb-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                    <img class="thumb-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
                                                     <div class="thumb-edit">
                                                         <label for="thumbUpload3" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                         <input type="file" id="thumbUpload3" class="thumb-upload d-none" accept=".png, .jpg, .jpeg">
@@ -818,7 +818,7 @@
                                             </div>
                                             <div class="col-4 col-sm-3 col-md-2 col-lg-4 thumb-upload">
                                                 <div class="thumb-preview position-relative border p-1">
-                                                    <img class="thumb-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                    <img class="thumb-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
                                                     <div class="thumb-edit">
                                                         <label for="thumbUpload7" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                         <input type="file" id="thumbUpload7" class="thumb-upload d-none" accept=".png, .jpg, .jpeg">
@@ -827,7 +827,7 @@
                                             </div>
                                             <div class="col-4 col-sm-3 col-md-2 col-lg-4 thumb-upload">
                                                 <div class="thumb-preview position-relative border p-1">
-                                                    <img class="thumb-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                    <img class="thumb-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
                                                     <div class="thumb-edit">
                                                         <label for="thumbUpload5" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                         <input type="file" id="thumbUpload5" class="thumb-upload d-none" accept=".png, .jpg, .jpeg">
@@ -836,7 +836,7 @@
                                             </div>
                                             <div class="col-4 col-sm-3 col-md-2 col-lg-4 thumb-upload">
                                                 <div class="thumb-preview position-relative border p-1">
-                                                    <img class="thumb-preview" src="assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                    <img class="thumb-preview" src="resources/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
                                                     <div class="thumb-edit">
                                                         <label for="thumbUpload6" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="icon an an-pencil-l an-1x"></i></label>
                                                         <input type="file" id="thumbUpload6" class="thumb-upload d-none" accept=".png, .jpg, .jpeg">
@@ -946,7 +946,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center about-col mb-4">
-                                <img src="assets/images/footer-logo.png" alt="Optimal" class="mb-3"/>
+                                <img src="resources/assets/images/footer-logo.png" alt="Optimal" class="mb-3"/>
                                 <p>55 Gallaxy Enque, 2568 steet, 23568 NY</p>
                                 <p class="mb-0 mb-md-3">Phone: <a href="tel:+011234567890">(+01) 123 456 7890</a> <span class="mx-1">|</span> Email: <a href="mailto:info@example.com">info@example.com</a></p>
                             </div>
@@ -1012,7 +1012,7 @@
                 <div class="footer-bottom clearfix">
                     <div class="container">
                         <div class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse">
-                            <img src="assets/images/payment.png" alt="Paypal Visa Payments"/>
+                            <img src="resources/assets/images/payment.png" alt="Paypal Visa Payments"/>
                             <div class="copytext text-uppercase">&copy; 2022 Optimal. All Rights Reserved.</div>
                         </div>
                     </div>
@@ -1037,7 +1037,7 @@
                                 <ul class="clearfix">
                                     <li class="item d-flex justify-content-center align-items-center">
                                         <a class="product-image" href="product-layout1.html">
-                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                            <img class="blur-up lazyload" src="resources/assets/images/products/cart-product-img1.jpg" data-src="resources/assets/images/products/cart-product-img1.jpg" alt="image" title="">
                                         </a>
                                         <div class="product-details">
                                             <a class="product-title" href="product-layout1.html">Floral Crop Top</a>
@@ -1062,7 +1062,7 @@
                                     </li>
                                     <li class="item d-flex justify-content-center align-items-center">
                                         <a class="product-image" href="product-layout1.html">
-                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                            <img class="blur-up lazyload" src="resources/assets/images/products/cart-product-img1.jpg" data-src="resources/assets/images/products/cart-product-img1.jpg" alt="image" title="">
                                         </a>
                                         <div class="product-details">
                                             <a class="product-title" href="product-layout1.html">V Neck T-shirts</a>
@@ -1107,14 +1107,14 @@
 
 
             <!-- Including Jquery -->
-            <script src="assets/js/vendor/jquery-min.js"></script>
-            <script src="assets/js/vendor/js.cookie.js"></script>
+            <script src="resources/assets/js/vendor/jquery-min.js"></script>
+            <script src="resources/assets/js/vendor/js.cookie.js"></script>
             <!--Including Javascript-->
-            <script src="assets/js/plugins.js"></script>
-            <script src="assets/js/main.js"></script>
+            <script src="resources/assets/js/plugins.js"></script>
+            <script src="resources/assets/js/main.js"></script>
 
             <!--Including Tagsinput-->
-            <script src="assets/js/vendor/bootstrap-tagsinput.js"></script>
+            <script src="resources/assets/js/vendor/bootstrap-tagsinput.js"></script>
             <script>
                 $(document).ready(function () {
                     $("#inputTag").tagsinput('items');
@@ -1122,7 +1122,7 @@
             </script>
 
             <!--Including editor tinymce-->
-            <script src="assets/js/vendor/tinymce.min.js"></script>
+            <script src="resources/assets/js/vendor/tinymce.min.js"></script>
             <script>
                 $(document).ready(function () {
                     tinymce.init({
