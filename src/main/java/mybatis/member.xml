@@ -5,8 +5,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member.MemberBean"> 
-	<select id="login" resultType="String">
-		select pw from member where id=#{id}
+	<select id="login" resultType="MyMember">
+		select * from member where id=#{id}
 	</select>
 	
 	<select id="idCheck" resultType="int">
@@ -14,12 +14,24 @@
 	</select>
 	
 	<insert id="InsertMember">
-		insert into member values(member_seq.nextval,#{id} , 
-		#{pw}, #{name}, #{postcode}, #{address}, 
-		#{detailaddress}, #{email}, #{hp}, 0,0)
+		insert into member(mno,id,pw,name,add1_sido,add2_sigungu,add3_eubmyeon,add4_donglee,email,hp) values(member_seq.nextval,#{id} , 
+		#{pw}, #{name}, #{add1_sido}, #{add2_sigungu}, 
+		#{add3_eubmyeon},#{add4_donglee}, #{email}, #{hp})
 	</insert>
 	<select id="FindId" resultType="String">
 		select id from member where name=#{name} and hp = #{hp}
 	</select>
-
+	
+	<select id="FindPw" resultType="int">
+		select count(*) from member where id=#{id} and hp = #{hp}
+	</select>
+	
+	<update id="resetPw">
+		update member set pw =#{securePassword} where id =  #{id}
+	</update>
+	
+	<delete id="deleteMember">
+		delete member where id = #{id}
+	</delete>
+	
 </mapper>

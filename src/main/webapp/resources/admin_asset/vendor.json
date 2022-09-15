@@ -1,0 +1,47 @@
+{
+  "bootstrap": "node_modules/bootstrap/dist/js/bootstrap.bundle.*",
+  "simplebar": [
+    "node_modules/simplebar/dist/simplebar.js",
+    "node_modules/simplebar/dist/simplebar.min.js"
+  ],
+  "sortablejs": "node_modules/sortablejs/*.js",
+  "awesomplete": [
+    "node_modules/awesomplete/awesomplete.js",
+    "node_modules/awesomplete/awesomplete.min.js"
+  ],
+  "autosize": "node_modules/autosize/dist/*.js",
+  "color-picker": [
+    "node_modules/@taufik-nurrohman/color-picker/index.js",
+    "node_modules/@taufik-nurrohman/color-picker/index.min.js"
+  ],
+  "flatpickr": "node_modules/flatpickr/dist/*.js",
+  "flatpickr/l10n": "node_modules/flatpickr/dist/l10n/*.js",
+  "flatpickr/plugins": "node_modules/flatpickr/dist/plugins/**/*.js",
+  "inputmask": "node_modules/inputmask/dist/inputmask.*",
+  "nouislider": "node_modules/nouislider/dist/*.js",
+  "dselect": "node_modules/@jarstone/dselect/dist/js/*.js",
+  "tagin": "node_modules/tagin/dist/js/*",
+  "jquery": "node_modules/jquery/dist/*",
+  "summernote": [
+    "node_modules/summernote/dist/**/*",
+    "!node_modules/summernote/dist/**/*.{zip,txt}"
+  ],
+  "apexcharts": [
+    "node_modules/apexcharts/dist/apexcharts.js",
+    "node_modules/apexcharts/dist/apexcharts.min.js"
+  ],
+  "fullcalendar": "node_modules/fullcalendar/**/*.js",
+  "photoswipe": "node_modules/photoswipe/dist/**/*",
+  "slugify": "node_modules/slugify/*.js",
+  "splide": "node_modules/@splidejs/splide/dist/js/*.js",
+  "markdown-it": "node_modules/markdown-it/dist/*.js",
+  "datatables": [
+    "node_modules/datatables.net/js/*",
+    "node_modules/datatables.net-bs5/js/*",
+    "node_modules/datatables.net-bs5/css/*",
+    "node_modules/datatables.net-responsive/js/*",
+    "node_modules/datatables.net-responsive-bs5/js/*",
+    "node_modules/datatables.net-responsive-bs5/css/*"
+  ],
+  "jqvmap": "node_modules/jqvmap/dist/**/*.js"
+}

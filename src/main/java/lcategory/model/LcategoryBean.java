@@ -3,7 +3,7 @@ package lcategory.model;
 public class LcategoryBean {
 	private int no;
 	private String name;
-	private int order;
+	private int order_num;
 	public int getNo() {
 		return no;
 	}
@@ -16,11 +16,11 @@ public class LcategoryBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getOrder() {
-		return order;
+	public int getOrder_num() {
+		return order_num;
 	}
-	public void setOrder(int order) {
-		this.order = order;
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
 	}
 	
 }
