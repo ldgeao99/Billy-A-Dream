@@ -21,6 +21,7 @@ public class memberMyPageController {
 	@RequestMapping(command)
 	public String login(@RequestParam("id")String id,Model model) {
 		
+		System.out.println("³Ñ¾î¿È");
 		MemberBean mb = mdao.getById(id);
 		
 		model.addAttribute("mb",mb);

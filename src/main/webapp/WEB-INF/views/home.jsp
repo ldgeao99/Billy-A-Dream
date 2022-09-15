@@ -123,7 +123,7 @@
                                         	<li><a href="register.mb">회원가입</a></li>
                                     	</c:if>
                                     	<c:if test="${not empty id }">
-                                        	<li><a href="mypage.mb">마이페이지</a></li>
+                                        	<li><a href="mypage.mb?id=<%=id%>">마이페이지</a></li>
                                         	<li><a href="my-wishlist.mb">관심목록</a></li>
                                         	<li><a href="compare-style1.mb">Compare</a></li>
                                         	<li><a href="out.mb">로그아웃</a></li>
