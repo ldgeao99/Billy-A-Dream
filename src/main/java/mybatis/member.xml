@@ -33,5 +33,17 @@
 	<delete id="deleteMember">
 		delete member where id = #{id}
 	</delete>
-	
+	<select id="SelectMemberList" resultType="member.model.MemberBean">
+		select * from member 
+		<if test="whatColumn == 'name'">
+			where name like #{keyword}
+		</if>
+		<if test="whatColumn == 'id'">
+			where contents like #{keyword}
+		</if>
+		order by mno desc
+	</select>
+	<update id="ChangeBlacklist">
+		update member set isblacklist=#{isblacklist} where mno=#{mno}
+	</update>
 </mapper>
