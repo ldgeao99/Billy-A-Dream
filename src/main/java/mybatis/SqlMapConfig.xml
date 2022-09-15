@@ -14,5 +14,6 @@
 		<mapper resource="mybatis/member.xml"/>
 		<mapper resource="mybatis/memberIp.xml"/>
     	<mapper resource="mybatis/product.xml"/>
+    	<mapper resource="mybatis/coupon.xml"/>
 	</mappers>
 </configuration>

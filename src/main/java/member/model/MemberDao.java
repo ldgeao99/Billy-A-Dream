@@ -1,13 +1,14 @@
 package member.model;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("myMemberDao") // °´Ã¼ »ı¼º
+@Component("myMemberDao") // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 public class MemberDao {
 
 	private final String namespace = "member.MemberBean";
@@ -28,7 +29,7 @@ public class MemberDao {
 	public void InsertMember(MemberBean mb) {
 		
 		int result = sqlSessionTemplate.insert(namespace+".InsertMember",mb);
-		System.out.println("È¸¿ø°¡ÀÔ °á°ú :"+result);
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ :"+result);
 	}
 	public String FindId(Map<String, String> map) {
 		
@@ -49,7 +50,13 @@ public class MemberDao {
 	public void deleteMember(String id) {
 		
 		int result = sqlSessionTemplate.delete(namespace+".deleteMember",id);
-		System.out.println("»èÁ¦ÇÑ °á°ú :"+result);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ :"+result);
 	}
-	
+	public List<MemberBean> selectMemberList(Map<String, String> map){//adminì—ì„œ íšŒì› ì¡°íšŒ
+		List<MemberBean> lists = sqlSessionTemplate.selectList(namespace+".SelectMemberList",map);
+		return lists;
+	}
+	public void changeBlacklist(MemberBean member) {
+		sqlSessionTemplate.update(namespace+".ChangeBlacklist", member);
+	}
 }
