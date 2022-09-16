@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("myMemberDao") // ��ü ����
+@Component("myMemberDao") // 占쏙옙체 占쏙옙占쏙옙
 public class MemberDao {
 
 	private final String namespace = "member.MemberBean";
@@ -29,7 +29,7 @@ public class MemberDao {
 	public void InsertMember(MemberBean mb) {
 		
 		int result = sqlSessionTemplate.insert(namespace+".InsertMember",mb);
-		System.out.println("ȸ������ ��� :"+result);
+		System.out.println("회占쏙옙占쏙옙占쏙옙 占쏙옙占� :"+result);
 	}
 	public String FindId(Map<String, String> map) {
 		
@@ -50,9 +50,9 @@ public class MemberDao {
 	public void deleteMember(String id) {
 		
 		int result = sqlSessionTemplate.delete(namespace+".deleteMember",id);
-		System.out.println("������ ��� :"+result);
+		System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占� :"+result);
 	}
-	public List<MemberBean> selectMemberList(Map<String, String> map){//admin에서 회원 조회
+	public List<MemberBean> selectMemberList(Map<String, String> map){//admin���� ���� 議고��
 		List<MemberBean> lists = sqlSessionTemplate.selectList(namespace+".SelectMemberList",map);
 		return lists;
 	}
@@ -62,8 +62,10 @@ public class MemberDao {
 	public void updateMember(MemberBean mb) {
 
 		int result = sqlSessionTemplate.update(namespace+".updateMember",mb);
-		
-		System.out.println("������Ʈ�� ��� :"+result);
+		System.out.println("占쏙옙占쏙옙占쏙옙트占쏙옙 占쏙옙占� :"+result);
 	}
-	
+	public MemberBean getMemberAddress(String id) {
+		MemberBean mbean = sqlSessionTemplate.selectOne(namespace+".getMemberAddress",id);
+		return mbean;
+	}
 }

@@ -26,7 +26,16 @@
 	var components = [];
 
 	$(function() {
-	
+		
+		/*
+		$.ajax({
+			url : "getLargeCategory.prd",
+			success : function(resdata){
+				
+			}
+		});
+		*/
+		
 		/* 세부 구성품 추가하는 부분 */
 		$('#add_component').click(function(){
 			
@@ -73,7 +82,41 @@
 			}).open();
 		});//click끝
 		
-
+		//집주소 버튼 누르면 ajax 요청을 통해 자기 집주소 얻어오는 부분
+		$('#setMyAddress').click(function(){
+			$.ajax({
+				url : "getUserAddress.prd",
+				data : {
+					id : '<%=(String)session.getAttribute("id")%>'
+				},
+				success : function(resdata){
+					
+					var addressArr = resdata.split(' ');
+					var temp = "";
+					
+					temp += addressArr[0];
+					temp += " " + addressArr[1];
+					if(addressArr[2] != "null"){
+						temp += " " + addressArr[2];	
+					}
+					temp += " " + addressArr[3];
+					
+					$('input[name="full_address"]').val(temp);
+					
+					$('[name=add1_sido]').val(addressArr[0]);
+					$('[name=add2_sigungu]').val(addressArr[1]);
+					if(addressArr[2] == "null"){
+						$('[name=add3_eubmyeon]').val("");
+					}else{
+						$('[name=add3_eubmyeon]').val(addressArr[2]);	
+					}
+					$('[name=add4_donglee]').val(addressArr[3]);
+				}
+			});
+			
+			
+		});
+		
 		
 		/* 등록 버튼을 눌렀을 때 */
 		$('#submit_button').click(function(){
@@ -213,7 +256,9 @@
 			<div class="col col-lg-6">
 				<div class="row">
 					<div class="col" style="overflow: auto; height: 250px;">
-						<ol style="list-style-type: none; padding-left: 0px">
+						<ol style="list-style-type: none; padding-left: 0px" id="leftcategory">
+							<!-- ajax로 대분류 요청하면 json으로 받아짐. -->
+						
 							<li><input type="button" value="여성의류" class="lcategory" id="lcategory/1"></li> <!-- id는 파싱을 위한 용도 -->
 							<li><input type="button" value="남성의류" class="lcategory" id="lcategory/2"></li>
 							<li><input type="button" value="신발" class="lcategory" id="lcategory/3"></li>
@@ -233,7 +278,7 @@
 					</div>
 	
 					<div class="col" style="overflow: auto; height: 250px;">
-						<ol style="list-style-type: none; padding-left: 0px">
+						<ol style="list-style-type: none; padding-left: 0px" id="rightcategory">
 							<li><input type="button" value="여성의류" class="scategory" id="scategory/1"></li>
 							<li><input type="button" value="여성의류" class="scategory" id="scategory/2"></li>
 							<li><input type="button" value="여성의류" class="scategory" id="scategory/3"></li>
@@ -264,12 +309,10 @@
 			<div class="col col-lg-6">
 				<div class="row row-cols-auto">
 					<div class="col"><input type="text" name="full_address" style="width: 200px" readonly></div>
-    				<div class="col" style="padding:0px"><input type="button" value="집주소"></div>
+    				<div class="col" style="padding:0px"><input type="button" id="setMyAddress" value="집주소"></div>
     				<div class="col"><input type="button" value="새로지정" id="openZipSearch"></div>
   				</div>
 				
-				
-				 
 				<input type="hidden" name="add1_sido" value="">		<!-- 도/시 이름 --> 
 				<input type="hidden" name="add2_sigungu" value=""> 	<!-- 시/군/구 이름 --> 
 				<input type="hidden" name="add3_eubmyeon" value=""> <!-- 법정리의 읍/면 이름 --> 

@@ -17,9 +17,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<!-- 컨트롤러를 찾기위해 album 패키지 하위의 모든 파일을 훑어봐라, album.xxx, album.x.y.z 등등 다 포함 -->
+	<!-- 컨트롤러 및 Autowired 해줄 클래스를 찾기위해 album 패키지 하위의 모든 파일을 훑어봐라, album.xxx, album.x.y.z 등등 다 포함 -->
 	<context:component-scan base-package="product"></context:component-scan>
-
+	<context:component-scan base-package="member"/>
+	
 	<!-- 클라이언트가 상품이미지를 올릴때, 서버측에서 request로 못받았고, MultipartRequest로 받아줘야 했음. 당시 객체생성 = 업로드 실행을 의미했음 -->
 	<!-- 파일 업로드 할 때 필요한 부분 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
