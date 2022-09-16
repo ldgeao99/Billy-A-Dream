@@ -156,8 +156,8 @@
             </a>
             <div class="ms-5 collapse" id="forms-collapse" data-bs-parent="#mainMenu">
               <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="form-control.html">쿠폰 발급</a></li>
-                <li class="nav-item"><a class="nav-link" href="select.html">쿠폰 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="insertCoupon.admin">쿠폰 발급</a></li>
+                <li class="nav-item"><a class="nav-link" href="coupon.admin">쿠폰 관리</a></li>
                 <li class="nav-item"><a class="nav-link" href="checks-radios.html">쿠폰 삭제</a></li>
                 <li class="nav-item"><a class="nav-link" href="range.html">쿠폰 수정</a></li>
               </ul>
