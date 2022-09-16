@@ -9,7 +9,7 @@ import member.model.MemberBean;
 import member.model.MemberDao;
 
 @Controller
-public class AdminBlacklistMemberController {
+public class AdminMemberBlacklistController {
 	private final String command="blacklist.admin";
 	private String getPage="redirect:/member.admin";
 	@Autowired

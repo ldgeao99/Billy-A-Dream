@@ -256,7 +256,6 @@
 					}
 				}
 			}
-
 			function couponInsertCheck(){
 				if($("#unitCd").val() == "02"){
 					if($("#amount").val() <= 100){

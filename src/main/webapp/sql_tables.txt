@@ -125,3 +125,30 @@ create sequence memberip_seq
   maxvalue 10000
   nocache;
 
+
+--쿠폰 테이블
+
+drop table coupon;
+create table coupon(
+	no number primary key,
+	code varchar2(20) not null,
+	name varchar2(40),
+	amount number,
+	unit varchar2(9),
+	startdate date default sysdate,
+	enddate date
+);
+
+drop sequence coupon_seq;
+create sequence coupon_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+drop table couponCount;
+create table couponCount(
+	cno number,
+	reg_date date
+);	

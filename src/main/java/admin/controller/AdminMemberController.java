@@ -23,7 +23,7 @@ public class AdminMemberController {
 	public String getList(Model model,
 			@RequestParam(value="whatColumn",required = false) String whatColumn,
 			@RequestParam(value="keyword",required = false) String keyword) {
-		Map<String, String> map=new HashMap<String, String>();//�˻��� ������� map
+		Map<String, String> map=new HashMap<String, String>();
 		map.put("whatColumn", whatColumn);
 		map.put("keyword", "%"+keyword+"%");
 		List<MemberBean> lists= memberDao.selectMemberList(map);
