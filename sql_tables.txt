@@ -30,9 +30,7 @@ create sequence lcate_seq
   nocache;
 
 insert into lcategory values(lcate_seq.nextval,'모바일',1);
-
 insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
-
 insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
 
 --소분류 카테고리
@@ -53,13 +51,9 @@ create sequence scate_seq
   nocache;
 
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트폰',1,1,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트워치',1,2,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'모니터',2,1,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'노트북',2,2,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'필름카메라',3,1,0);
 
 
@@ -101,7 +95,7 @@ create sequence member_seq
   maxvalue 10000
   nocache;
 
--- 아이피 테이블
+--- 아이피 테이블
 drop table memberip;
 create table memberip(
 num number,
