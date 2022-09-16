@@ -51,9 +51,9 @@ function hpCheck(){
 		else if(!exist){
 			$.ajax({
 				type : 'post',
-				url : "findid.mb",
+				url : "ipHpCheck.mb",
 				data : {
-					name : $('#name').val(),
+					id : $('#id').val(),
 					hp : $('#hp').val()
 				},
 					success : function(data){ 

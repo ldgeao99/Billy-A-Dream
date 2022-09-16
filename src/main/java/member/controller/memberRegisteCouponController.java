@@ -41,7 +41,7 @@ public class memberRegisteCouponController {
 		 
 		 MemberBean mb = mdao.getById(id);
 		 
-		 if(cb!=null) {
+		 if(cb!=null && mb.getCoupon()!=null) {
 			 if(mb.getCoupon().contains(String.valueOf(cb.getNo()))) {
 				 return "exist";
 			 }
@@ -73,7 +73,7 @@ public class memberRegisteCouponController {
 			 mb.setCoupon(mb.getCoupon()+","+no);
 		 
 		 
-		 System.out.println("ÄíÆù³»¿ª :"+mb.getCoupon());
+		 System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ :"+mb.getCoupon());
 		 Map<String, String>map = new HashMap<String, String>();
 		 map.put("id", id);
 		 map.put("no", mb.getCoupon());

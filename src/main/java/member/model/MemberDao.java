@@ -75,4 +75,10 @@ public class MemberDao {
 		MemberBean mbean = sqlSessionTemplate.selectOne(namespace+".getMemberAddress",id);
 		return mbean;
 	}
+	public int ipHpCheck(Map<String, String> map) {
+
+		int cnt = sqlSessionTemplate.selectOne(namespace+".ipHpCheck",map);
+		System.out.println("cnt : "+cnt);
+		return cnt;
+	}
 }

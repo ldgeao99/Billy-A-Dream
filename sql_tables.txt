@@ -73,6 +73,7 @@ hp number,
 isblacklist char(1) default 0,
 rating number default 0,
 wishpnum varchar2(200)
+
 );
 col mno for 99;
 col id for a10;

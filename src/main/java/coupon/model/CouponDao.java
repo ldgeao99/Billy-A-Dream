@@ -45,7 +45,6 @@ public class CouponDao {
 	public CouponBean getByCode(String code) {
 		
 		CouponBean cb = sqlSessionTemplate.selectOne(namespace+".getByCode",code);
-		
 		return cb;
 	}
 }

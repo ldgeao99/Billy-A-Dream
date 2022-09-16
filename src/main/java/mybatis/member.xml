@@ -62,4 +62,8 @@
 		select * from member 
 		where id = #{id}
 	</select>
+	
+	<select id="ipHpCheck" resultType="int">
+		select count(*) from member where id=#{id} and hp = #{hp}
+	</select>
 </mapper>
