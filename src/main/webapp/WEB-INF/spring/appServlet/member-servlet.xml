@@ -9,12 +9,13 @@
 
 	<mvc:annotation-driven/>
 	
+	<context:component-scan base-package="member"/>
+	<context:component-scan base-package="coupon"/>
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/member/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<context:component-scan base-package="member"></context:component-scan>
-	<context:component-scan base-package="coupon"></context:component-scan>
 </beans>
 
