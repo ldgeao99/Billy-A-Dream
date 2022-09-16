@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<!doctype html>
+<%@include file = "categoryTop.jsp" %>
 <style>
 button {
 	height: 2.5em;
@@ -54,12 +54,44 @@ td{
 	background-color: #F0F0F0;
 	color: black;
 }
+/* 카카오톡 로그인 */
+#kakaobg{
+	 width: 400px;
+	 border-radius: 5px; 
+	 background-color:#FFEB00;    
+}
 </style>
 
 
+
+<!--카카오톡 로그인 스크립트  -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
+	/*카카오톡 로그인   */
+	function kakaoLogin() {
+	Kakao.Auth.login({
+		success: function (response) {
+		Kakao.API.request({
+			url: '/v2/user/me',
+			success: function (response) {
+				kakaoLoginPro(response)
+			},
+			fail: function (error) {
+				console.log(error)
+			},
+		})
+	},
+		fail: function (error) {
+			console.log(error)
+		},
+	})
+}
+
+	
+	
+	//========================================================
 	$(function(){
 		$('#authNum').keydown(function(){
 			$('#hpmsg').hide();
@@ -384,7 +416,7 @@ td{
 							if ($.trim(data) == "yes") {
 								location.href = "home";
 							} else if ($.trim(data) == "admin") {
-								location.href = "admin.mb";
+								location.href = "main.admin";
 							} 
 							else if($.trim(data) == "Insertip"){
 								location.href = "Insertip.mb?id="+$('input[name="id"]').val();
@@ -403,8 +435,6 @@ td{
 	
 </script>
 
-
-<%@include file = "/categoryTop.jsp" %>
 
             <!--Body Container-->
             <div id="page-content">   
@@ -448,11 +478,13 @@ td{
 									<div class="row">
 										<div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
 											<p class="d-flex-center">
-												<input type="button" onclick="return loginCheck()" class="btn rounded me-auto" value="로그인">
 											<a href='#' onClick='showPopupID(true); return false' style="font-size: 12px;">아이디 찾기</a> &nbsp;&nbsp;/&nbsp;&nbsp;
 											<a href='#' onClick='showPopupPW(true); return false' style="font-size: 12px;">비밀번호 찾기</a>
 											</p>
-
+											<p>
+											<input type="button" onclick="return loginCheck()" class="btn rounded me-auto" value="로그인" style="width: 400px; height: 45px;">
+											<div id="kakaobg" style="text-align: center""><img onclick="kakaoLogin()" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" style="width: 200px; height: 45px; "></div>
+											</p>
 
 											<!-- 아이디 찾기 팝업창  -->
 											<div id="popupID" class="hide">
@@ -466,8 +498,7 @@ td{
 
 															<p><b>회원 아이디를 찾기 위해서는 회원명과 휴대전화 인증이 필요합니다</b></p><br><hr>
 															<div class="row">
-																<div
-																	class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
+																<div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
 																	<p class="d-flex-center">
 																	<table>
 																		<tr>
@@ -580,8 +611,8 @@ td{
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="inner">
-                                	<center><br><br>
-                                    <p> <b>[Billy A Dream] 에 계정이 없으신가요?</b> </p><br><br>
+                                	<center><br><br><br>
+                                    <p> <b>[Billy A Dream] 에 계정이 없으신가요?</b> </p><br><br><br>
                                     <a href="register.mb" class="btn rounded">회원가입</a>
                                     </center>
                                 </div>

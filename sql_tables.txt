@@ -14,7 +14,6 @@ grant create table, create sequence to billy;
 alter user billy default tablespace users quota unlimited on users;
 
 --대분류 카테고리
-
 drop table lcategory;
 create table lcategory(
 no number primary key, 
@@ -31,9 +30,7 @@ create sequence lcate_seq
   nocache;
 
 insert into lcategory values(lcate_seq.nextval,'모바일',1);
-
 insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
-
 insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
 
 --소분류 카테고리
@@ -54,13 +51,9 @@ create sequence scate_seq
   nocache;
 
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트폰',1,1,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트워치',1,2,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'모니터',2,1,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'노트북',2,2,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'필름카메라',3,1,0);
 
 
@@ -76,13 +69,11 @@ add2_sigungu varchar2(20),
 add3_eubmyeon varchar2(20),
 add4_donglee varchar2(20),
 email varchar2(30),
-hp varchar2(11),
+hp number,
 isblacklist char(1) default 0,
 rating number default 0,
-wishpnum varchar2(200),
-coupon varchar2(200)
+wishpnum varchar2(200)
 );
-
 col mno for 99;
 col id for a10;
 col pw for a5;
@@ -92,7 +83,7 @@ col add2_sigungu for a10;
 col add3_eubmyeon for a10;
 col add4_donglee for a10;
 col email for a10;
-col hp for a11;
+col hp for 9999999999;
 col isblacklist for 9;
 col rating for 9;
 
@@ -104,8 +95,7 @@ create sequence member_seq
   maxvalue 10000
   nocache;
 
--- 아이피 테이블
-
+--- 아이피 테이블
 drop table memberip;
 create table memberip(
 num number,
@@ -121,51 +111,39 @@ create sequence memberip_seq
   maxvalue 10000
   nocache;
   
- drop table coupon;
- create table coupon(
-   no number primary key,
-   code varchar2(20) not null,
-   name varchar2(40),
-   amount number,
-   unit varchar2(9),
-   startdate date default sysdate,
-   enddate date
-);
-insert into coupon values(coupon_seq.nextval,1111222233334444,'인생은',2000,'won','20220916','20220917');
-
-drop sequence coupon_seq;
-create sequence coupon_seq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;
-  
-
-
---쿠폰 테이블
-
-drop table coupon;
-create table coupon(
-	no number primary key,
-	code varchar2(20) not null,
-	name varchar2(40),
-	amount number,
-	unit varchar2(9),
-	startdate date default sysdate,
-	enddate date
+-- 상품 테이블
+drop table products;
+create table products(
+	no number not null primary key,
+	seller_no number not null,
+	images varchar2(100),
+	name varchar2(20) not null,
+	lcategory_no number not null,
+	scategory_no number not null,
+	add1_sido varchar2(20) not null,
+	add2_sigungu varchar2(30) not null,
+	add3_eubmyeon varchar2(20),
+	add4_donglee varchar2(20)  not null,
+	day_price number not null,
+	rentday_minimum number not null,
+	components varchar2(100),
+	description varchar2(200),
+	end_day date not null,
+	like_count number default 0,
+	view_count number default 0,
+	create_day date default sysdate,
+	pulled_day date default sysdate,
+	is_hidden char(1) default '0'
 );
 
-drop sequence coupon_seq;
-create sequence coupon_seq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;
+drop sequence products_seq;
+create sequence products_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
 
-drop table couponCount;
-create table couponCount(
-	cno number,
-	reg_date date
-);	
+commit;
+
+

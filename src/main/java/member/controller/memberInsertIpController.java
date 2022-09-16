@@ -44,7 +44,6 @@ public class memberInsertIpController {
 	public String ipInsert(@RequestParam("id")String id,Model model, HttpSession session) throws UnknownHostException {
 		
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println("¿©±â¼­ id:"+id);
 		MemberBean mb = mdao.getById(id);
 		
 		String ip = Inet4Address.getLocalHost().getHostAddress();

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
-<%@include file="/taglib.jsp" %>
+<%@include file="../common/common.jsp" %>
+<%
+	String id = (String)session.getAttribute("id"); // 아이디
+	System.out.println("id : "+id); 
+%>
+<c:set var="id" value="<%=id %>"></c:set>
 <html lang="ko">
     <head>
         <!--Required Meta Tags-->
@@ -27,6 +32,17 @@
         <script>
         	function gotoSellPage(){
         		location.href = "insert.prd";
+        	}
+        	
+        	function kakaoTalk(){
+        		  var screenW = screen.availWidth;  // 스크린 가로사이즈
+        		  var screenH = screen.availHeight; // 스크린 세로사이즈
+        		  var popW = 300; // 띄울창의 가로사이즈
+        		  var popH = 500; // 띄울창의 세로사이즈
+        		  var posL=960;   // 띄울창의 가로 포지션 
+        		  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+        		
+        		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL);
         	}
         </script>
         <style>
@@ -130,12 +146,19 @@
                                 
                                 <!--Minicart Drawer-->
                                 
-                                <!-- 상단 오른편 관심목록 버튼 -->
+                                <!-- 상단 오른편 대화창 버튼 -->
                                 <div class="header-cart iconset flex-lg-column">
                                     <a href="#" class="site-header__cart btn-minicart d-flex-justify-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
                                         <i class="fa-regular fa-heart"></i><span class="text d-none d-lg-flex">관심목록</span><span class="site-cart-count counter d-flex-center justify-content-center position-absolute rounded-circle">2</span>
                                     </a>
                                 </div>
+                                
+                                 <!-- 상단 오른편 판매하기 버튼 -->
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-regular fa-comment"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="gotoSellPage()">채팅</span>
+                                </div>
+                                
                                 <!--End Minicart Drawer-->
                                 <!--Setting Dropdown-->
 
@@ -1978,8 +2001,11 @@
             </div>
             <!--End Quickview Popup-->
 
-            <!--Addtocart Added Popup-->
-            <div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
+		<!-- 카카오톡 상담하기 -->
+		<div style = "position: fixed;right: 80px; bottom: 50%; top: 850px;" onclick="kakaoTalk()"><img src="resources/assets/images/kakaoicon.png" width="40px" height="40px"></img></div>
+
+		<!--Addtocart Added Popup-->
+		<div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
                 <button title="Close (Esc)" type="button" class="mfp-close">Ã</button>
                 <div class="addtocart-inner text-center clearfix">
                     <h4 class="title mb-3 text-success">Added to your shopping cart successfully.</h4>

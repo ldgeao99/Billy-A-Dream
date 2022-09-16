@@ -17,6 +17,7 @@ public class CouponDao {
 	
 	private String namespace="coupon.model.Coupon";
 	
+
 	public List<CouponBean> selectCouponList(){
 		List<CouponBean> lists=sqlSessionTemplate.selectList(namespace+".SelectCouponList");
 		for(CouponBean coupon : lists) {
@@ -39,4 +40,12 @@ public class CouponDao {
 		return coupon;
 	}
 
+
+	
+	public CouponBean getByCode(String code) {
+		
+		CouponBean cb = sqlSessionTemplate.selectOne(namespace+".getByCode",code);
+		
+		return cb;
+	}
 }
