@@ -21,7 +21,7 @@ public class ProductInsertController {
 	
 	private final String command = "insert.prd";
 	private String getPage ="productInsertForm";
-	//private String gotoPage ="redirect:/";
+	private String gotoPage ="redirect:/home";
 	
 	@Autowired
 	ProductDao productDao;
@@ -88,6 +88,6 @@ public class ProductInsertController {
 			System.out.println("상품 삽입실패");
 		}
 		
-		return getPage;
+		return gotoPage;
 	}
 }
