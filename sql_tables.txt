@@ -14,7 +14,6 @@ grant create table, create sequence to billy;
 alter user billy default tablespace users quota unlimited on users;
 
 --대분류 카테고리
-
 drop table lcategory;
 create table lcategory(
 no number primary key, 
@@ -102,14 +101,7 @@ create sequence member_seq
   maxvalue 10000
   nocache;
 
-insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'admin','admin','관리자','인천시 계양구','admin@naver.com','01012345678');
-insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'123','123','손님','인천시 계양구','123@naver.com','01012340000');
-insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'id','1234','박찬호','인천시 계양구','123@naver.com','01022533481');
-
-
-
 -- 아이피 테이블
-
 drop table memberip;
 create table memberip(
 num number,
@@ -124,4 +116,40 @@ create sequence memberip_seq
   minvalue 1
   maxvalue 10000
   nocache;
+  
+-- 상품 테이블
+drop table products;
+create table products(
+	no number not null primary key,
+	seller_no number not null,
+	images varchar2(100),
+	name varchar2(20) not null,
+	lcategory_no number not null,
+	scategory_no number not null,
+	add1_sido varchar2(20) not null,
+	add2_sigungu varchar2(30) not null,
+	add3_eubmyeon varchar2(20),
+	add4_donglee varchar2(20)  not null,
+	day_price number not null,
+	rentday_minimum number not null,
+	components varchar2(100),
+	description varchar2(200),
+	end_day date not null,
+	like_count number default 0,
+	view_count number default 0,
+	create_day date default sysdate,
+	pulled_day date default sysdate,
+	is_hidden char(1) default '0'
+);
+
+drop sequence products_seq;
+create sequence products_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+
+commit;
+
 
