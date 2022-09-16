@@ -472,7 +472,43 @@ height
 		        }).open();
 		    });
 		}	
-	
+	///======================================================================================
+		//쿠폰 체크 ajax
+		
+		function checkCode(){
+			CheckCode = false;
+		
+			$.ajax({
+					type:'get',
+					url : "registecoupon.mb", 
+					data : { 
+						code : $('#code').val() 
+							},
+						success : function(data){
+							if($.trim(data)=="exist"){
+								alert("이미 사용된 쿠폰입니다.");
+								checkCode = false;
+								return;
+							}
+							
+							else if($.trim(data)=="yes"){
+								if(confirm("쿠폰을 등록하시겠습니까?")){
+									CheckCode=true;
+									coupon.submit();
+								}
+							}
+							else{
+								alert("존재하지 않는 코드입니다.");
+								CheckCode = false;
+							}//else
+						}//success
+
+				});//ajax
+		
+			if(!CheckCode){
+				return false;
+			}
+	}
 </script>
 <!--Body Container-->
 <div id="page-content">
@@ -701,127 +737,25 @@ height
 					<div id="orderstracking" class="order-tracking tab-pane fade">
 						<h3 align="center">쿠폰내역</h3>
 						<hr>
-						<form class="orderstracking-from mt-3" method="post" action="#">
+						<form class="orderstracking-from mt-3" method="post" action="registecoupon.mb" name="coupon">
 							<p class="mb-3"></p>
-							<div class="row align-items-center">
+							<div  align="center">
 								<div class="form-group col-md-5 col-lg-5">
-									<label for="orderId" class="d-none">Order ID <span
-										class="required-f">*</span></label> <input name="orderId"
-										placeholder="Order ID" value="" id="orderId" type="text"
-										required>
-								</div>
-								<div class="form-group col-md-5 col-lg-5">
-									<label for="billingEmail" class="d-none">Billing email
+									<label for="code" class="d-none">code
 										<span class="required-f">*</span>
-									</label> <input name="billingEmail" placeholder="Billing email"
-										value="" id="billingEmail" type="text" required>
+									</label> <input name="code" placeholder="쿠폰 코드 입력"
+										value="" id="code" type="text" required>
 								</div>
 								<div class="form-group col-md-2 col-lg-2">
-									<button type="submit" class="btn rounded w-100 h-100">
-										<span>Track</span>
+									<button type="submit" onclick = "return checkCode()">
+										<span>쿠폰 등록</span>
 									</button>
 								</div>
 							</div>
 						</form>
+						<hr>
 						<div class="row mt-2">
 							<div class="col-sm-12">
-								<h3>Status for order no: 000123</h3>
-								<!-- Status Order -->
-								<div class="row mt-3">
-									<div class="col-lg-2 col-md-3 col-sm-4">
-										<div class="product-img mb-3 mb-sm-0">
-											<img class="blur-up lazyload"
-												data-src="resources/assets/images/products/product-1.jpg"
-												src="resources/assets/images/products/product-1.jpg"
-												alt="product" title="">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-9 col-sm-8">
-										<div class="tracking-detail d-flex-center">
-											<ul>
-												<li>
-													<div class="left">
-														<span>Order name</span>
-													</div>
-													<div class="right">
-														<span>Sunset Sleep Scarf Top</span>
-													</div>
-												</li>
-												<li>
-													<div class="left">
-														<span>customer number</span>
-													</div>
-													<div class="right">
-														<span>000123</span>
-													</div>
-												</li>
-												<li>
-													<div class="left">
-														<span>order date</span>
-													</div>
-													<div class="right">
-														<span>14 Nov 2021</span>
-													</div>
-												</li>
-												<li>
-													<div class="left">
-														<span>Ship Date</span>
-													</div>
-													<div class="right">
-														<span>16 Nov 2021</span>
-													</div>
-												</li>
-												<li>
-													<div class="left">
-														<span>shipping address</span>
-													</div>
-													<div class="right">
-														<span>55 Gallaxy Enque, 2568 steet, 23568 NY</span>
-													</div>
-												</li>
-												<li>
-													<div class="left">
-														<span>Carrier</span>
-													</div>
-													<div class="right">
-														<span>Ipsum</span>
-													</div>
-												</li>
-												<li>
-													<div class="left">
-														<span>carrier tracking number</span>
-													</div>
-													<div class="right">
-														<span>000123</span>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-lg-4 col-md-12 col-sm-12 mt-4 mt-lg-0">
-										<div class="tracking-map map-section ratio ratio-16x9 h-100">
-											<iframe src="https://www.google.com/maps/embed?pb="
-												allowfullscreen="" height="650"></iframe>
-										</div>
-									</div>
-								</div>
-								<!-- End Status Order -->
-								<!-- Tracking Steps -->
-								<div class="tracking-steps nav mt-5 mb-4 clearfix">
-									<div class="step done">
-										<span>order placed</span>
-									</div>
-									<div class="step current">
-										<span>preparing to ship</span>
-									</div>
-									<div class="step">
-										<span>shipped</span>
-									</div>
-									<div class="step">
-										<span>delivered</span>
-									</div>
-								</div>
-								<!-- End Tracking Steps -->
 								<!-- Order Table -->
 								<div class="table-responsive order-table">
 									<table

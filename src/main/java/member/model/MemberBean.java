@@ -14,15 +14,14 @@ public class MemberBean {
 	private String hp; // 핸드폰번호
 	private String isblacklist; // 블랙리스트
 	private int rating;
-	//유효성검사후 다시 쓰기 위해
-	private String repw;
+	private String coupon;
 	
 	
-	public String getRepw() {
-		return repw;
+	public String getCoupon() {
+		return coupon;
 	}
-	public void setRepw(String repw) {
-		this.repw = repw;
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
 	}
 	public String getAdd1_sido() {
 		return add1_sido;

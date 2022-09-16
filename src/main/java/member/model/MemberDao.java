@@ -29,7 +29,7 @@ public class MemberDao {
 	public void InsertMember(MemberBean mb) {
 		
 		int result = sqlSessionTemplate.insert(namespace+".InsertMember",mb);
-		System.out.println("회占쏙옙占쏙옙占쏙옙 占쏙옙占� :"+result);
+		System.out.println("가입한 결과 :"+result);
 	}
 	public String FindId(Map<String, String> map) {
 		
@@ -50,9 +50,9 @@ public class MemberDao {
 	public void deleteMember(String id) {
 		
 		int result = sqlSessionTemplate.delete(namespace+".deleteMember",id);
-		System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占� :"+result);
+		System.out.println("회원탈퇴 결과 :"+result);
 	}
-	public List<MemberBean> selectMemberList(Map<String, String> map){//admin���� ���� 議고��
+	public List<MemberBean> selectMemberList(Map<String, String> map){//admin
 		List<MemberBean> lists = sqlSessionTemplate.selectList(namespace+".SelectMemberList",map);
 		return lists;
 	}
@@ -62,8 +62,15 @@ public class MemberDao {
 	public void updateMember(MemberBean mb) {
 
 		int result = sqlSessionTemplate.update(namespace+".updateMember",mb);
-		System.out.println("占쏙옙占쏙옙占쏙옙트占쏙옙 占쏙옙占� :"+result);
+		
+		System.out.println("회원정보수정 결과 :"+result);
 	}
+	
+	public void insertCoupon(Map<String, String> map) {
+		int result = sqlSessionTemplate.update(namespace+".insertCoupon",map);
+		System.out.println("쿠폰추가 결과:"+result);
+	}
+	
 	public MemberBean getMemberAddress(String id) {
 		MemberBean mbean = sqlSessionTemplate.selectOne(namespace+".getMemberAddress",id);
 		return mbean;
