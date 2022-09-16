@@ -82,6 +82,7 @@ rating number default 0,
 wishpnum varchar2(200),
 coupon varchar2(200)
 );
+
 col mno for 99;
 col id for a10;
 col pw for a5;
@@ -103,12 +104,6 @@ create sequence member_seq
   maxvalue 10000
   nocache;
 
-insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'admin','admin','관리자','인천시 계양구','admin@naver.com','01012345678');
-insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'123','123','손님','인천시 계양구','123@naver.com','01012340000');
-insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'id','1234','박찬호','인천시 계양구','123@naver.com','01022533481');
-
-
-
 -- 아이피 테이블
 
 drop table memberip;
@@ -125,4 +120,25 @@ create sequence memberip_seq
   minvalue 1
   maxvalue 10000
   nocache;
+  
+ drop table coupon;
+ create table coupon(
+   no number primary key,
+   code varchar2(20) not null,
+   name varchar2(40),
+   amount number,
+   unit varchar2(9),
+   startdate date default sysdate,
+   enddate date
+);
+insert into coupon values(coupon_seq.nextval,1111222233334444,'인생은',2000,'won','20220916','20220917');
+
+drop sequence coupon_seq;
+create sequence coupon_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
 

@@ -15,5 +15,6 @@
 	</bean>
 	
 	<context:component-scan base-package="member"></context:component-scan>
+	<context:component-scan base-package="coupon"></context:component-scan>
 </beans>
 

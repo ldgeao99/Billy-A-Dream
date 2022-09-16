@@ -10,5 +10,12 @@ public class CouponDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	private String namespace="coupon.model.Coupon";
-
+	
+	
+	public CouponBean getByCode(String code) {
+		
+		CouponBean cb = sqlSessionTemplate.selectOne(namespace+".getByCode",code);
+		
+		return cb;
+	}
 }
