@@ -64,7 +64,7 @@ public class memberLoginController {
 
 					if (id.equals("admin")) { // 그 아이디가 admin 이면 admin으로 감
 						session.setAttribute("id", id);
-						return "admin";
+						return "admin";// admin 이면 index파일로
 					} else {
 						
 						List<MemberIpBean> lists = midao.getAllByMno(mb.getMno()); // mno 에 해당하는 ip테이블 레코드 다 가져오기

@@ -12,17 +12,13 @@ import lcategory.model.LcategoryDao;
 @Controller
 public class LcategoryInsertController {
 	private final String command="insert.lcate";
-	private String getPage="admin/insertLcate";
+	
 	private String gotoPage="redirect:/list.lcate";
 	
 	@Autowired
 	LcategoryDao lcategoryDao;
 	
-	@RequestMapping(value = command,method = RequestMethod.GET)
-	public String getInsert() {
-		
-		return getPage;
-	}
+	
 	@RequestMapping(value = command,method = RequestMethod.POST)
 	public String gotoInsert(@ModelAttribute("lcategory") LcategoryBean lcategory) {
 		lcategoryDao.insertLcategory(lcategory);

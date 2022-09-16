@@ -57,8 +57,6 @@ public class memberRegisterController {
 		map.put("ip", ip);
 		map.put("mno", String.valueOf(mb.getMno()));
 		
-		System.out.println("ip: " +ip);
-		System.out.println("mno:"+String.valueOf(mb.getMno()));
 		
 		midao.InsertIp(map); // 아이피 등록
 		

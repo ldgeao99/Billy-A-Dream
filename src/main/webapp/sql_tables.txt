@@ -1,0 +1,128 @@
+sql 테이블
+
+sys
+oracle as sysdba
+
+alter session set "_oracle_script"=true;
+
+create user billy identified by dream account unlock;
+
+grant connect, resource to billy;
+
+grant create table, create sequence to billy;
+
+alter user billy default tablespace users quota unlimited on users;
+
+--대분류 카테고리
+
+drop table lcategory;
+create table lcategory(
+no number primary key, 
+name varchar2(40),
+order_num number
+);
+
+drop sequence lcate_seq;
+create sequence lcate_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+insert into lcategory values(lcate_seq.nextval,'모바일',1);
+
+insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
+
+insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
+
+--소분류 카테고리
+drop table scategory;
+create table scategory(
+no number primary key, 
+name varchar2(40),
+lcate_no number,
+order_num number,
+search_count number 
+);
+drop sequence scate_seq;
+create sequence scate_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트폰',1,1,0);
+
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트워치',1,2,0);
+
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'모니터',2,1,0);
+
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'노트북',2,2,0);
+
+insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'필름카메라',3,1,0);
+
+
+-- 회원 테이블
+drop table member cascade constraints;
+create table member(
+mno number primary key,
+id varchar2(20),
+pw varchar2(100),
+name varchar2(20),
+add1_sido varchar2(20),
+add2_sigungu varchar2(20),
+add3_eubmyeon varchar2(20),
+add4_donglee varchar2(20),
+email varchar2(30),
+hp varchar2(11),
+isblacklist char(1) default 0,
+rating number default 0,
+wishpnum varchar2(200),
+coupon varchar2(200)
+);
+col mno for 99;
+col id for a10;
+col pw for a5;
+col name for a15;
+col add1_sido for a10;
+col add2_sigungu for a10;
+col add3_eubmyeon for a10;
+col add4_donglee for a10;
+col email for a10;
+col hp for a11;
+col isblacklist for 9;
+col rating for 9;
+
+drop sequence member_seq;
+create sequence member_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'admin','admin','관리자','인천시 계양구','admin@naver.com','01012345678');
+insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'123','123','손님','인천시 계양구','123@naver.com','01012340000');
+insert into member(mno,id,pw,name,address,email,hp) values(member_seq.nextval,'id','1234','박찬호','인천시 계양구','123@naver.com','01022533481');
+
+
+
+-- 아이피 테이블
+
+drop table memberip;
+create table memberip(
+num number,
+mno number references member(mno) on delete cascade,
+ip varchar2(20)
+);
+
+drop sequence memberip_seq;
+create sequence memberip_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+

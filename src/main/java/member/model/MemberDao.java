@@ -59,4 +59,11 @@ public class MemberDao {
 	public void changeBlacklist(MemberBean member) {
 		sqlSessionTemplate.update(namespace+".ChangeBlacklist", member);
 	}
+	public void updateMember(MemberBean mb) {
+
+		int result = sqlSessionTemplate.update(namespace+".updateMember",mb);
+		
+		System.out.println("������Ʈ�� ��� :"+result);
+	}
+	
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<!doctype html>
+<%@include file = "categoryTop.jsp" %>
 <style>
 button {
 	height: 2.5em;
@@ -384,7 +384,7 @@ td{
 							if ($.trim(data) == "yes") {
 								location.href = "home";
 							} else if ($.trim(data) == "admin") {
-								location.href = "admin.mb";
+								location.href = "main.admin";
 							} 
 							else if($.trim(data) == "Insertip"){
 								location.href = "Insertip.mb?id="+$('input[name="id"]').val();
@@ -403,8 +403,6 @@ td{
 	
 </script>
 
-
-<%@include file = "/categoryTop.jsp" %>
 
             <!--Body Container-->
             <div id="page-content">   
