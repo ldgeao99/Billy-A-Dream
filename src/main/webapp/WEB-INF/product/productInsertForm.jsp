@@ -27,15 +27,50 @@
 
 	$(function() {
 		
-		/*
+		
+		/* 대분류 카테고리를 화면에 추가하는 부분 */
 		$.ajax({
-			url : "getLargeCategory.prd",
+			url : "getLargeCategory.lcate",
 			success : function(resdata){
-				
+				var large_items = resdata.split('|'); 
+				for(var i = 0; i<large_items.length; i++){
+					var small_items = large_items[i].split(',');
+					$('#leftcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='lcategory' id='lcategory/"+ small_items[1] +"'></li>");	
+				}
 			}
 		});
-		*/
 		
+		/* 대분류 카테고리를 클릭하면 그에맞는 소분류 카테고리가 화면에 보여지는 부분 */
+		$('#leftcategory').on('click', '.lcategory', function(){
+			$('.lcategory').css('color', '');
+			$(this).css('color', 'red');
+			$('input[name="lcategory_no"]').val($(this).attr('id').split('/')[1]);
+			$('input[name="scategory_no"]').val("");
+			
+			$.ajax({
+				url : "getSmallCategory.scate",
+				data : {
+					lcategoryNo : $('input[name="lcategory_no"]').val()
+				},
+				success : function(resdata){
+					$('#rightcategory').empty();
+					var large_items = resdata.split('|'); 
+					for(var i = 0; i<large_items.length; i++){
+						var small_items = large_items[i].split(',');
+						$('#rightcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='scategory' id='scategory/"+ small_items[1] +"'></li>");	
+					} 
+				}
+			});
+		});
+		
+		/* 소분류 카테고리를 클릭하면 선택한 소분류의 색깔이 바뀌게하는 부분 */
+		$('#rightcategory').on('click', '.scategory', function(){
+			$('.scategory').css('color', '');
+			$(this).css('color', 'red');
+			$('input[name="scategory_no"]').val($(this).attr('id').split('/')[1]);
+		});
+			
+				
 		/* 세부 구성품 추가하는 부분 */
 		$('#add_component').click(function(){
 			
@@ -85,7 +120,7 @@
 		//집주소 버튼 누르면 ajax 요청을 통해 자기 집주소 얻어오는 부분
 		$('#setMyAddress').click(function(){
 			$.ajax({
-				url : "getUserAddress.prd",
+				url : "getUserAddress.mb",
 				data : {
 					id : '<%=(String)session.getAttribute("id")%>'
 				},
@@ -145,25 +180,45 @@
 			</div> 
 			*/
 			
+			/* 유효성 검사 */
+			if($('input[name="name"]').val() == ""){
+				alert("상품 이름을 입력하세요");
+				return;
+			}
+			if($('input[name="upload"]').val() == ""){
+				alert("상품 이미지를 선택하세요");
+				return;
+			}
+			if($('input[name="lcategory_no"]').val() == ""){
+				alert("카테고리를 선택하세요");
+				return;
+			}
+			if($('input[name="scategory_no"]').val() == ""){
+				alert("소분류를 선택하세요");
+				return;
+			}
+			if($('input[name="full_address"]').val() == ""){
+				alert("주소를 입력하세요");
+				return;
+			}
+			if($('input[name="day_price"]').val() == ""){
+				alert("가격을 입력하세요");
+				return;
+			}
+			if($('input[name="rentday_minimum"]').val() == ""){
+				alert("대여가능 최소일수를 입력하세요");
+				return;
+			}
+			if($('input[name="end_day"]').val() == ""){
+				alert("게시종료 예정일자를 선택하세요");
+				return;
+			}
+			
 			$('#prd_register_form').submit();
 			
 		});//click끝 
-		
-		$('.lcategory').click(function(){
-			$('.lcategory').css('color', '');
-			$(this).css('color', 'red');
-			$('input[name="lcategory_no"]').val($(this).attr('id').split('/')[1]);
-		});
-		
-		
-		$('.scategory').click(function(){
-			$('.scategory').css('color', '');
-			$(this).css('color', 'red');
-			$('input[name="scategory_no"]').val($(this).attr('id').split('/')[1]);
-		});
+
 	});
-	
-	
 	</script>
 	
 	<style>
@@ -238,61 +293,54 @@
 				<input type="text" name="name" placeholder="상품이름을 입력해 주세요." value="오큘러스 VR">
 			</div>
 		</div>
-		<br>
-	
+		
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ; background: #BDBDBD;">	
+			</div>
+		</div>
+		
+		<!-- 첨부파일 선택 부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 83px 10px;">상품 이미지</div>
 			
 			<div class="col col-lg-6">
-				<input type='file' name="upload " id='btnAtt' multiple='multiple' style="width:40%; padding:2px; border: none; border-radius: 0px;"/>
+				<input type='file' name="upload" id='btnAtt' accept="image/*" multiple='multiple' style="width:40%; padding:2px; border: none; border-radius: 0px;"/>
 				<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>
 			</div>
 		</div>
-		<br>
+		
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ; background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 카테고리 선택부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 112px 10px;">카테고리</div>
 			
 			<div class="col col-lg-6">
 				<div class="row">
-					<div class="col" style="overflow: auto; height: 250px;">
-						<ol style="list-style-type: none; padding-left: 0px" id="leftcategory">
+					<div class="col" style="overflow: auto; height: 250px; margin-left:15px; margin-right:15px">
+						<ol style="list-style-type: none; padding-left: 0px;" id="leftcategory">
 							<!-- ajax로 대분류 요청하면 json으로 받아짐. -->
 						
-							<li><input type="button" value="여성의류" class="lcategory" id="lcategory/1"></li> <!-- id는 파싱을 위한 용도 -->
+							<!-- 
+							<li><input type="button" value="여성의류" class="lcategory" id="lcategory/1"></li> id는 파싱을 위한 용도
 							<li><input type="button" value="남성의류" class="lcategory" id="lcategory/2"></li>
-							<li><input type="button" value="신발" class="lcategory" id="lcategory/3"></li>
-							<li><input type="button" value="가방" class="lcategory" id="lcategory/4"></li>
-							<li><input type="button" value="시계/쥬얼리" class="lcategory" id="lcategory/5"></li>
-							<li><input type="button" value="패션 액세서리" class="lcategory" id="lcategory/6"></li>
-							<li><input type="button" value="디지털/가전" class="lcategory" id="lcategory/7"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/8"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/9"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/10"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/11"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/12"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/13"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/14"></li>
-							<li><input type="button" value="스포츠/레저" class="lcategory" id="lcategory/15"></li>
+							<li><input type="button" value="신발" class="lcategory" id="lcategory/3"></li> 
+							-->
+							
 						</ol>
 					</div>
 	
-					<div class="col" style="overflow: auto; height: 250px;">
+					<div class="col" style="overflow: auto; height: 250px; margin-right:15px">
 						<ol style="list-style-type: none; padding-left: 0px" id="rightcategory">
+							<!-- 
 							<li><input type="button" value="여성의류" class="scategory" id="scategory/1"></li>
 							<li><input type="button" value="여성의류" class="scategory" id="scategory/2"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/3"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/4"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/5"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/6"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/7"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/8"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/9"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/10"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/11"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/12"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/13"></li>
-							<li><input type="button" value="여성의류" class="scategory" id="scategory/14"></li>
+							<li><input type="button" value="여성의류" class="scategory" id="scategory/3"></li> 
+							-->
 						</ol>
 					</div>
 				</div>
@@ -301,7 +349,12 @@
 				<input type="hidden" name="scategory_no" value=""> 
 			</div>
 		</div>
-		<br>
+		
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 거래지역 입력부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 10px 10px;">거래지역</div>
@@ -319,7 +372,11 @@
 				<input type="hidden" name="add4_donglee" value=""> <!-- 법정동/법정리 이름 -->
 			</div>
 		</div>
-		<br>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 일일렌트가격 입력부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 10px 10px;">일일렌트가격</div>
@@ -328,7 +385,11 @@
 				<input type="text" name="day_price" placeholder="숫자만 입력해주세요" style="width: 200px" value="6000"> 원
 			</div>
 		</div>
-		<br>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 대여가능 최소일수 입력부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 10px 10px;">대여가능 최소일수</div>
@@ -337,7 +398,11 @@
 				<input type="text" name="rentday_minimum" placeholder="숫자만 입력해주세요" style="width: 200px" value="7"> 일
 			</div>
 		</div>
-		<br>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 세부 구성품 입력부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 10px 10px;">세부 구성품</div>
@@ -359,7 +424,11 @@
 				<input type="hidden" name="components" value="">
 			</div>
 		</div>
-		<br>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 상세설명 입력부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 38px 10px;">상세설명</div>
@@ -368,7 +437,11 @@
 				<textarea name="description" placeholder="내용을 입력해 주세요." style="width: 100%; height: 6.25em; resize: none;">지금 당장 체험해보세요</textarea>
 			</div>
 		</div>
-		<br>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		<!-- 게시종료 예정일자 입력부분 -->
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 10px 10px;">게시종료 예정일자</div>
@@ -377,7 +450,11 @@
 				<input type="date" name="end_day" style="width: 140px">
 			</div>
 		</div>
-		<br>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
 		
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-8">

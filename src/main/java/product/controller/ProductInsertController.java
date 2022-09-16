@@ -3,6 +3,7 @@ package product.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -45,9 +46,10 @@ public class ProductInsertController {
 			System.out.println("넘어온 데이터가 없습니다.");
 		}
 		else {
+			String tempImages = ""; 
+			
 			for(MultipartFile multi :upload) {
 				System.out.println(multi.getOriginalFilename());
-				
 				//1. 파일 업로드
 				//System.out.println("multi.getName():" + multi.getName()); // upload : <input> 태그의 name 속성
 				System.out.println("multi.getOriginalFilename():" + multi.getOriginalFilename()); // 내가 선택한 화일의 파일명
@@ -64,7 +66,16 @@ public class ProductInsertController {
 					System.out.println(uploadPath + " 경로의 resources 폴더가 생성되었습니다.");
 				}
 				
-				File file = new File(uploadPath + "/" + multi.getOriginalFilename()); // multi.getOriginalFilename() 대신 pbean.getImage() 를 사용해도 됨.
+				UUID uuid = UUID.randomUUID();
+
+				File file = new File(uploadPath + "/" + uuid.toString()+"_" + multi.getOriginalFilename()); // multi.getOriginalFilename() 대신 pbean.getImage() 를 사용해도 됨.
+				
+				if(tempImages == "") {
+					tempImages = uuid.toString()+"_" + multi.getOriginalFilename();
+				}else {
+					tempImages +=  "," + uuid.toString()+"_" + multi.getOriginalFilename();
+				}
+				
 				try {
 					multi.transferTo(file); // 원하는 위치에 파일을 올리고 싶을 때 사용함. 이 문장 실행과 동시에 업로드 됨.
 					
@@ -73,8 +84,9 @@ public class ProductInsertController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				} 
-
 			}
+			
+			pbean.setImages(tempImages);
 		}
 		
 		System.out.println(pbean);

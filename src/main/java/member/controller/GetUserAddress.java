@@ -1,4 +1,4 @@
-package product.controller;
+package member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +11,14 @@ import member.model.MemberDao;
 
 @Controller
 public class GetUserAddress {
-	private final String command = "getUserAddress.prd";
+	private final String command = "getUserAddress.mb";
 	
 	@Autowired
 	MemberDao mdao;
 	
 	@ResponseBody // 해당 메서드가 반환한 것을 jsp 파일이 아닌 객체 그대로 전달한다. 
 	@RequestMapping(value=command, produces="text/plain;charset=UTF-8")
-	public String duplicationCheck(@RequestParam("id") String id) {
+	public String getUserAddress(@RequestParam("id") String id) {
 		
 		System.out.println("GetUserAddress: " + id);
 		
