@@ -1,18 +1,38 @@
 package product.model;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductDao {
-private final String namespace = "product.model.SQL"; // product.xml ¿¡¼­ namespace¿¡ Àû¾îÁØ°Í
+private final String namespace = "product.model.SQL"; // product.xml ï¿½ï¿½ï¿½ï¿½ namespaceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½
 	
-	@Autowired //  root-context.xml¿¡¼­ ¸¸µé°Ô ÇÑ °´Ã¼ ÁÖÀÔ
+	@Autowired //  root-context.xmlï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	SqlSession sqlSessionTemplate;
 	
 	public int insertProduct(ProductBean pbean){
 		int cnt = sqlSessionTemplate.insert(namespace + ".InsertProduct", pbean);
 		return cnt;
+	}
+
+	public ProductBean getByNo(String no) {
+
+		ProductBean pb = sqlSessionTemplate.selectOne(namespace+".GetByNo",no);
+		return pb;
+	}
+
+	public void updateView_count(String no) {
+
+		sqlSessionTemplate.update(namespace+".updateView_count",no);
+		
+	}
+	public List<ProductBean> getByseller_no(String seller_no) {
+		
+		List<ProductBean> lists =  sqlSessionTemplate.selectList(namespace+".getByseller_no",seller_no);
+		
+		return lists;
 	}
 }

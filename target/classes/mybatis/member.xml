@@ -66,4 +66,13 @@
 	<select id="ipHpCheck" resultType="int">
 		select count(*) from member where id=#{id} and hp = #{hp}
 	</select>
+	
+	<update id="updateLikePnum">
+		update member set likePnum = #{likePnum} where id = #{id}
+	</update>
+	
+	
+	<select id="getByMno" resultType="member.model.MemberBean">
+		select * from member where mno = #{seller_no}
+	</select>
 </mapper>

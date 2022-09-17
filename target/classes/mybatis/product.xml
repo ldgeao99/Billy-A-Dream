@@ -13,4 +13,15 @@
  		values(products_seq.nextval, 1, #{images}, #{name}, 2, 3, #{add1_sido}, #{add2_sigungu}, #{add3_eubmyeon}, #{add4_donglee}, #{day_price}, #{rentday_minimum}, #{components}, #{description}, #{end_day})
  	</insert>
  	
+ 	<select id="GetByNo" resultType="product.model.ProductBean">
+ 		select * from products where no = #{no}
+ 	</select>
+ 	
+ 	<update id="updateView_count">
+ 		update products set view_count = view_count+1 where no = #{no}
+ 	</update>
+ 	
+ 	<select id="getByseller_no" resultType="product.model.ProductBean">
+ 		select * from products where seller_no = #{seller_no}
+ 	</select>
 </mapper>
