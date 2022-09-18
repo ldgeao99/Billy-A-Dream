@@ -26,12 +26,6 @@ public class ProductDetailFormController {
 	private ProductDao pdao;
 	
 	@Autowired
-	private LcategoryDao ldao;
-	
-	@Autowired
-	private ScategoryDao sdao;
-	
-	@Autowired
 	private MemberDao mdao;
 	
 	@RequestMapping(command)

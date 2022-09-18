@@ -75,4 +75,5 @@
 	<select id="getByMno" resultType="member.model.MemberBean">
 		select * from member where mno = #{seller_no}
 	</select>
+	
 </mapper>

@@ -35,4 +35,10 @@ private final String namespace = "product.model.SQL"; // product.xml ï¿½ï¿½ï¿½ï¿
 		
 		return lists;
 	}
+
+	public List<ProductBean> getAllByNo(String[] productLists) {
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getAllByNo",productLists);
+		return lists;
+	}
+
 }

@@ -55,7 +55,7 @@
 		}
 		else{
 			if(confirm("상품을 구매하시겠습니까?")){
-				location.href="buy.prd";
+				buyForm.submit();
 			}
 			else{
 				return false;
@@ -63,6 +63,12 @@
 		}
 	}
 
+	/* $(function(){
+		  $('.slick-slide slick-current slick-active').css("style","width:100px")
+		  $('.slick-list draggable').css("style","width:100px")
+		
+	}) */
+	
 </script>
 			
             <!--Body Container-->
@@ -87,15 +93,15 @@
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
                                             
                                             <!-- 이미지 들어감 -->
-                                            <c:forEach var="images" items="${images }">
-                                            <a data-image="<%=request.getContextPath()%>/resources/${images}" data-zoom-image="<%=request.getContextPath()%>/resources/${images}" class="slick-slide slick-cloned active">
-                                                <img class="blur-up lazyload" data-src="<%=request.getContextPath()%>/resources/${images}" src="<%=request.getContextPath()%>/resources/${images}" alt="product" />
+                                            <c:forEach var="productimages" items="${images }">
+                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}" data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
+                                                <img class="blur-up lazyload" width="100px" height="120px" data-src="<%=request.getContextPath()%>/resources/${productimages}" src="<%=request.getContextPath()%>/resources/${productimages}" alt="product" />
                                             </a>
                                             </c:forEach>
                                         </div>
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right">
-                                        <div class="zoompro-span"><img id="zoompro" class="zoompro" src="<%=request.getContextPath()%>/resources/${images[0]}" data-zoom-image="<%=request.getContextPath()%>/resources/${images[0]}" alt="product" /></div>
+                                        <div class="zoompro-span"><img id="zoompro" class="zoompro" width = "1000" height="1280" src="<%=request.getContextPath()%>/resources/${images[0]}" data-zoom-image="<%=request.getContextPath()%>/resources/${images[0]}" alt="product" /></div>
                                         <div class="product-buttons">
                                             <a href="#" class="btn rounded prlightbox"><i class="icon an an-expand-l-arrows"></i><span class="tooltip-label">Zoom Image</span></a>
                                         </div>
@@ -143,7 +149,7 @@
                                 </div>
                                 <!-- End Product Info -->
                                 <!-- Product Form -->
-                                <form method="post" action="buy.prd" class="product-form hidedropdown">
+                                <form method="get" action="buy.prd" class="product-form hidedropdown" name="buyForm">
                                     <!-- Swatches Color/Size -->
                                     <!-- Product Action -->
                                     <div class="product-action w-100 clearfix">
@@ -158,7 +164,7 @@
                                             </div>
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="return buy()">구매하기</button>
+                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">구매하기</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,47 +288,61 @@
                                                 <!-- ======================================================================================================= -->
 <!-- ======================================================================================================= -->
 <!-- ======================================================================================================= -->
-							<section class="section product-slider pb-0">
-                    			<div class="container">
-									<div class="productSlider grid-products">
-										<div class="item">
-											<!--Start Product Image-->
-											<c:forEach var="sellerProducts" items="${lists }">
-											<div class="product-image">
-
-												<!--Start Product Image-->
-												<a href="product-layout1.html" class="product-img"> <!-- image -->
-													<img class="primary blur-up lazyload"  data-src="<%=request.getContextPath()%>/resources/${sellerProducts.images}" src="<%=request.getContextPath()%>/resources/${sellerProducts.images}" alt="" title=""> 
-													<!-- End image --> 
-													<!-- Hover image --> 
-													<img class="hover blur-up lazyload" data-src="<%=request.getContextPath()%>/resources/${sellerProducts.images}" src="<%=request.getContextPath()%>/resources/${sellerProducts.images}" alt="" title=""> 
-													<!-- End hover image --> 
-													<!-- product label -->
-												</a>
-												<!--End Product Image-->
-
-											</div>
-											<!--Start Product Details-->
-											<div class="product-details text-center">
-												<!--Product Name-->
-												<div class="product-name text-uppercase">
-													<a href="product-layout1.html">${sellerProducts.name }</a>
-												</div>
-												<!--End Product Name-->
-												<!--Product Price-->
-												<div class="product-price">
-													<span class="old-price"><fmt:formatNumber pattern="###,###" value="${sellerProducts.day_price }" var="price"/>${ price} 원 / 일</span>
-												</div>
-												<!--End Product Price-->
-											</div>
-											<!--End Product Details-->
-											
-											</c:forEach> <!-- 반복문 -->
-										</div>
+							 <!-- Products-->
+                <!-- Grid Product -->
+						<div class="grid-products grid--view-items wishlist-grid mt-4">
+							<div class="row">
+								<c:if test="${fn:length(lists)==0 }">
+									<div align="center">
+									<i class="fa-solid fa-store-slash fa-5x"></i></i><br><br>
+									 판매자가 판매하는 다른상품이 없습니다</div>
+								</c:if>
+								
+								<!-- 반복문 시작 -->
+								<c:if test="${fn:length(lists)!=0 }">
+								<c:forEach var="p" items="${ lists}">
+								<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+									<input type="hidden" name="no" id="no"value="${p.no }">
+									<!-- Product Image -->
+									<div class="product-image">
+										<!-- Product Image -->
+										<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
+											<img class="primary blur-up lazyload"
+											data-src="<%=request.getContextPath()%>/resources/${p.images}"
+											src="<%=request.getContextPath()%>/resources/${p.images}"
+											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
+											<img class="hover blur-up lazyload"
+											data-src="<%=request.getContextPath()%>/resources/${p.images}"
+											src="<%=request.getContextPath()%>/resources/${p.images}"
+											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
+										</a>
+										<!-- End Product Image -->
 									</div>
-								</div>
-							</section>
+									<!-- End Product Image -->
 
+									<!-- Product Details -->
+									<div class="product-details text-center">
+										<!-- Product Name -->
+										<div class="product-name">
+											<a href="product-layout1.html">${p.name}</a>
+										</div>
+										<!-- End Product Name -->
+										<!-- Product Price -->
+										<div class="product-price">
+											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.day_price}" var="price"/>${ price} 원 / 일</span>
+										</div>
+										<!-- End Product Price -->
+										<!-- Product Button -->
+									</div>
+									<!-- End Product Details -->
+								
+								</div>
+								</c:forEach>
+								</c:if>
+								<!--프로덕트 끝  -->
+							</div>
+						</div>
+						<!-- End Grid Product-->
 
 									<!-- ======================================================================================================= -->
 <!-- ======================================================================================================= -->

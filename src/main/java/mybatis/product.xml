@@ -24,4 +24,12 @@
  	<select id="getByseller_no" resultType="product.model.ProductBean">
  		select * from products where seller_no = #{seller_no}
  	</select>
+ 	
+ 	
+ 	<select id="getAllByNo" resultType= "product.model.ProductBean">
+		select * from products where no in
+		<foreach collection="array" item="lists" separator="," open="(" close=")">
+		 #{lists}
+		</foreach>
+	</select>
 </mapper>
