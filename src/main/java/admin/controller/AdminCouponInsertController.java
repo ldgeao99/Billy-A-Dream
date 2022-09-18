@@ -26,10 +26,6 @@ public class AdminCouponInsertController {
 	@RequestMapping(value=command,method = RequestMethod.POST)
 	public String gotoInsert(@ModelAttribute("coupon") CouponBean coupon) {
 		couponDao.insertCoupon(coupon);
-		int dif = DateParse.dateDif(coupon.getStartdate(),coupon.getEnddate());
-		for(int i=0;i<dif;i++) {
-			
-		}
 		return gotoPage;
 	}
 }

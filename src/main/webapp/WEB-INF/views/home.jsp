@@ -292,6 +292,28 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li class="lvl1 parent dropdown"><a href="#;">카테고리 <i class="an an-angle-down-l"></i></a>
+                                            <!-- foreach -->
+                                            <ul class="dropdown">
+                                            <c:forEach items="${lists }" var="firstList" varStatus="j">
+                                                
+                                                	<li>
+                                                	<a href="aboutus-style1.html" class="site-nav">대분류 : ${firstList.key} <i class="an an-angle-right-l"></i></a>
+                                                
+                                                    <ul class="dropdown">
+												<c:forEach items="${firstList.value }" var="scate" varStatus="i">
+                                                       
+                                                        <li><a href="aboutus-style1.html" class="site-nav last"> ${scate.name }</a></li>
+                                                        
+                                            	</c:forEach>
+                                                    
+                                                    </ul>
+                                                
+                                                	</li>
+                                                
+											</c:forEach>
+                                            </ul>
+                                        </li>
                                         <li class="lvl1 parent megamenu"><a href="#;">Shop <i class="an an-angle-down-l"></i></a>
                                             <div class="megamenu style4">
                                                 <div class="row">
@@ -665,67 +687,8 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="lvl1 parent dropdown"><a href="#;">Pages <i class="an an-angle-down-l"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="aboutus-style1.html" class="site-nav">About Us <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="aboutus-style1.html" class="site-nav">About Us Style1</a></li>
-                                                        <li><a href="aboutus-style2.html" class="site-nav">About Us Style2</a></li>
-                                                        <li><a href="aboutus-style3.html" class="site-nav last">About Us Style3</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact-style1.html" class="site-nav">Contact Us <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="contact-style1.html" class="site-nav">Contact Us Style1</a></li>
-                                                        <li><a href="contact-style2.html" class="site-nav last">Contact Us Style2</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="lookbook-2columns.html" class="site-nav">2 Columns</a></li>
-                                                        <li><a href="lookbook-3columns.html" class="site-nav">3 Columns</a></li>
-                                                        <li><a href="lookbook-4columns.html" class="site-nav">4 Columns</a></li>
-                                                        <li><a href="lookbook-5columns.html" class="site-nav">5 Columns + Fullwidth</a></li>
-                                                        <li><a href="lookbook-shop.html" class="site-nav last">Lookbook Shop</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="faqs-style1.html" class="site-nav">FAQs Style1</a></li>
-                                                        <li><a href="faqs-style2.html" class="site-nav last">FAQs Style2</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="brands-style1.html" class="site-nav">Brands <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="brands-style1.html" class="site-nav">Brands Style1</a></li>
-                                                        <li><a href="brands-style2.html" class="site-nav last">Brands Style2</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="my-account.html" class="site-nav">My Account <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="my-account.html" class="site-nav">My Account</a></li>
-                                                        <li><a href="login-sliding-style.html" class="site-nav">Login Sliding Slideshow</a></li>
-                                                        <li><a href="login.html" class="site-nav">Login</a></li>
-                                                        <li><a href="register.html" class="site-nav">Register</a></li>
-                                                        <li><a href="forgot-password.html" class="site-nav">Forgot Password</a></li>
-                                                        <li><a href="change-password.html" class="site-nav last">Change Password</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#" class="site-nav">Empty Pages <i class="an an-angle-right-l"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="empty-category.html" class="site-nav">Empty Category</a></li>
-                                                        <li><a href="empty-cart.html" class="site-nav">Empty Cart</a></li>
-                                                        <li><a href="empty-compare.html" class="site-nav">Empty Compare</a></li>
-                                                        <li><a href="empty-wishlist.html" class="site-nav">Empty Wishlist</a></li>
-                                                        <li><a href="empty-search.html" class="site-nav last">Empty Search</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="error-404.html" class="site-nav">Error 404 </a></li>
-                                                <li><a href="cms-page.html" class="site-nav">CMS Page</a></li>
-                                                <li><a href="elements-icons.html" class="site-nav">Icons</a></li>
-                                                <li><a href="coming-soon.html" class="site-nav">Coming soon <span class="lbl nm_label2">New</span></a></li>
-                                            </ul>
-                                        </li>
+                                        
+                                        
                                         <li class="lvl1 parent dropdown"><a href="#;">Blog <i class="an an-angle-down-l"></i></a>
                                             <ul class="dropdown">
                                                 <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
