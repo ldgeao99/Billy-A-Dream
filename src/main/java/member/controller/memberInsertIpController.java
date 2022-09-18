@@ -55,6 +55,6 @@ public class memberInsertIpController {
 		
 		session.setAttribute("id", id);
 		
-		return "redirect:home";
+		return "redirect:/";
 	}
 }

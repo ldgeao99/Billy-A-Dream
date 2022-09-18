@@ -11,7 +11,7 @@ public class memberKakaoLoginController {
 
 	
 	private final String command = "kakaologin.mb";
-	private String gotoPage = "home";
+	private String gotoPage = "redirect:/";
 	
 	
 	@Autowired

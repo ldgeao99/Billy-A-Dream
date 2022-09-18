@@ -24,7 +24,8 @@
 	<script type="text/javascript">
 
 	var components = [];
-
+	var componentsSize = 0;
+	
 	$(function() {
 		
 		
@@ -70,24 +71,75 @@
 			$('input[name="scategory_no"]').val($(this).attr('id').split('/')[1]);
 		});
 			
-				
+		
 		/* 세부 구성품 추가하는 부분 */
 		$('#add_component').click(function(){
 			
+			if(componentsSize == 10){
+				alert("세부 구성품은 최대 10개 까지만 입력 가능합니다.");
+			}
+			
 			var isExistComponent = components.indexOf($('#component_text').val()) != -1;
 			/* $('#component_text').val() */
-			if($('#component_text').val() != "" && !isExistComponent){
-				$(this).parent().parent().parent().append("<div class='row row-cols-3 components'><div class='col' style='padding:10px 10px'>"+ $('#component_text').val() + "</div><div class='col' style='padding:12px 10px'><i class='fa-regular fa-circle-xmark delete_component'  style='cursor:pointer'></i></div><div class='col'></div></div>");
+			if($('#component_text').val() != "" && !isExistComponent && componentsSize < 10){
+				componentsSize++;
+				$('#limit_component_Counter').empty();
+				$('#limit_component_Counter').append("("+ componentsSize + "/10)");
+				$(this).parent().parent().parent().append("<div class='row row-cols-3 components'><div class='col' style='padding:10px 10px'>"+ $('#component_text').val() + "</div><div class='col' style='padding:12px 10px'><i class='fa-regular fa-circle-check change_component' style='cursor:pointer'></i> <i class='fa-regular fa-circle-xmark delete_component'  style='cursor:pointer'></i></div><div class='col'></div></div>");
 				components.push($('#component_text').val());
 				//alert(components);					
+			}else if(isExistComponent){
+				alert("중복되는 구성품명은 사용할 수 없습니다.");
 			}
 			
 			$('#component_text').val(""); // 입력하는 곳 초기화
 		});//click끝
 		
+		/* 세부 구성품 수정하는 부분*/
+		$('.col').on('click', '.change_component', function(){
+			
+			var re_name = window.prompt("변경할 이름을 입력해주세요", "");
+			
+			var isExistComponent = components.indexOf(re_name) != -1;
+			
+			if(re_name != null && !isExistComponent){
+				
+				var pre_name = $(this).parent().prev().text();
+				
+				//배열에서 수정
+				for(var i = 0; i < components.length; i++){ 
+					if (components[i] == pre_name) { 
+						components.splice(i, 1);
+						components.splice(i, 0, re_name);
+					}
+				}
+				//화면에서 삭제
+				$(this).parent().prev().text(re_name);
+			}else if(isExistComponent){
+				alert("중복되는 구성품명은 사용할 수 없습니다.");
+			}
+			
+			
+			//alert(components);
+		});
+		
 		/* 세부 구성품 삭제하는 부분*/
 		$('.col').on('click', '.delete_component', function(){
+			componentsSize--;
+			$('#limit_component_Counter').empty();
+			$('#limit_component_Counter').append("("+ componentsSize + "/10)");
+			
+			//배열에서 삭제
+			for(var i = 0; i < components.length; i++){ 
+				if (components[i] == $(this).parent().prev().text()) { 
+					components.splice(i, 1); 
+				}
+			}
+			
+			//화면에서 삭제
 			$(this).parent().parent().remove();
+			
+			//alert(components);
 		});
 		
 
@@ -152,6 +204,27 @@
 			
 		});
 		
+		$('input[name="original_day_price"]').keyup(function(){
+			if(isNaN($(this).val())){
+				alert("숫자만 입력 가능합니다.");
+				$(this).val("");
+			}
+		})
+		
+		$('input[name="discounted_day_price"]').keyup(function(){
+			if(isNaN($(this).val())){
+				alert("숫자만 입력 가능합니다.");
+				$(this).val("");
+			}
+		})
+		
+		
+		$('input[name="rentday_minimum"]').keyup(function(){
+			if(isNaN($(this).val())){
+				alert("숫자만 입력 가능합니다.");
+				$(this).val("");
+			}
+		})
 		
 		/* 등록 버튼을 눌렀을 때 */
 		$('#submit_button').click(function(){
@@ -201,8 +274,12 @@
 				alert("주소를 입력하세요");
 				return;
 			}
-			if($('input[name="day_price"]').val() == ""){
-				alert("가격을 입력하세요");
+			if($('input[name="original_day_price"]').val() == ""){
+				alert("원래 일일렌트가격을 입력하세요");
+				return;
+			}
+			if($('input[name="discounted_day_price"]').val() == ""){
+				alert("할인된 일일렌트가격을 입력하세요");
 				return;
 			}
 			if($('input[name="rentday_minimum"]').val() == ""){
@@ -271,7 +348,7 @@
 		<div class="collection-hero__title-wrapper container">
 			<h1 class="collection-hero__title">상품등록</h1>
 			<div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
-				<a href="index.html" title="Back to the home page">홈</a><span>|</span><span
+				<a href="/ex/" title="Back to the home page" style="text-decoration:none">홈</a><span>|</span><span
 					class="fw-bold">상품등록</span><span>|</span><a href="#"><span>상품관리</span></a>
 			</div>
 		</div>
@@ -290,7 +367,7 @@
 			<div class="col col-lg-2" style="padding : 10px 10px;">상품명</div>
 			
 			<div class="col col-lg-6">
-				<input type="text" name="name" placeholder="상품이름을 입력해 주세요." value="오큘러스 VR">
+				<input type="text" name="name" placeholder="상품이름을 입력해 주세요(최대 40자)" value="오큘러스 VR" maxlength="40">
 			</div>
 		</div>
 		
@@ -302,7 +379,7 @@
 		
 		<!-- 첨부파일 선택 부분 -->
 		<div class="row justify-content-md-center">
-			<div class="col col-lg-2" style="padding : 83px 10px;">상품 이미지</div>
+			<div class="col col-lg-2" style="padding : 83px 10px;">상품 이미지<span id="limit_image_Counter" style="color:#9B99A9">(0/10)</span></div>
 			
 			<div class="col col-lg-6">
 				<input type='file' name="upload" id='btnAtt' accept="image/*" multiple='multiple' style="width:40%; padding:2px; border: none; border-radius: 0px;"/>
@@ -361,7 +438,7 @@
 			
 			<div class="col col-lg-6">
 				<div class="row row-cols-auto">
-					<div class="col"><input type="text" name="full_address" style="width: 200px" readonly></div>
+					<div class="col"><input type="text" name="full_address" placeholder="버튼을 눌러 입력해주세요" style="width: 270px" readonly></div>
     				<div class="col" style="padding:0px"><input type="button" id="setMyAddress" value="집주소"></div>
     				<div class="col"><input type="button" value="새로지정" id="openZipSearch"></div>
   				</div>
@@ -379,10 +456,23 @@
 		</div>
 		<!-- 일일렌트가격 입력부분 -->
 		<div class="row justify-content-md-center">
-			<div class="col col-lg-2" style="padding : 10px 10px;">일일렌트가격</div>
+			<div class="col col-lg-2" style="padding : 10px 10px;">원래 일일렌트가격</div>
 			
 			<div class="col col-lg-6">
-				<input type="text" name="day_price" placeholder="숫자만 입력해주세요" style="width: 200px" value="6000"> 원
+				<input type="text" name="original_day_price" placeholder="숫자만 입력해주세요" maxlength="8" style="width: 200px" value="9000"> 원
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-8">
+				<hr style="border: 0; height: 1px ;background: #BDBDBD;">	
+			</div>
+		</div>
+		<!-- 일일렌트가격 입력부분 -->
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2" style="padding : 10px 10px;">할인된 일일렌트가격</div>
+			
+			<div class="col col-lg-6">
+				<input type="text" name="discounted_day_price" placeholder="숫자만 입력해주세요" maxlength="8" style="width: 200px" value="6000"> 원
 			</div>
 		</div>
 		<div class="row justify-content-md-center">
@@ -395,7 +485,7 @@
 			<div class="col col-lg-2" style="padding : 10px 10px;">대여가능 최소일수</div>
 			
 			<div class="col col-lg-6">
-				<input type="text" name="rentday_minimum" placeholder="숫자만 입력해주세요" style="width: 200px" value="7"> 일
+				<input type="text" name="rentday_minimum" placeholder="숫자만 입력해주세요" maxlength="3" style="width: 200px" value="7"> 일
 			</div>
 		</div>
 		<div class="row justify-content-md-center">
@@ -405,11 +495,11 @@
 		</div>
 		<!-- 세부 구성품 입력부분 -->
 		<div class="row justify-content-md-center">
-			<div class="col col-lg-2" style="padding : 10px 10px;">세부 구성품</div>
+			<div class="col col-lg-2" style="padding : 10px 10px;">세부 구성품<span id="limit_component_Counter" style="color:#9B99A9">(0/10)</span></div>
 			
 			<div class="col col-lg-6">
 				<div class="row row-cols-auto">
-    				<div class="col"><input type="text" id="component_text" placeholder="세부 구성품을 입력해 주세요." style="width: 250px"></div>
+    				<div class="col"><input type="text" id="component_text" placeholder="세부 구성품을 입력해 주세요(최대 25자, 중복불가)" maxlength="25" style="width: 410px"></div>
     				<div class="col" style="padding:0px"><input type="button" id="add_component" value="+"></div>
   				</div>
   				
@@ -434,7 +524,7 @@
 			<div class="col col-lg-2" style="padding : 38px 10px;">상세설명</div>
 			
 			<div class="col col-lg-6">
-				<textarea name="description" placeholder="내용을 입력해 주세요." style="width: 100%; height: 6.25em; resize: none;">지금 당장 체험해보세요</textarea>
+				<textarea name="description" placeholder="내용을 입력해 주세요(최대 125자)" maxlength="125" style="width: 100%; height: 6.25em; resize: none;">지금 당장 체험해보세요</textarea>
 			</div>
 		</div>
 		<div class="row justify-content-md-center">
@@ -477,92 +567,7 @@
 	
 
 
-	<script type="text/javascript">
-						( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
-						  imageView = function imageView(att_zone, btn){
-						
-						    var attZone = document.getElementById(att_zone);
-						    var btnAtt = document.getElementById(btn)
-						    var sel_files = [];
-						    
-						    // 이미지와 체크 박스를 감싸고 있는 div 속성
-						    var div_style = 'display:inline-block;position:relative;'
-						                  + 'width:31%;height:160px;margin:7px;border:1px solid #D7D7D7;z-index:1';
-						    // 미리보기 이미지 속성
-						    var img_style = 'width:100%;height:100%;z-index:none;';
-						    
-						    // 이미지안에 표시되는 체크박스의 속성
-						    var chk_style = 'width:30px; height:30px; position:absolute; font-size:24px;'
-						                  + 'right: 0px; bottom:0px; z-index:999; color:#8C8C8C; cursor:pointer;';
-						  
-						    btnAtt.onchange = function(e){
-						      var files = e.target.files;
-						      var fileArr = Array.prototype.slice.call(files)
-						      for(f of fileArr){
-						        imageLoader(f);
-						      }
-						    }
-						    
-						    /*첨부된 이미리를을 배열에 넣고 미리보기 */
-						    imageLoader = function(file){
-						      sel_files.push(file);
-						      var reader = new FileReader();
-						      reader.onload = function(ee){
-						        let img = document.createElement('img')
-						        img.setAttribute('style', img_style)
-						        img.src = ee.target.result;
-						        attZone.appendChild(makeDiv(img, file));
-						      }
-						      
-						      reader.readAsDataURL(file);
-						    }
-						    
-						    /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
-						    makeDiv = function(img, file){
-						      var div = document.createElement('div')
-						      div.setAttribute('style', div_style)
-						      
-						      /* 
-						      var btn = document.createElement('input') 
-						      btn.setAttribute('type', 'button')
-						      btn.setAttribute('value', 'x')
-						      btn.setAttribute('delFile', file.name);
-						      btn.setAttribute('style', chk_style);
-						       */
-						      
-						      /* 이미지 오른편에 보여지는 X표시 버튼 */
-						      var btn = document.createElement('i');
-						      btn.setAttribute('class', 'fa-solid fa-square-xmark');
-						      btn.setAttribute('delFile', file.name); /* 이게 있어야 삭제가능 */
-						      btn.setAttribute('style', chk_style);
-						      
-						      /* 삭제 버튼이 눌릴 경우 이벤트 처리 */
-						      btn.onclick = function(ev){
-						        var ele = ev.srcElement;
-						        var delFile = ele.getAttribute('delFile');
-						        for(var i=0 ;i<sel_files.length; i++){
-						          if(delFile== sel_files[i].name){
-						            sel_files.splice(i, 1);      
-						          }
-						        }
-						        
-						        dt = new DataTransfer();
-						        for(f in sel_files) {
-						          var file = sel_files[f];
-						          dt.items.add(file);
-						        }
-						        btnAtt.files = dt.files;
-						        var p = ele.parentNode;
-						        attZone.removeChild(p)
-						      }
-						      div.appendChild(img)
-						      div.appendChild(btn)
-						      return div
-						    }
-						  }
-						)('att_zone', 'btnAtt')
-					
-						</script>
+
 
 
 	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
@@ -832,3 +837,152 @@
 <!--End Page Wrapper-->
 	</body>
 	</html>
+	
+<script type="text/javascript">
+
+/* 코드를 이런식으로 작성하면 function의 파라미터를 호출로 주는게 아니라 여기서 줄 수 있음 */
+( 
+	imageView = function imageView(att_zone, btn){ /* ('att_zone', 'btnAtt') 이미지들이 들어갈 위치, 파일추가 버튼 */
+						
+		var attZone = document.getElementById(att_zone); // 이미지들이 표시되는 공간 
+		var btnAtt = document.getElementById(btn)		 // 파일 추가 버튼
+		var sel_files = [];
+							    
+							    
+		/* 각 요소의 style 정의 */
+		// 이미지와 체크 박스를 감싸고 있는 div 속성
+		var div_style = 'display:inline-block;position:relative;'
+						+ 'width:31%;height:160px;margin:7px;border:1px solid #D7D7D7;z-index:1';
+		// 미리보기 이미지 속성
+		var img_style = 'width:100%;height:100%;z-index:none;';
+							    
+		// 이미지안에 표시되는 체크박스의 속성
+		var chk_style = 'width:30px; height:30px; position:absolute; font-size:24px;'
+						+ 'right: 0px; bottom:0px; z-index:999; color:#8C8C8C; cursor:pointer;';
+							  
+							    
+		/* 사용자에 의한 파일 추가 이벤트가 발생하면 */					
+		btnAtt.onchange = function(e){
+
+			var files = e.target.files; // object FileList
+			var fileArr = Array.prototype.slice.call(files) // Array 타입으로 변경 [object File],[object File],,
+			
+			if(sel_files.length + fileArr.length > 9){
+				alert("상품 이미지는 최대 9장 첨부 가능합니다.");	
+				
+				var dt = new DataTransfer();
+				
+				// 바로 위 dt 변수에 모든 파일객체 담음
+				for(index in sel_files) {
+					var file = sel_files[index];
+					dt.items.add(file);
+				}
+				
+				btnAtt.files = dt.files; // input type file 에 담긴 FileList를 덮어씌움
+				return;
+			}
+			
+			for(file of fileArr){
+				imageLoader(file);	
+			}
+		}
+							    
+		/* 첨부된 이미리를을 배열에 넣고 미리보기 */
+		imageLoader = function(file){
+			
+			var isAlreadyExist = false;
+			
+			for(index in sel_files) {
+				if(file.name == sel_files[index].name){
+					isAlreadyExist = true; 	
+				}
+			}
+			
+			if(isAlreadyExist == false){
+				sel_files.push(file);
+				
+				var reader = new FileReader();
+				
+				reader.onload = function(ee){
+					let img = document.createElement('img');
+					img.setAttribute('style', img_style);
+					img.src = ee.target.result;
+					attZone.appendChild(makeDiv(img, file));
+				}
+								      
+				reader.readAsDataURL(file);
+			}
+
+			/* 여기서 이제 보여지는 리밋 숫자 보여주면 됨. */
+			$('#limit_image_Counter').empty();
+			$('#limit_image_Counter').append("("+ sel_files.length +"/9)");
+			
+			
+			/* 기존에 존재하는 input type file 에 덮어띄워주는 작업이 필요함 */
+			var dt = new DataTransfer();
+			
+			// 바로 위 dt 변수에 모든 파일객체 담음
+			for(index in sel_files) {
+				var file = sel_files[index];
+				dt.items.add(file);
+			}
+			
+			btnAtt.files = dt.files; // input type file 에 담긴 FileList를 덮어씌움
+			
+
+		}
+							    
+		/*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
+		makeDiv = function(img, file){
+			var div = document.createElement('div')
+			div.setAttribute('style', div_style)
+							      
+			/* 
+			var btn = document.createElement('input') 
+			btn.setAttribute('type', 'button')
+			btn.setAttribute('value', 'x')
+			btn.setAttribute('delFile', file.name);
+			btn.setAttribute('style', chk_style);
+			*/
+		      
+			/* 이미지 오른편에 보여지는 X표시 버튼 */
+			var btn = document.createElement('i');
+			btn.setAttribute('class', 'fa-solid fa-square-xmark');
+			btn.setAttribute('delFile', file.name); /* 이게 있어야 삭제가능 */
+			btn.setAttribute('style', chk_style);
+		      
+			/* 삭제 버튼이 눌릴 경우 이벤트 처리 */
+			btn.onclick = function(ev){
+				var ele = ev.srcElement;
+				var watnToDelFileName = ele.getAttribute('delFile'); // 삭제할 파일의 이름
+				
+				// sel_files 배열에서 해당 파일객체 삭제
+				for(var i=0 ;i<sel_files.length; i++){
+					if(watnToDelFileName == sel_files[i].name){
+						sel_files.splice(i, 1);      
+					}
+				}
+			        
+				var dt = new DataTransfer(); // input type file은 내부적으로 선택된 파일을 저장하는 FileList를 갖는데, 이를 수정하려면 DataTransfer 객체로 덮어씌워야 한다. 
+				
+				// 바로 위 dt 변수에 모든 파일객체 담음
+				for(index in sel_files) {
+					var file = sel_files[index];
+					dt.items.add(file);
+				}
+				
+				// input type file 에 담긴 FileList를 덮어씌움
+				btnAtt.files = dt.files;
+				
+				var p = ele.parentNode;
+				attZone.removeChild(p)
+			}
+			
+			div.appendChild(img)
+			div.appendChild(btn)
+			return div
+		}						      
+	}
+	)('att_zone', 'btnAtt')
+					
+</script>

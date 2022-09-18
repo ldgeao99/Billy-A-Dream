@@ -23,7 +23,7 @@ public class memberRegisterController {
 	
 	private final String command = "register.mb";
 	private String getPage = "register";
-	private String gotoPage = "redirect:home";
+	private String gotoPage = "redirect:/";
 	
 	@Autowired
 	private MemberDao mdao;

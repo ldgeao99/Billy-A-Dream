@@ -75,7 +75,7 @@
                                 <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
                                 <!--End Mobile Toggle-->
                                 <!--Logo-->
-                                <div class="logo"><a href="home"><img class="logo-img mh-100" src="resources/assets/images/logo-demo20.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" width="120" /><span class="logo-txt d-none">Optimal</span></a></div>
+                                <div class="logo"><a href="/ex/"><img class="logo-img mh-100" src="resources/assets/images/logo-demo20.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" width="120" /><span class="logo-txt d-none">Optimal</span></a></div>
                                 <!--End Logo-->
                             </div>
                             <!--End Logo / Menu Toggle-->
@@ -463,6 +463,7 @@
                                                 <div class="grid-products grid--view-items">
                                                     <div class="row">
                                                         <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
+                                                        
                                                             <!--Start Product Image-->
                                                             <div class="product-image">
                                                                 <!--Start Product Image-->
@@ -480,6 +481,7 @@
                                                                 <!-- End product label -->
                                                             </div>
                                                             <!--End Product Image-->
+                                                            
                                                             <!--Start Product Details-->
                                                             <div class="product-details text-center">
                                                                 <!--Product Name-->
@@ -494,6 +496,7 @@
                                                                 <!--End Product Price-->
                                                             </div>
                                                             <!--End Product Details-->
+                                                            
                                                         </div>
                                                         <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
                                                             <!--Start Product Image-->
@@ -1074,7 +1077,7 @@
                 <!--End Home Slider-->
 
                 <!--Store Feature-->
-                <section class="section store-features">
+                <!-- <section class="section store-features">
                     <div class="container">
                         <div class="row store-info">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3 my-lg-0">
@@ -1115,10 +1118,11 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
                 <!--End Store Feature-->
-
+					
                 <!--Banner Masonary-->
+                <!-- 
                 <section class="section collection-banners style8 mt-0">
                     <div class="container">
                         <div class="grid-masonary banner-grid grid-mr-20">
@@ -1169,31 +1173,327 @@
                         </div>
                     </div>
                 </section>
+                 -->
                 <!--End Banner Masonary-->
+                
+                
+                <%	
+				//파일이 업로드 된 곳에 접근해서 가져오고 싶을 땐 jsp에서는 application 객체를 사용항
+				//컨트롤러 java 파일에서 업로드 하고자 하는 경로를 얻고싶을 땐 ServletContext 타입의 참조변수를 Autowired해서 사용
+				String apath = application.getContextPath() + "/resources";
+				// /ex/resources
+				%>
+				
+              	 <%--  
+               	<img src="<%=apath%>/0bbdc39f-dc1f-4dee-bc5b-2fa396f5a9b5_샤인머스켓.PNG" width="180px" height="180px"/>
+				<img src="<%=apath%>/defb4815-5245-46fe-baa6-080795050e2a_사과.jpg" width="180px" height="180px"/> 
+				--%>
 
-                <!--Product Slider-->
+				<%-- ${fn:length(recentProductList)}
+
+				<c:forEach var="rProduct" items="${recentProductList}">
+					${rProduct.images}
+
+					<img src="<%=apath%>/${fn:split(rProduct.images,',')[0]}" width="180px" height="180px"/>					
+					
+										
+					
+				</c:forEach> --%>
+				
+				
+				<!-- <div class="container">
+				  <div class="row">
+				    <div class="col">
+				    col
+				    </div>
+				    
+				    <div class="col">
+				    col
+				    </div>
+				    
+				    <div class="col">
+				    col
+				    </div>
+				    
+				    <div class="col">
+				    col
+				    </div>
+				  </div>
+				</div>	 -->
+					
+					
+				
+				<div class="container">
+				
+					<div class="section-header">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px  ;color: black; margin-top:50px">최근 올라온 상품</h2>
+                    </div>
+                     
+					<c:set var="notCeiledQuotient" value="${fn:length(recentProductList)/4}"/> 
+					<%-- notCeiledQuotient : ${notCeiledQuotient} <br> --%>
+					<c:set var="ceiledQuotient" value="${(notCeiledQuotient + (1 - (notCeiledQuotient % 1)) % 1)}"/> 
+					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
+					
+					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
+						<c:if test="${i % 4 eq 1}">
+							<div class="grid-products row">
+						</c:if>
+							
+						<!-- 비어있는 이미지 출력 -->
+						<c:if test="${i > fn:length(recentProductList)}">
+							<div class="item col">
+	                        </div>
+						</c:if>
+						
+						<!-- 정상적인 이미지 출력 -->
+						<c:if test="${i <= fn:length(recentProductList)}">
+							<div class="item col">
+	                        	<!--Start Product Image-->
+	                            <div class="product-image">
+	                                    <!--Start Product Image-->
+	                                    <a href="product-layout1.html" class="product-img">
+	                                        <!--Image-->
+	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <!--End Image-->
+	                                        <!--Hover Image-->
+	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <!--End Hover Image-->
+	                                    </a>
+	                                    <!-- End Product Image -->
+	                                    
+	                                    <!--Product label-->
+	                                    <div class="product-labels"><span class="lbl on-sale rounded-2" style="background:#489CFF">New</span></div>
+	                                    <!--End Product label-->
+	                                    
+	                                    <!--Product Button-->
+	                                    <div class="button-set style0 d-none d-md-block">
+	                                        <ul>
+	                                            <!--Cart Button-->
+	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
+	                                            <!--End Cart Button-->
+	                                            <!--Quick View Button-->
+	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
+	                                            <!--End Quick View Button-->
+	                                            <!--Wishlist Button-->
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <!--End Wishlist Button-->
+	                                            <!--Compare Button-->
+	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
+	                                            <!--End Compare Button-->
+	                                        </ul>
+	                                    </div>
+	                                    <!--End Product Button-->
+	                                </div>
+	                                <!-- End Product Image -->
+	                                
+	                                
+	                                
+	                                <!--Start Product Details-->
+	                                <div class="product-details text-center">
+	                                    <!--Product Name-->
+	                                    <div class="product-name">
+	                                        <a class="text-uppercase fw-normal" href="product-layout1.html">${recentProductList[i-1].name}</a>
+	                                    </div>
+	                                    <!--End Product Name-->
+	                                    <!--Product Price-->
+	                                    <div class="product-price">
+	                                        <span class="old-price"><fmt:formatNumber value="${recentProductList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
+	                                        <%-- <span class="old-price" style="text-decoration : none">${recentProductList[i-1].add1_sido} ${recentProductList[i-1].add2_sigungu} ${recentProductList[i-1].add3_eubmyeon} ${recentProductList[i-1].add4_donglee}</span> --%>
+	                                        <span class="price"><fmt:formatNumber value="${recentProductList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
+	                                    </div>
+	                                    <!-- End Product Price-->
+	                                    <!--Product Review-->
+	                                    <div class="product-review m-0">
+	                                    <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i> -->
+	                                    <span class="old-price" style="text-decoration : none">
+	                                    
+	                                    <c:if test="${recentProductList[i-1].add1_sido ne ''}">
+	                                    	${recentProductList[i-1].add1_sido}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${recentProductList[i-1].add2_sigungu ne ''}">
+	                                    	${recentProductList[i-1].add2_sigungu}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${recentProductList[i-1].add3_eubmyeon ne ''}">
+	                                    	${recentProductList[i-1].add3_eubmyeon}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${recentProductList[i-1].add4_donglee ne ''}">
+	                                    	${recentProductList[i-1].add4_donglee}
+	                                    </c:if>
+	                                    
+	                                    <%-- ${recentProductList[i-1].add1_sido} ${recentProductList[i-1].add2_sigungu} ${recentProductList[i-1].add3_eubmyeon} ${recentProductList[i-1].add4_donglee} --%>
+	                                    </span>
+	                                    </div>
+	                                    <!--End Product Review-->
+	                                </div>
+	                                <!--End Product Details-->
+                           		 </div>
+						</c:if>
+						
+						<c:if test="${i % 4 eq 0}">
+							</div>
+						</c:if>	
+						
+					</c:forEach>
+				</div>
+				
+				
+				
+				<div class="container">
+				
+					<div class="section-header">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px  ;color: black; margin-top:50px">인기 상품</h2>
+                    </div>
+                    
+					<c:set var="notCeiledQuotient" value="${fn:length(popularProductList)/4}"/> 
+					<%-- notCeiledQuotient : ${notCeiledQuotient} <br> --%>
+					<c:set var="ceiledQuotient" value="${(notCeiledQuotient + (1 - (notCeiledQuotient % 1)) % 1)}"/> 
+					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
+					
+					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
+						<c:if test="${i % 4 eq 1}">
+							<div class="grid-products row">
+						</c:if>
+							
+						<!-- 비어있는 이미지 출력 -->
+						<c:if test="${i > fn:length(popularProductList)}">
+							<div class="item col">
+	                        </div>
+						</c:if>
+						
+						<!-- 정상적인 이미지 출력 -->
+						<c:if test="${i <= fn:length(popularProductList)}">
+							<div class="item col">
+	                        	<!--Start Product Image-->
+	                            <div class="product-image">
+	                                    <!--Start Product Image-->
+	                                    <a href="product-layout1.html" class="product-img">
+	                                        <!--Image-->
+	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <!--End Image-->
+	                                        <!--Hover Image-->
+	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <!--End Hover Image-->
+	                                    </a>
+	                                    <!-- End Product Image -->
+	                                    
+	                                    <!--Product label-->
+	                                    <div class="product-labels"><span class="lbl on-sale rounded-2">Hot</span></div>
+	                                    <!--End Product label-->
+	                                    
+	                                    <!--Product Button-->
+	                                    <div class="button-set style0 d-none d-md-block">
+	                                        <ul>
+	                                            <!--Cart Button-->
+	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
+	                                            <!--End Cart Button-->
+	                                            <!--Quick View Button-->
+	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
+	                                            <!--End Quick View Button-->
+	                                            <!--Wishlist Button-->
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <!--End Wishlist Button-->
+	                                            <!--Compare Button-->
+	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
+	                                            <!--End Compare Button-->
+	                                        </ul>
+	                                    </div>
+	                                    <!--End Product Button-->
+	                                </div>
+	                                <!-- End Product Image -->
+	                                
+	                                
+	                                
+	                                <!--Start Product Details-->
+	                                <div class="product-details text-center">
+	                                    <!--Product Name-->
+	                                    <div class="product-name">
+	                                        <a class="text-uppercase fw-normal" href="product-layout1.html">${popularProductList[i-1].name}</a>
+	                                    </div>
+	                                    <!--End Product Name-->
+	                                    <!--Product Price-->
+	                                    <div class="product-price">
+	                                        <span class="old-price"><fmt:formatNumber value="${popularProductList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
+	                                        <%-- <span class="old-price" style="text-decoration : none">${popularProductList[i-1].add1_sido} ${popularProductList[i-1].add2_sigungu} ${popularProductList[i-1].add3_eubmyeon} ${popularProductList[i-1].add4_donglee}</span> --%>
+	                                        <span class="price"><fmt:formatNumber value="${popularProductList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
+	                                    </div>
+	                                    <!-- End Product Price-->
+	                                    <!--Product Review-->
+	                                    <div class="product-review m-0">
+	                                    <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i> -->
+	                                    <span class="old-price" style="text-decoration : none">
+	                                    
+	                                    <c:if test="${popularProductList[i-1].add1_sido ne ''}">
+	                                    	${popularProductList[i-1].add1_sido}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${popularProductList[i-1].add2_sigungu ne ''}">
+	                                    	${popularProductList[i-1].add2_sigungu}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${popularProductList[i-1].add3_eubmyeon ne ''}">
+	                                    	${popularProductList[i-1].add3_eubmyeon}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${popularProductList[i-1].add4_donglee ne ''}">
+	                                    	${popularProductList[i-1].add4_donglee}
+	                                    </c:if>
+	                                    
+	                                    <%-- ${popularProductList[i-1].add1_sido} ${popularProductList[i-1].add2_sigungu} ${popularProductList[i-1].add3_eubmyeon} ${popularProductList[i-1].add4_donglee} --%>
+	                                    </span>
+	                                    </div>
+	                                    <!--End Product Review-->
+	                                </div>
+	                                <!--End Product Details-->
+                           		 </div>
+						</c:if>
+						
+						<c:if test="${i % 4 eq 0}">
+							</div>
+						</c:if>	
+						
+					</c:forEach>
+				</div>
+				
+				
+				
+				
+                <%-- <!--Product Slider-->
                 <section class="section product-slider pt-0">
                     <div class="container">
+                    
                         <div class="section-header">
-                            <h2>New Arrivals</h2>
+                            <h2>최근 올라온 상품</h2>
                         </div>
+                        
                         <div class="productSlider grid-products">
-                            <div class="item">
+                        
+                        	<c:forEach var="rProduct" items="${recentProductList}" varStatus="status">
+								${rProduct.images}
+		
+								<img src="<%=apath%>/${fn:split(rProduct.images,',')[0]}" width="180px" height="180px"/>					
+							
+							
+							 	<div class="item">
                                 <!--Start Product Image-->
                                 <div class="product-image">
                                     <!--Start Product Image-->
                                     <a href="product-layout1.html" class="product-img">
                                         <!--Image-->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
+                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(rProduct.images,',')[0]}" src="<%=apath%>/${fn:split(rProduct.images,',')[0]}" alt="image" title="" />
                                         <!--End Image-->
                                         <!--Hover Image-->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
+                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(rProduct.images,',')[0]}" src="<%=apath%>/${fn:split(rProduct.images,',')[0]}" alt="image" title="" />
                                         <!--End Hover Image-->
                                     </a>
                                     <!-- End Product Image -->
+                                    
                                     <!--Product label-->
-                                    <div class="product-labels"><span class="lbl on-sale rounded-2">Sale</span></div>
+                                    <div class="product-labels"><span class="lbl on-sale rounded-2">New</span></div>
                                     <!--End Product label-->
+                                    
                                     <!--Product Button-->
                                     <div class="button-set style0 d-none d-md-block">
                                         <ul>
@@ -1212,8 +1512,10 @@
                                         </ul>
                                     </div>
                                     <!--End Product Button-->
+                                    
                                 </div>
                                 <!-- End Product Image -->
+                                
                                 <!--Start Product Details-->
                                 <div class="product-details text-center">
                                     <!--Product Name-->
@@ -1231,220 +1533,17 @@
                                     <!--End Product Review-->
                                 </div>
                                 <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!--Image-->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Image-->
-                                        <!--Hover Image-->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Hover Image-->
-                                    </a>
-                                    <!--End Product Image-->
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!-- End Product Image -->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name">
-                                        <a class="text-uppercase fw-normal" href="product-layout1.html">Wooden Baby Chair</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$200.00</span>
-                                    </div>
-                                    <!-- End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review m-0"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!--Image-->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Image-->
-                                        <!--Hover Image-->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Hover Image-->
-                                    </a>
-                                    <!-- End Product Image -->
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!-- End Product Image -->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name">
-                                        <a class="text-uppercase fw-normal" href="product-layout1.html">Round Wall Clock</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$130.00</span>
-                                    </div>
-                                    <!-- End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review m-0"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></div>
-                                    <!--End Product Review-->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!--Image-->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Image-->
-                                        <!--Hover Image-->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Hover Image-->
-                                    </a>
-                                    <!-- End Product Image -->
-                                    <!--Product label-->
-                                    <div class="product-labels"><span class="lbl on-sale rounded-2">Sale</span></div>
-                                    <!--End Product label-->
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!-- End Product Image -->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name">
-                                        <a class="text-uppercase fw-normal" href="product-layout1.html">Cushioned Office Chair</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="old-price">$120.00</span> <span class="price">$80.00</span>
-                                    </div>
-                                    <!-- End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review m-0"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!--Image-->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Image-->
-                                        <!--Hover Image-->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="" />
-                                        <!--End Hover Image-->
-                                    </a>
-                                    <!-- End Product Image -->
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!-- End Product Image -->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name">
-                                        <a class="text-uppercase fw-normal" href="product-layout1.html">Wall Street Green Lounge Chair</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$100.00</span>
-                                    </div>
-                                    <!-- End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review m-0"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
+                           		 </div>
+							</c:forEach>
                         </div>
+                        
+                        
                     </div>
                 </section>
-                <!--End Product Slider-->
+                <!--End Product Slider--> --%>
 
                 <!--Collections Grid-->
+                <!-- 
                 <section class="section collection-grids pt-0">
                     <div class="container">
                         <div class="section-header">
@@ -1546,9 +1645,11 @@
                         </div>
                     </div>
                 </section>
+                 -->
                 <!--End Collections Grid-->
 
                 <!--Testimonial Slider-->
+                <!-- 
                 <section class="section testimonial-slider style1">
                     <div class="container">
                         <div class="row">
@@ -1559,7 +1660,7 @@
                             </div>
                         </div>
                         <div class="quote-wraper">
-                            <!--Testimonial Slider Items-->
+                            
                             <div class="quotes-slider arwOut3">
                                 <div class="quotes-slide">
                                     <blockquote class="quotes-slider__text text-center">             
@@ -1622,13 +1723,15 @@
                                     </blockquote>
                                 </div>
                             </div>
-                            <!--Testimonial Slider Items-->
+                            
                         </div>
                     </div>
                 </section>
+                 -->
                 <!--End Testimonial Slider-->
 
                 <!--Brand Logo Slider-->
+                <!-- 
                 <section class="section logo-section">
                     <div class="container">
                         <div class="section-header">
@@ -1660,6 +1763,7 @@
                         </div>
                     </div>
                 </section>
+                -->
                 <!--End Brand Logo Slider-->
             </div>
             <!--End Body Container-->

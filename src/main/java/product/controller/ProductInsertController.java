@@ -22,7 +22,7 @@ public class ProductInsertController {
 	
 	private final String command = "insert.prd";
 	private String getPage ="productInsertForm";
-	private String gotoPage ="redirect:/home";
+	private String gotoPage ="redirect:/";
 	
 	@Autowired
 	ProductDao productDao;
