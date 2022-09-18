@@ -31,7 +31,20 @@
         <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
         <script>
         	function gotoSellPage(){
-        		location.href = "insert.prd";
+        		if($('#id').val()=="null"){
+        			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+        				location.href="login.mb";	
+        			}
+        			return false;
+        		}
+        		else{
+        			if(confirm("상품을 등록하시겠습니까?")){
+        				location.href = "insert.prd";
+        			}
+        			else{
+        				return false;
+        			}
+        		}
         	}
         	
         	function kakaoTalk(){
@@ -44,6 +57,8 @@
         		
         		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL);
         	}
+        	
+        	
         </script>
         <style>
 	        i {
@@ -82,6 +97,7 @@
                             <!--Search Inline-->
                             <div class="col-1 col-sm-1 col-md-1 col-lg-8 d-none d-lg-block">
                                 <form class="form minisearch search-inline px-5" id="header-search1" action="#" method="get">
+                                	<input type="hidden" id="id" id="id" value="<%=id %>">
                                     <label class="label d-none"><span>Search</span></label>
                                     <div class="control">
                                         <div class="searchField d-flex">
@@ -319,7 +335,7 @@
                                                 <div class="row">
                                                     <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Category Page</a>
                                                         <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="category-2columns.html" class="site-nav lvl-2">2 Columns with style1</a></li>
+                                                            <li class="lvl-2"><a href="productdetail.prd?no=5" class="site-nav lvl-2">상세페이지</a></li>
                                                             <li class="lvl-2"><a href="category-3columns.html" class="site-nav lvl-2">3 Columns with style2</a></li>
                                                             <li class="lvl-2"><a href="category-4columns.html" class="site-nav lvl-2">4 Columns with style3</a></li>
                                                             <li class="lvl-2"><a href="category-5columns.html" class="site-nav lvl-2">5 Columns with style4</a></li>
@@ -1825,7 +1841,7 @@
                         <div id="cart-drawer" class="block block-cart">
                             <div class="minicart-header">
                                 <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
-                                <h4 class="fs-6">Your cart (2 Items)</h4>
+                                <h4 class="fs-6">관심 상품 </h4>
                             </div>
                             <div class="minicart-content">
                                 <ul class="m-0 clearfix">

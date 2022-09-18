@@ -69,10 +69,11 @@ add2_sigungu varchar2(20),
 add3_eubmyeon varchar2(20),
 add4_donglee varchar2(20),
 email varchar2(30),
-hp number,
+hp varchar2(11),
 isblacklist char(1) default 0,
 rating number default 0,
-wishpnum varchar2(200)
+coupon varchar2(200),
+likePnum varchar2(200)
 );
 col mno for 99;
 col id for a10;
@@ -111,6 +112,8 @@ create sequence memberip_seq
   maxvalue 10000
   nocache;
   
+
+  
 -- 상품 테이블
 drop table products;
 create table products(
@@ -124,7 +127,7 @@ create table products(
 	add2_sigungu varchar2(30) not null,
 	add3_eubmyeon varchar2(20),
 	add4_donglee varchar2(20)  not null,
-	day_price number not null,
+	day_price number not null, 
 	rentday_minimum number not null,
 	components varchar2(100),
 	description varchar2(200),
@@ -135,6 +138,7 @@ create table products(
 	pulled_day date default sysdate,
 	is_hidden char(1) default '0'
 );
+
 
 drop sequence products_seq;
 create sequence products_seq

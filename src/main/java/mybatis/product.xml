@@ -25,4 +25,22 @@
  		order by view_count desc
  	</select>
  	
+ 	<select id="GetByNo" resultType="product.model.ProductBean">
+ 		select * from products where no = #{no}
+ 	</select>
+ 	
+ 	<update id="updateView_count">
+ 		update products set view_count = view_count+1 where no = #{no}
+ 	</update>
+ 	
+ 	<select id="getByseller_no" resultType="product.model.ProductBean">
+ 		select * from products where seller_no = #{seller_no}
+ 	</select>
+ 	
+ 	<select id="getAllByNo" resultType= "product.model.ProductBean">
+		select * from products where no in
+		<foreach collection="array" item="lists" separator="," open="(" close=")">
+		 #{lists}
+		</foreach>
+	</select>
 </mapper>

@@ -75,4 +75,18 @@ public class MemberDao {
 		MemberBean mbean = sqlSessionTemplate.selectOne(namespace+".getMemberAddress",id);
 		return mbean;
 	}
+	public int ipHpCheck(Map<String, String> map) {
+
+		int cnt = sqlSessionTemplate.selectOne(namespace+".ipHpCheck",map);
+		System.out.println("cnt : "+cnt);
+		return cnt;
+	}
+	public void updateLikePnum(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.update(namespace+".updateLikePnum",map);
+		System.out.println("찜한 결과 :"+cnt);
+	}
+	public MemberBean getByMno(int seller_no) {
+		MemberBean mb = sqlSessionTemplate.selectOne(namespace+".getByMno",seller_no);
+		return mb;
+	}
 }

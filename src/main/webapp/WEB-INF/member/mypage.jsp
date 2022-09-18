@@ -138,6 +138,7 @@ height
 }
 
 </style>
+ <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -473,6 +474,22 @@ height
 		    });
 		}	
 	///======================================================================================
+	///======================================================================================
+		//관심목록 삭제
+		
+		function pdelete(){
+			if(confirm("해당상품을 관심목록에서 삭제하시겠습니까?")){
+				
+				location.href="deletePnum.mb?no="+$('#no').val();
+			}	
+		
+	}
+		
+		
+		
+		
+		
+		///======================================================================================
 		//쿠폰 체크 ajax
 		
 		function checkCode(){
@@ -485,6 +502,7 @@ height
 						code : $('#code').val() 
 							},
 						success : function(data){
+							alert($.trim(data));
 							if($.trim(data)=="exist"){
 								alert("이미 사용된 쿠폰입니다.");
 								checkCode = false;
@@ -739,17 +757,13 @@ height
 						<hr>
 						<form class="orderstracking-from mt-3" method="post" action="registecoupon.mb" name="coupon">
 							<p class="mb-3"></p>
-							<div  align="center">
+							<div  align="center" style="width: 100%">
 								<div class="form-group col-md-5 col-lg-5">
 									<label for="code" class="d-none">code
 										<span class="required-f">*</span>
-									</label> <input name="code" placeholder="쿠폰 코드 입력"
-										value="" id="code" type="text" required>
-								</div>
-								<div class="form-group col-md-2 col-lg-2">
-									<button type="submit" onclick = "return checkCode()">
-										<span>쿠폰 등록</span>
-									</button>
+									</label> 
+									<input name="code" placeholder="쿠폰 코드 입력" value="" id="code" type="text" required >
+									<input type="submit" onclick = "return checkCode()" value="쿠폰 등록">
 								</div>
 							</div>
 						</form>
@@ -762,31 +776,33 @@ height
 										class="table table-bordered table-hover align-middle text-center mb-0">
 										<thead class="">
 											<tr>
-												<th scope="col">Date</th>
-												<th scope="col">Time</th>
-												<th scope="col">Description</th>
-												<th scope="col">Location</th>
+												<th scope="col">쿠폰번호</th>
+												<th scope="col">쿠폰명</th>
+												<th scope="col">쿠폰내용</th>
+												<th scope="col">쿠폰만료일</th>
 											</tr>
 										</thead>
 										<tbody>
+										<c:if test="${fn:length(mb.coupon)==0 }">
 											<tr>
-												<td>14 Nov 2021</td>
-												<td>08.00 AM</td>
-												<td>Shipped</td>
-												<td>Canada</td>
+												<td colspan="4" align="center"> 등록된 쿠폰이 없습니다</td>
 											</tr>
-											<tr>
-												<td>15 Nov 2021</td>
-												<td>12.00 AM</td>
-												<td>Shipping info received</td>
-												<td>California</td>
-											</tr>
-											<tr>
-												<td>16 Nov 2021</td>
-												<td>10.00 AM</td>
-												<td>Origin scan</td>
-												<td>Landon</td>
-											</tr>
+										</c:if>
+										<c:if test="${fn:length(mb.coupon)!=0 }">
+											<c:forEach var="c" items="${couponLists }">
+												<tr>
+													<td>${c.code }</td>
+													<td>${c.name }</td>
+													<td>${c.amount }${c.unit }</td>
+													<td>
+														<fmt:parseDate var="formattedDay" value="${c.enddate }" pattern="yyyy-MM-dd" />
+														<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
+													</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+											
+											
 										</tbody>
 									</table>
 								</div>
@@ -950,15 +966,22 @@ height
 
 					<!-- Wishlist -->
 					<div id="wishlist" class="product-wishlist tab-pane fade">
-						<h3>My Wishlist</h3>
+						<h3>관심목록</h3>
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
-								<div
-									class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<button type="button" class="btn remove-icon close-btn"
-										data-bs-toggle="tooltip" data-bs-placement="top"
-										title="Remove">
+								<c:if test="${fn:length(mb.likePnum)==0 }">
+									<div align="center">
+									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
+									 관심목록이 없습니다</div>
+								</c:if>
+								
+								<!-- 반복문 시작 -->
+								<c:if test="${fn:length(mb.likePnum)!=0 }">
+								<c:forEach var="p" items="${ plists}">
+								<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+									<input type="hidden" name="no" id="no"value="${p.no }">
+									<button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="삭제하기" onclick="pdelete()">
 										<i class="icon an an-times-r"></i>
 									</button>
 									<!-- Product Image -->
@@ -966,16 +989,13 @@ height
 										<!-- Product Image -->
 										<a href="product-layout1.html" class="product-img"> <!-- image -->
 											<img class="primary blur-up lazyload"
-											data-src="resources/assets/images/products/product-1.jpg"
-											src="resources/assets/images/products/product-1.jpg"
+											data-src="<%=request.getContextPath()%>/resources/${p.images}"
+											src="<%=request.getContextPath()%>/resources/${p.images}"
 											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
 											<img class="hover blur-up lazyload"
-											data-src="resources/assets/images/products/product-1-1.jpg"
-											src="resources/assets/images/products/product-1-1.jpg"
+											data-src="<%=request.getContextPath()%>/resources/${p.images}"
+											src="<%=request.getContextPath()%>/resources/${p.images}"
 											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
-											<div class="product-labels rectangular">
-												<span class="lbl pr-label3">Low in stock</span>
-											</div> <!-- End product label -->
 										</a>
 										<!-- End Product Image -->
 									</div>
@@ -985,209 +1005,28 @@ height
 									<div class="product-details text-center">
 										<!-- Product Name -->
 										<div class="product-name">
-											<a href="product-layout1.html">Martha Knit Top</a>
+											<a href="product-layout1.html">${p.name}</a>
 										</div>
 										<!-- End Product Name -->
 										<!-- Product Price -->
 										<div class="product-price">
-											<span class="old-price">$199.00</span> <span class="price">$150.00</span>
+											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.day_price}" var="price"/>${ price} 원 / 일</span>
 										</div>
 										<!-- End Product Price -->
-										<!-- Product Review -->
-										<div
-											class="product-review d-flex align-items-center justify-content-center">
-											<i class="an an-star"></i><i class="an an-star"></i><i
-												class="an an-star"></i><i class="an an-star"></i> <i
-												class="an an-star-o"></i> <span class="caption hidden ms-2">9
-												reviews</span>
-										</div>
-										<!-- End Product Review -->
 										<!-- Product Button -->
 										<form method="post" action="/cart/add" class="cart-form mt-3"
 											enctype="multipart/form-data">
 											<a href="cart-style1.html"
-												class="btn btn--small rounded product-form__cart-submit"><span>Add
-													to cart</span></a>
+												class="btn btn--small rounded product-form__cart-submit"><span>구매하기</span></a>
 										</form>
 										<!-- End Product Button -->
 									</div>
 									<!-- End Product Details -->
+								
 								</div>
-								<div
-									class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<button type="button" class="btn remove-icon close-btn"
-										data-bs-toggle="tooltip" data-bs-placement="top"
-										title="Remove">
-										<i class="icon an an-times-r"></i>
-									</button>
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="product-layout1.html" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
-											data-src="resources/assets/images/products/product-1.jpg"
-											src="resources/assets/images/products/product-1.jpg"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
-											data-src="resources/assets/images/products/product-1-1.jpg"
-											src="resources/assets/images/products/product-1-1.jpg"
-											alt="product" title="product" /> <!-- End hover image --> <!-- Product Label -->
-											<div class="product-labels rectangular">
-												<span class="lbl pr-label2">New</span>
-											</div> <!-- End Product Label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="product-layout1.html">Long Sleeve T-shirts</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="price">$199.00</span>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Review -->
-										<div
-											class="product-review d-flex align-items-center justify-content-center">
-											<i class="an an-star"></i><i class="an an-star"></i><i
-												class="an an-star"></i><i class="an an-star"></i><i
-												class="an an-star"></i> <span class="caption hidden ms-2">20
-												reviews</span>
-										</div>
-										<!-- End Product Review -->
-										<!-- Product Button -->
-										<form method="post" action="/cart/add" class="cart-form mt-3"
-											enctype="multipart/form-data">
-											<a href="cart-style1.html"
-												class="btn btn--small rounded product-form__cart-submit"><span>Add
-													to cart</span></a>
-										</form>
-										<!-- End Product Button -->
-									</div>
-									<!-- End Product Details -->
-								</div>
-								<div
-									class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<button type="button" class="btn remove-icon close-btn"
-										data-bs-toggle="tooltip" data-bs-placement="top"
-										title="Remove">
-										<i class="icon an an-times-r"></i>
-									</button>
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="product-layout1.html" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
-											data-src="resources/assets/images/products/product-1.jpg"
-											src="resources/assets/images/products/product-1.jpg"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
-											data-src="resources/assets/images/products/product-1-1.jpg"
-											src="resources/assets/images/products/product-1-1.jpg"
-											alt="product" title="product" /> <!-- End hover image --> <!-- Product Label -->
-											<div class="product-labels rectangular">
-												<span class="lbl on-sale">Out of stock</span>
-											</div> <!-- End Product Label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="product-layout1.html">Stand Collar Slim Shirt</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="price">$399.00</span>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Review -->
-										<div
-											class="product-review d-flex align-items-center justify-content-center">
-											<i class="an an-star"></i><i class="an an-star"></i><i
-												class="an an-star-o"></i><i class="an an-star-o"></i><i
-												class="an an-star-o"></i> <span class="caption hidden ms-2">19
-												reviews</span>
-										</div>
-										<!-- End Product Review -->
-										<!-- Product Button -->
-										<form method="post" action="/cart/add" class="cart-form mt-3"
-											enctype="multipart/form-data">
-											<a href="cart-style1.html"
-												class="btn btn--small rounded product-form__cart-submit soldOutBtn disabled"><span>Out
-													Of stock</span></a>
-										</form>
-										<!-- End Product Button -->
-									</div>
-									<!-- End Product Details -->
-								</div>
-								<div
-									class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<button type="button" class="btn remove-icon close-btn"
-										data-bs-toggle="tooltip" data-bs-placement="top"
-										title="Remove">
-										<i class="icon an an-times-r"></i>
-									</button>
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="product-layout1.html" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
-											data-src="resources/assets/images/products/product-1.jpg"
-											src="resources/assets/images/products/product-1.jpg"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
-											data-src="resources/assets/images/products/product-1-1.jpg"
-											src="resources/assets/images/products/product-1-1.jpg"
-											alt="product" title="product" /> <!-- End hover image --> <!-- Product Label -->
-											<div class="product-labels">
-												<span class="lbl pr-label1">Sale</span>
-											</div> <!-- End Product Label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="product-layout1.html">Backpack With Contrast</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="old-price">$99.00</span> <span class="price">$88.00</span>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Review -->
-										<div
-											class="product-review d-flex align-items-center justify-content-center">
-											<i class="an an-star"></i><i class="an an-star"></i><i
-												class="an an-star"></i><i class="an an-star"></i><i
-												class="an an-star-o"></i> <span class="caption hidden ms-2">2
-												reviews</span>
-										</div>
-										<!-- End Product Review -->
-										<!-- Product Button -->
-										<form method="post" action="/cart/add" class="cart-form mt-3"
-											enctype="multipart/form-data">
-											<a href="cart-style1.html"
-												class="btn btn--small rounded product-form__cart-submit"><span>Add
-													to cart</span></a>
-										</form>
-										<!-- End Product Button -->
-									</div>
-									<!-- End Product Details -->
-								</div>
+								</c:forEach>
+								</c:if>
+								<!--프로덕트 끝  -->
 							</div>
 						</div>
 						<!-- End Grid Product-->

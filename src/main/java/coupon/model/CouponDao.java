@@ -48,13 +48,15 @@ public class CouponDao {
 		CouponBean coupon=sqlSessionTemplate.selectOne(namespace+".SelectCoupon", no);
 		return coupon;
 	}
-
-
-	
 	public CouponBean getByCode(String code) {
 		
 		CouponBean cb = sqlSessionTemplate.selectOne(namespace+".getByCode",code);
-		
 		return cb;
+	}
+	public List<CouponBean> getAllByNo(String[] couponLists) {
+		
+		List<CouponBean> lists = sqlSessionTemplate.selectList(namespace+".getAllByNo",couponLists);
+		
+		return lists;
 	}
 }

@@ -32,6 +32,13 @@
 	<select id="getByCode" resultType="coupon.model.CouponBean">
 		select * from coupon where code = #{code}
 	</select>
+	
+	<select id="getAllByNo" resultType= "coupon.model.CouponBean">
+		select * from coupon where no in
+		<foreach collection="array" item="lists" separator="," open="(" close=")">
+		 #{lists}
+		</foreach>
+	</select>
 	<insert id="InsertCouponCount">
 		insert into couponCount values(#{cno},#{reg_date})
 	</insert>

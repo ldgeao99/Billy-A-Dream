@@ -1,9 +1,6 @@
 package com.spring.ex;
 
 
-
-import java.util.List;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,17 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import product.model.ProductBean;
 import product.model.ProductDao;
-
 import lcategory.model.LcategoryBean;
 import lcategory.model.LcategoryDao;
 import scategory.model.ScategoryBean;
 import scategory.model.ScategoryDao;
-
-
-
+/**
+ * Handles requests for the application home page.
+ */
 @Controller
 public class HomeController {
 	
@@ -50,18 +45,17 @@ public class HomeController {
 		
 		List<ProductBean> lists2 = productDao.getPopularProductList();	
 		model.addAttribute("popularProductList", lists2);
-
+		
 		List<LcategoryBean> list = lcategoryDao.selectLcategoryList();
 		Map<String,List<ScategoryBean>> lists=new HashMap<String,List<ScategoryBean>>();
 		for(LcategoryBean lcate : list) {
 			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
 			
-			
 			lists.put(lcate.getName(),scate);
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("lists", lists);
-
+		
 		return "home";
 	}
 }

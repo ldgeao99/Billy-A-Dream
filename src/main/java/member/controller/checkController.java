@@ -26,7 +26,7 @@ public class checkController {
 	
 	
 	
-	//===========// ¾ÆÀÌµð Áßº¹Ã¼Å©================================
+	//===========// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©================================
 	@ResponseBody 
 	@RequestMapping("idcheck.mb")
 	public String idcheck(@RequestParam("id") String id) {
@@ -40,7 +40,7 @@ public class checkController {
 	}
 	
 	
-	//=======// ¾ÆÀÌµð Ã£±â===================================
+	//=======// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½===================================
 	@ResponseBody 
 	@RequestMapping("findid.mb")
 	public String FindID(@RequestParam("name") String name,@RequestParam("hp") String hp) {
@@ -59,7 +59,7 @@ public class checkController {
 	}
 	
 	
-	//==========// ºñ¹Ð¹øÈ£ Ã£±â==============================================
+	//==========// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½==============================================
 	@ResponseBody 
 	@RequestMapping("findpw.mb")
 	public String FindPW(@RequestParam("id") String id,@RequestParam("hp") String hp) throws Exception {
@@ -71,28 +71,28 @@ public class checkController {
 		map.put("hp", hp);
 		
 		int result = mdao.FindPW(map);
-		String temporaryPw = getRandomPassword.tempPassword(8);// ·£´ýºÎ¿©ÇÑ ºñ¹Ð¹øÈ£
+		String temporaryPw = getRandomPassword.tempPassword(8);// ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
 		
-		String securePassword = encoder.encode(temporaryPw);// ·£´ýºÎ¿©ÇØ¼­ ¾ÏÈ£È­ ¼³Á¤
+		String securePassword = encoder.encode(temporaryPw);// ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½È£È­ ï¿½ï¿½ï¿½ï¿½
 		
 		if(result>0) {
 			
 			map.put("id", id);
 			map.put("securePassword", securePassword);
 			
-			MemberBean mb = mdao.getById(id);// ¾ÆÀÌµð¿¡ ÇØ´çÇÏ´Â ÀÌ¸ÞÀÏ °¡Á®¿Í¼­ ¸ÞÀÏ º¸³»±â
+			MemberBean mb = mdao.getById(id);// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			
 			int cnt = mdao.resetPW(map);
-			System.out.println("ºñ¹Ð¹øÈ£ ÃÊ±âÈ­ °á°ú :"+cnt);
+			System.out.println("ï¿½ï¿½Ð¹ï¿½È£ ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ :"+cnt);
 			
-			sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] ÀÓ½Ãºñ¹Ð¹øÈ£ ¹ß¼Û", "[Billy A Dream] ÀÓ½Ã ºñ¹Ð¹øÈ£´Â ' "+temporaryPw+" ' ÀÔ´Ï´Ù.");
+			sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] ï¿½Ó½Ãºï¿½Ð¹ï¿½È£ ï¿½ß¼ï¿½", "[Billy A Dream] ï¿½Ó½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ' "+temporaryPw+" ' ï¿½Ô´Ï´ï¿½.");
 			return "yes";
 		}
 		else {
 			return "null";
 		}
 	}
-	//==========// È¸¿øÅ»Åð ¹× ºñ¹Ð¹øÈ£ È®ÀÎ==============================================
+	//==========// È¸ï¿½ï¿½Å»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½==============================================
 	@ResponseBody 
 	@RequestMapping("quitPw.mb")
 	public String quitPw(@RequestParam("id") String id,@RequestParam("pw") String pw,HttpSession session) throws Exception {
@@ -102,10 +102,28 @@ public class checkController {
 		MemberBean mb = mdao.getById(id);
 		
 		if(encoder.matches(pw, mb.getPw())){
-			mdao.deleteMember(id);// È¸¿øÅ»Åð
-			session.invalidate(); // ¼¼¼ÇµÈ°Å ´Ù »èÁ¦
+			mdao.deleteMember(id);// È¸ï¿½ï¿½Å»ï¿½ï¿½
+			session.invalidate(); // ï¿½ï¿½ï¿½ÇµÈ°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return "yes";
 		}
+		return "null";
+	}
+	//==========// È¸ï¿½ï¿½Å»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½==============================================
+	@ResponseBody 
+	@RequestMapping("ipHpCheck.mb")
+	public String ipHpCheck(@RequestParam("id") String id,@RequestParam("hp") String hp,HttpSession session) throws Exception {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("id", id);
+		map.put("hp", hp);
+		
+		int cnt = mdao.ipHpCheck(map);
+		
+		if(cnt>0) {
+			return "";
+		}
+		
 		return "null";
 	}
 

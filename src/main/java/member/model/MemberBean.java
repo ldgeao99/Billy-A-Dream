@@ -11,12 +11,20 @@ public class MemberBean {
 	private String add3_eubmyeon;
 	private String add4_donglee;
 	private String email;
-	private String hp; // ÇÚµåÆù¹øÈ£
-	private String isblacklist; // ºí·¢¸®½ºÆ®
+	private String hp; // ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½È£
+	private String isblacklist; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	private int rating;
 	private String coupon;
+	private String likePnum;
 	
 	
+	
+	public String getLikePnum() {
+		return likePnum;
+	}
+	public void setLikePnum(String likePnum) {
+		this.likePnum = likePnum;
+	}
 	public String getCoupon() {
 		return coupon;
 	}

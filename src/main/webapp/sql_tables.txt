@@ -69,11 +69,13 @@ add2_sigungu varchar2(20),
 add3_eubmyeon varchar2(20),
 add4_donglee varchar2(20),
 email varchar2(30),
-hp number,
+hp varchar2(11),
 isblacklist char(1) default 0,
 rating number default 0,
-wishpnum varchar2(200)
+wishpnum varchar2(200),
+coupon varchar2(200)
 );
+
 col mno for 99;
 col id for a10;
 col pw for a5;
@@ -83,7 +85,7 @@ col add2_sigungu for a10;
 col add3_eubmyeon for a10;
 col add4_donglee for a10;
 col email for a10;
-col hp for 9999999999;
+col hp for a11;
 col isblacklist for 9;
 col rating for 9;
 
@@ -111,6 +113,34 @@ create sequence memberip_seq
   maxvalue 10000
   nocache;
   
+--쿠폰 테이블
+drop table coupon;
+create table coupon(
+   no number primary key,
+   code varchar2(20) not null,
+   name varchar2(40),
+   amount number,
+   unit varchar2(9),
+   startdate date default sysdate,
+   enddate date
+);
+insert into coupon values(coupon_seq.nextval,1111222233334444,'인생은',2000,'won','20220916','20220917');
+
+drop sequence coupon_seq;
+create sequence coupon_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
+drop table couponCount;
+create table couponCount(
+	cno number,
+	reg_date date
+);
+
+
 -- 상품 테이블
 drop table products;
 create table products(
