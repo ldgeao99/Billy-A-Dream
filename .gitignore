@@ -17,7 +17,7 @@ local.properties
 .recommenders
 *.class
 .vscode
-
+sendEMAIL.java
 # External tool builders
 .externalToolBuilders/
 
