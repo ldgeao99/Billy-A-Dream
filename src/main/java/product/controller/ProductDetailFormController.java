@@ -26,23 +26,23 @@ public class ProductDetailFormController {
 	private ProductDao pdao;
 	
 	@Autowired
-	private MemberDao mdao;
+	private MemberDao mdao; // org.springframework.beans.factory.NoSuchBeanDefinitionException: No matching bean of type [member.model.MemberDao] found for dependency
 	
 	@RequestMapping(command)
 	public String detailForm(@RequestParam("no") String no,Model model) {
 		
-		pdao.updateView_count(no); // 접속할때마다 조회수 증가
+		pdao.updateView_count(no);
 		
 		ProductBean pb = pdao.getByNo(no);
 		List<ProductBean> lists = pdao.getByseller_no(String.valueOf(pb.getSeller_no())); 
-		// 상세페이지에서 그 상품의 판매자가 파는 상품 다 가져오려고
+
 		for(ProductBean image : lists) {
-			image.setImages(image.getImages().split(",")[0]); // 판매자의 다른 상품이미지 보여주려면 다 가져오면 안되니 첫번째꺼만 가져옴.
+			image.setImages(image.getImages().split(",")[0]);
 		}
 		
 		MemberBean mb = mdao.getByMno(pb.getSeller_no());
 		
-		String[] images = pb.getImages().split(","); // 한개씩 가져와서 배열로 받기위해
+		String[] images = pb.getImages().split(",");
 		
 		model.addAttribute("mb",mb);
 		model.addAttribute("lists",lists);

@@ -23,6 +23,8 @@
 	
 	<context:component-scan base-package="com.spring.ex" />
 	<context:component-scan base-package="product"/>
+	<context:component-scan base-package="member"/>
+	<context:component-scan base-package="coupon"/>
 	<context:component-scan base-package="scategory" />
 	<context:component-scan base-package="lcategory" />
 	

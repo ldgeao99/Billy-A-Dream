@@ -35,19 +35,19 @@ public class memberMyPageController {
 		
 		MemberBean mb = mdao.getById(id);
 		
-		List<CouponBean> lists = null; // 쿠폰내역
+		List<CouponBean> lists = null;
 		if(mb.getCoupon()!=null) {
 			String[] couponLists = mb.getCoupon().split(",");
 			lists = cdao.getAllByNo(couponLists);
 		}
 		
-		//관심목록
+		
 		List<ProductBean> plists = null;
 		if(mb.getLikePnum()!=null) {
 			String[] productLists = mb.getLikePnum().split(",");
 			plists = pdao.getAllByNo(productLists);
 			for(ProductBean image : plists) {
-				image.setImages(image.getImages().split(",")[0]); // 판매자의 다른 상품이미지 보여주려면 다 가져오면 안되니 첫번째꺼만 가져옴.
+				image.setImages(image.getImages().split(",")[0]);
 			}
 		}
 		
