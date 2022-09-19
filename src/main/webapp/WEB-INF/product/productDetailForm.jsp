@@ -157,7 +157,6 @@
                                         <div class="row g-2">
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--submit">
-                                                    <input type="hidden" name="id" id="id" value="${id }">
                                                     <input type="hidden" name="no" id="no" value="${pb.no }">
                                                     <button type="button" name="add" class="btn rounded product-form__cart-submit mb-0" onclick="like()"><span>찜하기</span></button>
                                                 </div>

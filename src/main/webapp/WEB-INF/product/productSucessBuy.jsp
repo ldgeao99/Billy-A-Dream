@@ -1,167 +1,115 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@include file = "../member/categoryTop.jsp" %>
+<style>
+button {
+	height: 2.5em;
+	cursor: pointer;
+}
 
-<%@include file="../member/categoryTop.jsp" %>
+#popupID,#popupPW {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .7);
+	z-index: 1;
+}
 
-<!-- 달력 -->
-   
-<script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+#popupID.hide,#popupPW.hide {
+	display: none;
+}
+
+#popupID.has-filter,#popupPW.has-filter {
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+}
+
+#popupID .content,#popupPW .content {
+	padding: 40px;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+
+
+.small {
+	width: 250px;
+}
+td{
+	height: 20px;
+}
+.bt{
+	width : 120px;
+	border-radius : 5px;
+	background-color: #F7F7F7;
+	color: black;
+}
+.bts{
+	width : 140px;
+	border-radius : 5px;
+	background-color: #F0F0F0;
+	color: black;
+}
+/* 카카오톡 로그인 */
+#kakaobg{
+	 width: 400px;
+	 border-radius: 5px; 
+	 background-color:#FFEB00;    
+}
+</style>
+
+
+
+<!--카카오톡 로그인 스크립트  -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
-	$(function() {
-		$('#buyDate').html("<font color=red>선택 안함</font>");
-		$('#TotalPrice').html("<font color=red>0원</font>");
+$(function(){
+	var referrer = $('#url').val();
+	opener.parent.location.href=referrer;
+	window.close();
+})
 
-	})<!-- 결제창에서 달력사용 -->
 	
-	
-	function sub(){
-			var method = $('input[name=method]:checked').val();
-			var idx = "${eduVO.idx}";
-		    var windowW = 550;
-		    var windowH = 650;
-		    var winHeight = document.body.clientHeight;
-		    var winWidth = document.body.clientWidth;
-		    var winX = window.screenX || window.screenLeft || 0;
-		    var winY = window.screenY || window.screenTop || 0;
-		    var popX = winX + (winWidth - windowW)/2;
-		    var popY = winY + (winHeight - windowH)/2;
-			
-			
-			if(method=="kakao"){
-				$.ajax({
-					url:"kakaobuy.prd",
-					data : {
-						pname : $('#pname').val(),
-						price : $('#price').val(),
-						no : $('#no').val()
-					},
-					datatype : 'json',
-					success:function(data){
-						const jsonData = JSON.parse(data);
-						
-						window.open(jsonData.next_redirect_pc_url,"카카오톡 결제하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
-						window.close();
-					},
-					error:function(error){
-						alert("안됨");	
-					}
-				})
-			}
-	}
 </script>
+			<input type="hidden" id="url" value="${ BuyUrl}">
 
-
-<!--Body Container-->
-            <div id="page-content">
+            <!--Body Container-->
+            <div id="page-content">   
                 <!--Collection Banner-->
                 <div class="collection-header">
                     <div class="collection-hero">
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
-                            <h1 class="collection-hero__title">결제하기</h1>
-                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="home" title="Back to the home page">홈</a><span>|</span><span class="fw-bold">결제하기</span></div>
+                            <h1 class="collection-hero__title">주문확인</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/ex/" title="Back to the home page">홈</a><span>|</span><span class="fw-bold">주문확인</span></div>
                         </div>
                     </div>
                 </div>
                 <!--End Collection Banner-->
 
-                <!--Main Content-->
+                <!--Container-->
                 <div class="container">
-                    <!--Cart Page-->
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 main-col">
-
-                            <form action="#" method="post" class="cart style2">
-                                <table class="align-middle">
-                                    <thead class="cart__row cart__header small--hide">
-                                        <tr>
-                                            <th class="action">&nbsp;</th>
-                                            <th colspan="2" class="text-start">상품명</th>
-                                            <th class="text-center">가격</th>
-                                            <th class="text-center">구매기간</th>
-                                            <th class="text-center">총합</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="cart__row border-bottom line1 cart-flex border-top">
-                                            <td></td>
-                                            <td class="cart__image-wrapper cart-flex-item">
-                                                <a href="productdetail.prd?no=${pb.no }"><img class="cart__image blur-up lazyload" data-src="<%=request.getContextPath()%>/resources/${pb.images}" src="<%=request.getContextPath()%>/resources/${pb.images}" alt="${pb.name }" width="80" /></a>
-                                           		<input type="hidden" value="${pb.no } " id="no">
-                                            </td>
-                                            <td class="cart__meta small--text-left cart-flex-item">
-                                                <div class="list-view-item__title">
-                                                    <a href="product-layout1.html">${pb.name }</a>
-                                                    <input type="hidden" value=${pb.name } id="pname">
-                                                </div>
-                                                <div class="cart__meta-text">
-                                                   수량: 1
-                                                </div>
-                                            </td>
-                                            <td class="cart__price-wrapper cart-flex-item text-center small--hide">
-                                                <span class="money"><fmt:formatNumber pattern="###,###" value="${pb.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
-                                                <input type="hidden" id="price" value="${pb. discounted_day_price}">
-                                            </td>
-                                            <td>
-                                            	&emsp;<span class="money" id="buyDate"></span>
-                                            </td>
-                                            <td class="cart-price cart-flex-item text-center small--hide">
-                                                <span class="money fw-500" id="TotalPrice"></span>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                </table> 
-                            </form>    
-
-                            <div class="currencymsg">· 구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상계좌 재주문이 불가합니다.</div>
-                        </div>
-
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer">
-                            <div class="cart_info">
-                                <div id="shipping-calculator" class="mb-4 cart-col">
-                                    <h5>주문 상세</h5>
-                                    <form class="estimate-form pt-1" action="#" method="post">
-                                    </form>
-                                </div>
-                                <div class="cart-note mb-4 cart-col">
-                                    <h5>구매기간 설정</h5>
-                                    <!--기간설정  -->
-								</div>
-                                <div class="cart-order_detail cart-col">
-                                    <div class="row">
-                                        <span class="col-6 col-sm-6 cart__subtotal-title" style="height: 30px;"><strong>결제수단</strong></span>
-                                        <span>
-                                        	<input type="radio" value="card" name="method">
-                                        	&nbsp;&nbsp;
-                                        	<i class="fa-regular fa-credit-card fa-lg" ></i>&nbsp;신용카드  
-                                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        	
-                                        	<input type="radio" value="kakao" name="method">&nbsp;
-                                        	<img src="resources/assets/images/kakaopay.png" alt="카카오페이" width="52px"/>&nbsp;카카오페이
-                                        </span>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <span class="col-6 col-sm-6 cart__subtotal-title"><strong>결제금액</strong></span>
-                                        <span class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end"><span class="money">$735.00</span></span>
-                                    </div>
-                                    <br>
-                                    <p class="cart__shipping pt-0 m-0 fst-normal freeShipclaim"><i class="me-1 align-middle icon an an-truck-l"></i><b>무료배송</b></p>
-                                    <div class="customCheckbox cart_tearm">
-                                        <input type="checkbox" value="allen-vela" id="cart_tearm">
-                                        <label for="cart_tearm">모든 결제사항을 확인했습니다</label>
-                                    </div>
-                                    <input type="button" class="btn btn--small-wide rounded my-4 checkout" width="300px" value="결제하기" onclick="sub()">
-                                    <div class="paymnet-img text-center"><img src="resources/assets/images/safepayment.png" alt="Payment" /></div>
+                    <!--Main Content-->
+                    
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="inner">
+                                	<center><br><br><br>
+                                    <p> <b>[Billy A Dream] 에 계정이 없으신가요?</b> </p><br><br><br>
+                                    <a href="register.mb" class="btn rounded">회원가입</a>
+                                    </center>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--End Cart Page-->
+                    <!--End Main Content-->
                 </div>
-                <!--End Main Content-->
+                <!--End Container-->
             </div>
             <!--End Body Container-->
 
@@ -223,6 +171,7 @@
                                     </div>
                                 </div>
                                 <ul class="list-inline social-icons mt-3 pt-1">
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="an an-facebook" aria-hidden="true"></i></a></li>
                                     <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="an an-twitter" aria-hidden="true"></i></a></li>
                                     <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="an an-pinterest-p" aria-hidden="true"></i></a></li>
                                     <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="an an-instagram" aria-hidden="true"></i></a></li>

@@ -987,7 +987,7 @@ height
 									<!-- Product Image -->
 									<div class="product-image">
 										<!-- Product Image -->
-										<a href="product-layout1.html" class="product-img"> <!-- image -->
+										<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
 											<img class="primary blur-up lazyload"
 											data-src="<%=request.getContextPath()%>/resources/${p.images}"
 											src="<%=request.getContextPath()%>/resources/${p.images}"
@@ -1010,13 +1010,13 @@ height
 										<!-- End Product Name -->
 										<!-- Product Price -->
 										<div class="product-price">
-											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.day_price}" var="price"/>${ price} 원 / 일</span>
+											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
 										</div>
 										<!-- End Product Price -->
 										<!-- Product Button -->
 										<form method="post" action="/cart/add" class="cart-form mt-3"
 											enctype="multipart/form-data">
-											<a href="cart-style1.html"
+											<a href="buy.prd?no=${p.no }"
 												class="btn btn--small rounded product-form__cart-submit"><span>구매하기</span></a>
 										</form>
 										<!-- End Product Button -->
