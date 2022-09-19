@@ -64,16 +64,15 @@ mno number primary key,
 id varchar2(20),
 pw varchar2(100),
 name varchar2(20),
-add1_sido varchar2(20),
-add2_sigungu varchar2(20),
-add3_eubmyeon varchar2(20),
-add4_donglee varchar2(20),
+add1_sido varchar2(30),
+add2_sigungu varchar2(30),
+add3_eubmyeon varchar2(30),
+add4_donglee varchar2(30),
 email varchar2(30),
 hp varchar2(11),
 isblacklist char(1) default 0,
 rating number default 0,
-coupon varchar2(200),
-likePnum varchar2(200)
+coupon varchar2(200)
 );
 
 col mno for 99;
@@ -124,17 +123,16 @@ create table products(
 	name varchar2(130) not null,
 	lcategory_no number not null,
 	scategory_no number not null,
-	add1_sido varchar2(20) not null,
+	add1_sido varchar2(30) not null,
 	add2_sigungu varchar2(30) not null,
-	add3_eubmyeon varchar2(20),
-	add4_donglee varchar2(20)  not null,
+	add3_eubmyeon varchar2(30),
+	add4_donglee varchar2(30)  not null,
 	original_day_price number not null,
 	discounted_day_price number not null,
 	rentday_minimum number not null,
 	components varchar2(700),
 	description varchar2(400),
 	end_day date not null,
-	like_count number default 0,
 	view_count number default 0,
 	create_day date default sysdate,
 	pulled_day date default sysdate,
@@ -152,4 +150,20 @@ create sequence products_seq
 
 commit;
 
+-- 찜목록 테이블
+drop table wishlist cascade constraints;
+create table wishlist(
+	no number not null primary key,
+	product_no number not null,
+	member_no number not null
+);
 
+drop sequence wishlist_seq;
+create sequence wishlist_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+
+commit;

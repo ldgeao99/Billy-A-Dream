@@ -970,62 +970,70 @@ height
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
-								<c:if test="${fn:length(mb.likePnum)==0 }">
+								
+								<c:if test="${fn:length(plists) eq 0}">
 									<div align="center">
 									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
 									 관심목록이 없습니다</div>
 								</c:if>
 								
 								<!-- 반복문 시작 -->
-								<c:if test="${fn:length(mb.likePnum)!=0 }">
-								<c:forEach var="p" items="${ plists}">
-								<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<input type="hidden" name="no" id="no"value="${p.no }">
-									<button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="삭제하기" onclick="pdelete()">
-										<i class="icon an an-times-r"></i>
-									</button>
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="product-layout1.html" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="product-layout1.html">${p.name}</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.day_price}" var="price"/>${ price} 원 / 일</span>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Button -->
-										<form method="post" action="/cart/add" class="cart-form mt-3"
-											enctype="multipart/form-data">
-											<a href="cart-style1.html"
-												class="btn btn--small rounded product-form__cart-submit"><span>구매하기</span></a>
-										</form>
-										<!-- End Product Button -->
-									</div>
-									<!-- End Product Details -->
+								<c:if test="${fn:length(plists) ne 0}"> 
 								
-								</div>
-								</c:forEach>
+								
+									<c:forEach var="p" items="${plists}">
+										<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+											<input type="hidden" name="no" id="no"value="${p.no }">
+											<button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="삭제하기" onclick="pdelete()">
+												<i class="icon an an-times-r"></i>
+											</button>
+											<!-- Product Image -->
+											<div class="product-image">
+												<!-- Product Image -->
+												<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
+													<img class="primary blur-up lazyload"
+													data-src="<%=request.getContextPath()%>/resources/${p.images}"
+													src="<%=request.getContextPath()%>/resources/${p.images}"
+													alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
+													<img class="hover blur-up lazyload"
+													data-src="<%=request.getContextPath()%>/resources/${p.images}"
+													src="<%=request.getContextPath()%>/resources/${p.images}"
+													alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
+												</a>
+												<!-- End Product Image -->
+											</div>
+											<!-- End Product Image -->
+		
+											<!-- Product Details -->
+											<div class="product-details text-center">
+												<!-- Product Name -->
+												<div class="product-name">
+													<a href="product-layout1.html">${p.name}</a>
+												</div>
+												<!-- End Product Name -->
+												<!-- Product Price -->
+												<div class="product-price">
+													<span class="price"><fmt:formatNumber pattern="###,###" value="${p.original_day_price}" var="price"/>${ price} 원 / 일</span>
+												</div>
+												<!-- End Product Price -->
+												<!-- Product Button -->
+												<form method="post" action="/cart/add" class="cart-form mt-3"
+													enctype="multipart/form-data">
+													<a href="cart-style1.html"
+														class="btn btn--small rounded product-form__cart-submit"><span>구매하기</span></a>
+												</form>
+												<!-- End Product Button -->
+											</div>
+											<!-- End Product Details -->
+										
+										</div>
+									</c:forEach>
 								</c:if>
+								
+
+
+
+
 								<!--프로덕트 끝  -->
 							</div>
 						</div>

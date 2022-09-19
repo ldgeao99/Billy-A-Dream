@@ -21,8 +21,8 @@ tr{
   width: 100px;
   height: 100px;
   position: absolute;
-  left: 50%;
-  top: 1250px;
+  left: 60%;
+  top: 50%;
   transform: translate(-50%, -50%);
   background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
   background-position: 0 0;
@@ -461,7 +461,7 @@ tr{
 											</div>
 												</div>
 												<br><br>
-											<div class="d-grid gap-2">
+											<div class="d-grid gap-2" style="position:relative">
 												<button class="btn btn-primary btn-lg" type="submit" onclick="return sub()">가입하기</button>
 												<div class="heart" onclick="return sub()"></div>
 											</div>

@@ -30,26 +30,21 @@ public class ProductDao {
 	}
 	
 	public ProductBean getByNo(String no) {
-
 		ProductBean pb = sqlSessionTemplate.selectOne(namespace+".GetByNo",no);
 		return pb;
 	}
 
 	public void updateView_count(String no) {
-
-		sqlSessionTemplate.update(namespace+".updateView_count",no);
-		
+		sqlSessionTemplate.update(namespace+".updateView_count",no);	
 	}
 	
 	public List<ProductBean> getByseller_no(String seller_no) {
-		
 		List<ProductBean> lists =  sqlSessionTemplate.selectList(namespace+".getByseller_no",seller_no);
-		
 		return lists;
 	}
 
-	public List<ProductBean> getAllByNo(String[] productLists) {
-		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getAllByNo",productLists);
+	public List<ProductBean> getAllByNo(String[] pnoLists) {
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getAllByNo",pnoLists);
 		return lists;
 	}
 }

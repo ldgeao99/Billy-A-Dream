@@ -16,11 +16,11 @@ import product.model.ProductDao;
 import scategory.model.ScategoryDao;
 
 @Controller
-public class ProductDetailFormController {
+public class ProductDetailController {
 
 	
 	private final String command = "productdetail.prd";
-	private String gotoPage = "productDetailForm";
+	private String gotoPage = "productDetail";
 	
 	@Autowired
 	private ProductDao pdao;

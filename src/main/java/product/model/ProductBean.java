@@ -21,7 +21,6 @@ public class ProductBean {
 	private String description;
 	private String end_day;
 	
-	private int like_count;
 	private int view_count;
 	private String create_day;
 	private String pulled_day;
@@ -129,12 +128,7 @@ public class ProductBean {
 	public void setEnd_day(String end_day) {
 		this.end_day = end_day;
 	}
-	public int getLike_count() {
-		return like_count;
-	}
-	public void setLike_count(int like_count) {
-		this.like_count = like_count;
-	}
+
 	public int getView_count() {
 		return view_count;
 	}
@@ -197,7 +191,6 @@ public class ProductBean {
 				+ "components: " + components + "\n"
 				+ "description: " + description + "\n"
 				+ "end_day: " + end_day + "\n"
-				+ "like_count: " + like_count + "\n"
 				+ "view_count: " + view_count + "\n"
 				+ "create_day: " + create_day + "\n"
 				+ "pulled_day: " + pulled_day + "\n"

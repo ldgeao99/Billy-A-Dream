@@ -23,6 +23,7 @@
 	<context:component-scan base-package="coupon"/>
 	<context:component-scan base-package="lcategory"/>
 	<context:component-scan base-package="scategory"/>
+	<context:component-scan base-package="wishlist"/>
 	
 	<!-- 클라이언트가 상품이미지를 올릴때, 서버측에서 request로 못받았고, MultipartRequest로 받아줘야 했음. 당시 객체생성 = 업로드 실행을 의미했음 -->
 	<!-- 파일 업로드 할 때 필요한 부분 -->

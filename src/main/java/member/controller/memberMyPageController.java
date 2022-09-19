@@ -14,6 +14,8 @@ import member.model.MemberBean;
 import member.model.MemberDao;
 import product.model.ProductBean;
 import product.model.ProductDao;
+import wishlist.model.WishlistBean;
+import wishlist.model.WishlistDao;
 
 @Controller
 public class memberMyPageController {
@@ -30,8 +32,11 @@ public class memberMyPageController {
 	@Autowired
 	private ProductDao pdao;
 	
+	@Autowired
+	private WishlistDao wdao;
+	
 	@RequestMapping(command)
-	public String login(@RequestParam("id")String id,Model model) {
+	public String login(@RequestParam("id")String id, Model model) {
 		
 		MemberBean mb = mdao.getById(id);
 		
@@ -42,16 +47,22 @@ public class memberMyPageController {
 		}
 		
 		
-		List<ProductBean> plists = null;
-		if(mb.getLikePnum()!=null) {
-			String[] productLists = mb.getLikePnum().split(",");
-			plists = pdao.getAllByNo(productLists);
-			for(ProductBean image : plists) {
-				image.setImages(image.getImages().split(",")[0]);
-			}
+		
+		List<WishlistBean> wishlist = wdao.getWishListByMno(String.valueOf(mb.getMno()));
+		
+		String[] pnoLists = new String[wishlist.size()];
+		
+		for(int i = 0; i<wishlist.size(); i++) {
+			int product_no = wishlist.get(i).getProduct_no();
+			pnoLists[i] = String.valueOf(product_no); 
 		}
 		
-		
+		List<ProductBean> plists = pdao.getAllByNo(pnoLists);
+			
+		for(ProductBean image : plists) {
+			image.setImages(image.getImages().split(",")[0]);
+		}
+
 		model.addAttribute("couponLists",lists);
 		model.addAttribute("plists",plists);
 		model.addAttribute("mb",mb);

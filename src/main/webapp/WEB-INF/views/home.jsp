@@ -38,12 +38,9 @@
         			return false;
         		}
         		else{
-        			if(confirm("상품을 등록하시겠습니까?")){
-        				location.href = "insert.prd";
-        			}
-        			else{
-        				return false;
-        			}
+        			
+        			location.href = "insert.prd";
+
         		}
         	}
         	
@@ -1230,7 +1227,7 @@
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="product-layout1.html" class="product-img">
+	                                    <a href="productdetail.prd?no=${recentProductList[i-1].no}" class="product-img">
 	                                        <!--Image-->
 	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->

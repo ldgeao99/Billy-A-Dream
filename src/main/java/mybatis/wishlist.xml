@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 복사해서 가져온 부분 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wishlist.model.SQL"> <!-- 여기에서 namespace 속성으로  들어간 텍스트는 AlbumBean 클래스와 아무상관이 없다. 마음대로 아무거나 써도 됨 -->
+	
+	<select id="IsExistUserInThisProduct" resultType="int">
+ 		select count(*) 
+ 		from wishlist
+ 		where product_no = #{product_no} and member_no = #{member_no}
+ 	</select>
+ 	
+ 	<select id="GetCountWishMembers" resultType="int">
+ 		select count(*) 
+ 		from wishlist
+ 		where product_no = #{product_no}
+ 	</select>
+ 	
+ 	<select id="GetWishListByMno" resultType="wishlist.model.WishlistBean">
+ 		select * 
+ 		from wishlist
+ 		where member_no = #{member_no}
+ 	</select>
+ 	
+ 	<delete id="DeleteWishlist">
+ 		delete from wishlist
+ 		where product_no = #{product_no} and member_no = #{member_no} 
+ 	</delete>
+ 	
+ 	<insert id="InsertWishlist">
+ 		insert into wishlist
+ 		values(wishlist_seq.nextval, #{product_no}, #{member_no}) 
+ 	</insert>
+	
+</mapper>

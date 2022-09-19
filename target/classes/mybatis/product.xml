@@ -43,4 +43,5 @@
 		 #{lists}
 		</foreach>
 	</select>
+	
 </mapper>

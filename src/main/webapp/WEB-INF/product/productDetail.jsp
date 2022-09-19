@@ -11,8 +11,52 @@
 </style>
 
 <!-- 오른쪽 상단 아이콘 관련 -->
+<script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+	$(function(){
+		if($('#id').val() != ""){
+			whatButtonWillShowAboutLike();	
+		}
+		
+		showLikeCount();
+	});
+
+	function whatButtonWillShowAboutLike(){
+		$.ajax({
+			type : 'post',
+			url : "isExistUserInThisProduct.wish",
+			data : {
+				id : $('#id').val(),
+				no : $('#no').val()
+			},
+			success : function(rdata) {
+				if(rdata == "existUser"){
+					$('#likeText').text("찜해제");
+					$('#likeText').parent().css('background-color', "#FE877B");
+					
+				}else{
+					$('#likeText').text("찜하기");
+					$('#likeText').parent().css('background-color', "");
+				}
+			}
+		});
+	}
+	
+	function showLikeCount(){
+		$.ajax({
+			type : 'post',
+			url : "getLikeCount.wish",
+			data : {
+				no : $('#no').val()
+			},
+			success : function(data) {
+				$('#likeCount').text(data);
+			}
+		});
+	}
+	
 	function like(){
 		if($('#id').val()==""){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
@@ -21,28 +65,29 @@
 			return false;
 		}
 		else{
-			if(confirm("상품을 관심목록에 추가하시겠습니까?")){ // 관심목록에 추가하는 작업
-				$.ajax({
-					type : 'post',
-					url : "addlike.mb",
-					data : {
-						id : $('#id').val(),
-						no : $('#no').val(),
-					},
-					success : function(data) {
-						if($.trim(data)=='yes'){
-							alert("관심목록에 추가하였습니다")
-						}
-						else if($.trim(data)== 'no'){
-							alert("이미 목록에 존재하는 상품입니다")
-						}
-					}//success
+			$.ajax({
+				type : 'post',
+				url : "addOrDeletelike.wish",
+				data : {
+					id : $('#id').val(),
+					no : $('#no').val(),
+				},
+				success : function(rdata) {
+					
+					//alert(rdata);
+					
+					if(rdata == "added"){
+						$('#likeText').text("찜해제");
+						$('#likeText').parent().css('background-color', "#FE877B");
+						showLikeCount();	
+					}else if(rdata == "deleted"){
+						$('#likeText').text("찜하기");
+						$('#likeText').parent().css('background-color', "");
+						showLikeCount();
+					}
+				}//success
 
-				});//ajax
-			}
-			else{
-				return false;
-			}
+			});//ajax
 		}
 	}
 	
@@ -63,12 +108,6 @@
 		}
 	}
 
-	/* $(function(){
-		  $('.slick-slide slick-current slick-active').css("style","width:100px")
-		  $('.slick-list draggable').css("style","width:100px")
-		
-	}) */
-	
 </script>
 			
             <!--Body Container-->
@@ -117,33 +156,81 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <!-- Product Info -->
                                 <div class="product-single__meta">
-                                    <h1 class="product-single__title">${pb.name }</h1>
+                                    <h1 class="product-single__title" style="margin-bottom:20px">${pb.name }</h1>
                                     
                                     <!-- Product Reviews -->
                                     <!-- Product Info -->
-                                    <br>
 						<div class="product-info">
-							<p class="product-sku">${pb.lcategory_no}<span class="variant-sku">${pb.scategory_no }</span></p>
-							<p>
-							<i class="fa-regular fa-clock"></i>&nbsp;
-							<fmt:parseDate var="formattedDay" value="${pb.create_day }" pattern="yyyy-MM-dd" />
-							<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
-							</p>
+							
+							
+							
+							<div class="container">
+								<div class="row">
+									<div class="col" style="padding:0px">
+										<i class="fa-regular fa-clock"></i>&nbsp;
+										<fmt:parseDate var="formattedDay" value="${pb.create_day }" pattern="yyyy-MM-dd" />
+										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
+							    	</div>
+							    	
+							    	<div class="col" style="text-align:right">
+							      	<i class="fa-solid fa-heart"></i> 관심 
+                                    
+                                    <span id="likeCount">
+	                                    
+                                    </span>
+                                    
+                                    &nbsp;&nbsp; 
+                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }
+							    	</div>
+							</div>
+							
+							
+							
 						</div>
+						
+						
+						
+						
 						<hr>
 						<!-- End Product Info -->
+						
+						
 							<div>
-								<div class="bigtext"><i class="fa-solid fa-boxes-stacked"></i>&nbsp;&nbsp;구성품</div>
-								<div>${pb.components }</div>
+								<div class="bigtext"><i class="fa-solid fa-caret-right" style="margin-right:10px"></i>카테고리</div>
+								<div>
+									<p class="product-sku">${pb.lcategory_no}<span class="variant-sku">${pb.scategory_no }</span></p>		
+								
+								</div>
+							</div>
+							<br>
+						
+							<div>
+								<div class="bigtext"><i class="fa-solid fa-boxes-stacked" style="margin-right:10px"></i>세부 구성품</div>
+								<div>
+								
+								<c:set var="components_list" value="${fn:split(pb.components,',')}" />
+								<c:forEach var="compo" items="${components_list}" varStatus="status">
+									- ${compo} <br>
+								</c:forEach>
+								</div>
 							</div>
 							<br>
 							<div>
-								<div class="bigtext"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;거래지역</div><div>${pb.add1_sido } ${pb.add2_sigungu } ${pb.add3_eubmyeon } ${pb.add4_donglee }</div>
+								<div class="bigtext"><i class="fa-solid fa-location-dot" style="margin-right:10px"></i>거래지역</div>
+								<div class="container">
+								  <div class="row">
+								    <div class="col" style="padding:0px">
+								      ${pb.add1_sido } ${pb.add2_sigungu } ${pb.add3_eubmyeon } ${pb.add4_donglee }
+								    </div>
+								    <div class="col" style="text-align:right">
+								      <span style="font-weight: bold; font-size: 20px;"><fmt:formatNumber pattern="###,###" value="${pb.discounted_day_price }" var="price"/>${ price} 원 / 일</span>
+								    </div>
+								  </div>
+								</div>
 							</div>
-
                                     <!-- Product Price -->
                                     <div  align="right">
-                                            <span style="font-weight: bold; font-size: 20px;"><fmt:formatNumber pattern="###,###" value="${pb.discounted_day_price }" var="price"/>${ price} 원 / 일</span>   
+                                               
                                     </div>
                                     <!-- End Product Price -->  
                                 </div>
@@ -153,13 +240,15 @@
                                     <!-- Swatches Color/Size -->
                                     <!-- Product Action -->
                                     <div class="product-action w-100 clearfix">
-                                    <i class="fa-solid fa-heart"></i> 관심  ${pb.like_count } &nbsp;&nbsp; <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }<br><br>
+                                    
+                                    
+                                    <br>
                                         <div class="row g-2">
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--submit">
                                                     <input type="hidden" name="id" id="id" value="${id }">
                                                     <input type="hidden" name="no" id="no" value="${pb.no }">
-                                                    <button type="button" name="add" class="btn rounded product-form__cart-submit mb-0" onclick="like()"><span>찜하기</span></button>
+                                                    <button type="button" name="add" class="btn rounded product-form__cart-submit mb-0" onclick="like()"><span id="likeText">찜하기</span></button>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
