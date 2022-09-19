@@ -65,7 +65,7 @@
                                                 </div>
                                             </td>
                                             <td class="cart__price-wrapper cart-flex-item text-center small--hide">
-                                                <span class="money"><fmt:formatNumber pattern="###,###" value="${pb.day_price}" var="price"/>${ price} 원 / 일</span>
+                                                <span class="money"><fmt:formatNumber pattern="###,###" value="${pb.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
                                             </td>
                                             <td>
                                             	&emsp;<span class="money" id="buyDate"></span>

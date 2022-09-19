@@ -143,7 +143,7 @@
 
                                     <!-- Product Price -->
                                     <div  align="right">
-                                            <span style="font-weight: bold; font-size: 20px;"><fmt:formatNumber pattern="###,###" value="${pb.day_price }" var="price"/>${ price} 원 / 일</span>   
+                                            <span style="font-weight: bold; font-size: 20px;"><fmt:formatNumber pattern="###,###" value="${pb.discounted_day_price }" var="price"/>${ price} 원 / 일</span>   
                                     </div>
                                     <!-- End Product Price -->  
                                 </div>
@@ -329,7 +329,7 @@
 										<!-- End Product Name -->
 										<!-- Product Price -->
 										<div class="product-price">
-											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.day_price}" var="price"/>${ price} 원 / 일</span>
+											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
 										</div>
 										<!-- End Product Price -->
 										<!-- Product Button -->

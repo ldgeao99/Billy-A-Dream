@@ -75,6 +75,7 @@ rating number default 0,
 coupon varchar2(200),
 likePnum varchar2(200)
 );
+
 col mno for 99;
 col id for a10;
 col pw for a5;
@@ -115,7 +116,7 @@ create sequence memberip_seq
 
   
 -- 상품 테이블
-drop table products;
+drop table products cascade constraints;
 create table products(
 	no number not null primary key,
 	seller_no number not null,
@@ -127,10 +128,11 @@ create table products(
 	add2_sigungu varchar2(30) not null,
 	add3_eubmyeon varchar2(20),
 	add4_donglee varchar2(20)  not null,
-	day_price number not null, 
+	original_day_price number not null,
+	discounted_day_price number not null,
 	rentday_minimum number not null,
-	components varchar2(100),
-	description varchar2(200),
+	components varchar2(700),
+	description varchar2(400),
 	end_day date not null,
 	like_count number default 0,
 	view_count number default 0,
