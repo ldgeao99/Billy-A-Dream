@@ -24,6 +24,9 @@ public class ProductBuyFormController {
 		
 		ProductBean pb = pdao.getByNo(no);
 		
+		pb.setImages(pb.getImages().split(",")[0]); // 판매자의 다른 상품이미지 보여주려면 다 가져오면 안되니 첫번째꺼만 가져옴.
+		
+		
 		model.addAttribute("pb",pb);
 		return gotoPage;
 	}
