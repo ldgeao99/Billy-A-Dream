@@ -414,7 +414,7 @@ td{
 						},
 						success : function(data) {
 							if ($.trim(data) == "yes") {
-								location.href = "home";
+								location.href = "/ex/";
 							} else if ($.trim(data) == "admin") {
 								location.href = "main.admin";
 							} 
@@ -444,7 +444,7 @@ td{
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
                             <h1 class="collection-hero__title">Login</h1>
-                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="home" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">Login</span></div>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/ex/" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">Login</span></div>
                         </div>
                     </div>
                 </div>

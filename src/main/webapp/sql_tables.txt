@@ -14,7 +14,6 @@ grant create table, create sequence to billy;
 alter user billy default tablespace users quota unlimited on users;
 
 --대분류 카테고리
-
 drop table lcategory;
 create table lcategory(
 no number primary key, 
@@ -31,9 +30,7 @@ create sequence lcate_seq
   nocache;
 
 insert into lcategory values(lcate_seq.nextval,'모바일',1);
-
 insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
-
 insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
 
 --소분류 카테고리
@@ -54,13 +51,9 @@ create sequence scate_seq
   nocache;
 
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트폰',1,1,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'스마트워치',1,2,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'모니터',2,1,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'노트북',2,2,0);
-
 insert into scategory(no,name,lcate_no,order_num,search_count) values(scate_seq.nextval,'필름카메라',3,1,0);
 
 
@@ -105,7 +98,6 @@ create sequence member_seq
   nocache;
 
 -- 아이피 테이블
-
 drop table memberip;
 create table memberip(
 num number,
@@ -121,8 +113,9 @@ create sequence memberip_seq
   maxvalue 10000
   nocache;
   
- drop table coupon;
- create table coupon(
+--쿠폰 테이블
+drop table coupon;
+create table coupon(
    no number primary key,
    code varchar2(20) not null,
    name varchar2(40),
@@ -145,4 +138,41 @@ drop table couponCount;
 create table couponCount(
 	cno number,
 	reg_date date
-);	
+);
+
+
+-- 상품 테이블
+drop table products;
+create table products(
+	no number not null primary key,
+	seller_no number not null,
+	images varchar2(1400),
+	name varchar2(130) not null,
+	lcategory_no number not null,
+	scategory_no number not null,
+	add1_sido varchar2(20) not null,
+	add2_sigungu varchar2(30) not null,
+	add3_eubmyeon varchar2(20),
+	add4_donglee varchar2(20)  not null,
+	original_day_price number not null,
+	discounted_day_price number not null,
+	rentday_minimum number not null,
+	components varchar2(700),
+	description varchar2(400),
+	end_day date not null,
+	like_count number default 0,
+	view_count number default 0,
+	create_day date default sysdate,
+	pulled_day date default sysdate,
+	is_hidden char(1) default '0'
+);
+
+drop sequence products_seq;
+create sequence products_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+
+commit;

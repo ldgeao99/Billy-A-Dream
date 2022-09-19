@@ -19,7 +19,7 @@ public class memberLogoutController {
 		
 		session.invalidate();//技记等芭 促 昏力
 		
-		return "redirect:home";
+		return "redirect:/";
 	}
 	
 }

@@ -96,7 +96,7 @@ create sequence member_seq
   maxvalue 10000
   nocache;
 
---- 아이피 테이블
+-- 아이피 테이블
 drop table memberip;
 create table memberip(
 num number,
@@ -119,8 +119,8 @@ drop table products;
 create table products(
 	no number not null primary key,
 	seller_no number not null,
-	images varchar2(100),
-	name varchar2(20) not null,
+	images varchar2(1400),
+	name varchar2(130) not null,
 	lcategory_no number not null,
 	scategory_no number not null,
 	add1_sido varchar2(20) not null,

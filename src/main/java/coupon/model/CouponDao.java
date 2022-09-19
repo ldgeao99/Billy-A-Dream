@@ -27,7 +27,16 @@ public class CouponDao {
 		return lists;
 	}
 	public void insertCoupon(CouponBean coupon) {
+		int cno=sqlSessionTemplate.selectOne(namespace+".GetNextCno");
+		coupon.setNo(cno);
 		sqlSessionTemplate.insert(namespace+".InsertCoupon", coupon);
+		int dif = DateParse.dateDif(coupon.getStartdate(), coupon.getEnddate());
+
+		// 쿠폰 시작일 ~ 마감일 -1
+		for(int i=0; i<dif ;i++) {
+			sqlSessionTemplate.insert( namespace+".InsertCouponCount",
+					new CouponCount(coupon.getNo(),DateParse.datePlus(coupon.getStartdate(), i)));
+		}
 	}
 	public void updateCoupon(CouponBean coupon) {
 		sqlSessionTemplate.update(namespace+".UpdateCoupon", coupon);

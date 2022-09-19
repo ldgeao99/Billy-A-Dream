@@ -9,9 +9,21 @@
 	
  	<!-- category를 입력받고 있지 않으므로 category 를 null로 입력하라는 의미임. jdbcType=VARCHAR는. -->
  	<insert id="InsertProduct">
- 		insert into products(no, seller_no, images, name, lcategory_no, scategory_no, add1_sido, add2_sigungu, add3_eubmyeon, add4_donglee, day_price, rentday_minimum, components, description, end_day)
- 		values(products_seq.nextval, 1, #{images}, #{name}, 2, 3, #{add1_sido}, #{add2_sigungu}, #{add3_eubmyeon}, #{add4_donglee}, #{day_price}, #{rentday_minimum}, #{components}, #{description}, #{end_day})
+ 		insert into products(no, seller_no, images, name, lcategory_no, scategory_no, add1_sido, add2_sigungu, add3_eubmyeon, add4_donglee, original_day_price, discounted_day_price, rentday_minimum, components, description, end_day)
+ 		values(products_seq.nextval, 1, #{images}, #{name}, 2, 3, #{add1_sido}, #{add2_sigungu}, #{add3_eubmyeon}, #{add4_donglee}, #{original_day_price}, #{discounted_day_price}, #{rentday_minimum}, #{components}, #{description}, #{end_day})
  	</insert>
+ 	
+ 	<select id="GetRecentProductList" resultType="product.model.ProductBean">
+ 		select * 
+ 		from products
+ 		order by create_day
+ 	</select>
+ 	
+ 	<select id="GetPopularProductList" resultType="product.model.ProductBean">
+ 		select * 
+ 		from products
+ 		order by view_count desc
+ 	</select>
  	
  	<select id="GetByNo" resultType="product.model.ProductBean">
  		select * from products where no = #{no}
@@ -24,7 +36,6 @@
  	<select id="getByseller_no" resultType="product.model.ProductBean">
  		select * from products where seller_no = #{seller_no}
  	</select>
- 	
  	
  	<select id="getAllByNo" resultType= "product.model.ProductBean">
 		select * from products where no in

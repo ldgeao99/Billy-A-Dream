@@ -5,27 +5,30 @@
 <mapper namespace="coupon.model.Coupon">
 
 
-   <select id="SelectCouponList" resultType="coupon.model.CouponBean">
-      select * from coupon 
-      order by no desc
-   </select>
-   <insert id="InsertCoupon">
-      insert into coupon 
-      values(coupon_seq.nextval,#{code},#{name},#{amount},#{unit},#{startdate},#{enddate})
-   </insert>
-   <update id="UpdateCoupon">
-      update coupon 
-      set code=#{code},name=#{name},amount=#{amount},unit=#{unit},startdate=#{startdate},
-      enddate=#{enddate} where no=#{no}
-   </update>
-   <delete id="DeleteCoupon">
-      delete coupon 
-      where no=#{no}
-   </delete>
-   <select id="SelectCoupon">
-      select * from coupon 
-      where no=#{no}
-   </select>
+   	<select id="GetNextCno" resultType="int">
+      	select coupon_seq.nextval from dual
+   	</select>
+   	<select id="SelectCouponList" resultType="coupon.model.CouponBean">
+      	select * from coupon 
+      	order by no desc
+   	</select>
+   	<insert id="InsertCoupon">
+      	insert into coupon 
+      	values(#{no},#{code},#{name},#{amount},#{unit},#{startdate},#{enddate})
+   	</insert>
+   	<update id="UpdateCoupon">
+      	update coupon 
+      	set code=#{code},name=#{name},amount=#{amount},unit=#{unit},startdate=#{startdate},
+      	enddate=#{enddate} where no=#{no}
+   	</update>
+  	<delete id="DeleteCoupon">
+      	delete coupon 
+      	where no=#{no}
+   	</delete>
+   	<select id="SelectCoupon">
+      	select * from coupon 
+      	where no=#{no}
+   	</select>
 	<select id="getByCode" resultType="coupon.model.CouponBean">
 		select * from coupon where code = #{code}
 	</select>
@@ -36,4 +39,7 @@
 		 #{lists}
 		</foreach>
 	</select>
+	<insert id="InsertCouponCount">
+		insert into couponCount values(#{cno},#{reg_date})
+	</insert>
 </mapper>
