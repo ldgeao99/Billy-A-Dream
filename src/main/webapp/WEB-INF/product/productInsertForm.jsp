@@ -858,7 +858,7 @@
 							    
 		// 이미지안에 표시되는 체크박스의 속성
 		var chk_style = 'width:30px; height:30px; position:absolute; font-size:24px;'
-						+ 'right: 0px; bottom:0px; z-index:999; color:#8C8C8C; cursor:pointer;';
+						+ 'right: 0px; bottom:0px; z-index:999; color:#FFFFFF; cursor:pointer;';
 							  
 							    
 		/* 사용자에 의한 파일 추가 이벤트가 발생하면 */					
