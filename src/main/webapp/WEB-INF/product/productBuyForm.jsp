@@ -234,27 +234,15 @@
 											var d1 = new Date(tempArr1[1] + "/" + tempArr1[2] + "/" + tempArr1[0]);   
 											var d2 = new Date(tempArr2[1] + "/" + tempArr2[2] + "/" + tempArr2[0]);
 											
-											
 											var diff = d2.getTime() - d1.getTime();
 											var daydiff = diff / (1000 * 60 * 60 * 24);   
-											
-											//alert(daydiff);
 											
 											if(daydiff < rentday_minimum){
 												alert("해당 상품의 최소 예약가능한 단위는 " + rentday_minimum + "일 입니다.\n" + "예약일을 다시 선택하세요");
 												return;
 											}
 											
-											
-											
-											
-											
-											
-											
-											
-											
-											
-											
+
 											var isExist = false;
 											
 											for(var i = 0; i<reservedDates.length; i++){

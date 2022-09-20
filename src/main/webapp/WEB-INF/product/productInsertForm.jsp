@@ -538,6 +538,15 @@
 			
 			<div class="col col-lg-6">
 				<input type="date" name="end_day" style="width: 140px">
+				<script>
+					//make today as string
+					var today = new Date();
+					var dd = String(today.getDate()).padStart(2, '0');
+					var mm = String(today.getMonth() + 1).padStart(2, '0');
+					var yyyy = today.getFullYear();
+					var today_string = yyyy + "-" + mm + '-' + dd;
+					$('input[name="end_day"]').attr('min',today_string);
+				</script>
 			</div>
 		</div>
 		<div class="row justify-content-md-center">

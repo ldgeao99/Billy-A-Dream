@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import member.model.MemberBean;
+import member.model.MemberDao;
 import product.model.ProductBean;
 import product.model.ProductDao;
 
@@ -28,6 +31,9 @@ public class ProductInsertController {
 	ProductDao productDao;
 	
 	@Autowired
+	MemberDao memberDao;
+	
+	@Autowired
 	ServletContext servletContext; // 프로젝트 1개당 하나가 자동으로 만들어줌. 그래서 그냥 Autowired만 해줘도 주입됨.
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
@@ -37,8 +43,12 @@ public class ProductInsertController {
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doInsert(ProductBean pbean) { // 커맨드 객체 형태로 받음
+	public String doInsert(ProductBean pbean, HttpSession session) { // 커맨드 객체 형태로 받음
 		System.out.println("ProductInsertController에 POST 요청 들어옴");
+		
+		String id = (String)session.getAttribute("id");
+		MemberBean mb = memberDao.getById(id);
+		pbean.setSeller_no(mb.getMno());
 		
 		MultipartFile[] upload = pbean.getUpload();
 		
