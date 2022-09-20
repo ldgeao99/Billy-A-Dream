@@ -1,6 +1,7 @@
 package member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,10 @@ public class memberUpdateController {
 	
 	@RequestMapping(value = command , method = RequestMethod.POST)
 	public String updateMember(MemberBean mb,Model model) {
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String securePassword = encoder.encode(mb.getPw());
+		mb.setPw(securePassword);
 		
 		mdao.updateMember(mb);
 		
