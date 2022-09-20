@@ -99,12 +99,7 @@
 			return false;
 		}
 		else{
-			if(confirm("상품을 구매하시겠습니까?")){
-				buyForm.submit();
-			}
-			else{
-				return false;
-			}
+			buyForm.submit();
 		}
 	}
 
@@ -253,7 +248,7 @@
                                             </div>
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">구매하기</button>
+                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button>
                                                 </div>
                                             </div>
                                         </div>

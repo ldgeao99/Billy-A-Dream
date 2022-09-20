@@ -51,21 +51,24 @@ public class memberMyPageController {
 		
 		
 		
-		List<WishlistBean> wishlist = wdao.getWishListByMno(String.valueOf(mb.getMno()));
+		List<WishlistBean> wishList = wdao.getWishListByMno(String.valueOf(mb.getMno())); // some product numbers
+		List<ProductBean> plists = null;
 		
-		String[] pnoLists = new String[wishlist.size()];
-		
-		for(int i = 0; i<wishlist.size(); i++) {
-			int product_no = wishlist.get(i).getProduct_no();
-			pnoLists[i] = String.valueOf(product_no); 
-		}
-		
-		List<ProductBean> plists = pdao.getAllByNo(pnoLists);
+		if(wishList.size() != 0) {
+			String[] pnoLists = new String[wishList.size()];
 			
-		for(ProductBean image : plists) {
-			image.setImages(image.getImages().split(",")[0]);
+			for(int i = 0; i<wishList.size(); i++) {
+				int product_no = wishList.get(i).getProduct_no();
+				pnoLists[i] = String.valueOf(product_no); 
+			}
+			
+			plists = pdao.getAllByNo(pnoLists);
+				
+			for(ProductBean image : plists) {
+				image.setImages(image.getImages().split(",")[0]);
+			}
 		}
-
+		
 		model.addAttribute("couponLists",lists);
 		model.addAttribute("plists",plists);
 		model.addAttribute("mb",mb);

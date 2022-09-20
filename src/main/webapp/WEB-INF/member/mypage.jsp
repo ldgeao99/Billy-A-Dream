@@ -477,12 +477,32 @@ height
 	///======================================================================================
 		//관심목록 삭제
 		
-		function pdelete(){
-			if(confirm("해당상품을 관심목록에서 삭제하시겠습니까?")){
-				
-				location.href="deletePnum.mb?no="+$('#no').val();
-			}	
-		
+	function wishDelete(obj){
+		if(confirm("해당상품을 관심목록에서 삭제하시겠습니까?")){
+			
+			$.ajax({
+				type : 'post',
+				url : "addOrDeletelike.wish",
+				data : {
+					id : $('#id').val(),
+					no : $('#no').val(),
+				},
+				success : function(rdata) {
+					
+					//alert(rdata);
+					if(rdata == "deleted"){
+						alert("삭제되었습니다.");
+						$(obj).parent().remove();
+						//여기서 이미지도 날려주자.
+					}
+				}//success
+
+			});//ajax
+			
+			
+			
+			//location.href="addOrDeletelike.wish?no=" + $('#no').val() + "?id=" + $('#id').val();
+		}	
 	}
 		
 		
@@ -548,6 +568,7 @@ height
 	<!--Container-->
 	<div class="container pt-2">
 		<!--Main Content-->
+		<!-- 
 		<div class="dashboard-upper-info">
 			<div class="row align-items-center g-0">
 				<div class="col-xl-3 col-lg-3 col-sm-6">
@@ -585,6 +606,7 @@ height
 				</div>
 			</div>
 		</div>
+		 -->
 
 		<div class="row mb-4 mb-lg-5 pb-lg-5">
 			<div class="col-xl-3 col-lg-2 col-md-12 mb-4 mb-lg-0">
@@ -595,6 +617,7 @@ height
 						href="#dashboard">대쉬보드</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#orders">거래내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">관심목록</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#selllist">판매상품관리</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">쿠폰내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab"
 						href="#account-details">회원정보수정</a></li>
@@ -974,7 +997,8 @@ height
 								<c:if test="${fn:length(plists) eq 0}">
 									<div align="center">
 									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
-									 관심목록이 없습니다</div>
+									 관심목록이 없습니다
+									</div>
 								</c:if>
 								
 								<!-- 반복문 시작 -->
@@ -984,7 +1008,7 @@ height
 									<c:forEach var="p" items="${plists}">
 										<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
 											<input type="hidden" name="no" id="no"value="${p.no }">
-											<button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="삭제하기" onclick="pdelete()">
+											<button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="삭제" onclick="wishDelete(this)">
 												<i class="icon an an-times-r"></i>
 											</button>
 											<!-- Product Image -->
@@ -1029,17 +1053,85 @@ height
 										</div>
 									</c:forEach>
 								</c:if>
-								
-
-
-
-
 								<!--프로덕트 끝  -->
 							</div>
 						</div>
 						<!-- End Grid Product-->
 					</div>
 					<!-- End Wishlist -->
+					
+					<!-- Wishlist -->
+					<div id="selllist" class="product-wishlist tab-pane fade">
+						<h3>판매상품관리</h3>
+						<!-- Grid Product -->
+						<div class="grid-products grid--view-items wishlist-grid mt-4">
+							<div class="row">
+								
+								<c:if test="${fn:length(plists) eq 0}">
+									<div align="center">
+									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
+									 관심목록이 없습니다
+									</div>
+								</c:if>
+								
+								<!-- 반복문 시작 -->
+								<c:if test="${fn:length(plists) ne 0}"> 
+								
+								
+									<c:forEach var="p" items="${plists}">
+										<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+											<input type="hidden" name="no" id="no"value="${p.no }">
+											<!-- Product Image -->
+											<div class="product-image">
+												<!-- Product Image -->
+												<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
+													<img class="primary blur-up lazyload"
+													data-src="<%=request.getContextPath()%>/resources/${p.images}"
+													src="<%=request.getContextPath()%>/resources/${p.images}"
+													alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
+													<img class="hover blur-up lazyload"
+													data-src="<%=request.getContextPath()%>/resources/${p.images}"
+													src="<%=request.getContextPath()%>/resources/${p.images}"
+													alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
+												</a>
+												<!-- End Product Image -->
+											</div>
+											<!-- End Product Image -->
+		
+											<!-- Product Details -->
+											<div class="product-details text-center">
+												<!-- Product Name -->
+												<div class="product-name">
+													<a href="product-layout1.html">${p.name}</a>
+												</div>
+												<!-- End Product Name -->
+												<!-- Product Price -->
+												<div class="product-price">
+													<span class="price"><fmt:formatNumber pattern="###,###" value="${p.original_day_price}" var="price"/>${ price} 원 / 일</span>
+												</div>
+												<!-- End Product Price -->
+												<!-- Product Button -->
+												
+												<form method="post" action="/cart/add" class="cart-form mt-3"
+													enctype="multipart/form-data">
+													<a href="update.prd?no=${p.no}" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a> 
+													<a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>삭제</span></a>
+												</form>
+												<!-- End Product Button -->
+											</div>
+											<!-- End Product Details -->
+										
+										</div>
+									</c:forEach>
+								</c:if>
+								<!--프로덕트 끝  -->
+							</div>
+						</div>
+						<!-- End Grid Product-->
+					</div>
+					<!-- End Wishlist -->
+					
+					
 				</div>
 				<!-- End Tab panes -->
 			</div>
