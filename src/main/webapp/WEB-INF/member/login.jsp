@@ -536,7 +536,7 @@ td{
 																	<br>
 																	<br> 
 																	<span id="FINDID" style="display: none;"></span>
-																	<a href='#' onClick='closePopupID(); return false'>
+																	<center><a href='#' onClick='closePopupID(); return false'></center><br><br>
 																	<i class="align-middle icon an an-an-double-left me-2"></i>뒤로가기</a>
 																	</p>
 																</div>

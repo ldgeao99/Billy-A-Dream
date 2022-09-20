@@ -9,7 +9,22 @@ public class ReservationBean {
 	private String is_accepted;
 	private String accepted_date;
 	private String status;
+	private String name; // 승인내역 가져올때 필요함
+	private int amount; 
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	public String getAccepted_date() {
 		return accepted_date;
 	}

@@ -1,7 +1,10 @@
 package member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.print.attribute.HashAttributeSet;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import member.model.MemberBean;
 import member.model.MemberDao;
 import product.model.ProductBean;
 import product.model.ProductDao;
+import reservation.model.ReservationBean;
+import reservation.model.ReservationDao;
 import wishlist.model.WishlistBean;
 import wishlist.model.WishlistDao;
 
@@ -37,13 +42,23 @@ public class memberMyPageController {
 	@Autowired
 	private WishlistDao wdao;
 	
+	@Autowired
+	private ReservationDao rdao;
+	
 	@RequestMapping(command)
 	public String login( Model model,HttpSession session) {
 		
 		String id = (String)session.getAttribute("id");
 		MemberBean mb = mdao.getById(id);
 		
-		List<CouponBean> lists = null;
+		//구매자의 구매내역
+		List<ReservationBean> buyrb =  rdao.getAllByBuyer_no(String.valueOf( mb.getMno()));//아이디에 해당하는 예약내역 가져옴
+		
+		//판매자의 물품 승인 및 철회 내역
+		List<ReservationBean> sellrb = rdao.getAllByMno(mb.getMno()); 
+		
+		
+		List<CouponBean> lists = null; // 쿠폰 가져오기
 		if(mb.getCoupon()!=null) {
 			String[] couponLists = mb.getCoupon().split(",");
 			lists = cdao.getAllByNo(couponLists);
@@ -69,6 +84,10 @@ public class memberMyPageController {
 			}
 		}
 		
+		
+		
+		model.addAttribute("buyrb",buyrb);
+		model.addAttribute("sellrb",sellrb);
 		model.addAttribute("couponLists",lists);
 		model.addAttribute("plists",plists);
 		model.addAttribute("mb",mb);

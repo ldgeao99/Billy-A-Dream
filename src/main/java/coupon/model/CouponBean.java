@@ -8,6 +8,15 @@ public class CouponBean {
 	private String unit;
 	private String startdate;
 	private String enddate;
+	private int use;
+	
+	
+	public int getUse() {
+		return use;
+	}
+	public void setUse(int use) {
+		this.use = use;
+	}
 	public int getNo() {
 		return no;
 	}

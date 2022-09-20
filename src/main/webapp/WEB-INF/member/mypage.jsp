@@ -142,12 +142,32 @@ height
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+	
+	function acceptProduct(no){
+		$.ajax({
+			type : 'post',
+			url : "acceptProduct.prd",
+			data : {
+				rno : no
+			},
+			success : function(data) {
+				if ($.trim(data) == 'yes') {
+					location.reload();
+				} else{
+					alert("안됨");
+				}
+			}//success
+
+		});//ajax
+	}
+
 
 	var phClick=true; // 폰 인증받기 클릭
 	var phCheck = true; // 폰확인
 	var mailClick=true; // 이메일 인증받기 클릭
 	var mailnCheck = true; // 이메일 확인
 
+	
 	$(function() {
 		$('#cbtest2').click(function() {
 			$('#quitbtn').attr("data-bs-target", "#exampleModal");
@@ -169,8 +189,7 @@ height
 												"<font color=red size=2px>비밀번호를 입력해주세요</font>");
 								$('#pwmsg').show();
 							} else {
-								$
-										.ajax({
+								$.ajax({
 											type : 'post',
 											url : "quitPw.mb",
 											data : {
@@ -522,11 +541,10 @@ height
 						code : $('#code').val() 
 							},
 						success : function(data){
-							alert($.trim(data));
 							if($.trim(data)=="exist"){
 								alert("이미 사용된 쿠폰입니다.");
 								checkCode = false;
-								return;
+								return false;
 							}
 							
 							else if($.trim(data)=="yes"){
@@ -535,9 +553,10 @@ height
 									coupon.submit();
 								}
 							}
-							else{
+							else if($.trim(data)==""){
 								alert("존재하지 않는 코드입니다.");
 								CheckCode = false;
+								return false;
 							}//else
 						}//success
 
@@ -614,7 +633,7 @@ height
 				<ul class="nav flex-column bg-light h-100 dashboard-list"
 					role="tablist">
 					<li><a class="nav-link active" data-bs-toggle="tab"
-						href="#dashboard">대쉬보드</a></li>
+						href="#dashboard">승인 및 철회</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#orders">거래내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">관심목록</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#selllist">판매상품관리</a></li>
@@ -631,79 +650,61 @@ height
 				<div class="tab-content dashboard-content">
 					<!-- Dashboard -->
 					<div id="dashboard" class="tab-pane fade active show">
-						<h3>대쉬보드</h3>
-						<p>
-							From your account dashboard. you can easily check &amp; view your
-							<a class="text-decoration-underline" href="#">recent orders</a>,
-							manage your <a class="text-decoration-underline" href="#">shipping
-								and billing addresses</a> and <a class="text-decoration-underline"
-								href="#">edit your password and account details.</a>
-						</p>
-						<div class="row user-profile mt-4">
-							<div class="col-12 col-lg-6">
-								<div class="profile-img">
-									<div class="img">
-										<img src="resources/assets/images/avatar-img1.jpg"
-											alt="profile" width="65" />
-									</div>
-									<div class="detail ms-3">
-										<h5 class="mb-1">Optimal</h5>
-										<p>
-											Balance: <strong>$500</strong>
-										</p>
-									</div>
-									<div class="lbl">SILVER USER</div>
-								</div>
-							</div>
-							<div class="col-12 col-lg-6">
-								<ul class="profile-order mt-3 mt-lg-0">
-									<li>
-										<h3 class="mb-1">16</h3> All Orders
-									</li>
-									<li>
-										<h3 class="mb-1">02</h3> Awaiting Payments
-									</li>
-									<li>
-										<h3 class="mb-1">00</h3> Awaiting Shipment
-									</li>
-									<li>
-										<h3 class="mb-1">01</h3> Awaiting Delivery
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="table-responsive order-table mt-4">
+						<h3 align="center">승인 여부</h3>
+						<div class="table-responsive order-table">
 							<table
 								class="table table-bordered table-hover align-middle text-center mb-0">
 								<thead class="alt-font">
 									<tr>
-										<th>Order</th>
-										<th>Product</th>
-										<th>Date</th>
-										<th>Status</th>
-										<th>Total</th>
-										<th>Actions</th>
+										<th>주문번호</th>
+										<th>상품명</th>
+										<th>결제일자</th>
+										<th>결제금액</th>
+										<th>예약일자</th>
+										<th>승인여부</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Long Sleeve T-shirts</td>
-										<td>March 04, 2021</td>
-										<td class="text-success">Completed</td>
-										<td>$165.00 for 1 item</td>
-										<td><a class="link-underline view"
-											href="cart-style1.html">View</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Floral Crop Top</td>
-										<td>May 12, 2021</td>
-										<td class="text-danger">Processing</td>
-										<td>$113.00 for 3 item</td>
-										<td><a class="link-underline view"
-											href="cart-style1.html">View</a></td>
-									</tr>
+									<c:if test="${fn:length(sellrb)==0 }">
+										<tr>
+											<td colspan="6">주문 된 상품이 없습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${fn:length(sellrb)!=0 }">
+										<c:forEach var="s" items="${sellrb }">
+											<tr>
+												<td>${s.no }</td>
+												<td>${s.name }</td>
+												<td>
+													<fmt:parseDate var="buyday" value="${s.accepted_date }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="buyday" value="${buyday }" pattern="yyyy-MM-dd hh:mm"/>
+													${buyday }
+												</td>
+												<td>
+													<fmt:formatNumber pattern="###,###" value="${s.amount }" var="price"/>${price }원
+												</td>
+												<td>
+													<fmt:parseDate var="formattedDay" value="${s.start_date }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="first" value="${formattedDay }" pattern="yyyy-MM-dd"/>
+													${first }
+												    ~
+													<fmt:parseDate var="formattedDay" value="${s.end_date }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="last" value="${formattedDay }" pattern="yyyy-MM-dd"/>
+													${last }
+												
+												
+												</td>
+												<td>
+												<c:if test="${s.is_accepted ==0}">
+													<input type="button" value="승인하기"  onclick="acceptProduct('${s.no}')">
+												</c:if>
+												<c:if test="${s.is_accepted ==1}">
+													<input type="button" value="승인됨" style="background-color: black;color: white;">
+												</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div>
@@ -712,57 +713,61 @@ height
 
 					<!-- Orders -->
 					<div id="orders" class="product-order tab-pane fade">
-						<h3>Orders</h3>
+						<h3>거래 내역</h3>
 						<div class="table-responsive order-table">
 							<table
 								class="table table-bordered table-hover align-middle text-center mb-0">
 								<thead class="alt-font">
 									<tr>
-										<th>Order</th>
-										<th>Product</th>
-										<th>Date</th>
-										<th>Status</th>
-										<th>Total</th>
-										<th>Actions</th>
+										<th>주문번호</th>
+										<th>상품명</th>
+										<th>결제일자</th>
+										<th>결제금액</th>
+										<th>예약일자</th>
+										<th>승인여부</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Long Sleeve T-shirts</td>
-										<td>March 04, 2021</td>
-										<td class="text-success">Completed</td>
-										<td>$165.00 for 1 item</td>
-										<td><a class="link-underline view"
-											href="cart-style1.html">View</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Floral Crop Top</td>
-										<td>May 19, 2021</td>
-										<td class="text-success">Completed</td>
-										<td>$150.00 for 1 item</td>
-										<td><a class="link-underline view"
-											href="cart-style1.html">View</a></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Bodysuit Black</td>
-										<td>June 24, 2021</td>
-										<td class="text-danger">Processing</td>
-										<td>$190.00 for 2 item</td>
-										<td><a class="link-underline view"
-											href="cart-style1.html">View</a></td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Hoodie Sweatshirt</td>
-										<td>July 28, 2021</td>
-										<td class="text-danger">Processing</td>
-										<td>$170.00 for 1 item</td>
-										<td><a class="link-underline view"
-											href="cart-style1.html">View</a></td>
-									</tr>
+									<c:if test="${fn:length(sellrb)==0 }">
+										<tr>
+											<td colspan="6">주문 된 상품이 없습니다.</td>
+										</tr>
+									</c:if>
+									<c:if test="${fn:length(sellrb)!=0 }">
+										<c:forEach var="b" items="${buyrb }">
+											<tr>
+												<td>${b.no }</td>
+												<td>${b.name }</td>
+												<td>
+													<fmt:parseDate var="buyday" value="${b.accepted_date }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="buyday" value="${buyday }" pattern="yyyy-MM-dd hh:mm"/>
+													${buyday }
+												</td>
+												<td>
+													<fmt:formatNumber pattern="###,###" value="${b.amount }" var="price"/>${price }원
+												</td>
+												<td>
+													<fmt:parseDate var="formattedDay" value="${b.start_date }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="first" value="${formattedDay }" pattern="yyyy-MM-dd"/>
+													${first }
+												    ~
+													<fmt:parseDate var="formattedDay" value="${b.end_date }" pattern="yyyy-MM-dd"/>
+													<fmt:formatDate var="last" value="${formattedDay }" pattern="yyyy-MM-dd"/>
+													${last }
+												
+												
+												</td>
+												<td>
+												<c:if test="${b.is_accepted ==0}">
+													<input type="button" value="미승인"  >
+												</c:if>
+												<c:if test="${b.is_accepted ==1}">
+													<input type="button" value="승인됨" style="background-color: black;color: white;">
+												</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div>
@@ -811,7 +816,7 @@ height
 												<td colspan="4" align="center"> 등록된 쿠폰이 없습니다</td>
 											</tr>
 										</c:if>
-										<c:if test="${fn:length(mb.coupon)!=0 }">
+										<c:if test="${fn:length(couponLists)!=0 }">
 											<c:forEach var="c" items="${couponLists }">
 												<tr>
 													<td>${c.code }</td>

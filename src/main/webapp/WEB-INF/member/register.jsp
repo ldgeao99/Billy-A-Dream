@@ -288,6 +288,7 @@ tr{
 						
    		   			 if(!joongbok){
    						$('#id').attr("class","form-control is-invalid");
+   						alert("중복체크를 해주세요");
    						$('#id').focus();
    						return false;
    		   			 }
@@ -411,12 +412,12 @@ tr{
 							<form method="post" action="register.mb" name="f">
 											<div class="form-group">
 												<label for="id" class="form-label mt-4">아이디</label>
-												<input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp">
+												<input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp" placeholder="아이디를 입력해주세요">
 												<input type="button" value="중복체크" onclick="idCheck()">
 											</div>
 											<div class="form-group has-success">
 												<label class="form-label mt-4" for="updatepw">비밀번호</label>
-												<input type="password" id="updatepw" name= "pw" placeholder="비밀번호를 입력해주세요">
+												<input type="password" id="updatepw" name= "pw" placeholder="최소 8글자 / 문자 포함">
 												<div class="valid-feedback"></div>
 											</div>
 											<div class="form-group has-danger">
@@ -429,7 +430,7 @@ tr{
 											</div>
 											<div class="form-group">
 												<label for="full_address" class="form-label mt-4">주소</label>
-												<input type="text" class="form-control" id="full_address" name="full_address" aria-describedby="emailHelp" >
+												<input type="text" class="form-control" id="full_address" name="full_address" aria-describedby="emailHelp" readonly style="background-color: white;" placeholder="주소검색을 해주세요">
 												<input type="button" onclick="execDaumPostcode()" value="주소 검색" readonly>
 												<input type="hidden" name="add1_sido" >
 												<input type="hidden" name="add2_sigungu" >
@@ -440,7 +441,7 @@ tr{
 											
 											<div class="form-group">
 												<label for="hp" class="form-label mt-4">전화번호</label> 
-												<input type="text" class="form-control" id="hp" name="hp" aria-describedby="emailHelp" placeholder="전화번호 입력" >
+												<input type="text" class="form-control" id="hp" name="hp" aria-describedby="emailHelp" placeholder="ex) 01012345678" >
 												<input type="button" value="인증번호 받기" onclick="sendSMS()">
 												<br><br>
 												<div style="display: none;" id="authNumShow">
@@ -451,7 +452,7 @@ tr{
 											</div>
 											<div class="form-group">
 												<label for="email" class="form-label mt-4">이메일</label> 
-												<input type="email" class="form-control" name="email" id="email"aria-describedby="emailHelp" placeholder="이메일" >
+												<input type="email" class="form-control" name="email" id="email"aria-describedby="emailHelp" placeholder="ex) 1234@naver.com" >
 												<input type="button" value="인증번호 받기" onclick="sendEmail()" class="bt">
 											
 											<div style="display: none;" id="EmailAuthNumShow">

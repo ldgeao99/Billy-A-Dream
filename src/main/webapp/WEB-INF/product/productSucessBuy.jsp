@@ -31,7 +31,7 @@
 
                 <!--Container-->
                 <div class="container" align="center">
-                    <!--Main Content-->
+                    <!--Main Content--><br><br><br><br><br><br><br>
                     		<table>
                     			<tr>
                     				<td rowspan="2" align="right" width="300px"><i class="fa-regular fa-circle-check fa-7x"></i></td>
@@ -40,6 +40,11 @@
                     			<tr>
                     				<td align="left" width="450px" style="padding-left: 30px;">
                     					주문내역 및 배송에 관한 안내는 <a href="mypage.mb"style="color: orange; font-weight: bold;">마이페이지</a> 를 통하여 확인 가능합니다.
+                    					<br><br>
+										주문일자 :  
+												<c:set var="now" value="<%=new java.util.Date()%>" />
+												<c:set var="sysYear"><fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초" /></c:set>  			
+												<c:out value="${sysYear}" />	
                     				</td>
                     			</tr>
                     		</table>
