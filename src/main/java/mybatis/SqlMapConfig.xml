@@ -16,5 +16,6 @@
     	<mapper resource="mybatis/product.xml"/>
     	<mapper resource="mybatis/coupon.xml"/>
     	<mapper resource="mybatis/wishlist.xml"/>
+    	<mapper resource="mybatis/reservation.xml"/>
 	</mappers>
 </configuration>

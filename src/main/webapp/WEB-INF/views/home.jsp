@@ -45,14 +45,17 @@
         	}
         	
         	function kakaoTalk(){
-        		  var screenW = screen.availWidth;  // 스크린 가로사이즈
-        		  var screenH = screen.availHeight; // 스크린 세로사이즈
-        		  var popW = 300; // 띄울창의 가로사이즈
-        		  var popH = 500; // 띄울창의 세로사이즈
-        		  var posL=960;   // 띄울창의 가로 포지션 
-        		  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
+        		var idx = "${eduVO.idx}";
+    		    var windowW = 550;
+    		    var windowH = 650;
+    		    var winHeight = document.body.clientHeight;
+    		    var winWidth = document.body.clientWidth;
+    		    var winX = window.screenX || window.screenLeft || 0;
+    		    var winY = window.screenY || window.screenTop || 0;
+    		    var popX = winX + (winWidth - windowW)/2;
+    		    var popY = winY + (winHeight - windowH)/2;
         		
-        		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기",'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL);
+        		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
         	}
         	
         	

@@ -1,86 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@include file = "../member/categoryTop.jsp" %>
 <style>
-button {
-	height: 2.5em;
-	cursor: pointer;
-}
 
-#popupID,#popupPW {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, .7);
-	z-index: 1;
-}
-
-#popupID.hide,#popupPW.hide {
-	display: none;
-}
-
-#popupID.has-filter,#popupPW.has-filter {
-	backdrop-filter: blur(4px);
-	-webkit-backdrop-filter: blur(4px);
-}
-
-#popupID .content,#popupPW .content {
-	padding: 40px;
-	background: #fff;
-	border-radius: 5px;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
-}
-
-
-.small {
-	width: 250px;
-}
-td{
-	height: 20px;
-}
-.bt{
-	width : 120px;
-	border-radius : 5px;
-	background-color: #F7F7F7;
-	color: black;
-}
-.bts{
-	width : 140px;
-	border-radius : 5px;
-	background-color: #F0F0F0;
-	color: black;
-}
-/* 카카오톡 로그인 */
-#kakaobg{
-	 width: 400px;
-	 border-radius: 5px; 
-	 background-color:#FFEB00;    
-}
 </style>
 
 
 
 <!--카카오톡 로그인 스크립트  -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+      <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
-$(function(){
-	var referrer = $('#url').val();
-	opener.parent.location.href=referrer;
-	window.close();
-})
 
 	
 </script>
-			<input type="hidden" id="url" value="${ BuyUrl}">
 
             <!--Body Container-->
-            <div id="page-content">   
+            <div id="page-content" align="center">   
                 <!--Collection Banner-->
                 <div class="collection-header">
                     <div class="collection-hero">
@@ -94,17 +30,19 @@ $(function(){
                 <!--End Collection Banner-->
 
                 <!--Container-->
-                <div class="container">
+                <div class="container" align="center">
                     <!--Main Content-->
-                    
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                <div class="inner">
-                                	<center><br><br><br>
-                                    <p> <b>[Billy A Dream] 에 계정이 없으신가요?</b> </p><br><br><br>
-                                    <a href="register.mb" class="btn rounded">회원가입</a>
-                                    </center>
-                                </div>
-                            </div>
+                    		<table>
+                    			<tr>
+                    				<td rowspan="2" align="right" width="300px"><i class="fa-regular fa-circle-check fa-7x"></i></td>
+                    				<td align="left" width="450px" style="padding-left: 30px;"><b style="font-size: 20px;">고객님의 주문이 완료 되었습니다.</b></td>
+                    			</tr>
+                    			<tr>
+                    				<td align="left" width="450px" style="padding-left: 30px;">
+                    					주문내역 및 배송에 관한 안내는 <a href="mypage.mb"style="color: orange; font-weight: bold;">마이페이지</a> 를 통하여 확인 가능합니다.
+                    				</td>
+                    			</tr>
+                    		</table>
                         </div>
                     </div>
                     <!--End Main Content-->

@@ -30,12 +30,16 @@
 			
 			
 			if(method=="kakao"){
+				
 				$.ajax({
 					url:"kakaobuy.prd",
 					data : {
+						id : $('#id').val(),
 						pname : $('#pname').val(),
 						price : $('#price').val(),
-						no : $('#no').val()
+						no : $('#no').val(),
+						start_date : $('#start_date').val(),
+						end_date : $('#end_date').val()
 					},
 					datatype : 'json',
 					success:function(data){
@@ -74,6 +78,9 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-8 main-col">
 
                             <form action="#" method="post" class="cart style2">
+                            <input type="hidden" id="id" value="<%=id%>">
+                            <input type="hidden" id="start_date" value="2022-09-22">
+                            <input type="hidden" id="end_date" value="2022-09-22">
                                 <table class="align-middle">
                                     <thead class="cart__row cart__header small--hide">
                                         <tr>

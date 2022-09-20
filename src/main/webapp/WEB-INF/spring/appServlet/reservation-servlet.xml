@@ -13,7 +13,7 @@
 	
 	<!-- ViewResolver 설정, *.mv 요청이 들어오면 앞에 prefix의 값을 붙이고 뒤에 suffix의 값을 붙여서 해당 url로 이동하게 함 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/product/" />
+		<property name="prefix" value="/WEB-INF/reservation/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	

@@ -5,7 +5,6 @@
 <%
 	String id = (String)session.getAttribute("id"); // 아이디
 	System.out.println("id : "+id); 
-	
 %>
 <c:set var="id" value="<%=id %>"></c:set>
 
