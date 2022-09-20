@@ -2,6 +2,8 @@ package member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +38,9 @@ public class memberMyPageController {
 	private WishlistDao wdao;
 	
 	@RequestMapping(command)
-	public String login(@RequestParam("id")String id, Model model) {
+	public String login( Model model,HttpSession session) {
 		
+		String id = (String)session.getAttribute("id");
 		MemberBean mb = mdao.getById(id);
 		
 		List<CouponBean> lists = null;

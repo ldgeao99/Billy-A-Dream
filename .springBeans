@@ -8,9 +8,15 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/lcategory-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/reservation-servlet.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/prod-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/admin-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/member-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/wishlist-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/scategory-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
 	</autoconfigs>
 	<configSets>

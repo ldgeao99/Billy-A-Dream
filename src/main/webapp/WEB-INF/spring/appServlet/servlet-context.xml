@@ -28,5 +28,6 @@
 	<context:component-scan base-package="scategory" />
 	<context:component-scan base-package="lcategory" />
 	<context:component-scan base-package="wishlist" />
+	<context:component-scan base-package="reservation"/>
 	
 </beans:beans>

@@ -166,6 +166,28 @@ create sequence wishlist_seq
 	maxvalue 10000000
 	nocache;
 
-commit;
 
+-- reservation테이블
+drop table reservation cascade constraints;
+create table reservation(
+	no number primary key not null,
+	product_no number references products(no) on delete cascade,
+	buyer_no number references member(mno) on delete cascade,
+	start_date date not null,
+	end_date date not null,
+	is_accepted char(1),
+	accepted_date date,
+	status varchar2(20)
+	);
+
+drop sequence reservation_seq;
+create sequence reservation_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+
+commit;
+	
 --
