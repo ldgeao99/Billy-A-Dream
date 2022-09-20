@@ -538,6 +538,15 @@
 			
 			<div class="col col-lg-6">
 				<input type="date" name="end_day" style="width: 140px">
+				<script>
+					//make today as string
+					var today = new Date();
+					var dd = String(today.getDate()).padStart(2, '0');
+					var mm = String(today.getMonth() + 1).padStart(2, '0');
+					var yyyy = today.getFullYear();
+					var today_string = yyyy + "-" + mm + '-' + dd;
+					$('input[name="end_day"]').attr('min',today_string);
+				</script>
 			</div>
 		</div>
 		<div class="row justify-content-md-center">
@@ -858,7 +867,7 @@
 							    
 		// 이미지안에 표시되는 체크박스의 속성
 		var chk_style = 'width:30px; height:30px; position:absolute; font-size:24px;'
-						+ 'right: 0px; bottom:0px; z-index:999; color:#8C8C8C; cursor:pointer;';
+						+ 'right: 0px; bottom:0px; z-index:999; color:#FFFFFF; cursor:pointer;';
 							  
 							    
 		/* 사용자에 의한 파일 추가 이벤트가 발생하면 */					

@@ -17,9 +17,14 @@ public class ReservationDao {
 		private String namespace="reservation.model.ReservationBean";
 
 		public void InsertReservation(ReservationBean rb) {
-			
 			int result = sqlSessionTemplate.insert(namespace+".InsertReservation",rb);
-			System.out.println("예약 결과 :"+result);
+			System.out.println(result);
+		}
+		
+		public List<ReservationBean> getAllReservationOnlyDates(String pno) {
+			List<ReservationBean> result = sqlSessionTemplate.selectList(namespace+".GetAllReservationOnlyDates", pno);
+			System.out.println("size:" + result.size());
+			return result;
 		}
 
 		public List<ReservationBean> getAllByBuyer_no(String Buyer_no) {

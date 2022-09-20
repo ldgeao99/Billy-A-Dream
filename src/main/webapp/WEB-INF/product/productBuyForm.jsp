@@ -5,6 +5,11 @@
 
 
 <!-- 달력 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -62,10 +67,6 @@
 	}
 </script>
 
-
-
-
-
 <!--Body Container-->
             <div id="page-content">
                 <!--Collection Banner-->
@@ -88,8 +89,7 @@
 
                             <form action="#" method="post" class="cart style2">
                             <input type="hidden" id="id" value="<%=id%>">
-                            <input type="hidden" id="start_date" value="2022-09-22">
-                            <input type="hidden" id="end_date" value="2022-09-22">
+                            
                                 <table class="align-middle">
                                     <thead class="cart__row cart__header small--hide">
                                         <tr>
@@ -144,12 +144,135 @@
                                 <div class="cart-note mb-4 cart-col">
                                     <h5>예약기간 설정</h5>
                                     <!--기간설정  -->
+									<input type="text" id="select_date" placeholder="날짜를 선택해주세요" value="예약일자 선택" readonly>
+									<input type="hidden" id="start_date" value=""><!-- 2022-09-22 -->
+                            		<input type="hidden" id="end_date" value="">
+                            		
+									<script>
+										$.noConflict();
+									
+										//make today as string
+										var today = new Date();
+										var dd = String(today.getDate()).padStart(2, '0');
+										var mm = String(today.getMonth() + 1).padStart(2, '0');
+										var yyyy = today.getFullYear();
+										var today_string = mm + '/' + dd + '/' + yyyy;
+										
+										//will be disabled dates by 'isInvalidDate' property
+										
+										function getDatesStartToLast(arr) {
+										
+											var result = [];
+										
+											for(var i=0; i<arr.length; i++){
+												var startDate = arr[i][0];
+												var lastDate = arr[i][1];
+												
+												var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
+												if(!(regex.test(startDate) && regex.test(lastDate))) return "Not Date Format";
+												
+												var curDate = new Date(startDate);
+												while(curDate <= new Date(lastDate)) {
+													result.push(curDate.toISOString().split("T")[0]);
+													curDate.setDate(curDate.getDate() + 1);
+												}
+											}
+											
+											return result; 
+										}
+										
+										//var disabledDates = ["2022-09-27", "2022-09-29"];
+										
+										var datesList = [];
+										//datesList.push(["2022-09-27","2022-09-29"]);
+										//datesList.push(["2022-10-05","2022-10-07"]);
 
-                                    <input type="text" id="select_date" placeholder="날짜를 선택해주세요" readonly>
-                                    
-                                    
+										<c:forEach var="r" items="${rlist}">
+											datesList.push(["${r.start_date}", "${r.end_date}"]);
+										</c:forEach>
+										
+										var reservedDates = getDatesStartToLast(datesList);// 2022-09-27,2022-09-28,2022-09-29
+
+										var max_date = "${pb.end_day}";
+										max_date = max_date.split(' ')[0].split('-')[1] + "/" + max_date.split(' ')[0].split('-')[2] + "/" + "/" + max_date.split(' ')[0].split('-')[0]
+										
+
+										$('#select_date').daterangepicker({
+											locale: {
+												separator: " ~ ",
+												applyLabel: "확인",
+										        cancelLabel: "취소",
+												daysOfWeek: ["일", "월", "화", "수", "목", "금", "토"],
+												monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+											},
+										    "linkedCalendars": false,
+										    "showCustomRangeLabel": false,
+										    autoUpdateInput : false,
+										    "startDate": "09/14/2022",
+										    "endDate": "09/20/2022",
+										    "minDate": today_string,
+										    "maxDate": max_date,
+										    "opens": "center",
+										    isInvalidDate: function(ele) {
+										        var currDate = moment(ele._d).format('YYYY-MM-DD');
+										        return reservedDates.indexOf(currDate) != -1;
+										    }
+										}, function(start, end, label) {
+										  		console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+										});
+										
+										//When i click apply button
+										$('#select_date').on('apply.daterangepicker', function(ev, picker) {
+											var tryReservationDatesList = getDatesStartToLast([[picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD')]]);
+											
+											var rentday_minimum = "${pb.rentday_minimum}";
+											
+											var start = picker.startDate.format('YYYY-MM-DD'); 
+											var end = picker.endDate.format('YYYY-MM-DD');
+											var tempArr1 = start.split('-');
+											var tempArr2 = end.split('-');
+											var d1 = new Date(tempArr1[1] + "/" + tempArr1[2] + "/" + tempArr1[0]);   
+											var d2 = new Date(tempArr2[1] + "/" + tempArr2[2] + "/" + tempArr2[0]);
+											
+											var diff = d2.getTime() - d1.getTime();
+											var daydiff = diff / (1000 * 60 * 60 * 24);   
+											
+											if(daydiff < rentday_minimum){
+												alert("해당 상품의 최소 예약가능한 단위는 " + rentday_minimum + "일 입니다.\n" + "예약일을 다시 선택하세요");
+												return;
+											}
+											
+
+											var isExist = false;
+											
+											for(var i = 0; i<reservedDates.length; i++){
+												if(tryReservationDatesList.indexOf(reservedDates[i]) != -1){
+													isExist = true;
+													break;
+												}	
+											}
+										
+											if(isExist == true){
+												alert("다른사람과 겹치는 예약일자는 선택할 수 없습니다.");
+												$(this).val('');
+											}else{
+												$(this).val(picker.startDate.format('YYYY-MM-DD') + ' ~ '+ picker.endDate.format('YYYY-MM-DD'));
+												$('#start_date').val(picker.startDate.format('YYYY-MM-DD'));
+												$('#end_date').val(picker.endDate.format('YYYY-MM-DD'));
+											}	
+										});
+										
+										// When i click cancel button
+										$('#select_date').on('cancel.daterangepicker', function(ev, picker) {
+											$(this).val('');
+											$('#start_date').val("");
+											$('#end_date').val("");
+										});
+									</script>
                                     
 								</div>
+								
+								
                                 <div class="cart-order_detail cart-col">
                                     <div class="row">
                                         <span class="col-6 col-sm-6 cart__subtotal-title" style="height: 30px;"><strong>결제수단</strong></span>
@@ -360,5 +483,8 @@
 
         </div>
         <!--End Page Wrapper-->
+        
     </body>
 </html>
+
+

@@ -155,6 +155,6 @@
 		
 	<servlet-mapping>
 		<servlet-name>reservation</servlet-name>
-		<url-pattern>*.reser</url-pattern>
+		<url-pattern>*.rsv</url-pattern>
 	</servlet-mapping>
 </web-app>
