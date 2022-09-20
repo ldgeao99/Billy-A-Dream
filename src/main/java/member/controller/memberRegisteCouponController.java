@@ -36,7 +36,6 @@ public class memberRegisteCouponController {
 		
 		 CouponBean cb=null;
 		 cb = cdao.getByCode(code);
-		 System.out.println("code있음:"+cb);
 		 String id = (String)session.getAttribute("id");
 		 
 		 MemberBean mb = mdao.getById(id);
@@ -85,6 +84,6 @@ public class memberRegisteCouponController {
 		 
 		 mdao.insertCoupon(map);
 		 
-		 return "mypage";
+		 return "redirect:mypage.mb";
 	}
 }

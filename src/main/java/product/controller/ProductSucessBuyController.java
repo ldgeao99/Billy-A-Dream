@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,7 +28,7 @@ public class ProductSucessBuyController {
 	
 	
 	@RequestMapping(value="after.prd",method = RequestMethod.GET) // jsp갔다가 일로다시와서 productSucessBuy로 감 팝업창 닫기위해
-	public String sucessBuy(HttpSession session) {
+	public String sucessBuy(HttpSession session,Model model) {
 		
 		
 		ReservationBean rb =(ReservationBean)session.getAttribute("rb");
@@ -38,7 +39,6 @@ public class ProductSucessBuyController {
 		System.out.println("edate:"+rb.getEnd_date());
 		
 		rdao.InsertReservation(rb);
-		
 		
 		return "productSucessBuy";
 	}

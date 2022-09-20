@@ -7,4 +7,17 @@
 		insert into reservation values(reservation_seq.nextval,#{product_no},#{buyer_no},#{start_date},#{end_date},0,sysdate,'1')
 	</insert>
 	
+	<select id="getAllByBuyer_no" resultType= "reservation.model.ReservationBean">
+		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted  
+		from reservation r inner join products p on r.product_no = p.no where r.buyer_no=#{buyer_no}
+	</select>
+	
+	<select id="getAllByMno" resultType= "reservation.model.ReservationBean">
+		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted  
+		from (select * from products where seller_no = #{mno}) p  inner join reservation r on p.no = r.product_no
+	</select>
+	
+	<update id="updateAccept">
+		update reservation set is_accepted = 1 where no = #{rno}
+	</update>
 </mapper>

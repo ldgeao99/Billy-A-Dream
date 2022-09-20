@@ -72,7 +72,7 @@ public class checkController {
 		
 		int result = mdao.FindPW(map);
 		String temporaryPw = getRandomPassword.tempPassword(8);// �����ο��� ��й�ȣ
-		
+		System.out.println("임시비밀번호 :"+temporaryPw);
 		String securePassword = encoder.encode(temporaryPw);// �����ο��ؼ� ��ȣȭ ����
 		
 		if(result>0) {

@@ -196,7 +196,7 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.5</version>
-		</dependency>
+		</dependency> 
 
 		<!-- Spring-security 모듈 -->
 		<dependency>

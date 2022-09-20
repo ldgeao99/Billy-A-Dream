@@ -14,7 +14,7 @@
    	</select>
    	<insert id="InsertCoupon">
       	insert into coupon 
-      	values(#{no},#{code},#{name},#{amount},#{unit},#{startdate},#{enddate})
+      	values(#{no},#{code},#{name},#{amount},#{unit},#{startdate},#{enddate},0)
    	</insert>
    	<update id="UpdateCoupon">
       	update coupon 

@@ -18,6 +18,7 @@
 	
 	
 	function sub(){
+		
 			var method = $('input[name=method]:checked').val();
 			var idx = "${eduVO.idx}";
 		    var windowW = 550;
@@ -28,8 +29,13 @@
 		    var winY = window.screenY || window.screenTop || 0;
 		    var popX = winX + (winWidth - windowW)/2;
 		    var popY = winY + (winHeight - windowH)/2;
-			
-			
+
+
+		    if(!$('#cart_tearm').is(":checked")){
+		    	alert("결제사항을 확인해주세요");
+		    	return false;
+		    }
+		    
 			if(method=="kakao"){
 				
 				$.ajax({
@@ -169,7 +175,7 @@
                                         <input type="checkbox" value="allen-vela" id="cart_tearm">
                                         <label for="cart_tearm">모든 결제사항을 확인했습니다</label>
                                     </div>
-                                    <input type="button" class="btn btn--small-wide rounded my-4 checkout" width="300px" value="결제하기" onclick="sub()">
+                                    <input type="button" class="btn rounded product-form__cart-submit mb-0"  value="결제하기" onclick="sub()">
                                     <div class="paymnet-img text-center"><img src="resources/assets/images/safepayment.png" alt="Payment" /></div>
                                 </div>
                             </div>
