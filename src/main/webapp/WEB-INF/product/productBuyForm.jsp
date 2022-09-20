@@ -3,8 +3,9 @@
 
 <%@include file="../member/categoryTop.jsp" %>
 
+
 <!-- 달력 -->
-   
+
 <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -51,6 +52,9 @@
 			}
 	}
 </script>
+
+
+
 
 
 <!--Body Container-->
@@ -126,8 +130,13 @@
                                     </form>
                                 </div>
                                 <div class="cart-note mb-4 cart-col">
-                                    <h5>구매기간 설정</h5>
+                                    <h5>예약기간 설정</h5>
                                     <!--기간설정  -->
+
+                                    <input type="text" id="select_date" placeholder="날짜를 선택해주세요" readonly>
+                                    
+                                    
+                                    
 								</div>
                                 <div class="cart-order_detail cart-col">
                                     <div class="row">
