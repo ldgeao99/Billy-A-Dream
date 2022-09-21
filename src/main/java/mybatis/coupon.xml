@@ -3,18 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="coupon.model.Coupon">
-
+	<select id="SelectCouponCount" resultType="int">
+		select count(*) from couponCount where cno=#{cno} and reg_date=#{reg_date} 
+	</select>
 
    	<select id="GetNextCno" resultType="int">
       	select coupon_seq.nextval from dual
    	</select>
    	<select id="SelectCouponList" resultType="coupon.model.CouponBean">
       	select * from coupon 
-      	order by no desc
+      	<if test="whatColumn == 'name'">
+			where name like #{keyword}
+		</if>
+		<if test="whatColumn == 'code'">
+			where contents like #{keyword}
+		</if>
+      	order by startdate desc
    	</select>
    	<insert id="InsertCoupon">
       	insert into coupon 
-      	values(#{no},#{code},#{name},#{amount},#{unit},#{startdate},#{enddate},0)
+      	values(#{no},#{code},#{name},#{amount},#{unit},#{startdate},#{enddate})
    	</insert>
    	<update id="UpdateCoupon">
       	update coupon 

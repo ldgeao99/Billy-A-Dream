@@ -24,6 +24,7 @@ public class DateParse {
 		Date date;
 		try {
 			date = strFormat.parse(str);
+			System.out.println("date"+date);
 			return dateFormat.format(date);
 			
 		} catch (ParseException e) {

@@ -1,6 +1,8 @@
 package coupon.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +15,30 @@ public class CouponDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	DateParse dateParse;
-	
 	private String namespace="coupon.model.Coupon";
 	
 
-	public List<CouponBean> selectCouponList(){
-		List<CouponBean> lists=sqlSessionTemplate.selectList(namespace+".SelectCouponList");
-		for(CouponBean coupon : lists) {
-			coupon.setStartdate(DateParse.dateToStr(coupon.getStartdate()));
-			coupon.setEnddate(DateParse.dateToStr(coupon.getEnddate()));
+	public List<CouponBean> selectCouponList(Map<String, String> map){
+		List<CouponBean> list=sqlSessionTemplate.selectList(namespace+".SelectCouponList",map);
+		List<CouponBean> lists=new ArrayList<CouponBean>();
+		String now=DateParse.getTodayPlus(0);
+		CouponCount cCount=new CouponCount();
+		cCount.setReg_date(now);
+		for(CouponBean coupon : list) {
+			String strtdate =coupon.getStartdate();
+			String[] startdate=strtdate.split(" ");
+			String endate=coupon.getEnddate();
+			String[] enddate=endate.split(" ");
+			
+			coupon.setStartdate(startdate[0]);
+			coupon.setEnddate(enddate[0]);
+			cCount.setCno(coupon.getNo());
+			int cnt=sqlSessionTemplate.selectOne(namespace+".SelectCouponCount",cCount );
+			coupon.setUse(cnt);
+			if(Integer.parseInt(now)<Integer.parseInt(DateParse.dateToStr(coupon.getStartdate()))) {
+				coupon.setUse(2);
+			}
+			lists.add(coupon);
 		}
 		return lists;
 	}
