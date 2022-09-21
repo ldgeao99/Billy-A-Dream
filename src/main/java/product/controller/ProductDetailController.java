@@ -28,6 +28,12 @@ public class ProductDetailController {
 	@Autowired
 	private MemberDao mdao; // org.springframework.beans.factory.NoSuchBeanDefinitionException: No matching bean of type [member.model.MemberDao] found for dependency
 	
+	@Autowired
+	private LcategoryDao ldao;
+	
+	@Autowired
+	private ScategoryDao sdao;
+	
 	@RequestMapping(command)
 	public String detailForm(@RequestParam("no") String no,Model model) {
 		
@@ -35,7 +41,8 @@ public class ProductDetailController {
 		
 		ProductBean pb = pdao.getByNo(no);
 		List<ProductBean> lists = pdao.getByseller_no(String.valueOf(pb.getSeller_no())); 
-
+		pb.setLcategoryName(ldao.selectLcategoryName(pb.getLcategory_no()));
+		pb.setScategoryName(sdao.selectScategoryName(pb.getScategory_no()));
 		for(ProductBean image : lists) {
 			image.setImages(image.getImages().split(",")[0]);
 		}

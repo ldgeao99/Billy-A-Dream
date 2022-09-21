@@ -5,9 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-@Component("lcategoryDao")
+@Component
 public class LcategoryDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -43,5 +42,8 @@ public class LcategoryDao {
 	public void deleteLcategory(int no) {
 		sqlSessionTemplate.delete(namespace+".DeleteLcategory", no);
 	}
-	
+	public String selectLcategoryName(int no) {
+		String name= sqlSessionTemplate.selectOne(namespace+".SelectLcategoryName", no);
+		return name;
+	}
 }

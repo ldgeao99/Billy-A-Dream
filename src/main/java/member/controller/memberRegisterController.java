@@ -40,29 +40,29 @@ public class memberRegisterController {
 	public String register(MemberBean mb) throws Exception {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String securePassword = encoder.encode(mb.getPw());// °¡Á®¿Â pw ¾ÏÈ£È­
-		Map<String,String>map = new HashMap<String,String>();// ip µî·Ï¿¡ ÇÊ¿äÇÑ mno, ip
+		String securePassword = encoder.encode(mb.getPw());// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pw ï¿½ï¿½È£È­
+		Map<String,String>map = new HashMap<String,String>();// ip ï¿½ï¿½Ï¿ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ mno, ip
 		
 		
 		
-		// È¸¿ø°¡ÀÔÀÛ¾÷
+		// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½
 		mb.setPw(securePassword);
 		mdao.InsertMember(mb); 
 		
 		
-		//ip µî·ÏÀÛ¾÷
-		mb = mdao.getById(mb.getId());// mno ¸¦ primary key µî·ÏÇØ¼­ mno¸¦ ±âÁØÀ¸·Î ÇÔ
-		String ip = Inet4Address.getLocalHost().getHostAddress();// ¾ÆÀÌÇÇ °¡Á®¿À±â
+		//ip ï¿½ï¿½ï¿½ï¿½Û¾ï¿½
+		mb = mdao.getById(mb.getId());// mno ï¿½ï¿½ primary key ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ mnoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		String ip = Inet4Address.getLocalHost().getHostAddress();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		map.put("ip", ip);
 		map.put("mno", String.valueOf(mb.getMno()));
 		
 		
-		midao.InsertIp(map); // ¾ÆÀÌÇÇ µî·Ï
+		midao.InsertIp(map); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		
-		String msg = "[Biily A Dream]   "+mb.getName()+"´ÔÀÇ È¸¿ø°¡ÀÔÀ» ÃàÇÏµå¸³´Ï´Ù. ¾ÕÀ¸·Î ÀúÈñ¿Í ÇÔ²² Billy A DreamÀ» ÀÌ²ø¾î°¥ ÁÖÀÎ°øÀÌ µÇ¼Ì½À´Ï´Ù. °¨»çÇÕ´Ï´Ù.";
+		String msg = "[Biily A Dream]   "+mb.getName()+"ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµå¸³ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô²ï¿½ Billy A Dreamï¿½ï¿½ ï¿½Ì²ï¿½ï¿½î°¥ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ ï¿½Ç¼Ì½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.";
 		
-		sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] È¸¿ø°¡ÀÔ ÃàÇÏµå¸³´Ï´Ù.", msg);
+		sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµå¸³ï¿½Ï´ï¿½.", msg);
 		
 		return gotoPage;
 	}

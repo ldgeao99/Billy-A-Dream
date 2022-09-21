@@ -193,7 +193,7 @@
 							<div>
 								<div class="bigtext"><i class="fa-solid fa-caret-right" style="margin-right:10px"></i>카테고리</div>
 								<div>
-									<p class="product-sku">${pb.lcategory_no}<span class="variant-sku">${pb.scategory_no }</span></p>		
+									<p class="product-sku">${pb.lcategoryName}<span class="variant-sku">${pb.scategoryName }</span></p>		
 								
 								</div>
 							</div>

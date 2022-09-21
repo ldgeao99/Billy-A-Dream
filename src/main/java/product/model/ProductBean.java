@@ -25,7 +25,25 @@ public class ProductBean {
 	private String create_day;
 	private String pulled_day;
 	private char is_hidden;
+	private String lcategoryName;
+	private String scategoryName;
 	
+	public String getLcategoryName() {
+		return lcategoryName;
+	}
+
+	public void setLcategoryName(String lcategoryName) {
+		this.lcategoryName = lcategoryName;
+	}
+
+	public String getScategoryName() {
+		return scategoryName;
+	}
+
+	public void setScategoryName(String scategoryName) {
+		this.scategoryName = scategoryName;
+	}
+
 	private MultipartFile[] upload;
 	
 	public ProductBean() {
