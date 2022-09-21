@@ -1069,7 +1069,9 @@ height
 												<!-- End Product Name -->
 												<!-- Product Price -->
 												<div class="product-price">
-													<span class="price"><fmt:formatNumber pattern="###,###" value="${p.original_day_price}" var="price"/>${ price} 원 / 일</span>
+													<span class="old-price"><fmt:formatNumber value="${p.original_day_price}" pattern="#,###" />원/일</span> 
+													<span class="price"><fmt:formatNumber value="${p.discounted_day_price}" pattern="#,###" />원/일</span> 
+													<%-- <span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span> --%>
 												</div>
 												<!-- End Product Price -->
 												<!-- Product Button -->
@@ -1139,7 +1141,9 @@ height
 												<!-- End Product Name -->
 												<!-- Product Price -->
 												<div class="product-price">
-													<span class="price"><fmt:formatNumber pattern="###,###" value="${p.original_day_price}" var="price"/>${ price} 원 / 일</span>
+												<%-- <span class="old-price"><fmt:formatNumber value="${p.original_day_price}" pattern="#,###" />원/일</span> --%> 
+	                                        	<span class="price" style="color : #e95144 !important"><fmt:formatNumber value="${p.discounted_day_price}" pattern="#,###" />원/일</span> 
+													<%-- <span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span> --%>
 												</div>
 												<!-- End Product Price -->
 												<!-- Product Button -->
