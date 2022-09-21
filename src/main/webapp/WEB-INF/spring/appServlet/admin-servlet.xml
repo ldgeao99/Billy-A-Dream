@@ -21,6 +21,8 @@
 	<context:component-scan base-package="product"/>
 	<context:component-scan base-package="wishlist"/>
 	<context:component-scan base-package="reservation"/>
+	<context:component-scan base-package="lcategory"/>
+	<context:component-scan base-package="scategory"/>
 
 	<!-- error page 설정 -->
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
-@Component("ScategoryDao")
+@Component
 public class ScategoryDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -15,18 +15,18 @@ public class ScategoryDao {
 	private String namespace="scategory.model.Scategory";
 	
 	public void insertScategory(ScategoryBean scate) {
-		System.out.println(1);
 		if(scate.getOrder_num()==0) {
 			int lastOrder=0;
 			lastOrder=selectMaxOrder(scate);
 			
 			scate.setOrder_num(lastOrder+1);
 		}
-		System.out.println(2);
 		sqlSessionTemplate.insert(namespace+".InsertScategory", scate);
 	}
 	public List<ScategoryBean> selectScategoryList(int lcate_no){
+		System.out.println("lcate_no"+lcate_no);
 		List<ScategoryBean> lists=sqlSessionTemplate.selectList(namespace+".SelectScategoryList", lcate_no);
+		System.out.println("lists.size()"+lists.size());
 		
 		return lists;
 	}
@@ -58,6 +58,10 @@ public class ScategoryDao {
 			scate.setOrder_num(lastOrder+1);
 		}
 		sqlSessionTemplate.update(namespace+".ChangeLcategory", scate);
+	}
+	public String selectScategoryName(int no) {
+		String name= sqlSessionTemplate.selectOne(namespace+".SelectScategoryName", no);
+		return name;
 	}
 	
 }
