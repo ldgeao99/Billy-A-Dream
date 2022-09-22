@@ -421,6 +421,11 @@ td{
 							else if($.trim(data) == "Insertip"){
 								location.href = "Insertip.mb?id="+$('input[name="id"]').val();
 							}
+							else if($.trim(data)=="black"){
+								$('#logincheck').html(
+								"<br><br><font color=red>이용 정지중인 회원입니다.<br> 안녕히가세요.</font>");
+								return false;
+							}
 							else {
 								$('#logincheck').html(
 								"<br><br><font color=red>아이디 또는 비밀번호를 잘못 입력했습니다.<br> 입력하신 내용을 다시 확인해주세요.</font>");

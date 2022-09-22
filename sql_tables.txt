@@ -177,7 +177,8 @@ create table reservation(
 	end_date date not null,
 	is_accepted char(1),
 	accepted_date date,
-	status varchar2(20)
+	status varchar2(20),
+	amount number
 	);
 
 drop sequence reservation_seq;
@@ -188,6 +189,48 @@ create sequence reservation_seq
 	maxvalue 10000000
 	nocache;
 
+drop table room cascade constraints;
+create table room(
+	no number default 0,
+	room_no number not null primary key,
+	mno1 number references member(mno) on delete cascade,
+	mno2 number references member(mno) on delete cascade,
+	pno number references products(no) on delete cascade
+	);
+
+drop sequence room_seq;
+create sequence room_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+	
+	
+drop table chat;
+create table chat(
+	no number not null,
+	room_no number references room(room_no) on delete cascade,
+	send_mno number references member(mno) on delete cascade,
+	read_mno number references member(mno) on delete cascade,
+	time date not null,
+	content varchar2(1000) not null,
+	pno number references  products(no) on delete cascade
+	);
+
+drop sequence chat_seq;
+create sequence chat_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+	
+
+
 commit;
 	
 --
+
+
+

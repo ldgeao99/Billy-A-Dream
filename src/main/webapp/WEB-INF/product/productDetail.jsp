@@ -102,6 +102,32 @@
 			buyForm.submit();
 		}
 	}
+	
+	//채팅
+	function chat(){
+		
+		var no = $('#no').val();
+		
+		var idx = "${eduVO.idx}";
+	    var windowW = 350;
+	    var windowH = 450;
+	    var winHeight = document.body.clientHeight;
+	    var winWidth = document.body.clientWidth;
+	    var winX = window.screenX || window.screenLeft || 0;
+	    var winY = window.screenY || window.screenTop || 0;
+	    var popX = winX + (winWidth - windowW)/2;
+	    var popY = winY + (winHeight - windowH)/2;
+		
+		if($('#id').val()==""){
+			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+				location.href="login.mb";	
+			}
+			return false;
+		}
+		else{
+			window.open("chat.prd?no="+no,"대화하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
+		}
+	}
 
 </script>
 			
@@ -249,6 +275,11 @@
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--buyit clearfix">
                                                     <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                                <div class="product-form__item--buyit clearfix">
+                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chat()">채팅</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -39,7 +39,7 @@
         		}
         		else{
         			
-        			location.href = "insert.prd";
+        			location.href = "allchatting.mb";
 
         		}
         	}
