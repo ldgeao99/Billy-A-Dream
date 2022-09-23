@@ -47,4 +47,14 @@ public class ProductDao {
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getAllByNo",pnoLists);
 		return lists;
 	}
+
+	public int updateProduct(ProductBean pbFromForm) {
+		int cnt =  sqlSessionTemplate.update(namespace+".UpdateProduct", pbFromForm);
+		return cnt;
+	}
+
+	public int deleteProduct(String no) {
+		int cnt =  sqlSessionTemplate.delete(namespace+".DeleteProduct", no);
+		return cnt;
+	}
 }

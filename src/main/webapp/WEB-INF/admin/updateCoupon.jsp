@@ -185,17 +185,18 @@
 					</div>
 					<div class="card-body p-0" data-simplebar>
 						<div class="vstack gap-2">
-							<form action="insertCoupon.admin"
+							<form action="updateCoupon.admin"
 								onsubmit="return couponInsertCheck()" method="post">
-								<center><h3>쿠폰 추가하기</h3></center>
+								<center><h3>쿠폰 수정하기</h3></center>
+								<input type="hidden" name="no" value="${coupon.no }">
 								<div class="mb-3">
 									<label  class="form-label fw-bold"for="couponCd"><br>쿠폰코드</label>
 								</div>
 								<div class="input-group ">
-									<input type="text" class="form-control" id="code" name="code"
-										placeholder="쿠폰 코드(임의의 문자열 또는 랜덤 생성 문자열)를 입력하세요"
+									<input type="text" class="form-control" id="code" name="code" value="${coupon.code }"
 										aria-label="Recipient's username"
-										aria-describedby="button-addon2" required="required">
+										aria-describedby="button-addon2" required="required" readonly="readonly"
+										 >
 									<button class="btn btn-light" type="button" id="button-addon2"
 										onclick="show_uuid()">자동생성</button>
 								</div>
@@ -204,7 +205,7 @@
 								</div>
 								<div class="input-group">
 									<input class="form-control" type="text" id="name" name="name"
-										placeholder="쿠폰명" required="required">
+										placeholder="쿠폰명" required="required" value="${coupon.name }">
 								</div>
 
 								<div class="mb-3">
@@ -215,11 +216,11 @@
 										style="text-align: right" id="amount" name="amount"
 										placeholder="할인값(숫자만 입력)"
 										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-										required="required"> <select class="form-control"
+										required="required"  value="${coupon.amount }"> <select class="form-control"
 										id="unit" name="unit">
 										<option value="">단위 선택</option>
-										<option value="won">&#8361;</option>
-										<option value="per">%</option>
+										<option value="won" <c:if test="${coupon.unit eq 'won'}"> selected </c:if>>&#8361;</option>
+										<option value="per" <c:if test="${coupon.unit eq 'per'}"> selected </c:if>>%</option>
 									</select>
 								</div>
 
@@ -232,7 +233,7 @@
 										placeholder="쿠폰 종료일(년도, 월, 일 8자리로 입력) ex)20220131"
 										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 										aria-describedby="button-addon3" required="required"
-										maxlength="8">
+										maxlength="8" value="${coupon.startdate }">
 									<button class="btn btn-light" type="button" id="button-addon3">당일
 										시작</button>
 								</div>
@@ -244,13 +245,13 @@
 										name="enddate"
 										placeholder="쿠폰 종료일(년도, 월, 일 8자리로 입력) ex)20220131"
 										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-										required="required" maxlength="8">
+										required="required" maxlength="8" value="${coupon.enddate }">
 								</div>
 								<div class="mb-3">
 
 
 									<button type="reset" class="btn btn-light">취소하기</button>
-									<button type="submit" id="btn" class="btn btn-info px-5">추가하기</button>
+									<button type="submit" id="btn" class="btn btn-info px-5">수정하기</button>
 								</div>
 							</form>
 						</div>
@@ -331,16 +332,10 @@ function dateFormat(date) {
 
         return date.getFullYear()  + month +  day ;
 }
-			function guid() {
-				function s4() {
-					
-					return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-				}
-				return s4() + s4() + s4() + s4();
-			}
+			
 
 			function show_uuid() {
-				document.getElementById("code").value = guid();
+				alert("쿠폰 코드는 수정할 수 없습니다.");
 			}
 			
 			function couponInsertCheck(){

@@ -17,7 +17,7 @@ import member.model.MemberDao;
 import member.model.getRandomPassword;
 import member.model.sendEMAIL;
 
-@Controller
+@Controller 
 public class checkController {
 	
 	

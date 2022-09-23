@@ -984,7 +984,10 @@
 				btnAtt.files = dt.files;
 				
 				var p = ele.parentNode;
-				attZone.removeChild(p)
+				attZone.removeChild(p);
+				
+				$('#limit_image_Counter').empty();
+				$('#limit_image_Counter').append("("+ sel_files.length +"/9)");
 			}
 			
 			div.appendChild(img)

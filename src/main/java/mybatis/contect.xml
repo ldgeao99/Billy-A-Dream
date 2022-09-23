@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="contect.model.ContectBean">
+  	<insert id="InsertNewContect"> <!-- 문의사항 남기기 -->
+  		insert into contect(no,mno,id,category_num,title,content) 
+  		values(contect_seq.nextval,#{mno},#{id},#{category_num},#{title},#{content}) 
+  	</insert>
+  	<select id="SelectMyContect" resultType="contect.model.ContectBean"> 
+  	<!-- 마이페이지에서 조회할때 -->
+  		select * from contect 
+  		where mno=#{mno} 
+  		order by no desc
+  	</select>
+  	<select id="SelectAllContect" resultType="contect.model.ContectBean"> 
+  	<!-- 전체조회(카테고리별로도 가능) -->
+  		select * from contect 
+  		<if test="whatColumn == 'category_num'">
+			where category_num like #{keyword} 
+		</if>
+		order by no desc
+  	</select>
+  	<select id="SelectContectToReply" resultType="contect.model.ContectBean"> 
+  	<!-- 관리자가 답글 남겨야 하는 글 -->
+  		select * from contect 
+  		where is_reply=0 and is_replied=0 
+  		order by num
+  	</select>
+  	<insert id="InsertReplyContect"><!-- 관리자 답글 -->
+  		insert into contect(no,id,category_num,title,content,is_reply,is_replied) 
+  		values(#{no},"Billy",#{category_num},#{title},#{content},1,1)
+  	</insert>
+  	<delete id="DeleteContect">
+  	<!-- 본인 문의 삭제  -->
+  		delete contect where no=#{no}
+  	</delete>
+  	<delete id="DeleteReplyContect">
+  	<!-- 관리자 답글 삭제(본인 문의글 삭제시 or 관리자 삭제시) -->
+  		delete contect where no=#{no}
+  	</delete>
+  	<update id="UpdateContect">
+  	<!-- 수정기능 -->
+  		update contect set content=#{content},category_num=#{category_num} 
+  		where no=#{no}  	
+  	</update>
+  	<select id="SelectContectDetail" resultType="contect.model.ContectBean">
+  	<!-- 해당글 확인(+답글) -->
+  		select * from contect 
+  		where no=#{no} or no=#{no-1}
+  	</select>
+  	<update id="UpdateReply">
+  	<!-- 답글 남겨졌을 때 -->
+  		update contect set is_replied='1' 
+  		where no=#{no}
+  	</update>
+  	<update id="UpdateReadcount">
+  	<!-- 조회수 증가 -->
+  		update contect set readcount=readcount+1 
+  		where no=#{no}
+  	</update>
+  </mapper>

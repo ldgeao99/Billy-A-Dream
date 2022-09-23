@@ -39,5 +39,7 @@
 	<update id="ChangeLcategory">
 		update scategory set lcate_no=#{lcate_no},order_num=#{order_num} where no=#{no}
 	</update>
-	
+	<select id="SelectScategoryName" resultType="String">
+		select name from scategory where no=#{no}
+	</select>
 </mapper>

@@ -1348,7 +1348,7 @@
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="product-layout1.html" class="product-img">
+	                                    <a href="productdetail.prd?no=${popularProductList[i-1].no}" class="product-img">
 	                                        <!--Image-->
 	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->

@@ -15,11 +15,15 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-*.class
 .vscode
 sendEMAIL.java
 # External tool builders
 .externalToolBuilders/
+
+# frequently making conflict
+*.class
+pom.properties
+
 
 # Locally stored "Eclipse launch configurations"
 *.launch

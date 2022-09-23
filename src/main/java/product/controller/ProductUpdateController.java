@@ -2,6 +2,7 @@ package product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,72 +41,91 @@ public class ProductUpdateController {
 		return getPage;
 	}
 	
-	/*
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doUpdate(ProductBean pbean) { // 커맨드 객체 형태로 받음
-		System.out.println("ProductInsertController에 POST 요청 들어옴");
+	public String doUpdate(ProductBean pbean) {
 		
-		MultipartFile[] upload = pbean.getUpload();
+		System.out.println(pbean);
 		
-		if(upload == null) {
-			System.out.println("넘어온 데이터가 없습니다.");
+		ProductBean pbFromForm = pbean;
+		ProductBean pbFromDB = productDao.getByNo(String.valueOf(pbFromForm.getNo()));
+		
+		//1. make array by split images from pbeanFromForm
+		//2. make array by split images from pbeanFromDB
+		String[] imgNamesFromForm = pbFromForm.getImages().split(",");
+		String[] imgNamesFromDB = pbFromDB.getImages().split(",");
+		
+		for(String s : imgNamesFromForm) {
+			System.out.println(s);
 		}
-		else {
-			String tempImages = ""; 
-			
-			for(MultipartFile multi :upload) {
-				System.out.println(multi.getOriginalFilename());
-				//1. 파일 업로드
-				//System.out.println("multi.getName():" + multi.getName()); // upload : <input> 태그의 name 속성
-				System.out.println("multi.getOriginalFilename():" + multi.getOriginalFilename()); // 내가 선택한 화일의 파일명
-				//System.out.println("pbean.getImage():" + pbean.getImage()); // 이것 또한 내가 선택한 화일명, 이걸 이용해도 상관없음
-				
-				
-				String uploadPath = servletContext.getRealPath("/resources");
-				System.out.println("uploadPath: " + uploadPath);
-				
-				//resources 라는 폴더가 존재하지 않는다명 생성.
-				File folder = new File(uploadPath);
-				if (!folder.exists()) {
-					folder.mkdir(); //폴더 생성합니다.
-					System.out.println(uploadPath + " 경로의 resources 폴더가 생성되었습니다.");
-				}
-				
+		System.out.println();
+		
+		for(String s : imgNamesFromDB) {
+			System.out.println(s);
+		}
+		System.out.println();
+		
+		String path = servletContext.getRealPath("/resources");
+		System.out.println("path: " + path);
+		System.out.println();
+		
+		//3. disappeared files delete on server resource
+		for(int i = 0; i<imgNamesFromDB.length; i++) {
+			if(Arrays.asList(imgNamesFromForm).contains(imgNamesFromDB[i]) == false) {
+				System.out.println("!!" + imgNamesFromDB[i] + " file have to be deleted on server resource!!");
+				File file = new File(path + "/" + imgNamesFromDB[i]);
+				file.delete();
+			}
+		}
+		System.out.println();
+		
+		//4. appeared new files upload on server resource
+		MultipartFile[] upload = pbFromForm.getUpload();
+		String tempImages = null;
+		//resources 라는 폴더가 존재하지 않는다명 생성.
+		File folder = new File(path);
+		if (!folder.exists()) {
+			folder.mkdir(); //폴더 생성합니다.
+			System.out.println(path + " 경로의 resources 폴더가 생성되었습니다.");
+		}
+		for(int i = 0; i<imgNamesFromForm.length; i++) {
+			if(Arrays.asList(imgNamesFromDB).contains(imgNamesFromForm[i]) == false) {
+				System.out.println("!!" + imgNamesFromForm[i] + "file have to be uploaded on server resource!!"); 
 				UUID uuid = UUID.randomUUID();
-
-				File file = new File(uploadPath + "/" + uuid.toString()+"_" + multi.getOriginalFilename()); // multi.getOriginalFilename() 대신 pbean.getImage() 를 사용해도 됨.
+				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // multi.getOriginalFilename() 대신 pbean.getImage() 를 사용해도 됨.
 				
-				if(tempImages == "") {
-					tempImages = uuid.toString()+"_" + multi.getOriginalFilename();
+				if(tempImages == null) {
+					tempImages = uuid.toString()+"_" + upload[i].getOriginalFilename();
 				}else {
-					tempImages +=  "," + uuid.toString()+"_" + multi.getOriginalFilename();
+					tempImages +=  "," + uuid.toString()+"_" + upload[i].getOriginalFilename();
 				}
 				
 				try {
-					multi.transferTo(file); // 원하는 위치에 파일을 올리고 싶을 때 사용함. 이 문장 실행과 동시에 업로드 됨.
+					upload[i].transferTo(file); // 원하는 위치에 파일을 올리고 싶을 때 사용함. 이 문장 실행과 동시에 업로드 됨.
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
-				} 
+				}
+			}else {
+				if(tempImages == null) {
+					tempImages = imgNamesFromForm[i];
+				}else {
+					tempImages += "," + imgNamesFromForm[i];
+				}	
 			}
-			
-			pbean.setImages(tempImages);
 		}
+		System.out.println("tempImages: " + tempImages);
+		pbFromForm.setImages(tempImages);
 		
-		System.out.println(pbean);
-		
-		int cnt = -1;
-		cnt = productDao.insertProduct(pbean);
-		
+		//6. execute update
+		int cnt = productDao.updateProduct(pbFromForm);
 		if(cnt > 0 ) {
-			System.out.println("상품 삽입성공");
+			System.out.println("상품 수정성공");
 		}else {
-			System.out.println("상품 삽입실패");
+			System.out.println("상품 수정실패");
 		}
 		
 		return gotoPage;
 	}
-	*/
 }

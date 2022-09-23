@@ -9,9 +9,13 @@ import java.util.Date;
 public class DateParse {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
+<<<<<<< HEAD
 	private static DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
 	private static SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+=======
+	private static DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd"); 
+>>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 	
 	// 외부에서 객체 생성 금지 
 	private DateParse() {}
@@ -26,6 +30,7 @@ public class DateParse {
 		Date date;
 		try {
 			date = strFormat.parse(str);
+			System.out.println("date"+date);
 			return dateFormat.format(date);
 			
 		} catch (ParseException e) {
@@ -61,7 +66,7 @@ public class DateParse {
 			Date endDate = strFormat.parse(end);
 			int dif = (int) ((endDate.getTime()-startDate.getTime()) / (24*60*60*1000));
 			System.out.println("날짜 차이 : "+dif);
-			return dif;
+			return dif+1;
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
