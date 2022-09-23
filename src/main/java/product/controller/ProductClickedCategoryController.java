@@ -31,12 +31,6 @@ public class ProductClickedCategoryController {
 	@Autowired
 	private ProductDao pdao;
 	
-	@Autowired
-	private LcategoryDao lcategoryDao;
-	
-	@Autowired
-	private ScategoryDao scategoryDao;
-	
 	@RequestMapping(command)
 	public String detailForm(@RequestParam("whatColumn") String whatColumn,
 								@RequestParam("keyword") String keyword, 
@@ -56,20 +50,8 @@ public class ProductClickedCategoryController {
 		
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
 		
-		
-		/* for lcategory list & scategory list */
-		List<LcategoryBean> list = lcategoryDao.selectLcategoryList();
-		Map<String,List<ScategoryBean>> lists=new HashMap<String,List<ScategoryBean>>();
-		for(LcategoryBean lcate : list) {
-			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
-			
-			lists.put(lcate.getName(),scate);
-		}
-		
 		model.addAttribute("resultProductList", resultProductList);
 		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("list", list); 	// lcategory list
-		model.addAttribute("lists", lists);	// scategory list
 		
 		return getPage;
 	}

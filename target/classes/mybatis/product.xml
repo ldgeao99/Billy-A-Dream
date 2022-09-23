@@ -48,7 +48,7 @@
 		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
 		</if>	
  		
- 		order by pulled_day, no
+ 		order by pulled_day, pro2.no
  	</select>
  	
  	<select id="GetTotalSearchCount" resultType="int">

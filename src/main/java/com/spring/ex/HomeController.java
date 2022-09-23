@@ -63,15 +63,15 @@ public class HomeController {
 		List<ProductBean> lists2 = productDao.getPopularProductList(map2, pageInfo2);	
 		model.addAttribute("popularProductList", lists2);
 		
-		List<LcategoryBean> list = lcategoryDao.selectLcategoryList();
-		Map<String,List<ScategoryBean>> lists = new HashMap<String,List<ScategoryBean>>();
-		for(LcategoryBean lcate : list) {
-			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
-			
-			lists.put(lcate.getName(),scate);
-		}
-		model.addAttribute("list", list);
-		model.addAttribute("lists", lists);
+//		List<LcategoryBean> list = lcategoryDao.selectLcategoryList();
+//		Map<String,List<ScategoryBean>> lists = new HashMap<String,List<ScategoryBean>>();
+//		for(LcategoryBean lcate : list) {
+//			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
+//			
+//			lists.put(lcate.getName(),scate);
+//		}
+//		model.addAttribute("list", list);
+//		model.addAttribute("lists", lists);
 		
 		return "home";
 	}

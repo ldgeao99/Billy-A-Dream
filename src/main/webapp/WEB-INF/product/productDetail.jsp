@@ -135,11 +135,18 @@
             <!--Body Container-->
             <div id="page-content">   
                 <!--Breadcrumbs-->
-                <div class="breadcrumbs-wrapper text-uppercase">
-                    <div class="container">
-                        <div class="breadcrumbs"><a href="index.html" title="Back to the home page">홈</a><span>|</span><span class="fw-bold">상세페이지</span></div>
+                
+                
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">상세페이지</h2>
+                        </div>
                     </div>
                 </div>
+                
+                
                 <!--End Breadcrumbs-->
 
 
@@ -178,7 +185,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <!-- Product Info -->
                                 <div class="product-single__meta">
-                                    <h1 class="product-single__title" style="margin-bottom:20px">${pb.name }</h1>
+                                    <h1 class="product-single__title" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600!important; font-size:22px;color: black; margin-bottom:10px">${pb.name }</h1>
                                     
                                     <!-- Product Reviews -->
                                     <!-- Product Info -->
@@ -264,28 +271,27 @@
                                     <!-- Swatches Color/Size -->
                                     <!-- Product Action -->
                                     <div class="product-action w-100 clearfix">
-                                    
-                                    
                                     <br>
-                                         <div class="row g-2">
-                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                         <div class="row row-cols-3">
+                                            <div class="col-12 col-sm-4 col-md-4 col-lg-5">
                                                 <div class="product-form__item--submit">
                                                     <input type="hidden" name="id" id="id" value="${id }">
                                                     <input type="hidden" name="no" id="no" value="${pb.no }">
                                                     <button type="button" name="add" class="btn rounded product-form__cart-submit mb-0" onclick="like()"><span id="likeText">찜하기</span></button>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-12 col-sm-4 col-md-4 col-lg-5">
                                                 <div class="product-form__item--buyit clearfix">
                                                     <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-12 col-sm-4 col-md-4 col-lg-2">
                                                 <div class="product-form__item--buyit clearfix">
                                                     <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chat()">채팅</button>
                                                 </div>
                                             </div>
                                         </div>
+                                      
                                     </div>
                                     <!-- End Product Action -->
                                     <!-- Product Info link -->
@@ -311,7 +317,7 @@
                                 <div class="tab-content" id="vertical-tabContent">
                                     <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                                         <div class="product-description">
-                                             <h4 class="spr-form-title text-uppercase mb-3">제품 상세설명</h4>
+                                             <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">제품 상세설명</h4>
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                     </div>
                                                     ${pb.description }
@@ -373,7 +379,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="spr-reviews">
-                                                        <h4 class="spr-form-title text-uppercase mb-3">상품 후기</h4>
+                                                        <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">상품 후기</h4>
                                                         <div class="review-inner">
                                                             <div class="spr-review">
                                                                 <div class="spr-review-header">
@@ -395,7 +401,7 @@
                                         <div class="" id="reviews">
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                                	 <h4 class="spr-form-title text-uppercase mb-3">${mb.name } 님의 판매상품</h4>
+                                                	 <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">${mb.name } 님의 판매상품</h4>
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                     </div>
                                                 </div>

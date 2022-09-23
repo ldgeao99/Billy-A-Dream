@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,6 +7,70 @@
 	System.out.println("id : "+id); 
 %>
 <c:set var="id" value="<%=id %>"></c:set>
+
+<script src="resources/assets/js/vendor/jquery-min.js"></script>
+<script>
+	// getting category
+	$(function(){
+		$.ajax({
+			url : "getLargeCategory.lcate",
+			success : function(originText) { // mobile,1|pc/notebook,2|camera/dslr,3
+				var lcateTextArr = []; // 모바일,PC/노트북,카메라/DSLR
+				var lcateNoArr = [];   // 1,2,3
+				
+				var originArr = originText.split('|'); //['mobile,1','pc/notebook,2', 'camera/dslr,3'] 
+				 
+				for(var i = 0; i<originArr.length; i++){
+					lcateTextArr.push(originArr[i].split(',')[0]); //[mobile, pc/notebook, camera/dslr]
+					lcateNoArr.push(originArr[i].split(',')[1]);
+					$('#cate_dropdown').append("<li id="+ originArr[i].split(',')[1] +">" 
+					+ "<a href= " + "javascript:gotoSearchByCate('" + originArr[i].split(',')[0] + "')" +  " class='site-nav'>"+ originArr[i].split(',')[0] +"<i class='an an-angle-right-l'></i></a>"
+					+ "</li>");
+				}
+				// --- makeing lcate completed 
+				
+				// solved async problem by promise(if we dont use promise, then loop will operate 2 times, even if loop size is 3)
+				for(var i = 0; i<lcateNoArr.length ;i++){
+					getScate(lcateNoArr[i])
+					.then( (index) => {
+						//console.log(index + "종료");
+					});	
+				}
+				// -- inserting scate completed
+				
+			} // outside sucess end
+		});// outside ajax end
+	}); // function end		
+	
+	function getScate(lno){
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				url : "getSmallCategory.scate",
+				data : {
+					lcategoryNo : lno
+				},
+				success : function(originText2) { // 스마트워치,2|스마트폰,1       모니터,3|노트북,4      필름카메라,5
+					console.log(originText2);
+					
+					var scate = [];
+					var originArr2 = originText2.split('|');
+					
+					for(var i = 0; i<originArr2.length; i++){
+						scate.push(originArr2[i].split(',')[0]);
+					}
+					
+					$("li[id='"+ lno + "']").append("<ul class='dropdown'> </ul>");
+					
+					for(var i = 0; i<scate.length; i++){
+						$("li[id='"+ lno + "']" + ">" + ".dropdown").append("<li>" 
+								+ "<a href= " + "javascript:gotoSearchByCate('" + scate[i] + "')" +  " class='site-nav last'>" + scate[i] +"</a></li>"
+								+ "</li>");	
+					}
+				}
+			});// inside ajax end
+		});// promise end
+	}
+</script>
 
 <html lang="ko">
     <head>
@@ -27,6 +92,14 @@
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="resources/assets/css/style.css" />
         <link rel="stylesheet" href="resources/assets/css/responsive.css" />
+        
+        <!-- Main Style CSS From CategortyTop-->
+        <link rel="stylesheet" href="resources/assets/css/style.css" />
+        <link rel="stylesheet" href="resources/assets/css/responsive.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+   		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        
         
         <!-- 오른쪽 상단 아이콘 관련 -->
         <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
@@ -313,24 +386,10 @@
                                         </li>
                                         <li class="lvl1 parent dropdown"><a href="#;">카테고리 <i class="an an-angle-down-l"></i></a>
                                             <!-- foreach -->
-                                            <ul class="dropdown">
-                                            <c:forEach items="${lists }" var="firstList" varStatus="j">
-                                                
-                                                	<li>
-                                                	<a href="javascript:gotoSearchByCate('${firstList.key}')" class="site-nav"> ${firstList.key} <i class="an an-angle-right-l"></i></a>
-                                                
-                                                    <ul class="dropdown">
-												<c:forEach items="${firstList.value }" var="scate" varStatus="i">
-                                                       
-                                                        <li><a href="javascript:gotoSearchByCate('${scate.name}')" class="site-nav last"> ${scate.name }</a></li>
-                                                        
-                                            	</c:forEach>
-                                                    
-                                                    </ul>
-                                                
-                                                	</li>
-                                                
-											</c:forEach>
+                                            <ul class="dropdown" id="cate_dropdown">
+                                            
+                                          	<!-- category가 ajax로 들어오는 자리 -->
+											
                                             </ul>
                                         </li>
                                         <li class="lvl1 parent megamenu"><a href="#;">Shop <i class="an an-angle-down-l"></i></a>

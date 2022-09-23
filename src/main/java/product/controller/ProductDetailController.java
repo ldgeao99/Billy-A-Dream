@@ -39,7 +39,10 @@ public class ProductDetailController {
 		
 		pdao.updateView_count(no);
 		
+		//product object will be shown
 		ProductBean pb = pdao.getByNo(no);
+		
+		//seller's products
 		List<ProductBean> lists = pdao.getByseller_no(String.valueOf(pb.getSeller_no())); 
 		pb.setLcategoryName(ldao.selectLcategoryName(pb.getLcategory_no()));
 		pb.setScategoryName(sdao.selectScategoryName(pb.getScategory_no()));
