@@ -1,6 +1,7 @@
 package product.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,15 @@ public class ProductDao {
 	public int deleteProduct(String no) {
 		int cnt =  sqlSessionTemplate.delete(namespace+".DeleteProduct", no);
 		return cnt;
+	}
+
+	public void updatePulledDay(String no) {
+		sqlSessionTemplate.update(namespace+".updatePulledDay",no);
+		
+	}
+
+	public List<ProductBean> getEqualCate(Map<String, String> map) {
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getEqualCate",map);
+		return lists;
 	}
 }

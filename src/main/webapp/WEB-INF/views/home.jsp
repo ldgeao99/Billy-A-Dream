@@ -39,6 +39,19 @@
         		}
         		else{
         			
+        			location.href = "insert.prd";
+
+        		}
+        	}
+        	function chat(){
+        		if($('#id').val()=="null"){
+        			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+        				location.href="login.mb";	
+        			}
+        			return false;
+        		}
+        		else{
+        			
         			location.href = "allchatting.mb";
 
         		}
@@ -56,6 +69,19 @@
     		    var popY = winY + (winHeight - windowH)/2;
         		
         		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
+        	}
+        	function mypage(){
+        		if($('#id').val()=="null"){
+        			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+        				location.href="login.mb";	
+        			}
+        			return false;
+        		}
+        		else{
+        			
+        			location.href = "mypage.mb";
+
+        		}
         	}
         	
         	
@@ -141,41 +167,44 @@
 	                                	<span class="text d-none d-lg-flex" onClick="gotoSellPage()">판매하기</span>
                                 </div>
                                
+                                   <!-- 상단 오른편 판매하기 버튼 -->
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-regular fa-comment"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="chat()">채팅</span>
+                                </div>
                                 
                                 <!-- 상단 오른편 마이페이지 버튼 -->
-                                <div class="user-link iconset flex-lg-column"><i class="fa-regular fa-user"></i><span class="text d-none d-lg-flex">마이페이지</span></div>
-                                <div id="userLinks" class="mt-lg-3">
+                                <div class="user-link iconset flex-lg-column">
+                                	<i class="fa-regular fa-user">
+                                		</i><span class="text d-none d-lg-flex" onclick="mypage()">마이페이지</span>
+                                </div>
+                                <%-- <div id="userLinks" class="mt-lg-3">
                                     <ul class="user-links">
                                     	<c:if test="${id == null}">
-                                       	 	<li><a href="login.mb">로그인</a></li>
                                         	<li><a href="register.mb">회원가입</a></li>
                                     	</c:if>
                                     	<c:if test="${not empty id }">
                                         	<li><a href="mypage.mb?id=<%=id%>">마이페이지</a></li>
                                         	<li><a href="my-wishlist.mb">관심목록</a></li>
-                                        	<li><a href="compare-style1.mb">Compare</a></li>
-                                        	<li><a href="out.mb">로그아웃</a></li>
                                     	</c:if>
                                     </ul>
+                                </div> --%>
+                                
+                                    <!-- 상단 오른편 로그인,로그아웃 버튼 -->
+                                <c:if test="${id == null}">
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-solid fa-lock-open"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="location.href='login.mb'">로그인</span>
                                 </div>
+                                </c:if>
+                                 <c:if test="${id != null}">
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-solid fa-lock"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="location.href='out.mb'">로그아웃</span>
+                                </div>
+                                </c:if>
                                 <!--End Setting Dropdown-->
                                 
-                                <!--Minicart Drawer-->
-                                
-                                <!-- 상단 오른편 대화창 버튼 -->
-                                <div class="header-cart iconset flex-lg-column">
-                                    <a href="#" class="site-header__cart btn-minicart d-flex-justify-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
-                                        <i class="fa-regular fa-heart"></i><span class="text d-none d-lg-flex">관심목록</span><span class="site-cart-count counter d-flex-center justify-content-center position-absolute rounded-circle">2</span>
-                                    </a>
-                                </div>
-                                
-                                 <!-- 상단 오른편 판매하기 버튼 -->
-                                <div class="iconset flex-lg-column">
-	                                	<i class="fa-regular fa-comment"></i>
-	                                	<span class="text d-none d-lg-flex" onClick="gotoSellPage()">채팅</span>
-                                </div>
-                                
-                                <!--End Minicart Drawer-->
                                 <!--Setting Dropdown-->
 
                                 

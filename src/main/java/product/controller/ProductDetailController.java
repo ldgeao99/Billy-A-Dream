@@ -1,6 +1,8 @@
 package product.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,9 +42,24 @@ public class ProductDetailController {
 		pdao.updateView_count(no);
 		
 		ProductBean pb = pdao.getByNo(no);
+		
 		List<ProductBean> lists = pdao.getByseller_no(String.valueOf(pb.getSeller_no())); 
-		pb.setLcategoryName(ldao.selectLcategoryName(pb.getLcategory_no()));
-		pb.setScategoryName(sdao.selectScategoryName(pb.getScategory_no()));
+		
+		String Lcate = ldao.selectLcategoryName(pb.getLcategory_no());
+		String Scate = sdao.selectScategoryName(pb.getScategory_no());
+		
+		pb.setLcategoryName(Lcate);
+		pb.setScategoryName(Scate);
+		
+		Map<String, String>map = new HashMap<String, String>();
+		map.put("lcategory_no",String.valueOf(pb.getLcategory_no()));
+		map.put("scategory_no",String.valueOf(pb.getScategory_no()));
+		
+		List<ProductBean> EqualLists = pdao.getEqualCate(map);
+		
+		for(ProductBean image : EqualLists) {
+			image.setImages(image.getImages().split(",")[0]);
+		}
 		for(ProductBean image : lists) {
 			image.setImages(image.getImages().split(",")[0]);
 		}
@@ -55,6 +72,8 @@ public class ProductDetailController {
 		model.addAttribute("lists",lists);
 		model.addAttribute("images",images);
 		model.addAttribute("pb",pb);
+		model.addAttribute("EqualLists",EqualLists);
+		
 		return gotoPage;
 	}
 }

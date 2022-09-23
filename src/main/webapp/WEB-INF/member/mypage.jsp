@@ -593,6 +593,27 @@ height
 				return false;
 			}
 	}
+		
+		function upProduct(no){
+			
+			$.ajax({
+				type:'get',
+				url : "upProduct.prd", 
+				data : { 
+					no : no 
+						},
+					success : function(data){
+						if($.trim(data)=="yes"){
+							alert("재노출 되었습니다");
+						}
+						else if($.trim(data)=="no"){
+							alert("상단 재노출은 하루에 한 번만 가능합니다")
+							return false;
+						}
+					}//success
+
+			});//ajax
+		}
 </script>
 <!--Body Container-->
 <div id="page-content">
@@ -1152,6 +1173,7 @@ height
 													enctype="multipart/form-data">
 													<a href="update.prd?no=${p.no}" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a>
 													<a href="#" id="${p.no}" class="btn btn--small rounded product-form__cart-submit delete_prd"><span>삭제</span></a>
+													<input type="button" name="up" value="상단 노출" style="height: 30px; width: 145px; margin-top: 5px;" onclick="upProduct(${p.no })">
 												</form>
 												<!-- End Product Button -->
 											</div>
