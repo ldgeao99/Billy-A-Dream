@@ -187,12 +187,13 @@
 						<div class="vstack gap-2">
 							<form action="updateCoupon.admin"
 								onsubmit="return couponInsertCheck()" method="post">
+								<center><h3>쿠폰 수정하기</h3></center>
 								<input type="hidden" name="no" value="${coupon.no }">
 								<div class="mb-3">
 									<label  class="form-label fw-bold"for="couponCd"><br>쿠폰코드</label>
 								</div>
 								<div class="input-group ">
-									<input type="text" class="form-control" id="code" name="code" value=""
+									<input type="text" class="form-control" id="code" name="code" value="${coupon.code }"
 										aria-label="Recipient's username"
 										aria-describedby="button-addon2" required="required" readonly="readonly"
 										 >
@@ -331,16 +332,10 @@ function dateFormat(date) {
 
         return date.getFullYear()  + month +  day ;
 }
-			function guid() {
-				function s4() {
-					
-					return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-				}
-				return s4() + s4() + s4() + s4();
-			}
+			
 
 			function show_uuid() {
-				alert("코드는 수정할 수 없습니다.");
+				alert("쿠폰 코드는 수정할 수 없습니다.");
 			}
 			
 			function couponInsertCheck(){
