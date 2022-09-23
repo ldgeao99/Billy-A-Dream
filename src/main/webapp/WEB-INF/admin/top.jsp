@@ -96,7 +96,7 @@
             <div class="ms-5 collapse" id="authentication-collapse" data-bs-parent="#mainMenu">
               <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="member.admin">회원 조회/이용 정지</a></li>
-                <li class="nav-item"><a class="nav-link" href="register.html">예약 내역 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="memberReservationList.admin">예약 내역 관리</a></li>
                 <li class="nav-item"><a class="nav-link" href="register.html">게시글 관리</a></li>
               </ul>
             </div>
@@ -158,8 +158,6 @@
               <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="insertCoupon.admin">쿠폰 발급</a></li>
                 <li class="nav-item"><a class="nav-link" href="coupon.admin">쿠폰 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="checks-radios.html">쿠폰 삭제</a></li>
-                <li class="nav-item"><a class="nav-link" href="range.html">쿠폰 수정</a></li>
               </ul>
             </div>
           </li>

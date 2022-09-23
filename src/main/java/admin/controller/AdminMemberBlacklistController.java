@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
 import member.model.MemberDao;
+import reservation.model.ReservationDetailBean;
 
 @Controller
 public class AdminMemberBlacklistController {
@@ -21,6 +22,7 @@ public class AdminMemberBlacklistController {
 		member.setMno(mno);
 		member.setIsblacklist(check);
 		memberDao.changeBlacklist(member);
+		
 		return getPage;
 	}
 }

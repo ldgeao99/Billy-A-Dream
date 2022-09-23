@@ -23,15 +23,13 @@ public class AdminCouponUpdateController {
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String getUpdate(@RequestParam("no") int no,
 			Model model) {
-		System.out.println(1);
 		CouponBean coupon = couponDao.selectCoupon(no);
 		model.addAttribute("coupon", coupon);
-		System.out.println(2);
 		return getPage;
 	}
 	@RequestMapping(value=command,method = RequestMethod.POST)
 	public String gotoUpdate(@ModelAttribute("coupon") CouponBean coupon) {
-		
+		couponDao.updateCoupon(coupon);
 		return gotoPage;
 	}
 }

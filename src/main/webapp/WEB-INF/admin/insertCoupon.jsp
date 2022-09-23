@@ -187,6 +187,7 @@
 						<div class="vstack gap-2">
 							<form action="insertCoupon.admin"
 								onsubmit="return couponInsertCheck()" method="post">
+								<center><h3>쿠폰 추가하기</h3></center>
 								<div class="mb-3">
 									<label  class="form-label fw-bold"for="couponCd"><br>쿠폰코드</label>
 								</div>

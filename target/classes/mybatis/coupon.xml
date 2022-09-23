@@ -16,7 +16,8 @@
 			where name like #{keyword}
 		</if>
 		<if test="whatColumn == 'code'">
-			where contents like #{keyword}
+
+			where code like #{keyword}
 		</if>
       	order by startdate desc
    	</select>
@@ -33,7 +34,11 @@
       	delete coupon 
       	where no=#{no}
    	</delete>
-   	<select id="SelectCoupon">
+   	<delete id="DeleteCouponCount">
+   		delete couponCount 
+   		where cno=#{cno}
+   	</delete>
+   	<select id="SelectCoupon" resultType="coupon.model.CouponBean">
       	select * from coupon 
       	where no=#{no}
    	</select>

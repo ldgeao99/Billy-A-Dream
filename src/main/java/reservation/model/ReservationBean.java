@@ -9,9 +9,9 @@ public class ReservationBean {
 	private String is_accepted;
 	private String accepted_date;
 	private String status;
-	private String name; // 승인내역 가져올때 필요함
 	private int amount; 
 	
+	private String name; // 승인내역 가져올때 필요함
 	
 	public String getName() {
 		return name;

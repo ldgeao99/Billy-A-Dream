@@ -60,7 +60,7 @@ public class DateParse {
 			Date endDate = strFormat.parse(end);
 			int dif = (int) ((endDate.getTime()-startDate.getTime()) / (24*60*60*1000));
 			System.out.println("날짜 차이 : "+dif);
-			return dif;
+			return dif+1;
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
