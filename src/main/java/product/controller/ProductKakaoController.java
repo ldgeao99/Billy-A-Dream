@@ -37,7 +37,7 @@ public class ProductKakaoController {
 	
 	@ResponseBody
 	@RequestMapping(value=command)
-	public String kakaobuy(@RequestParam("no")int no ,@RequestParam("pname")String pname, @RequestParam("price")String price,
+	public String kakaobuy(@RequestParam("no")int no ,@RequestParam("pname")String pname, @RequestParam("price")int price,
 							@RequestParam("start_date")	String start_date,	@RequestParam("end_date")	String end_date,@RequestParam("id") String id,
 							HttpSession session) {
 			
@@ -50,6 +50,7 @@ public class ProductKakaoController {
 			rb.setBuyer_no(mb.getMno());
 			rb.setStart_date(start_date);
 			rb.setEnd_date(end_date);
+			rb.setAmount(price);
 			
 			session.setAttribute("rb", rb);
 			

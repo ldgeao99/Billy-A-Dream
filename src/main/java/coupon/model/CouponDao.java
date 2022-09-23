@@ -8,9 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import util.DateParse;
+import util.DateParse; 
 
-@Component("couponDao")
+@Component
 public class CouponDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -56,12 +56,28 @@ public class CouponDao {
 	}
 	public void updateCoupon(CouponBean coupon) {
 		sqlSessionTemplate.update(namespace+".UpdateCoupon", coupon);
+		sqlSessionTemplate.delete(namespace+".DeleteCouponCount", coupon.getNo());
+		int dif = DateParse.dateDif(coupon.getStartdate(), coupon.getEnddate());
+
+		// 쿠폰 시작일 ~ 마감일 -1
+		for(int i=0; i<dif ;i++) {
+			sqlSessionTemplate.insert( namespace+".InsertCouponCount",
+					new CouponCount(coupon.getNo(),DateParse.datePlus(coupon.getStartdate(), i)));
+		}
 	}
 	public void deleteCoupon(int no) {
 		sqlSessionTemplate.delete(namespace+".DeleteCoupon", no);
+		sqlSessionTemplate.delete(namespace+".DeleteCouponCount",no);
 	}
 	public CouponBean selectCoupon(int no) {
 		CouponBean coupon=sqlSessionTemplate.selectOne(namespace+".SelectCoupon", no);
+		String strtdate =DateParse.dateToStr(coupon.getStartdate());
+		String[] startdate=strtdate.split(" ");
+		String endate=DateParse.dateToStr(coupon.getEnddate());
+		String[] enddate=endate.split(" ");
+		
+		coupon.setStartdate(startdate[0]);
+		coupon.setEnddate(enddate[0]);
 		return coupon;
 	}
 	public CouponBean getByCode(String code) {

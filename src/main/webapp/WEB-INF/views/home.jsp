@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
-
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
 
-<style>
-#more_see : hover{
-	background-color: red;
-}
-</style>
             <!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
