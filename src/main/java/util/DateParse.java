@@ -9,7 +9,7 @@ import java.util.Date;
 public class DateParse {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
-	private static DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+	private static DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd"); 
 	
 	// 외부에서 객체 생성 금지 
 	private DateParse() {}

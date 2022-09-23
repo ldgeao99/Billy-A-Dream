@@ -191,27 +191,29 @@
 						
 						
 							<div>
-								<div class="bigtext"><i class="fa-solid fa-caret-right" style="margin-right:10px"></i>카테고리</div>
+								<div class="bigtext" style="margin-bottom: 2px"><i class="fa-solid fa-caret-right" style="margin-right:10px;"></i>카테고리</div>
 								<div>
-									<p class="product-sku">${pb.lcategoryName}<span class="variant-sku">${pb.scategoryName }</span></p>		
+									<span class="variant-sku">${pb.lcategoryName}</span> &nbsp;> &nbsp;<span class="variant-sku" style="padding:0px">${pb.scategoryName }</span>		
 								
 								</div>
 							</div>
 							<br>
 						
 							<div>
-								<div class="bigtext"><i class="fa-solid fa-boxes-stacked" style="margin-right:10px"></i>세부 구성품</div>
+								<div class="bigtext" style="margin-bottom: 2px"><i class="fa-solid fa-boxes-stacked" style="margin-right:10px"></i>세부 구성품</div>
 								<div>
 								
 								<c:set var="components_list" value="${fn:split(pb.components,',')}" />
 								<c:forEach var="compo" items="${components_list}" varStatus="status">
-									- ${compo} <br>
+									<c:if test="${compo ne ''}">
+										- ${compo} <br> 
+									</c:if>
 								</c:forEach>
 								</div>
 							</div>
 							<br>
 							<div>
-								<div class="bigtext"><i class="fa-solid fa-location-dot" style="margin-right:10px"></i>거래지역</div>
+								<div class="bigtext" style="margin-bottom: 2px"><i class="fa-solid fa-location-dot" style="margin-right:10px"></i>거래지역</div>
 								<div class="container">
 								  <div class="row">
 								    <div class="col" style="padding:0px">

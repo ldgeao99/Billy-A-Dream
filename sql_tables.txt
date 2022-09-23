@@ -14,7 +14,7 @@ grant create table, create sequence to billy;
 alter user billy default tablespace users quota unlimited on users;
 
 --대분류 카테고리
-drop table lcategory;
+drop table lcategory cascade constraints;
 create table lcategory(
 no number primary key, 
 name varchar2(40),
@@ -34,7 +34,7 @@ insert into lcategory values(lcate_seq.nextval,'PC/노트북',2);
 insert into lcategory values(lcate_seq.nextval,'카메라/DSLR',3);
 
 --소분류 카테고리
-drop table scategory;
+drop table scategory cascade constraints;
 create table scategory(
 no number primary key, 
 name varchar2(40),
@@ -97,7 +97,7 @@ create sequence member_seq
   nocache;
 
 -- 아이피 테이블
-drop table memberip;
+drop table memberip cascade constraints;
 create table memberip(
 num number,
 mno number references member(mno) on delete cascade,
@@ -112,13 +112,11 @@ create sequence memberip_seq
   maxvalue 10000
   nocache;
   
-
-  
 -- 상품 테이블
 drop table products cascade constraints;
 create table products(
-	no number not null primary key,
-	seller_no number not null,
+	no number primary key,
+	seller_no number not null references member(mno) on delete cascade,
 	images varchar2(1400),
 	name varchar2(130) not null,
 	lcategory_no number not null,
@@ -139,7 +137,6 @@ create table products(
 	is_hidden char(1) default '0'
 );
 
-
 drop sequence products_seq;
 create sequence products_seq
 	increment by 1
@@ -153,9 +150,9 @@ commit;
 -- 찜목록 테이블
 drop table wishlist cascade constraints;
 create table wishlist(
-	no number not null primary key,
-	product_no number not null,
-	member_no number not null
+	no number primary key,
+	product_no number not null references products(no) on delete cascade,
+	member_no number not null references member(mno) on delete cascade
 );
 
 drop sequence wishlist_seq;
@@ -170,16 +167,18 @@ create sequence wishlist_seq
 -- reservation테이블
 drop table reservation cascade constraints;
 create table reservation(
-   no number primary key not null,
-   product_no number references products(no) on delete cascade,
-   buyer_no number references member(mno) on delete cascade,
-   start_date date not null,
-   end_date date not null,
-   is_accepted char(1),
-   accepted_date date,
-   status varchar2(20),
-   amount number
-   );
+
+	no number primary key not null,
+	product_no number references products(no) on delete cascade,
+	buyer_no number references member(mno) on delete cascade,
+	start_date date not null,
+	end_date date not null,
+	is_accepted char(1),
+	accepted_date date,
+	status varchar2(20),
+	amount number
+	);
+
 
 drop sequence reservation_seq;
 create sequence reservation_seq
@@ -188,6 +187,34 @@ create sequence reservation_seq
 	minvalue 1
 	maxvalue 10000000
 	nocache;
+
+--쿠폰 테이블
+drop table coupon cascade constraints;
+create table coupon(
+   no number primary key,
+   code varchar2(20) not null,
+   name varchar2(40),
+   amount number,
+   unit varchar2(9),
+   startdate date default sysdate,
+   enddate date,
+   use number default 0
+);
+
+drop sequence coupon_seq;
+create sequence coupon_seq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+
+drop table couponCount cascade constraints;
+create table couponCount(
+   cno number,
+   reg_date date
+);
+
 
 commit;
 	

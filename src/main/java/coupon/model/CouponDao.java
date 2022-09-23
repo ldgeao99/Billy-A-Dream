@@ -8,9 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import util.DateParse;
+import util.DateParse; 
 
-@Component("couponDao")
+@Component
 public class CouponDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
