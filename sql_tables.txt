@@ -145,7 +145,11 @@ create sequence products_seq
 	maxvalue 10000000
 	nocache;
 
+-- paging test
+-- insert into products(no, seller_no, images, name, lcategory_no, scategory_no, add1_sido, add2_sigungu, add3_eubmyeon, add4_donglee, original_day_price, discounted_day_price, rentday_minimum, end_day) values(products_seq.nextval, 5, 'xx.jsp', '오큘러', 2, 1, 'as', 'as', 'as', 'as', 100, 100, 5, '2022-10-10');
 commit;
+
+
 
 -- 찜목록 테이블
 drop table wishlist cascade constraints;

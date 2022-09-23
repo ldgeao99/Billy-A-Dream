@@ -1,16 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
-
-<style>
-#more_see : hover{
-	background-color: red;
-}
-</style>
-            <!--Mobile Menu-->
+			<!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
                 <ul id="MobileNav" class="mobile-nav medium">
@@ -311,33 +305,7 @@
 
             <!--Body Container-->
             <div id="page-content">
-                <!--Home Slider-->
-                <section class="slideshow slideshow-wrapper">
-                    <div class="home-slideshow">
-                        <div class="slide slide1">
-                            <div class="slideshow--large bg-size">
-                                <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/demo20-banner1.jpg" src="resources/assets/images/slideshow/demo20-banner1.jpg" alt="slideshow" title="" />
-                                <div class="container">
-                                    <div class="slideshow-content slideshow-overlay middle container d-flex justify-content-center align-items-center">
-                                        <div class="slideshow-content-in text-center">
-                                            <div class="wrap-caption animation style2 whiteText">
-                                                <p class="ss-small-title mb-1">FRESH ADDITION</p>
-                                                <h2 class="mega-title ss-mega-title">Billy A Dream</h2>
-                                                <span class="mega-subtitle ss-sub-title">Furniture that works for you with best price</span>
-                                                <div class="ss-btnWrap">
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#">BUY FURNITURE</a>
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#">RENT FURNITURE</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--End Home Slider-->
-
+               
                 <!--Store Feature-->
                 <!-- <section class="section store-features">
                     <div class="container">
@@ -483,18 +451,25 @@
 				  </div>
 				</div>	 -->
 					
-					
+				<div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">검색결과</h2>
+                        </div>
+                    </div>
+                </div>
 				
 				<div class="container">
-				
-					<div class="section-header">
-                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px  ;color: black; margin-top:50px">최근 올라온 상품</h2>
-                    </div>
                      
-					<c:set var="notCeiledQuotient" value="${fn:length(recentProductList)/4}"/> 
+					<c:set var="notCeiledQuotient" value="${fn:length(resultProductList)/4}"/> 
 					<%-- notCeiledQuotient : ${notCeiledQuotient} <br> --%>
 					<c:set var="ceiledQuotient" value="${(notCeiledQuotient + (1 - (notCeiledQuotient % 1)) % 1)}"/> 
 					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
+					
+					<c:if test="${fn:length(resultProductList) eq 0}">
+						<p style="text-align:center">검색결과가 없습니다.</p>
+					</c:if>
 					
 					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
 						<c:if test="${i % 4 eq 1}">
@@ -502,45 +477,41 @@
 						</c:if>
 							
 						<!-- 비어있는 이미지 출력 -->
-						<c:if test="${i > fn:length(recentProductList)}">
+						<c:if test="${i > fn:length(resultProductList)}">
 							<div class="item col">
 	                        </div>
 						</c:if>
 						
 						<!-- 정상적인 이미지 출력 -->
-						<c:if test="${i <= fn:length(recentProductList)}">
+						<c:if test="${i <= fn:length(resultProductList)}">
 							<div class="item col">
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="productdetail.prd?no=${recentProductList[i-1].no}" class="product-img">
+	                                    <a href="productdetail.prd?no=${resultProductList[i-1].no}" class="product-img">
 	                                        <!--Image-->
-	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->
 	                                        <!--Hover Image-->
-	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Hover Image-->
 	                                    </a>
 	                                    <!-- End Product Image -->
-	                                    
-	                                    <!--Product label-->
-	                                    <div class="product-labels"><span class="lbl on-sale rounded-2" style="background:#489CFF">New</span></div>
-	                                    <!--End Product label-->
 	                                    
 	                                    <!--Product Button-->
 	                                    <div class="button-set style0 d-none d-md-block">
 	                                        <ul>
 	                                            <!--Cart Button-->
-	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
+	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
 	                                            <!--End Cart Button-->
 	                                            <!--Quick View Button-->
-	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
+	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l" style="margin-top:7px"></i> <span class="tooltip-label top">Quick View</span></a></li>
 	                                            <!--End Quick View Button-->
 	                                            <!--Wishlist Button-->
-	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
 	                                            <!--End Wishlist Button-->
 	                                            <!--Compare Button-->
-	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
+	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar" style="margin-top:7px"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
 	                                            <!--End Compare Button-->
 	                                        </ul>
 	                                    </div>
@@ -554,14 +525,14 @@
 	                                <div class="product-details text-center">
 	                                    <!--Product Name-->
 	                                    <div class="product-name">
-	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${recentProductList[i-1].no}">${recentProductList[i-1].name}</a>
+	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${resultProductList[i-1].no}">${resultProductList[i-1].name}</a>
 	                                    </div>
 	                                    <!--End Product Name-->
 	                                    <!--Product Price-->
 	                                    <div class="product-price">
-	                                        <span class="old-price"><fmt:formatNumber value="${recentProductList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
-	                                        <%-- <span class="old-price" style="text-decoration : none">${recentProductList[i-1].add1_sido} ${recentProductList[i-1].add2_sigungu} ${recentProductList[i-1].add3_eubmyeon} ${recentProductList[i-1].add4_donglee}</span> --%>
-	                                        <span class="price"><fmt:formatNumber value="${recentProductList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
+	                                        <span class="old-price"><fmt:formatNumber value="${resultProductList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
+	                                        <%-- <span class="old-price" style="text-decoration : none">${resultProductList[i-1].add1_sido} ${resultProductList[i-1].add2_sigungu} ${resultProductList[i-1].add3_eubmyeon} ${resultProductList[i-1].add4_donglee}</span> --%>
+	                                        <span class="price"><fmt:formatNumber value="${resultProductList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
 	                                    </div>
 	                                    <!-- End Product Price-->
 	                                    <!--Product Review-->
@@ -569,20 +540,20 @@
 	                                    <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i> -->
 	                                    <span class="old-price" style="text-decoration : none">
 	                                    
-	                                    <c:if test="${recentProductList[i-1].add1_sido ne ''}">
-	                                    	${recentProductList[i-1].add1_sido}
+	                                    <c:if test="${resultProductList[i-1].add1_sido ne ''}">
+	                                    	${resultProductList[i-1].add1_sido}
 	                                    </c:if>
 	                                    
-	                                    <c:if test="${recentProductList[i-1].add2_sigungu ne ''}">
-	                                    	${recentProductList[i-1].add2_sigungu}
+	                                    <c:if test="${resultProductList[i-1].add2_sigungu ne ''}">
+	                                    	${resultProductList[i-1].add2_sigungu}
 	                                    </c:if>
 	                                    
-	                                    <c:if test="${recentProductList[i-1].add3_eubmyeon ne ''}">
-	                                    	${recentProductList[i-1].add3_eubmyeon}
+	                                    <c:if test="${resultProductList[i-1].add3_eubmyeon ne ''}">
+	                                    	${resultProductList[i-1].add3_eubmyeon}
 	                                    </c:if>
 	                                    
-	                                    <c:if test="${recentProductList[i-1].add4_donglee ne ''}">
-	                                    	${recentProductList[i-1].add4_donglee}
+	                                    <c:if test="${resultProductList[i-1].add4_donglee ne ''}">
+	                                    	${resultProductList[i-1].add4_donglee}
 	                                    </c:if>
 	                                    
 	                                    <%-- ${recentProductList[i-1].add1_sido} ${recentProductList[i-1].add2_sigungu} ${recentProductList[i-1].add3_eubmyeon} ${recentProductList[i-1].add4_donglee} --%>
@@ -600,135 +571,6 @@
 						
 					</c:forEach>
 				</div>
-				
-				<center>
-					<div>
-					<input type="button" value="더보기" id="more_see" style="width:15%; margin-top:10px" onClick="location.href='newOrPopularClicked.prd?whatColumn=new'">
-					</div>
-				</center>
-				
-				<div class="container">
-				
-					<div class="section-header">
-                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px  ;color: black; margin-top:50px">인기 상품</h2>
-                    </div>
-                    
-					<c:set var="notCeiledQuotient" value="${fn:length(popularProductList)/4}"/> 
-					<%-- notCeiledQuotient : ${notCeiledQuotient} <br> --%>
-					<c:set var="ceiledQuotient" value="${(notCeiledQuotient + (1 - (notCeiledQuotient % 1)) % 1)}"/> 
-					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
-					
-					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
-						<c:if test="${i % 4 eq 1}">
-							<div class="grid-products row">
-						</c:if>
-							
-						<!-- 비어있는 이미지 출력 -->
-						<c:if test="${i > fn:length(popularProductList)}">
-							<div class="item col">
-	                        </div>
-						</c:if>
-						
-						<!-- 정상적인 이미지 출력 -->
-						<c:if test="${i <= fn:length(popularProductList)}">
-							<div class="item col">
-	                        	<!--Start Product Image-->
-	                            <div class="product-image">
-	                                    <!--Start Product Image-->
-	                                    <a href="productdetail.prd?no=${popularProductList[i-1].no}" class="product-img">
-	                                        <!--Image-->
-	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
-	                                        <!--End Image-->
-	                                        <!--Hover Image-->
-	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
-	                                        <!--End Hover Image-->
-	                                    </a>
-	                                    <!-- End Product Image -->
-	                                    
-	                                    <!--Product label-->
-	                                    <div class="product-labels"><span class="lbl on-sale rounded-2">Hot</span></div>
-	                                    <!--End Product label-->
-	                                    
-	                                    <!--Product Button-->
-	                                    <div class="button-set style0 d-none d-md-block">
-	                                        <ul>
-	                                            <!--Cart Button-->
-	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-	                                            <!--End Cart Button-->
-	                                            <!--Quick View Button-->
-	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-	                                            <!--End Quick View Button-->
-	                                            <!--Wishlist Button-->
-	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-	                                            <!--End Wishlist Button-->
-	                                            <!--Compare Button-->
-	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-	                                            <!--End Compare Button-->
-	                                        </ul>
-	                                    </div>
-	                                    <!--End Product Button-->
-	                                </div>
-	                                <!-- End Product Image -->
-	                                
-	                                
-	                                
-	                                <!--Start Product Details-->
-	                                <div class="product-details text-center">
-	                                    <!--Product Name-->
-	                                    <div class="product-name">
-	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${popularProductList[i-1].no}">${popularProductList[i-1].name}</a>
-	                                    </div>
-	                                    <!--End Product Name-->
-	                                    <!--Product Price-->
-	                                    <div class="product-price">
-	                                        <span class="old-price"><fmt:formatNumber value="${popularProductList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
-	                                        <%-- <span class="old-price" style="text-decoration : none">${popularProductList[i-1].add1_sido} ${popularProductList[i-1].add2_sigungu} ${popularProductList[i-1].add3_eubmyeon} ${popularProductList[i-1].add4_donglee}</span> --%>
-	                                        <span class="price"><fmt:formatNumber value="${popularProductList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
-	                                    </div>
-	                                    <!-- End Product Price-->
-	                                    <!--Product Review-->
-	                                    <div class="product-review m-0">
-	                                    <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i> -->
-	                                    <span class="old-price" style="text-decoration : none">
-	                                    
-	                                    <c:if test="${popularProductList[i-1].add1_sido ne ''}">
-	                                    	${popularProductList[i-1].add1_sido}
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${popularProductList[i-1].add2_sigungu ne ''}">
-	                                    	${popularProductList[i-1].add2_sigungu}
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${popularProductList[i-1].add3_eubmyeon ne ''}">
-	                                    	${popularProductList[i-1].add3_eubmyeon}
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${popularProductList[i-1].add4_donglee ne ''}">
-	                                    	${popularProductList[i-1].add4_donglee}
-	                                    </c:if>
-	                                    
-	                                    <%-- ${popularProductList[i-1].add1_sido} ${popularProductList[i-1].add2_sigungu} ${popularProductList[i-1].add3_eubmyeon} ${popularProductList[i-1].add4_donglee} --%>
-	                                    </span>
-	                                    </div>
-	                                    <!--End Product Review-->
-	                                </div>
-	                                <!--End Product Details-->
-                           		 </div>
-						</c:if>
-						
-						<c:if test="${i % 4 eq 0}">
-							</div>
-						</c:if>	
-						
-					</c:forEach>
-				</div>
-				
-				<center>
-					<div>
-					<input type="button" value="더보기" id="more_see" style="width:15%; margin-top:10px; margin-bottom:20px" onClick="location.href='newOrPopularClicked.prd?whatColumn=hot'">
-					</div>
-				</center>
-				
 				
                 <%-- <!--Product Slider-->
                 <section class="section product-slider pt-0">
@@ -1038,4 +880,12 @@
             </div>
             <!--End Body Container-->
 
-<%@include file="../member/commonBottom.jsp" %>            
+
+
+<center>
+${pageInfo.pagingHtml} <!-- 코드가 삽입되게 함 -->
+</center>
+<br>
+
+
+<%@include file="../member/commonBottom.jsp" %>

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file = "../member/categoryTop.jsp" %>
+<%@include file="../common/common.jsp" %>
+<%@include file="../member/commonTop.jsp" %>
 
 <style>
 	.bigtext{
@@ -774,83 +775,7 @@
             <!--End Body Container-->
 
             <!--Footer-->
-            <div class="footer footer-1">
-                <div class="footer-top clearfix">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center about-col mb-4">
-                                <img src="resources/assets/images/footer-logo.png" alt="Optimal" class="mb-3"/>
-                                <p>55 Gallaxy Enque, 2568 steet, 23568 NY</p>
-                                <p class="mb-0 mb-md-3">Phone: <a href="tel:+011234567890">(+01) 123 456 7890</a> <span class="mx-1">|</span> Email: <a href="mailto:info@example.com">info@example.com</a></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-3 footer-links">
-                                <h4 class="h4">Informations</h4>
-                                <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="aboutus-style1.html">About us</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="privacy-policy.html">Privacy policy</a></li>
-                                    <li><a href="#">Terms &amp; condition</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-2 footer-links">
-                                <h4 class="h4">Quick Shop</h4>
-                                <ul>
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li><a href="#">Kids</a></li>
-                                    <li><a href="#">Sportswear</a></li>
-                                    <li><a href="#">Sale</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-3 footer-links">
-                                <h4 class="h4">Customer Services</h4>
-                                <ul>
-                                    <li><a href="#">Request Personal Data</a></li>
-                                    <li><a href="faqs-style1.html">FAQ's</a></li>
-                                    <li><a href="contact-style1.html">Contact Us</a></li>
-                                    <li><a href="#">Orders and Returns</a></li>
-                                    <li><a href="#">Support Center</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 newsletter-col">
-                                <div class="display-table pt-md-3 pt-lg-0">
-                                    <div class="display-table-cell footer-newsletter">
-                                        <form action="#" method="post">
-                                            <label class="h4">NEWSLETTER SIGN UP</label>
-                                            <p>Enter Your Email To Receive Daily News And Get 20% Off Coupon For All Items.</p>
-                                            <div class="input-group">
-                                                <input type="email" class="brounded-start input-group__field newsletter-input mb-0" name="EMAIL" value="" placeholder="Email address" required>
-                                                <span class="input-group__btn">
-                                                    <button type="submit" class="btn newsletter__submit rounded-end" name="commit" id="Subscribe"><i class="an an-envelope-l"></i></button>
-                                                </span>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <ul class="list-inline social-icons mt-3 pt-1">
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="an an-facebook" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="an an-twitter" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="an an-pinterest-p" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="an an-instagram" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="TikTok"><i class="an an-tiktok" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Whatsapp"><i class="an an-whatsapp" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom clearfix">
-                    <div class="container">
-                        <div class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse">
-                            <img src="resources/assets/images/payment.png" alt="Paypal Visa Payments"/>
-                            <div class="copytext text-uppercase">&copy; 2022 Optimal. All Rights Reserved.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%@include file="../member/commonBottom.jsp" %>
             <!--End Footer-->
 
             <!--Scoll Top-->
@@ -1136,51 +1061,7 @@
             <!--End Size Chart-->
 
             <!-- Sticky Cart -->
-            <div class="stickyCart">
-                <div class="container">
-                    <form method="post" action="#" id="stickycart-form" class="d-flex-center justify-content-center">
-                        <div class="img"><img src="resources/assets/images/products/100x120.jpg" class="product-featured-img" alt="product" /></div>
-                        <div class="sticky-title ms-2 ps-1 pe-5">Floral Crop Top</div>
-                        <div class="stickyOptions rounded position-relative">
-                            <div class="selectedOpt rounded">Red / S - <span class="money">$130.00</span></div>
-                            <ul>
-                                <li class="vrOpt" data-val="31677941252156" data-no="0">Red / S - $130.00</li>
-                                <li class="vrOpt" data-val="31677941383228" data-no="1">Red / M - $130.00</li>
-                                <li class="vrOpt" data-val="31677941514300" data-no="2">Green / L - $130.00</li>
-                                <li class="vrOpt" data-val="31677941678140" data-no="3">Green / XL - $130.00</li>
-                                <li class="vrOpt" data-val="31677941284924" data-no="4">Pink / S - $104.00</li>
-                                <li class="vrOpt" data-val="31677941415996" data-no="5">Pink / M - $130.00</li>
-                                <li class="vrOpt" data-val="31677941579836" data-no="6">Peach / L - $130.00</li>
-                                <li class="vrOpt" data-val="31677941710908" data-no="7">Peach / XL - $130.00</li>
-                                <li class="soldout">White / S - Sold out</li>
-                                <li class="vrOpt" data-val="31677941481532" data-no="9">White / M - $130.00</li>
-                                <li class="vrOpt" data-val="31677941612604" data-no="10">Blue / L - $130.00</li>
-                                <li class="vrOpt" data-val="31677941776444" data-no="11">Blue / XL - $130.00</li>
-                            </ul>
-                        </div>
-                        <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js d-none ms-3">
-                            <option selected="selected" value="31677941252156">Red / S</option>
-                            <option value="31677941383228">Red / S</option>
-                            <option value="31677941514300">Red / M</option>
-                            <option value="31677941678140">Green / XL</option>
-                            <option value="31677941284924">Pink / S</option>
-                            <option value="31677941415996">Pink / M</option>
-                            <option value="31677941579836">Peach / L</option>
-                            <option value="31677941710908">Peach / XL</option>
-                            <option disabled="disabled">White / S - Sold out</option>
-                            <option value="31677941481532">White / M</option>
-                            <option value="31677941612604">Blue / L</option>
-                            <option value="31677941776444">Blue / XL</option>
-                        </select>
-                        <div class="qtyField mx-2" title="Quantity">
-                            <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
-                            <input type="text" id="quantity1" name="quantity" value="1" class="product-form__input qty rounded-0">
-                            <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-r" aria-hidden="true"></i></a>
-                        </div>
-                        <button type="submit" name="add" class="btn rounded btn-secondary product-form__cart-submit"><span>Add to cart</span></button>                    
-                    </form>
-                </div>
-            </div>
+            
             <!-- End Sticky Cart -->
 
             <!--Quickview Popup-->
