@@ -51,21 +51,21 @@ public class memberMyPageController {
 		String id = (String)session.getAttribute("id");
 		MemberBean mb = mdao.getById(id);
 		
-		//구매자의 구매내역
-		List<ReservationBean> buyrb =  rdao.getAllByBuyer_no(String.valueOf( mb.getMno()));//아이디에 해당하는 예약내역 가져옴
 		
-		//판매자의 물품 승인 및 철회 내역
+		List<ReservationBean> buyrb =  rdao.getAllByBuyer_no(String.valueOf( mb.getMno()));
+		
+		
 		List<ReservationBean> sellrb = rdao.getAllByMno(mb.getMno()); 
 		
 		
-		List<CouponBean> lists = null; // 쿠폰 가져오기
+		List<CouponBean> lists = null;
 		if(mb.getCoupon()!=null) {
 			String[] couponLists = mb.getCoupon().split(",");
 			lists = cdao.getAllByNo(couponLists);
 		}
 		
 		
-		
+		/* get plists(=wishlist items) */
 		List<WishlistBean> wishList = wdao.getWishListByMno(String.valueOf(mb.getMno())); // some product numbers
 		List<ProductBean> plists = null;
 		
@@ -84,12 +84,20 @@ public class memberMyPageController {
 			}
 		}
 		
+		/* get selling_plist */
+		List<ProductBean> selling_plists = pdao.getByseller_no(String.valueOf(mb.getMno()));
+		
+		for(ProductBean pb : selling_plists) { // to show only first picture
+			pb.setImages(pb.getImages().split(",")[0]);
+		}
 		
 		
+		/* set model */
 		model.addAttribute("buyrb",buyrb);
 		model.addAttribute("sellrb",sellrb);
 		model.addAttribute("couponLists",lists);
-		model.addAttribute("plists",plists);
+		model.addAttribute("plists",plists);					// = wishlist items
+		model.addAttribute("selling_plists",selling_plists);	
 		model.addAttribute("mb",mb);
 		return gotoPage;
 	}

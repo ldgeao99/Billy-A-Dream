@@ -16,7 +16,7 @@
 		select * from lcategory where order_num=#{order_num}
 	</select>
 	<select id="SelectLcategoryName" resultType="String">
-		select name form lcategory where no=#{no}
+		select name from lcategory where no=#{no}
 	</select>
 	<update id="AfterUpdateOrder_num">
 		update lcategory set order_num=order_num-#{order_num} where no=#{no}

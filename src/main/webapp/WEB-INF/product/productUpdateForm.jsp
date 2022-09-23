@@ -12,7 +12,7 @@
       <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
       <script>
         function gotoSellPage(){
-        	location.href = "insert.prd";
+        	location.href = "update.prd";
         }
      </script>
      <style>
@@ -27,7 +27,7 @@
 	var componentsSize = 0;
 	
 	$(function() {
-
+		
 		/* 대분류 카테고리를 화면에 추가하는 부분 */
 		$.ajax({
 			url : "getLargeCategory.lcate",
@@ -35,8 +35,36 @@
 				var large_items = resdata.split('|'); 
 				for(var i = 0; i<large_items.length; i++){
 					var small_items = large_items[i].split(',');
-					$('#leftcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='lcategory' id='lcategory/"+ small_items[1] +"'></li>");	
+					
+					if(small_items[1] == "${pb.lcategory_no}"){
+						$('#leftcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='lcategory' style='color:red' id='lcategory/"+ small_items[1] +"'></li>");	
+					}
+					else{
+						$('#leftcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='lcategory' id='lcategory/"+ small_items[1] +"'></li>");	
+					}
 				}
+				
+				/* 대분류 카테고리에 맞는 소분류 카테고리를 불러오는 부분 */
+				$.ajax({
+					url : "getSmallCategory.scate",
+					data : {
+						lcategoryNo : $('input[name="lcategory_no"]').val()
+					},
+					success : function(resdata){
+						$('#rightcategory').empty();
+						var large_items = resdata.split('|'); 
+						for(var i = 0; i<large_items.length; i++){
+							var small_items = large_items[i].split(',');
+							
+							if(small_items[1] == "${pb.scategory_no}"){
+								$('#rightcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='scategory' style='color:red' id='scategory/"+ small_items[1] +"'></li>");
+							}else{
+								$('#rightcategory').append("<li><input type='button' value='"+ small_items[0] + "' class='scategory' id='scategory/"+ small_items[1] +"'></li>");	
+							}	
+						} 
+					}
+				});
+				
 			}
 		});
 		
@@ -71,6 +99,22 @@
 		});
 			
 		
+		
+		
+		var comsString = "${pb.components}";
+		
+		if(comsString != ""){
+			var comsArr = comsString.split(',');
+			
+			for(var i = 0; i<comsArr.length ;i++){
+				components.push(comsArr[i]);
+				$('#add_component').parent().parent().parent().append("<div class='row row-cols-3 components'><div class='col' style='padding:10px 10px'>"+ comsArr[i] + "</div><div class='col' style='padding:12px 10px'><i class='fa-regular fa-circle-check change_component' style='cursor:pointer'></i> <i class='fa-regular fa-circle-xmark delete_component'  style='cursor:pointer'></i></div><div class='col'></div></div>");
+			}
+			componentsSize = comsArr.length;
+			$('#limit_component_Counter').empty();
+			$('#limit_component_Counter').append("("+ componentsSize + "/10)");
+		}
+		
 		/* 세부 구성품 추가하는 부분 */
 		$('#add_component').click(function(){
 			
@@ -95,7 +139,7 @@
 		});//click끝
 		
 		/* 세부 구성품 수정하는 부분*/
-		$('.col').on('click', '.change_component', function(){
+		$(document).on('click', '.change_component', function(){
 			
 			var re_name = window.prompt("변경할 이름을 입력해주세요", "");
 			
@@ -345,10 +389,9 @@
 	<div class="collection-hero">
 		<div class="collection-hero__image" style=""></div>
 		<div class="collection-hero__title-wrapper container">
-			<h1 class="collection-hero__title">상품등록</h1>
+			<h1 class="collection-hero__title">상품수정</h1>
 			<div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
-				<a href="/ex/" title="Back to the home page" style="text-decoration:none">홈</a><span>|</span><span
-					class="fw-bold">상품등록</span><span>|</span><a href="#"><span>상품관리</span></a>
+				<a href="/ex/" title="Back to the home page" style="text-decoration:none">홈</a><span>|</span><a href="insert.prd" style="text-decoration:none">상품등록</a><span>|</span><span class="fw-bold">상품수정</span></a>
 			</div>
 		</div>
 	</div>
@@ -357,9 +400,9 @@
 
 <!--Main Content-->
 
-<form id="prd_register_form" action="insert.prd" method="post" enctype="multipart/form-data">
+<form id="prd_register_form" action="update.prd" method="post" enctype="multipart/form-data">
 	
-
+	
 	<div class="container">
 		<!-- 상품명 입력부분 -->
 		<div class="row justify-content-md-center">
@@ -377,6 +420,7 @@
 		</div>
 		
 		<!-- 첨부파일 선택 부분 -->
+		<input type="hidden" name="images" value="${pb.images}">			
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2" style="padding : 83px 10px;">상품 이미지<span id="limit_image_Counter" style="color:#9B99A9">(0/10)</span></div>
 			
@@ -421,8 +465,8 @@
 					</div>
 				</div>
 				
-				<input type="hidden" name="lcategory_no" value="">
-				<input type="hidden" name="scategory_no" value=""> 
+				<input type="hidden" name="lcategory_no" value="${pb.lcategory_no}">
+				<input type="hidden" name="scategory_no" value="${pb.scategory_no}">
 			</div>
 		</div>
 		
@@ -507,6 +551,7 @@
     				<div class="col" style="padding:0px"><input type="button" id="add_component" value="+"></div>
   				</div>
   				
+
   				<!-- 
   				<div class="row row-cols-3 components">
 					<div class="col" style="padding:10px 10px">Column</div>
@@ -528,7 +573,7 @@
 			<div class="col col-lg-2" style="padding : 38px 10px;">상세설명</div>
 			
 			<div class="col col-lg-6">
-				<textarea name="description" placeholder="내용을 입력해 주세요(최대 125자)" maxlength="125" style="width: 100%; height: 6.25em; resize: none;">지금 당장 체험해보세요</textarea>
+				<textarea name="description" placeholder="내용을 입력해 주세요(최대 125자)" maxlength="125" style="width: 100%; height: 6.25em; resize: none;">${pb.description}</textarea>
 			</div>
 		</div>
 		<div class="row justify-content-md-center">
@@ -563,7 +608,9 @@
 		
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-8">
-				<input type="button" id="submit_button" value="등록하기">	
+				<input type="hidden" name="no" value="${pb.no}">
+				<input type="hidden" name="seller_no" value="${pb.seller_no}">
+				<input type="button" id="submit_button" value="수정하기">	
 			</div>
 		</div>
 		
@@ -855,15 +902,27 @@
 	
 <script type="text/javascript">
 
+
+
+
+/* 1. get initial imge names list*/
+/* var initialImagesText = "${pb.images}";
+		 
+중요한거 sel_files 에 file 객체를 만들어 넣어줘야 함.
+*/
+		
+
+/* 2. 요거대로 div에 추가해주자 */
+
 /* 코드를 이런식으로 작성하면 function의 파라미터를 호출로 주는게 아니라 여기서 줄 수 있음 */
 ( 
 	imageView = function imageView(att_zone, btn){ /* ('att_zone', 'btnAtt') 이미지들이 들어갈 위치, 파일추가 버튼 */
-						
+					
+		
 		var attZone = document.getElementById(att_zone); // 이미지들이 표시되는 공간 
 		var btnAtt = document.getElementById(btn)		 // 파일 추가 버튼
 		var sel_files = [];
-							    
-							    
+		
 		/* 각 요소의 style 정의 */
 		// 이미지와 체크 박스를 감싸고 있는 div 속성
 		var div_style = 'display:inline-block;position:relative;'
@@ -874,11 +933,97 @@
 		// 이미지안에 표시되는 체크박스의 속성
 		var chk_style = 'width:30px; height:30px; position:absolute; font-size:24px;'
 						+ 'right: 0px; bottom:0px; z-index:999; color:#8C8C8C; cursor:pointer;';
-							  
-							    
+						
+		
+		
+		
+		//이 부분은 화면이 로드될 때 딱 한번만 불림.---------------------------------------------------------
+		var initialImagesText = "${pb.images}";
+		var initialImages = initialImagesText.split(',');
+		
+		for(var i = 0; i<initialImages.length; i++){
+			var ob = new File([], initialImages[i]);
+			sel_files.push(ob);
+			
+			var dt = new DataTransfer(); // input type file은 내부적으로 선택된 파일을 저장하는 FileList를 갖는데, 이를 수정하려면 DataTransfer 객체로 덮어씌워야 한다. 
+			
+			// 바로 위 dt 변수에 모든 파일객체 담음
+			for(index in sel_files) {
+				var file = sel_files[index];
+				dt.items.add(file);
+			}
+			
+			// input type file 에 담긴 FileList를 덮어씌움
+			btnAtt.files = dt.files;
+			
+			/* 여기서 반복문 3번 돌려 이미지 그리기 */				
+			var temp_img = document.createElement('img');
+			temp_img.setAttribute('style', img_style);
+			temp_img.src = "http://localhost:8080/ex/resources/" + initialImages[i];
+			
+			makedDiv = function(temp_img, file){
+				var div = document.createElement('div')
+				div.setAttribute('style', div_style)
+			      
+				/* 이미지 오른편에 보여지는 X표시 버튼 */
+				var btn = document.createElement('i');
+				btn.setAttribute('class', 'fa-solid fa-square-xmark');
+				btn.setAttribute('delFile', file.name); /* 이게 있어야 삭제가능 */
+				btn.setAttribute('style', chk_style);
+			      
+				/* 삭제 버튼이 눌릴 경우 이벤트 처리 */
+				btn.onclick = function(ev){
+					var ele = ev.srcElement;
+					var watnToDelFileName = ele.getAttribute('delFile'); // 삭제할 파일의 이름
+					
+					// sel_files 배열에서 해당 파일객체 삭제
+					for(var i=0 ;i<sel_files.length; i++){
+						if(watnToDelFileName == sel_files[i].name){
+							sel_files.splice(i, 1);      
+						}
+					}
+					
+					var dt = new DataTransfer(); // input type file은 내부적으로 선택된 파일을 저장하는 FileList를 갖는데, 이를 수정하려면 DataTransfer 객체로 덮어씌워야 한다. 
+					
+					// 바로 위 dt 변수에 모든 파일객체 담음
+					for(index in sel_files) {
+						var file = sel_files[index];
+						dt.items.add(file);
+					}
+					
+					// input type file 에 담긴 FileList를 덮어씌움
+					btnAtt.files = dt.files;
+					
+					var p = ele.parentNode;
+					attZone.removeChild(p);
+					
+					$('#limit_image_Counter').empty();
+					$('#limit_image_Counter').append("("+ sel_files.length +"/9)");
+				}
+				
+				div.appendChild(temp_img)
+				div.appendChild(btn)
+				return div
+			}
+			
+			attZone.appendChild(makedDiv(temp_img, ob));
+			
+		}
+		
+		$('#limit_image_Counter').empty();
+		$('#limit_image_Counter').append("("+ sel_files.length +"/9)");
+		 
+
+		/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+						
+		
+		
+		
+		
 		/* 사용자에 의한 파일 추가 이벤트가 발생하면 */					
 		btnAtt.onchange = function(e){
-
+			//alert(typeof sel_files[0]);
+			
 			var files = e.target.files; // object FileList
 			var fileArr = Array.prototype.slice.call(files) // Array 타입으로 변경 [object File],[object File],,
 			
@@ -922,6 +1067,7 @@
 					let img = document.createElement('img');
 					img.setAttribute('style', img_style);
 					img.src = ee.target.result;
+					
 					attZone.appendChild(makeDiv(img, file));
 				}
 								      
@@ -990,7 +1136,10 @@
 				btnAtt.files = dt.files;
 				
 				var p = ele.parentNode;
-				attZone.removeChild(p)
+				attZone.removeChild(p);
+				
+				$('#limit_image_Counter').empty();
+				$('#limit_image_Counter').append("("+ sel_files.length +"/9)");
 			}
 			
 			div.appendChild(img)

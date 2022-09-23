@@ -143,6 +143,8 @@ height
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
+	
+	
 	function acceptProduct(no){
 		$.ajax({
 			type : 'post',
@@ -169,6 +171,31 @@ height
 
 	
 	$(function() {
+		
+		$('.delete_prd').click(function(){
+			var pno = $(this).attr('id');
+			
+			// 1.request with ajax for delete prd from server and table
+			$.ajax({
+				url : "delete.prd",
+				data : {
+					no : pno,
+				},
+				success : function(data) {
+					if(data == "deleted"){
+						alert("성공적으로 삭제되었습니다.");
+					}else{
+						alert("상품삭제 실패");
+					}
+				}//success
+			});
+			
+			// 2.delete product item view
+			$(this).parent().parent().parent().remove();
+		});
+		
+		
+		
 		$('#cbtest2').click(function() {
 			$('#quitbtn').attr("data-bs-target", "#exampleModal");
 		})
@@ -1020,11 +1047,11 @@ height
 											<div class="product-image">
 												<!-- Product Image -->
 												<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
-													<img class="primary blur-up lazyload"
+													<img class="primary blur-up lazyload" style="height:186px"
 													data-src="<%=request.getContextPath()%>/resources/${p.images}"
 													src="<%=request.getContextPath()%>/resources/${p.images}"
 													alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-													<img class="hover blur-up lazyload"
+													<img class="hover blur-up lazyload" style="height:186px"
 													data-src="<%=request.getContextPath()%>/resources/${p.images}"
 													src="<%=request.getContextPath()%>/resources/${p.images}"
 													alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
@@ -1042,7 +1069,9 @@ height
 												<!-- End Product Name -->
 												<!-- Product Price -->
 												<div class="product-price">
-													<span class="price"><fmt:formatNumber pattern="###,###" value="${p.original_day_price}" var="price"/>${ price} 원 / 일</span>
+													<span class="old-price"><fmt:formatNumber value="${p.original_day_price}" pattern="#,###" />원/일</span> 
+													<span class="price"><fmt:formatNumber value="${p.discounted_day_price}" pattern="#,###" />원/일</span> 
+													<%-- <span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span> --%>
 												</div>
 												<!-- End Product Price -->
 												<!-- Product Button -->
@@ -1072,29 +1101,29 @@ height
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
 								
-								<c:if test="${fn:length(plists) eq 0}">
+								<c:if test="${fn:length(selling_plists) eq 0}">
 									<div align="center">
 									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
-									 관심목록이 없습니다
+									 판매중인 상품이 없습니다
 									</div>
 								</c:if>
 								
 								<!-- 반복문 시작 -->
-								<c:if test="${fn:length(plists) ne 0}"> 
+								<c:if test="${fn:length(selling_plists) ne 0}"> 
 								
 								
-									<c:forEach var="p" items="${plists}">
+									<c:forEach var="p" items="${selling_plists}">
 										<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
 											<input type="hidden" name="no" id="no"value="${p.no }">
 											<!-- Product Image -->
 											<div class="product-image">
 												<!-- Product Image -->
 												<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
-													<img class="primary blur-up lazyload"
+													<img class="primary blur-up lazyload" style="height:186px"
 													data-src="<%=request.getContextPath()%>/resources/${p.images}"
 													src="<%=request.getContextPath()%>/resources/${p.images}"
 													alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-													<img class="hover blur-up lazyload"
+													<img class="hover blur-up lazyload" style="height:186px"
 													data-src="<%=request.getContextPath()%>/resources/${p.images}"
 													src="<%=request.getContextPath()%>/resources/${p.images}"
 													alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
@@ -1112,15 +1141,17 @@ height
 												<!-- End Product Name -->
 												<!-- Product Price -->
 												<div class="product-price">
-													<span class="price"><fmt:formatNumber pattern="###,###" value="${p.original_day_price}" var="price"/>${ price} 원 / 일</span>
+												<%-- <span class="old-price"><fmt:formatNumber value="${p.original_day_price}" pattern="#,###" />원/일</span> --%> 
+	                                        	<span class="price" style="color : #e95144 !important"><fmt:formatNumber value="${p.discounted_day_price}" pattern="#,###" />원/일</span> 
+													<%-- <span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span> --%>
 												</div>
 												<!-- End Product Price -->
 												<!-- Product Button -->
 												
 												<form method="post" action="/cart/add" class="cart-form mt-3"
 													enctype="multipart/form-data">
-													<a href="update.prd?no=${p.no}" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a> 
-													<a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>삭제</span></a>
+													<a href="update.prd?no=${p.no}" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a>
+													<a href="#" id="${p.no}" class="btn btn--small rounded product-form__cart-submit delete_prd"><span>삭제</span></a>
 												</form>
 												<!-- End Product Button -->
 											</div>
