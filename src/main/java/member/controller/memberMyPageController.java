@@ -1,13 +1,17 @@
 package member.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import coupon.model.CouponBean;
 import coupon.model.CouponDao;
@@ -42,17 +46,14 @@ public class memberMyPageController {
 	private ReservationDao rdao;
 	
 	@RequestMapping(command)
-	public String login( Model model,HttpSession session) {
+	public String login( Model model,HttpSession session,HttpServletResponse response,@RequestParam(value="select",required = false)String select) throws IOException {
 		
 		String id = (String)session.getAttribute("id");
 		MemberBean mb = mdao.getById(id);
-		
-		
+		 
 		List<ReservationBean> buyrb =  rdao.getAllByBuyer_no(String.valueOf( mb.getMno()));
 		
-		
 		List<ReservationBean> sellrb = rdao.getAllByMno(mb.getMno()); 
-		
 		
 		List<CouponBean> lists = null;
 		if(mb.getCoupon()!=null) {
@@ -95,6 +96,35 @@ public class memberMyPageController {
 		model.addAttribute("plists",plists);					// = wishlist items
 		model.addAttribute("selling_plists",selling_plists);	
 		model.addAttribute("mb",mb);
+		
+		
+		response.setContentType("text/html; charset=UTF-8"); // 내보내는것의 한글처리
+		PrintWriter writer = response.getWriter(); // 웹브라우저와 연결다리 담당
+		
+		System.out.println("select:"+select);
+		writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
+		if(select==null) {
+			
+		}
+		else if(select.equals("2")) {
+			writer.println("<script>$(function(){document.getElementById('order').click();})</script>"); 
+		}
+		else if(select.equals("3")) {
+			writer.println("<script>$(function(){document.getElementById('wish').click();})</script>"); 
+		}
+		else if(select.equals("4")) {
+			writer.println("<script>$(function(){document.getElementById('sell').click();})</script>"); 
+		}
+		else if(select.equals("5")) {
+			writer.println("<script>$(function(){document.getElementById('coupon').click();})</script>"); 
+		}
+		else if(select.equals("6")) {
+			writer.println("<script>$(function(){document.getElementById('updateMem').click();})</script>"); 
+		}
+       	
+		writer.flush(); 
+		
+		
 		return gotoPage;
 	}
 }

@@ -25,13 +25,13 @@ public class ProductUpdateController {
 	
 	private final String command = "update.prd";
 	private String getPage ="productUpdateForm";
-	private String gotoPage ="redirect:/";
+	private String gotoPage ="redirect:mypage.mb?select=4";
 	
 	@Autowired
 	ProductDao productDao;
 	
 	@Autowired
-	ServletContext servletContext; // ÇÁ·ÎÁ§Æ® 1°³´ç ÇÏ³ª°¡ ÀÚµ¿À¸·Î ¸¸µé¾îÁÜ. ±×·¡¼­ ±×³É Autowired¸¸ ÇØÁàµµ ÁÖÀÔµÊ.
+	ServletContext servletContext; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® 1ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½×·ï¿½ï¿½ï¿½ ï¿½×³ï¿½ Autowiredï¿½ï¿½ ï¿½ï¿½ï¿½àµµ ï¿½ï¿½ï¿½Ôµï¿½.
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String showUpdateForm(@RequestParam("no") String pno, Model model) {
@@ -81,17 +81,17 @@ public class ProductUpdateController {
 		//4. appeared new files upload on server resource
 		MultipartFile[] upload = pbFromForm.getUpload();
 		String tempImages = null;
-		//resources ¶ó´Â Æú´õ°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸í »ý¼º.
+		//resources ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		File folder = new File(path);
 		if (!folder.exists()) {
-			folder.mkdir(); //Æú´õ »ý¼ºÇÕ´Ï´Ù.
-			System.out.println(path + " °æ·ÎÀÇ resources Æú´õ°¡ »ý¼ºµÇ¾ú½À´Ï´Ù.");
+			folder.mkdir(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+			System.out.println(path + " ï¿½ï¿½ï¿½ï¿½ï¿½ resources ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 		for(int i = 0; i<imgNamesFromForm.length; i++) {
 			if(Arrays.asList(imgNamesFromDB).contains(imgNamesFromForm[i]) == false) {
 				System.out.println("!!" + imgNamesFromForm[i] + "file have to be uploaded on server resource!!"); 
 				UUID uuid = UUID.randomUUID();
-				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // multi.getOriginalFilename() ´ë½Å pbean.getImage() ¸¦ »ç¿ëÇØµµ µÊ.
+				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // multi.getOriginalFilename() ï¿½ï¿½ï¿½ pbean.getImage() ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½ï¿½.
 				
 				if(tempImages == null) {
 					tempImages = uuid.toString()+"_" + upload[i].getOriginalFilename();
@@ -100,7 +100,7 @@ public class ProductUpdateController {
 				}
 				
 				try {
-					upload[i].transferTo(file); // ¿øÇÏ´Â À§Ä¡¿¡ ÆÄÀÏÀ» ¿Ã¸®°í ½ÍÀ» ¶§ »ç¿ëÇÔ. ÀÌ ¹®Àå ½ÇÇà°ú µ¿½Ã¿¡ ¾÷·Îµå µÊ.
+					upload[i].transferTo(file); // ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½.
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -121,9 +121,9 @@ public class ProductUpdateController {
 		//6. execute update
 		int cnt = productDao.updateProduct(pbFromForm);
 		if(cnt > 0 ) {
-			System.out.println("»óÇ° ¼öÁ¤¼º°ø");
+			System.out.println("ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}else {
-			System.out.println("»óÇ° ¼öÁ¤½ÇÆÐ");
+			System.out.println("ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return gotoPage;

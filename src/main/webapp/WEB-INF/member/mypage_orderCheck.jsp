@@ -144,6 +144,7 @@ height
 <script type="text/javascript">
 	
 	
+	
 	function acceptProduct(no){
 		$.ajax({
 			type : 'post',
@@ -684,10 +685,10 @@ height
 					<li><a class="nav-link" data-bs-toggle="tab" href="#orders" id="order">거래내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#wishlist" id="wish">관심목록</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#selllist" id="sell">판매상품관리</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking" id="coupon">쿠폰내역</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking" id="orderstracking">쿠폰내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab"
-						href="#account-details" id="updateMem">회원정보수정</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#quit" id="q">회원탈퇴</a></li>
+						href="#account-details">회원정보수정</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#quit">회원탈퇴</a></li>
 				</ul>
 				<!-- End Nav tabs -->
 			</div>
@@ -994,7 +995,7 @@ height
 											</div>
 											<div class="form-group">
 												<label for="name" class="form-label mt-4">이름</label>
-												<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" value="${mb.name }" readonly>
+												<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" value="${mb.name }">
 											</div>
 											<div class="form-group">
 												<label for="full_address" class="form-label mt-4">주소</label>
