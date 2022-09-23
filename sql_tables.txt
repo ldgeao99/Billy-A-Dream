@@ -215,6 +215,28 @@ create table couponCount(
    reg_date date
 );
 
+-- 문의하기 테이블
+drop table contect cascade constraints;
+create table contect( 
+   no number primary key not null,
+   mno number references member(mno) on delete cascade,
+   id varchar2(20),
+   reg_date date default sysdate,
+   category_num number,
+   title varchar2(50),
+   content varchar2(210),
+   is_reply number default 0, --원글인지 답글인지 구분
+   is_replied number default 0, --답글남겼는지 체크
+   readcount number default 0	
+   );
+
+drop sequence contect_seq;
+create sequence contect_seq
+	increment by 2
+	start with 2 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
 
 commit;
 	
