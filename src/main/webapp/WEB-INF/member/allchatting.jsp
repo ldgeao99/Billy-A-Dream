@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,12 +17,13 @@
 
 </head>
 <style>
-/* .simplebar-content{
+
+.inner-main .card collapse chat-collapse show{
 	display: none;
-} */
+}
 </style>
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
  
  
@@ -35,15 +35,15 @@
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data) {
 			var roomlist = data.split("|");
+			
 			for(var i=0 in roomlist){
 				var roomlists = roomlist[i].split(",");
-				alert(roomlists[4]);
-				$('.simplebar-content').append(
+				$('#lists').append(
 						'<div class="card collapse chat-collapse show"> <div class="card-header d-flex align-items-center gap-3">'+
 						' <button type="button" aria-label="Close" class="btn-close flex-shrink-0 d-lg-none shadow-none" data-toggle="inner-sidebar-expand"></button></div>'+
 			              '<div class="card-body navbar-light px-0" data-simplebar>'+
 			                '<div class="navbar-nav">'+
-			                  '<a href="javascript:void(0)" class="nav-link d-flex align-items-center px-3 gap-3">'+
+			                  '<a onClick="detailmsg('+roomlists[1]+')" class="nav-link d-flex align-items-center px-3 gap-3">'+
 			                    '<div class="position-relative">'+
 			                      '<img src="<%=request.getContextPath()%>/resources/'+roomlists[4]+'" alt="User" width="38" height="38" class="rounded-circle" loading="lazy">'+
 			                    '</div>'+
@@ -63,10 +63,92 @@
 		}
 
 	});//ajax
+	
  })
+ 	 const interval = setInterval(function() {
+ 		detailmsg($('#roomno').val());
+ 	}, 1500);	 
+ 
+ 
+	function detailmsg(no){
+	 $('#mse').nextAll().remove();
+	 
+	 $.ajax({
+		 	type : 'post',
+			url : "getallmsg.mb",
+			data : {
+				no : no
+			},
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			success : function(date) {
+				var id = <%=session.getAttribute("id")%>;
+				var info = date.split("|");
+				
+				$('#imag').attr("src","<%=request.getContextPath()%>/resources/"+info[0].split(",")[3]); 
+				$('#imgtag').attr("href","productdetail.prd?no="+info[0].split(",")[8]);
+				
+				if($('#name').val()==info[0].split(",")[5]){
+				$('.username').html(info[0].split(",")[6]);//대화창 위에 이름 띄우기위해
+				}
+				else{
+				$('.username').html(info[0].split(",")[5]);//대화창 위에 이름 띄우기위해
+				}
+				
+				for(var i=0 in info){
+					//alert(info[i]);
+					var msg = info[i].split(",");
+					if(id==msg[4]){
+						
+					$('#msi').parent().append( // 오른쪽 나오는거
+							'<div class="popover bs-popover-start">'+
+			                  '<div class="popover-body" id="m">'+
+			                    msg[1]+'<input type="hidden" id="roomno" value="'+msg[7]+'">'+
+			                    '<time>'+msg[2]+'</time>'+
+			                  '</div>'+
+			                  '</div>'
+			                  );
+					}
+					else{
+						
+			        $('#mse').parent().append(
+			                '<div class="popover bs-popover-end">'+
+			                  '<div class="popover-body" id="m">'+
+			                   msg[1]+
+			                    '<time>'+msg[2]+'</time>'+
+			                  '</div>'+
+			                '</div>'
+	             	 ); 
+					}          
+				}
+				$(".simplebar-content-wrapper").scrollTop($(".simplebar-content-wrapper")[0].scrollHeight);
+			},//success 
+			error : function(){
+				alert("에러");
+			}
+		});//ajax
+		 
+	}
+ 
+ 	function sendmsg(){
+ 		 $.ajax({
+ 		 	type : 'post',
+ 			url : "sendRoomMsg.mb",
+ 			data : {
+ 				room_no : $('#roomno').val(),
+ 				msg : $('#msg').val()
+ 			},
+ 			success : function(data) {
+ 				detailmsg($('#roomno').val());
+ 			},//success 
+ 			error : function(){
+ 				alert("에러");
+ 			}
+
+ 		});//ajax
+ 	}
  </script>
 <body class="preloading">
-
+	<input type="hidden" id="name" value="${name }">
   <!-- Wrapper -->
   <div id="wrapper" class="fixed-sidebar fixed-navbar">
 
@@ -81,17 +163,8 @@
 
             <!-- Chat list -->
             <div class="card collapse chat-collapse show">
-              <div class="card-header d-flex align-items-center gap-3">
-                <button type="button" aria-label="Close" class="btn-close flex-shrink-0 d-lg-none shadow-none" data-toggle="inner-sidebar-expand"></button>
-              </div>
-              <div class="card-body navbar-light px-0" data-simplebar>
-                <div class="navbar-nav">
-                  <a href="javascript:void(0)" class="nav-link d-flex align-items-center px-3 gap-3">
-                    <div class="vstack position-relative overflow-hidden">
-                      <p class="mb-0 small text-truncate"></p>
-                      <p class="mb-0 small text-truncate fw-bold text-dark"></p>
-                    </div>
-                  </a>
+              <div class="card-body navbar-light px-0" data-simplebar >
+                <div class="navbar-nav" id="lists">
                  
                 </div>
               </div>
@@ -99,7 +172,7 @@
             <!-- /Chat list -->
 
           </div>
-          <div id="inner-main">
+          <div id="inner-main" >
             <div class="card">
               <div class="card-header d-flex align-items-center gap-3">
                 <button class="btn link-secondary px-0 d-lg-none shadow-none" type="button" data-toggle="inner-sidebar-expand">
@@ -110,10 +183,12 @@
                   </svg>
                 </button>
                 <div class="position-relative">
-                  <img src="resources/admin_asset/img/user/user2.svg" alt="User" width="36" height="36" class="rounded-circle" loading="lazy">
-                  <span class="position-absolute bottom-0 end-0 badge border border-white rounded-circle bg-success p-1"><span class="visually-hidden">online</span></span>
+                	<a id="imgtag">
+                  <img src="resources/admin_asset/img/user/user2.svg" alt="User" width="36" height="36" class="rounded-circle" loading="lazy" id="imag">
+                	</a>
                 </div>
                 <div class="vstack position-relative overflow-hidden small">
+               		<p class="username"></p>
                 </div>
                 <div class="dropdown ms-auto">
                   <button class="btn link-secondary px-0 dropdown-toggle no-caret d-flex shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,13 +209,13 @@
                 </div>
               </div>
               <div class="card-body chat-body py-0" data-simplebar>
-                <div class="popover bs-popover-start">
+                <div class="popover bs-popover-start" id="msi" style="display: none;">
                   <div class="popover-body">
                     오른쪽 내가 보내는 내용
                     <time>시간</time>
                   </div>
                 </div>
-                <div class="popover bs-popover-end">
+                <div class="popover bs-popover-end" id="mse" style="display: none;">
                   <div class="popover-body">
                    왼쪽 상대방 내용
                     <time>시간</time>
@@ -150,8 +225,8 @@
               <div class="card-footer chat-footer px-0">
                 <form>
                   <div class="input-group">
-                    &nbsp;&nbsp;&nbsp;<textarea class="form-control autosize px-0 border-0 shadow-none" rows="1" placeholder="Write a message..."></textarea>
-                    <button class="btn link-secondary d-flex shadow-none" type="button">
+                    &nbsp;&nbsp;&nbsp;<textarea class="form-control autosize px-0 border-0 shadow-none" rows="1" placeholder="메세지 입력.." id="msg"></textarea>
+                    <button class="btn link-secondary d-flex shadow-none" type="button" onclick="sendmsg()">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                       </svg>

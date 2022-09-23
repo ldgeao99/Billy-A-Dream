@@ -10,6 +10,8 @@ public class DateParse {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
 	private static DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+	private static SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 	
 	// 외부에서 객체 생성 금지 
 	private DateParse() {}
@@ -66,6 +68,18 @@ public class DateParse {
 		}
 		
 		return -1;
+	}
+	public static String time(String time) {
+			
+		Date date;
+		try {
+			date = fulltimeFormat.parse(time);
+			return timeFormat.format(date);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 

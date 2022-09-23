@@ -37,4 +37,10 @@ public class roomDao {
 		List<roomBean> rb = sqlSessionTemplate.selectList(namespace+".searchRoomById",id);
 		return rb;
 	}
+
+
+	public roomBean getByRoom_no(int room_no) {
+		roomBean rb = sqlSessionTemplate.selectOne(namespace+".getByRoom_no",room_no);
+		return rb;
+	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +36,10 @@ public class allChattingController {
 	
 	
 	@RequestMapping(value=command , method = RequestMethod.GET) 
-	public String allChatting() {
+	public String allChatting(HttpSession session,Model model) {
+		String id =(String)session.getAttribute("id");
+		MemberBean mb = mdao.getById(id);
+		model.addAttribute("name",mb.getName());
 		return gotoPage; 
 	}
 	
