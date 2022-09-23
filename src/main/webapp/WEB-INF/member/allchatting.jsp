@@ -67,11 +67,21 @@
  })
  	 const interval = setInterval(function() {
  		detailmsg($('#roomno').val());
- 	}, 1500);	 
+ 	}, 3000);	 
  
  
 	function detailmsg(no){
-	 $('#mse').nextAll().remove();
+	 
+	/* var msglists ="";
+	
+	
+	if(msglists==""){
+		
+	}
+	else{ */
+		
+		
+	$('#mse').nextAll().remove();
 	 
 	 $.ajax({
 		 	type : 'post',
@@ -126,6 +136,8 @@
 				alert("에러");
 			}
 		});//ajax
+		
+//	}//else
 		 
 	}
  

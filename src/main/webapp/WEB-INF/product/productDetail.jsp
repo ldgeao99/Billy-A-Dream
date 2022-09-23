@@ -264,7 +264,7 @@
                                     
                                     
                                     <br>
-                                        <div class="row g-2">
+                                         <div class="row g-2">
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--submit">
                                                     <input type="hidden" name="id" id="id" value="${id }">
@@ -282,10 +282,6 @@
                                                     <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chat()">채팅</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="agree-check customCheckbox clearfix d-none">
-                                            <input id="prTearm" name="tearm" type="checkbox" value="tearm" required />
-                                            <label for="prTearm">I agree with the terms and conditions</label>
                                         </div>
                                     </div>
                                     <!-- End Product Action -->
