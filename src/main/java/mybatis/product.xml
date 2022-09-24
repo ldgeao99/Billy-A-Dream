@@ -16,7 +16,7 @@
  	<select id="GetRecentProductList" resultType="product.model.ProductBean">
  		select * 
 		from products
-		order by pulled_day, no
+		order by pulled_day desc, no
  	</select>
 
  	<select id="GetPopularProductList" resultType="product.model.ProductBean">
@@ -91,6 +91,7 @@
  	
  	<select id="getByseller_no" resultType="product.model.ProductBean">
  		select * from products where seller_no = #{seller_no}
+ 		order by pulled_day desc, no
  	</select>
  	
  	<select id="getAllByNo" resultType= "product.model.ProductBean">

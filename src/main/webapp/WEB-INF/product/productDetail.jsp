@@ -197,7 +197,7 @@
 								<div class="row">
 									<div class="col" style="padding:0px">
 										<i class="fa-regular fa-clock"></i>&nbsp;
-										<fmt:parseDate var="formattedDay" value="${pb.create_day }" pattern="yyyy-MM-dd" />
+										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd" />
 										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
 							    	</div>
 							    	
