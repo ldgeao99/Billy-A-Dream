@@ -203,7 +203,7 @@
                                     <div class="control">
                                         <div class="searchField d-flex">
                                             <div class="search-category">
-                                                <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start">
+                                                <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start" style="padding-left: 15px;">
                                                 	<option value="all"> 전체검색</option>
                                                 	<option value="name"> 상품명</option>
                                                 	<option value="seller_name"> 판매자 ID</option>

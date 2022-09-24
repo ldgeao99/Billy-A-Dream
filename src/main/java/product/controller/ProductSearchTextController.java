@@ -53,7 +53,6 @@ public class ProductSearchTextController {
 		System.out.println("keyword: " + keyword);
 		keyword = keyword.toUpperCase();
 		
-		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn); // genre or grade or actor
 		
@@ -75,6 +74,12 @@ public class ProductSearchTextController {
 		
 		model.addAttribute("resultProductList", resultProductList);
 		model.addAttribute("pageInfo", pageInfo);
+		
+		
+		
+		if(whatColumn.equals("address")) {
+			return "productSearchResultByAddress";
+		}
 		
 		return getPage;
 	}
