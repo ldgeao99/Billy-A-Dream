@@ -402,6 +402,7 @@
 
 <form id="prd_register_form" action="update.prd" method="post" enctype="multipart/form-data">
 	
+	<input type="hidden" name="whereClicked" value="${whereClicked}">
 	
 	<div class="container">
 		<!-- 상품명 입력부분 -->

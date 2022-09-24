@@ -197,8 +197,8 @@
 								<div class="row">
 									<div class="col col-lg-4" style="padding:0px">
 										<i class="fa-regular fa-clock"></i>&nbsp;
-										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd" />
-										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
+										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd HH:mm:ss" />
+										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd HH:mm:ss" />${newformattedDay }
 							    	</div>
 							    	
 							    	<div class="col" style="text-align:right">
@@ -214,7 +214,7 @@
                                     
                                     <c:if test="${id == pb.id}">
                                 	&nbsp;&nbsp; 
-                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }">수정</a>
+                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }&whereClicked=detail">수정</a>
                                 	</c:if>
                                 	
 							    	</div>

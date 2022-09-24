@@ -1172,7 +1172,7 @@ height
 												
 												<form method="post" action="/cart/add" class="cart-form mt-3"
 													enctype="multipart/form-data">
-													<a href="update.prd?no=${p.no}" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a>
+													<a href="update.prd?no=${p.no}&whereClicked=mypage" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a>
 													<a href="#" id="${p.no}" class="btn btn--small rounded product-form__cart-submit delete_prd"><span>삭제</span></a>
 													<input type="button" name="up" value="상단 노출" style="height: 30px; width: 145px; margin-top: 5px;" onclick="upProduct(${p.no })">
 												</form>
