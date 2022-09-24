@@ -227,7 +227,7 @@
 							<div>
 								<div class="bigtext" style="margin-bottom: 2px"><i class="fa-solid fa-caret-right" style="margin-right:10px;"></i>카테고리</div>
 								<div>
-									<span class="variant-sku">${pb.lcategoryName}</span> &nbsp;> &nbsp;<span class="variant-sku" style="padding:0px">${pb.scategoryName }</span>		
+									<a href="javascript:gotoSearchByCate('${pb.lcategoryName}')"><span class="variant-sku">${pb.lcategoryName}</span></a> &nbsp;> &nbsp;<a href="javascript:gotoSearchByCate('${pb.scategoryName}')"><span class="variant-sku" style="padding:0px">${pb.scategoryName }</span></a>	
 								
 								</div>
 							</div>
@@ -489,7 +489,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="section-header col-12">
-                                <h2 class="text-transform-none">유사한 상품</h2>
+                                <h2 class="text-transform-none" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:22px  ;color: black; margin-top:50px">유사한 상품</h2>
                             </div>
                         </div>
                         
