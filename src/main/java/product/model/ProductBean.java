@@ -27,7 +27,16 @@ public class ProductBean {
 	private char is_hidden;
 	private String lcategoryName;
 	private String scategoryName;
+	private String id; // seller_id
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getLcategoryName() {
 		return lcategoryName;
 	}

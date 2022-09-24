@@ -202,11 +202,11 @@
 							    	</div>
 							    	
 							    	<div class="col" style="text-align:right">
-							      	<i class="fa-solid fa-heart"></i> 관심 
-                                    
-                                    <span id="likeCount">
-	                                    
-                                    </span>
+							    	
+							    	<i class="fa-regular fa-user"></i> <a href="search.prd?whatColumn=seller_name&keyword=${pb.id}">${pb.id}</a>
+							    	&nbsp;&nbsp; 					    	
+							    	
+							      	<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
                                     
                                     &nbsp;&nbsp; 
                                     <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }

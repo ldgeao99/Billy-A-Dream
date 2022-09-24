@@ -461,7 +461,6 @@
                 </div>
 				
 				<div class="container">
-                     
 					<c:set var="notCeiledQuotient" value="${fn:length(resultProductList)/4}"/> 
 					<%-- notCeiledQuotient : ${notCeiledQuotient} <br> --%>
 					<c:set var="ceiledQuotient" value="${(notCeiledQuotient + (1 - (notCeiledQuotient % 1)) % 1)}"/> 

@@ -206,6 +206,7 @@
                                                 <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start">
                                                 	<option value="all"> 전체검색</option>
                                                 	<option value="name"> 상품명</option>
+                                                	<option value="seller_name"> 판매자 ID</option>
                                                     <option value="address"> 주소명</option>
                                                 
                                                     <!-- 

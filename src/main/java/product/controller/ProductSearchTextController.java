@@ -51,32 +51,30 @@ public class ProductSearchTextController {
 		System.out.println("ProductSearchController 에서 넘겨받은 2개의 값");
 		System.out.println("whatColumn:" + whatColumn);
 		System.out.println("keyword: " + keyword);
+		keyword = keyword.toUpperCase();
+		
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", "%"+ keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
+		
+		if(whatColumn.equals("name") || whatColumn.equals("address")) { // product name search
+			map.put("keyword", "%"+ keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
+		}else {
+			map.put("keyword", keyword); // 미리 %를 붙여서 넘겨줘야 함.
+		}
 		
 		// 검색 조건에 맞는 레코드의 개수가 몇개인지 가져옴
 		int totalCount = pdao.getTotalSearchCount(map);
+		System.out.println("totalCount of the result list by search: " + totalCount);
+		
 		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 페이지 번호에 이런걸 넣어줘야 해서.
 		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword); // null 대신에 3을 넘기면 한 페이지에 3개씩 보여짐
 		
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
-		
-		
-		/* for lcategory list & scategory list */
-		List<LcategoryBean> list = lcategoryDao.selectLcategoryList();
-		Map<String,List<ScategoryBean>> lists=new HashMap<String,List<ScategoryBean>>();
-		for(LcategoryBean lcate : list) {
-			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
-			
-			lists.put(lcate.getName(),scate);
-		}
+		System.out.println("size of the list will be shown in this page: " + resultProductList.size());		
 		
 		model.addAttribute("resultProductList", resultProductList);
 		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("list", list); 	// lcategory list
-		model.addAttribute("lists", lists);	// scategory list
 		
 		return getPage;
 	}

@@ -26,18 +26,21 @@
  	</select>
  	
  	<select id="GetProductListBySearch" resultType="product.model.ProductBean">
- 		select pro2.*, scate.name scategoryName
-		from (select pro.*, lcate.name lcategoryName
+ 		select *
+ 		from(select pro3.*, upper(m.id) id    
+		from (select pro2.*, scate.name scategoryName
+		from (select pro.no, pro.seller_no, pro.images, upper(pro.name) name, pro.lcategory_no, pro.scategory_no, pro.add1_sido, pro.add2_sigungu, pro.add3_eubmyeon, pro.add4_donglee, pro.original_day_price, pro.discounted_day_price, pro.rentday_minimum, pro.components, pro.description, pro.end_day, pro.view_count, pro.create_day, pro.pulled_day, pro.is_hidden, lcate.name lcategoryName
 		from products pro inner join lcategory lcate
 		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
-		on pro2.scategory_no= scate.no
+		on pro2.scategory_no= scate.no) pro3 inner join member m
+    	on pro3.seller_no = m.mno)
  		
  		<if test="whatColumn == 'all' and keyword != ''">
-		where pro2.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		where name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
 		</if>
  		
 		<if test="whatColumn == 'name'">
-		where pro2.name like #{keyword}
+		where name like #{keyword}
 		</if>
 		
 		<if test="whatColumn == 'address'">
@@ -45,28 +48,33 @@
 		</if>
 		
 		<if test="whatColumn == 'category'">
-		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'seller_name'">
+		where id = #{keyword}
 		</if>	
  		
- 		order by pulled_day, pro2.no
+ 		order by pulled_day, no
  	</select>
  	
  	<select id="GetTotalSearchCount" resultType="int">
- 	
  		select count(*) 
- 		from
- 		(select pro2.*, scate.name scategoryName
-		from (select pro.*, lcate.name lcategoryName
+ 		from (select *
+ 		from((select pro3.*, upper(m.id) id    
+		from (select pro2.*, scate.name scategoryName
+		from (select pro.no, pro.seller_no, pro.images, upper(pro.name) name, pro.lcategory_no, pro.scategory_no, pro.add1_sido, pro.add2_sigungu, pro.add3_eubmyeon, pro.add4_donglee, pro.original_day_price, pro.discounted_day_price, pro.rentday_minimum, pro.components, pro.description, pro.end_day, pro.view_count, pro.create_day, pro.pulled_day, pro.is_hidden, lcate.name lcategoryName
 		from products pro inner join lcategory lcate
 		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
-		on pro2.scategory_no= scate.no
+		on pro2.scategory_no= scate.no) pro3 inner join member m
+    	on pro3.seller_no = m.mno))) pro4
  		
  		<if test="whatColumn == 'all' and keyword != ''">
-		where pro2.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		where pro4.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
 		</if>
  		
 		<if test="whatColumn == 'name'">
-		where pro2.name like #{keyword}
+		where pro4.name like #{keyword}
 		</if>
 		
 		<if test="whatColumn == 'address'">
@@ -74,9 +82,12 @@
 		</if>
 		
 		<if test="whatColumn == 'category'">
-		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
 		</if>
-		)
+		
+		<if test="whatColumn == 'seller_name'">
+		where id = #{keyword}
+		</if>
  	</select>
  	
  	
