@@ -15,15 +15,71 @@
  	
  	<select id="GetRecentProductList" resultType="product.model.ProductBean">
  		select * 
- 		from products
- 		order by create_day
+		from products
+		order by pulled_day, no
  	</select>
- 	
+
  	<select id="GetPopularProductList" resultType="product.model.ProductBean">
  		select * 
  		from products
- 		order by view_count desc
+ 		order by view_count desc, no
  	</select>
+ 	
+ 	<select id="GetProductListBySearch" resultType="product.model.ProductBean">
+ 		select pro2.*, scate.name scategoryName
+		from (select pro.*, lcate.name lcategoryName
+		from products pro inner join lcategory lcate
+		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
+		on pro2.scategory_no= scate.no
+ 		
+ 		<if test="whatColumn == 'all' and keyword != ''">
+		where pro2.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		</if>
+ 		
+		<if test="whatColumn == 'name'">
+		where pro2.name like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'address'">
+		where add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'category'">
+		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
+		</if>	
+ 		
+ 		order by pulled_day, pro2.no
+ 	</select>
+ 	
+ 	<select id="GetTotalSearchCount" resultType="int">
+ 	
+ 		select count(*) 
+ 		from
+ 		(select pro2.*, scate.name scategoryName
+		from (select pro.*, lcate.name lcategoryName
+		from products pro inner join lcategory lcate
+		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
+		on pro2.scategory_no= scate.no
+ 		
+ 		<if test="whatColumn == 'all' and keyword != ''">
+		where pro2.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		</if>
+ 		
+		<if test="whatColumn == 'name'">
+		where pro2.name like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'address'">
+		where add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'category'">
+		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
+		</if>
+		)
+ 	</select>
+ 	
+ 	
  	
  	<select id="GetByNo" resultType="product.model.ProductBean">
  		select * from products where no = #{no}

@@ -65,7 +65,6 @@ public class ProductInsertController {
 				System.out.println("multi.getOriginalFilename():" + multi.getOriginalFilename()); // 내가 선택한 화일의 파일명
 				//System.out.println("pbean.getImage():" + pbean.getImage()); // 이것 또한 내가 선택한 화일명, 이걸 이용해도 상관없음
 				
-				
 				String uploadPath = servletContext.getRealPath("/resources");
 				System.out.println("uploadPath: " + uploadPath);
 				
