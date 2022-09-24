@@ -346,7 +346,7 @@
                             <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">                            
                                 <nav class="grid__item" id="AccessibleNav">
                                     <ul id="siteNav" class="site-nav medium center hidearrow">
-                                        <li class="lvl1 parent megamenu"><a href="#;">Home <i class="an an-angle-down-l"></i></a>
+                                        <!-- <li class="lvl1 parent megamenu"><a href="#;">Home <i class="an an-angle-down-l"></i></a>
                                             <div class="megamenu style1">
                                                 <div class="row">
                                                     <div class="col-md-8 col-lg-8">
@@ -413,8 +413,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="lvl1 parent dropdown"><a href="#;">카테고리 <i class="an an-angle-down-l"></i></a>
+                                        </li> -->
+                                        <li class="lvl1 parent dropdown"><a href="#;"><i class="fa-solid fa-bars"></i></i> <i class="an an-angle-down-l"></i></a>
                                             <!-- foreach -->
                                             <ul class="dropdown" id="cate_dropdown">
                                             
@@ -729,6 +729,19 @@
                                                 End Product Grid
                                             </div> -->
                                         </li>
+                                        <li class="lvl1 parent dropdown"><a href="board.evt">이벤트<i class="an an-angle-down-l"></i></a>
+                                           <!--  <ul class="dropdown">
+                                                <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
+                                                <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
+                                                <li><a href="blog-masonry.html" class="site-nav">Masonry Blog Style</a></li>
+                                                <li><a href="blog-2columns.html" class="site-nav">2 Columns</a></li>
+                                                <li><a href="blog-3columns.html" class="site-nav">3 Columns</a></li>
+                                                <li><a href="blog-4columns.html" class="site-nav">4 Columns</a></li>
+                                                <li><a href="blog-single-post.html" class="site-nav last">Article Page</a></li>
+                                            </ul> -->
+                                        </li>
+                                        
                                         <li class="lvl1 parent megamenu"><a href="board.ctc">문의게시판<i class="an an-angle-down-l"></i></a>
                                             <!-- <div class="megamenu style4">
                                                 <div class="row shop-grid-5">
@@ -797,18 +810,7 @@
                                         </li>
                                         
                                         
-                                        <li class="lvl1 parent dropdown"><a href="#;">Blog <i class="an an-angle-down-l"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                                                <li><a href="blog-masonry.html" class="site-nav">Masonry Blog Style</a></li>
-                                                <li><a href="blog-2columns.html" class="site-nav">2 Columns</a></li>
-                                                <li><a href="blog-3columns.html" class="site-nav">3 Columns</a></li>
-                                                <li><a href="blog-4columns.html" class="site-nav">4 Columns</a></li>
-                                                <li><a href="blog-single-post.html" class="site-nav last">Article Page</a></li>
-                                            </ul>
-                                        </li>
+                                        
                                     </ul>
                                 </nav>                                   
                             </div>

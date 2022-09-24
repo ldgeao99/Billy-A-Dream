@@ -1,17 +1,17 @@
-package contect.controller;
+package event.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ContectViewController {
+public class EventViewController {
 	
-	private final String command="board.ctc";
-	private String getPage="contectBoard"; 
+	private final String command="board.evt";
+	private String getPage="eventBoard"; 
 	
 	@RequestMapping(command)
-	public String contectBoardView(Model model) {
+	public String eventBoardView(Model model) {
 		
 		return getPage;
 	}
