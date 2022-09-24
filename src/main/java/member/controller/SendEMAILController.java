@@ -21,12 +21,12 @@ public class SendEMAILController {
 	public String email(@RequestParam("email") String email, HttpSession session) throws Exception {
 
 		int EmailAuthNum = sendSMS.randomRange(10000, 99999);// 6�ڸ� ������ȣ �ο�
-		String subject = "[Biily A Dream] �̸��� ������ȣ";
-		String msg = "[Billy A Dream] �̸��� ���� ��ȣ�� [" + EmailAuthNum + "] �Դϴ�.";
+		String subject = "[Biily A Dream] email certification number";
+		String msg = "[Billy A Dream] email certification number [" + EmailAuthNum + "]";
 
 		sendEMAIL.sendMail(email, subject, msg);
 
-		System.out.println("�ο��� �̸���������ȣ :" + EmailAuthNum);
+		System.out.println("email certification number :" + EmailAuthNum);
 		session.setAttribute("EmailAuthNum", EmailAuthNum);
 
 		return "yes";

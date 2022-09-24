@@ -3,6 +3,7 @@
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
+
             <!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
