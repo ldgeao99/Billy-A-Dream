@@ -59,7 +59,7 @@
 	}
 	
 	function like(){
-		if($('#id').val()==""){
+		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -93,7 +93,7 @@
 	}
 	
 	function buy(){
-		if($('#id').val()==""){
+		if($('#id').val() == "null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -119,7 +119,7 @@
 	    var popX = winX + (winWidth - windowW)/2;
 	    var popY = winY + (winHeight - windowH)/2;
 		
-		if($('#id').val()==""){
+		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -282,7 +282,8 @@
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 col-lg-5">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button>
+                                                	<input type="button" class="btn rounded btn-outline-primary proceed-to-checkout" value="예약 및 결제하기" onclick="buy()">
+                                                    <!-- <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button> -->
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 col-lg-2">
