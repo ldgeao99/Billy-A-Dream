@@ -195,7 +195,7 @@
 							
 							<div class="container">
 								<div class="row">
-									<div class="col" style="padding:0px">
+									<div class="col col-lg-4" style="padding:0px">
 										<i class="fa-regular fa-clock"></i>&nbsp;
 										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd" />
 										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
@@ -209,7 +209,14 @@
 							      	<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
                                     
                                     &nbsp;&nbsp; 
-                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }
+                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count } 
+                                    
+                                    
+                                    <c:if test="${id == pb.id}">
+                                	&nbsp;&nbsp; 
+                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }">수정</a>
+                                	</c:if>
+                                	
 							    	</div>
 							</div>
 							
