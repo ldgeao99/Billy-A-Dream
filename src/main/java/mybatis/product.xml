@@ -110,7 +110,14 @@
  		delete from products
  		where no = #{no}
  	</delete>
+ 	
+ 	<update id="updatePulledDay">
+ 		update products set pulled_day = sysdate where no = #{no}
+ 	</update>
 	
+	<select id="getEqualCate" resultType= "product.model.ProductBean">
+		select * from products where lcategory_no=#{lcategory_no} and scategory_no=#{scategory_no}
+	</select>
 	
 	
 </mapper>

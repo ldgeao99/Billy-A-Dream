@@ -84,6 +84,6 @@ public class memberRegisteCouponController {
 		 
 		 mdao.insertCoupon(map);
 		 
-		 return "redirect:mypage.mb";
+		 return "redirect:mypage.mb?select=5";
 	}
 }

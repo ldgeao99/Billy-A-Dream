@@ -57,7 +57,7 @@ public class allMsgController {
 			String time = DateParse.time(c.getTime());
 			// 두번째mno가 판매자임
 			info += pb.getName()+","+c.getContent()+","+time+","+pb.getImages()+","+mb.getId()+","+mb.getName()+","+mb2.getName()+","+room_no+","+pb.getNo();
-			
+			 
 			if(lists.size()-1!=i) {
 				info+= "|";
 			}
