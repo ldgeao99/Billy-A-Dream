@@ -44,10 +44,7 @@ public class ProductDetailController {
 		//product object will be shown
 		ProductBean pb = pdao.getByNo(no);
 		
-<<<<<<< HEAD
-=======
 		//seller's products
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 		List<ProductBean> lists = pdao.getByseller_no(String.valueOf(pb.getSeller_no())); 
 		
 		String Lcate = ldao.selectLcategoryName(pb.getLcategory_no());

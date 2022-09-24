@@ -105,7 +105,7 @@
 	}
 	
 	//채팅
-	function chat(){
+	function chatProduct(){
 		
 		var no = $('#no').val();
 		
@@ -287,7 +287,7 @@
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 col-lg-2">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chat()">채팅</button>
+                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chatProduct()">채팅</button>
                                                 </div>
                                             </div>
                                         </div>

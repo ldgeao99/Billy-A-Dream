@@ -104,7 +104,7 @@ public class memberMyPageController {
 		System.out.println("select:"+select);
 		writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
 		if(select==null) {
-			
+		 
 		}
 		else if(select.equals("2")) {
 			writer.println("<script>$(function(){document.getElementById('order').click();})</script>"); 

@@ -24,27 +24,27 @@ public class ProductDao {
 	}
 	
 	public List<ProductBean> getRecentProductList(Map<String, String> map, PagingProduct pageInfo){
-		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //°Ç³Ê¶Û ·¹ÄÚµå °³¼ö(ÆäÀÌÁö ¹øÈ£¿¡ µû¶ó º¯°æµÊ)
-		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // º¸¿©ÁÙ(=°¡Á®¿Ã) ·¹ÄÚµå °³¼ö(°íÁ¤)
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // °Ç³Ê¶ç°í ¸î°³¸¸ °¡Á®¿ÃÁö¿¡ ´ëÇÑ Á¤º¸¸¦ °¡Áö°í ÀÖÀ½
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //ï¿½Ç³Ê¶ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // ï¿½Ç³Ê¶ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".GetRecentProductList", map, rowBounds);
 		return lists;
 	}
 	
 	public List<ProductBean> getPopularProductList(Map<String, String> map, PagingProduct pageInfo){
-		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //°Ç³Ê¶Û ·¹ÄÚµå °³¼ö(ÆäÀÌÁö ¹øÈ£¿¡ µû¶ó º¯°æµÊ)
-		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // º¸¿©ÁÙ(=°¡Á®¿Ã) ·¹ÄÚµå °³¼ö(°íÁ¤)
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // °Ç³Ê¶ç°í ¸î°³¸¸ °¡Á®¿ÃÁö¿¡ ´ëÇÑ Á¤º¸¸¦ °¡Áö°í ÀÖÀ½
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //ï¿½Ç³Ê¶ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // ï¿½Ç³Ê¶ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".GetPopularProductList", map, rowBounds);
 		return lists;
 	}
 	
 	public List<ProductBean> getProductListBySearch(Map<String, String> map, PagingProduct pageInfo) {
-		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //°Ç³Ê¶Û ·¹ÄÚµå °³¼ö(ÆäÀÌÁö ¹øÈ£¿¡ µû¶ó º¯°æµÊ)
-		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // º¸¿©ÁÙ(=°¡Á®¿Ã) ·¹ÄÚµå °³¼ö(°íÁ¤)
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // °Ç³Ê¶ç°í ¸î°³¸¸ °¡Á®¿ÃÁö¿¡ ´ëÇÑ Á¤º¸¸¦ °¡Áö°í ÀÖÀ½
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //ï¿½Ç³Ê¶ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // ï¿½Ç³Ê¶ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".GetProductListBySearch", map, rowBounds);
 		return lists;
@@ -84,7 +84,6 @@ public class ProductDao {
 		return cnt;
 	}
 
-<<<<<<< HEAD
 	public void updatePulledDay(String no) {
 		sqlSessionTemplate.update(namespace+".updatePulledDay",no);
 		
@@ -94,9 +93,6 @@ public class ProductDao {
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getEqualCate",map);
 		return lists;
 	}
-=======
-	
 
 	
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 }

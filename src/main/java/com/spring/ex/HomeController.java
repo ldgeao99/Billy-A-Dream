@@ -47,13 +47,13 @@ public class HomeController {
 			
 		Map<String, String> map1 = new HashMap<String, String>();
 		map1.put("whatColumn", ""); // genre or grade or actor
-		map1.put("keyword", ""); // ¹Ì¸® %¸¦ ºÙ¿©¼­ ³Ñ°ÜÁà¾ß ÇÔ.
+		map1.put("keyword", ""); // ï¿½Ì¸ï¿½ %ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 		PagingProduct pageInfo1 = new PagingProduct("1", null, 8, "", "main_new", "");
 		
 		
 		Map<String, String> map2 = new HashMap<String, String>();
 		map2.put("whatColumn", ""); // genre or grade or actor
-		map2.put("keyword", ""); // ¹Ì¸® %¸¦ ºÙ¿©¼­ ³Ñ°ÜÁà¾ß ÇÔ.
+		map2.put("keyword", ""); // ï¿½Ì¸ï¿½ %ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 		PagingProduct pageInfo2 = new PagingProduct("1", null, 8, "", "main_hot", "");
 		
 		
@@ -72,7 +72,7 @@ public class HomeController {
 //		}
 //		model.addAttribute("list", list);
 //		model.addAttribute("lists", lists);
-		
+		 
 		return "home";
 	}
 }
