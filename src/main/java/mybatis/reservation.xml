@@ -15,7 +15,7 @@
 	
 	<select id="getAllByMno" resultType= "reservation.model.ReservationBean">
 		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted  
-		from (select * from products where seller_no = #{mno}) p  inner join reservation r on p.no = r.product_no
+		from (select * from products where seller_no = #{mno}) p  inner join reservation r on p.no = r.product_no order by accepted_date
 	</select>
 	
 	<update id="updateAccept">

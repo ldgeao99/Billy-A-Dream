@@ -57,11 +57,18 @@ public class allChattingController {
 			MemberBean mb2 = mdao.getByMno(r.getMno2()); // 두번째가 판매자임
 			ProductBean pb = pdao.getByNo(String.valueOf(r.getPno())); // 상품번호에 따른 productbean 이미지 가져오기위해
 			
+			String name; 
+			if(id.equals(mb.getId())) {
+				name = mb2.getName();
+			}
+			else {
+				name = mb.getName();
+			}
 			// 이미지가 여러개이기 때문에 첫번째꺼만 넘겨줘야함.
 			String[] images = pb.getImages().split(",");
 			pb.setImages(images[0]);
 			
-			listJson+=+r.getNo()+","+r.getRoom_no()+","+mb.getName()+","+mb2.getName()+","+pb.getImages();
+			listJson+=+r.getNo()+","+r.getRoom_no()+","+name+","+pb.getImages();
 			if(rb.size()-1!=i) {
 				listJson+= "|";
 			}

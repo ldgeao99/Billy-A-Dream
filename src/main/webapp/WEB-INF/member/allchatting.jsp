@@ -45,7 +45,7 @@
 			                '<div class="navbar-nav">'+
 			                  '<a onClick="detailmsg('+roomlists[1]+')" class="nav-link d-flex align-items-center px-3 gap-3">'+
 			                    '<div class="position-relative">'+
-			                      '<img src="<%=request.getContextPath()%>/resources/'+roomlists[4]+'" alt="User" width="38" height="38" class="rounded-circle" loading="lazy">'+
+			                      '<img src="<%=request.getContextPath()%>/resources/'+roomlists[3]+'" alt="User" width="38" height="38" class="rounded-circle" loading="lazy">'+
 			                    '</div>'+
 			                    '<div class="vstack position-relative overflow-hidden">'+
 			                      '<p class="mb-0 small text-truncate">'+roomlists[2]+'</p>'+
@@ -65,21 +65,15 @@
 	});//ajax
 	
  })
+	 
  	 const interval = setInterval(function() {
  		detailmsg($('#roomno').val());
  	}, 3000);	 
  
  
+ 
 	function detailmsg(no){
 	 
-	/* var msglists ="";
-	
-	
-	if(msglists==""){
-		
-	}
-	else{ */
-		
 		
 	$('#mse').nextAll().remove();
 	 
