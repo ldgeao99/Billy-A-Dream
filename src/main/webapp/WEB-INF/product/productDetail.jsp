@@ -359,7 +359,7 @@
                             <div class="col-12 col-sm-3 mb-2 sm-md-0">
                                 <div class="nav flex-column nav-pills" id="vertical-tab" role="tablist" aria-orientation="vertical">
                                     <a class="nav-link active" id="description-tab" data-bs-toggle="pill" href="#description" role="tab" aria-controls="description" aria-selected="true">상세설명</a>
-                                    <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#reviewt" role="tab" aria-controls="reviewt" aria-selected="false">상품 후기</a>
+                                    <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#reviewt" role="tab" aria-controls="reviewt" aria-selected="false" >상품 후기</a>
                                     <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#sellerProduct" role="tab" aria-controls="reviewt" aria-selected="false">판매자 상품</a>
                                 </div>
                             </div>
@@ -383,14 +383,14 @@
                                                             <span class="spr-summary-actions-togglereviews ms-2">Based on 6 reviews 234</span>
                                                         </div>
                                                         <div class="spr-summary-actions mt-3 mt-lg-0">
-                                                            <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded"><i class="icon an-1x an an-pencil-alt me-2"></i>리뷰 작성하기</a>
+                                                            <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded" id="write"><i class="icon an-1x an an-pencil-alt me-2"></i>리뷰 작성하기</a>
                                                         </div>
                                                     </div>
 
                                                     <form method="post" action="#" class="product-review-form new-review-form mb-4">
                                                         <h4 class="spr-form-title text-uppercase">Write A Review</h4>
                                                         <fieldset class="spr-form-contact">
-                                                            <div class="spr-form-contact-name form-group">
+                                                            <div class="spr-form-contact-name form-group" id="writediv">
                                                                 <label class="spr-form-label" for="nickname">Name <span class="required">*</span></label>
                                                                 <input class="spr-form-input spr-form-input-text" id="nickname" type="text" name="name" placeholder="John smith" required />
                                                             </div>

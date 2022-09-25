@@ -1,8 +1,12 @@
 package product.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +41,7 @@ public class ProductDetailController {
 	private ScategoryDao sdao;
 	
 	@RequestMapping(command)
-	public String detailForm(@RequestParam("no") String no,Model model) {
+	public String detailForm(@RequestParam("no") String no,Model model,@RequestParam(value="write",required = false)String write,HttpServletResponse response) throws IOException {
 		
 		pdao.updateView_count(no);
 		
@@ -75,6 +79,18 @@ public class ProductDetailController {
 		model.addAttribute("images",images);
 		model.addAttribute("pb",pb);
 		model.addAttribute("EqualLists",EqualLists);
+		
+		System.out.println("여기옴");
+		if(write!=null) { // 후기작성하기 누르면 
+			response.setContentType("text/html; charset=UTF-8"); // 내보내는것의 한글처리
+			PrintWriter writer = response.getWriter(); // 웹브라우저와 연결다리 담당
+			writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
+			writer.println("<script>$(function(){document.getElementById('reviewt-tab').click();})</script>"); 
+			writer.println("<script>$(function(){document.getElementById('write').click();})</script>"); 
+			writer.println("<script>$(function(){var offset = $('#writediv').offset(); $('html, body').animate({scrollTop: offset.top},400); })</script>"); 
+			writer.flush();
+		}
+       	
 		
 		return gotoPage;
 	}

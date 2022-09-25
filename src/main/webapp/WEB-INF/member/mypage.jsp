@@ -148,6 +148,11 @@ height
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
+	function writeReview(pno){
+		alert(pno);
+		location.href="writeReview.prd?pno="+pno;
+	}
+	
 	function acceptProduct(no){
 		$.ajax({
 			type : 'post',
@@ -245,6 +250,21 @@ height
 										});//ajax
 							}
 						})
+		/* 거래내역 누르면 status change  //delay because of mypageController is too many process */				
+		$('#order').click(function(){
+			$.ajax({
+				type : 'post',
+				url : "changeStatus.rsv",
+				data : {
+					id : $('#id').val()
+				},
+				success : function(data) {
+				}//success
+
+			});//ajax
+			
+		})//click		
+						
 	})
 	
 	
@@ -807,11 +827,17 @@ height
 												
 												</td>
 												<td>
-												<c:if test="${b.is_accepted ==0}">
+												<c:if test="${b.is_accepted ==0 and b.status==1}">
 													<input type="button" value="미승인"  >
 												</c:if>
-												<c:if test="${b.is_accepted ==1}">
+												<c:if test="${b.is_accepted ==1 and b.status==1}">
 													<input type="button" value="승인됨" style="background-color: black;color: white;">
+												</c:if>
+												<c:if test="${b.is_accepted ==1 and b.status==2}">
+													<input type="button" value="이용중" style="background-color: black;color: white;">
+												</c:if>
+												<c:if test="${b.is_accepted ==1 and b.status==3}">
+													<input type="button" value="후기작성" style="background-color: #036635;color: white;" onclick="writeReview('${b.product_no}')">
 												</c:if>
 												</td>
 											</tr>
