@@ -12,19 +12,21 @@ public class ContectDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	private String namespace="contect.model.ContectBean"; 
+	private String namespace="contect.model.Contect"; 
 	
 	public List<ContectBean> selectAllContect(Map<String,String> map){
-		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectAllContect", map);
+		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectContect", map);
 		return lists;
 	}
 	public List<ContectBean> selectMyContect(){
 		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectMyContect");
 		return lists;
 	}
-	public List<ContectBean> selectContectDetail(int no) {
-		List<ContectBean> contect = sqlSessionTemplate.selectOne(namespace+".SelectContectDetail", no);
-		sqlSessionTemplate.update(namespace+".UpdateReadcount",no);
+	public ContectBean selectContectDetail(int no) {
+		if(no%2==0) {
+			sqlSessionTemplate.update(namespace+".UpdateReadcount",no);
+		}
+		ContectBean contect = sqlSessionTemplate.selectOne(namespace+".SelectContectDetail", no);
 		return contect;
 	}
 	public void insertReplyContect(int no) {
@@ -40,7 +42,7 @@ public class ContectDao {
 	}
 	public void deleteContect(int no) {
 		sqlSessionTemplate.delete(namespace+".DeleteContect", no);
-		sqlSessionTemplate.delete(namespace+".DeleteReplyContect", no-1);
+		
 	}
 	public void deleteReplyContect(int no) {
 		sqlSessionTemplate.delete(namespace+".DeleteReplyContect", no);		

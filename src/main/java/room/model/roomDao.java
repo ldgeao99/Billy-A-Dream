@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("roomDao")
+@Component
 public class roomDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -23,7 +23,7 @@ public class roomDao {
 
 	public void createRoom(roomBean rb) {
 		int result = sqlSessionTemplate.insert(namespace+".createRoom",rb);
-		System.out.println("방 만든 결과 :"+result);
+		System.out.println("諛� 留뚮뱺 寃곌낵 :"+result);
 	}
 
 

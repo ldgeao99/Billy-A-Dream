@@ -19,5 +19,6 @@
     	<mapper resource="mybatis/reservation.xml"/>
     	<mapper resource="mybatis/chat.xml"/>
     	<mapper resource="mybatis/room.xml"/>
+    	<mapper resource="mybatis/contect.xml"/>
 	</mappers>
 </configuration>

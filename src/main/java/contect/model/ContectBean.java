@@ -11,6 +11,18 @@ public class ContectBean {
 	private int is_reply;
 	private int is_replied;
 	private int readcount;
+	private String[] category
+		= {"회원 정보",
+			"결제 관련",
+			"거래 관련",
+			"상품 문의",
+			"기타"};
+	public String[] getCategory() {
+		return category;
+	}
+	public void setCategory(String[] category) {
+		this.category = category;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -38,8 +50,8 @@ public class ContectBean {
 	public int getCategory_num() {
 		return category_num;
 	}
-	public void setCategory_num(int category_num) {
-		this.category_num = category_num;
+	public void setCategory_num(String category_num) {
+		this.category_num = Integer.parseInt(category_num);
 	}
 	public String getTitle() {
 		return title;

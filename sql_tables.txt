@@ -171,7 +171,6 @@ create sequence wishlist_seq
 -- reservation테이블
 drop table reservation cascade constraints;
 create table reservation(
-
 	no number primary key not null,
 	product_no number references products(no) on delete cascade,
 	buyer_no number references member(mno) on delete cascade,
