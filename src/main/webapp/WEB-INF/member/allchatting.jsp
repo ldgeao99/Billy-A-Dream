@@ -63,12 +63,12 @@
 		}
 
 	});//ajax
-	if(detail){
 		
  	 const interval = setInterval(function() {
+	if(detail){
  		detailmsg($('#roomno').val());
- 	}, 3000);	 
 	}
+ 	}, 3000);	 
  })
 	 
  
