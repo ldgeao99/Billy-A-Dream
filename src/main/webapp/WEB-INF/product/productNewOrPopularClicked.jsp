@@ -4,6 +4,15 @@
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
+<script src="resources/assets/js/vendor/jquery-min.js"></script>
+<script>
+	$(function(){
+		$('#pageSize').change(function(){
+			location.href="newOrPopularClicked.prd?whatColumn="+$('#what').val()+"&keyword="+$('#keyword').val()+"&pagesize="+$('#pageSize').val();
+		})
+	})
+</script>
+
 			<!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
@@ -456,7 +465,7 @@
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
                             <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">
-                            
+                            <input type="hidden" id = "what" value="${param.whatColumn}">
                             <c:if test="${param.whatColumn eq 'new' }">
                             최신상품
                             </c:if>
@@ -478,9 +487,18 @@
 					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
 					
 					<c:if test="${fn:length(prdList) eq 0}">
-						<p style="text-align:center">검색결과가 없습니다.</p>
+						<div align="center" style="margin-top: 100px;">
+						<i class="fa-regular fa-circle-xmark fa-6x"></i>
+						<p style="margin-top: 30px;">검색결과가 없습니다.</p>
+						</div>
 					</c:if>
-					
+					<c:if test="${fn:length(prdList) ne 0}">
+						<select style="width: 100px;height:30px; margin-left: 1100px; margin-bottom: 50px;" id="pageSize">
+							<option value="4" <c:if test="${pagesize==4 }">selected</c:if>>4개씩 보기
+							<option value="8" <c:if test="${pagesize==8 }">selected</c:if>>8개씩 보기
+							<option value="16" <c:if test="${pagesize==16 }">selected</c:if>>16개씩 보기
+						</select>
+					</c:if>
 					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
 						<c:if test="${i % 4 eq 1}">
 							<div class="grid-products row">

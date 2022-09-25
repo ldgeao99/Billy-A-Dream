@@ -25,7 +25,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
- 
+ var detail = false;
  
  $(function(){
 	 
@@ -63,18 +63,20 @@
 		}
 
 	});//ajax
-	
- })
-	 
+	if(detail){
+		
  	 const interval = setInterval(function() {
  		detailmsg($('#roomno').val());
  	}, 3000);	 
+	}
+ })
+	 
  
  
  
 	function detailmsg(no){
 	 
-		
+	 detail = true;	
 	$('#mse').nextAll().remove();
 	 
 	 $.ajax({

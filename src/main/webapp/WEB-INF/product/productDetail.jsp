@@ -12,6 +12,7 @@
 </style>
 
 <!-- 오른쪽 상단 아이콘 관련 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -22,8 +23,55 @@
 		}
 		
 		showLikeCount();
+		
+		
+		window.Kakao.init("712a5c51e06bca8448c4c65b4205bb54");
+		Kakao.isInitialized();
 	});
 
+	
+	/* 카카오 공유하기 */
+	function kakaoShare() {
+		/*  클립보드 복사 */
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+		
+		/* 카톡 공유 */
+		 Kakao.Link.sendDefault({
+		      objectType: 'feed',
+		      content: {
+		        title: 'Billy A Dream 상품',
+		        description:  'Billy A Dream ['+$('#pname').val()+"] 상품",
+		        imageUrl:
+		        	"https://ifh.cc/g/sRO1w5.png"
+		        	<%--  '<%=request.getContextPath()%>/resources/'+$('#pimages').val() --%>,
+		        link: {
+		          mobileWebUrl: document.location.href,
+		          webUrl: document.location.href,
+		        },
+		      },
+		      buttons: [
+		        {
+		          title: '웹으로 보기',  //첫 번째 버튼 
+		          link: {
+		            mobileWebUrl: document.location.href,  //버튼 클릭 시 이동 링크
+		            webUrl: document.location.href,
+		          },
+		        },
+		      ],
+		    })
+
+
+	}
+	
+	
 	function whatButtonWillShowAboutLike(){
 		$.ajax({
 			type : 'post',
@@ -159,7 +207,7 @@
                                 <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
                                     <div class="product-thumb">
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            
+                                            <input type="hidden" id="pimages" value="${images[0] }">
                                             <!-- 이미지 들어감 -->
                                             <c:forEach var="productimages" items="${images }">
                                             <a data-image="<%=request.getContextPath()%>/resources/${productimages}" data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
@@ -186,7 +234,7 @@
                                 <!-- Product Info -->
                                 <div class="product-single__meta">
                                     <h1 class="product-single__title" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600!important; font-size:22px;color: black; margin-bottom:10px">${pb.name }</h1>
-                                    
+                                    <input type="hidden" id="pname" value="${pb.name }">
                                     <!-- Product Reviews -->
                                     <!-- Product Info -->
 						<div class="product-info">
@@ -210,6 +258,8 @@
                                     
                                     &nbsp;&nbsp; 
                                     <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }
+                                    &nbsp;&nbsp; 
+                                    <a href="javascript:kakaoShare()"><i class="fa-regular fa-share-from-square"></i> 공유</a>
 							    	</div>
 							</div>
 							

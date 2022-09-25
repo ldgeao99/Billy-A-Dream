@@ -35,23 +35,30 @@ public class ProductClickedCategoryController {
 	public String detailForm(@RequestParam("whatColumn") String whatColumn,
 								@RequestParam("keyword") String keyword, 
 								@RequestParam(value = "pageNumber", required = false) String pageNumber,
+								@RequestParam(value = "pagesize", required = false) String pagesize,
 								HttpServletRequest request,
 								Model model){
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
 		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", keyword); // ¹Ì¸® %¸¦ ºÙ¿©¼­ ³Ñ°ÜÁà¾ß ÇÔ.
+		map.put("keyword", keyword); // ï¿½Ì¸ï¿½ %ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 		
-		// °Ë»ö Á¶°Ç¿¡ ¸Â´Â ·¹ÄÚµåÀÇ °³¼ö°¡ ¸î°³ÀÎÁö °¡Á®¿È
+		// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int totalCount = pdao.getTotalSearchCount(map);
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" ÆäÀÌÁö ¹øÈ£¿¡ ÀÌ·±°É ³Ö¾îÁà¾ß ÇØ¼­.
-		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword); // null ´ë½Å¿¡ 3À» ³Ñ±â¸é ÇÑ ÆäÀÌÁö¿¡ 3°³¾¿ º¸¿©Áü
+		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¼ï¿½.
+		PagingProduct pageInfo = new PagingProduct(pageNumber, pagesize, totalCount, url, whatColumn, keyword); // null ï¿½ï¿½Å¿ï¿½ 3ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
 		
+		if(pagesize==null) {
+			pagesize = "8";
+		}
+		
 		model.addAttribute("resultProductList", resultProductList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("pagesize", pagesize);
+		
 		
 		return getPage;
 	}
