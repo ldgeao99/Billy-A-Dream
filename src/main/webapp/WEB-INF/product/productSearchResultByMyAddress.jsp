@@ -44,8 +44,19 @@
 			async : false 
 		}); 
 		
+		var filename = "";
+		var center_point; 
+		
+		if('${areaNum}' == 11){
+			filename = "resources/only_seoul.json";
+			center_point = new kakao.maps.LatLng(37.566826, 126.9786567);
+		}else if('${areaNum}' == 28){
+			filename = "resources/only_incheon.json";
+			center_point = new kakao.maps.LatLng(37.454345, 126.6906171);
+		}
+	
 		// 2) getJSON 메소드를 이용해 JSON 파일을 파싱함
-		$.getJSON("resources/only_seoul.json", function(geojson) {
+		$.getJSON(filename, function(geojson) {
 			var units = geojson.features; // 파일에서 key값이 "features"인 것의 value를 통으로 가져옴(이것은 여러지역에 대한 정보를 모두 담고있음)			
 			$.each(units, function(index, unit) { // 1개 지역씩 꺼내서 사용함. val은 그 1개 지역에 대한 정보를 담음
 				var coordinates = []; //좌표 저장할 배열
@@ -70,7 +81,7 @@
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
-	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	        center: center_point, // 지도의 중심좌표
 	        level: 8 // 지도의 확대 레벨
 	    };	
 
@@ -150,7 +161,6 @@
 
 	
 </script>
-
 <!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>

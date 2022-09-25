@@ -30,7 +30,8 @@ public class ProductSearchLocationController {
 	@Autowired
 	private ProductDao pdao;
 	
-	
+	@Autowired
+	private MemberDao mdao;
 	
 	@RequestMapping(command)
 	public String detailForm(@RequestParam("whatColumn") String whatColumn, 
@@ -38,8 +39,8 @@ public class ProductSearchLocationController {
 								@RequestParam(value = "add2Name", required = false) String add2Name,
 								@RequestParam(value = "pageNumber", required = false) String pageNumber,
 								HttpServletRequest request,
-								Model model
-								) throws UnsupportedEncodingException{
+								Model model,
+								HttpSession session) {
 		
 		System.out.println("\n + ProductSearchLocationController 에서 넘겨받은 4개의 값");
 		System.out.println("whatColumn:" + whatColumn);
@@ -74,7 +75,25 @@ public class ProductSearchLocationController {
 		model.addAttribute("resultProductList", resultProductList);
 		model.addAttribute("pageInfo", pageInfo);
 		
-		//paging 클래스 다른거 써야함.
+		
+		
+//		//to get Addr1
+//		String id = (String)session.getAttribute("id");
+//		MemberBean mb = mdao.getById(id);
+//		
+//		String areaNum = null;
+//		String addr1 = mb.getAdd1_sido();
+//		System.out.println("\n" + "addr1 : " + addr1);
+//		if(addr1.equals("서울")) {
+//			areaNum = "11";
+//		}else if(addr1.equals("인천")) {
+//			areaNum = "28";
+//		}
+		
+		model.addAttribute("areaNum", 11);
+		
+
+		
 		return getPage;
 	}
 }
