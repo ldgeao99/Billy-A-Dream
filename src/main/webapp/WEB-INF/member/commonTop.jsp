@@ -10,8 +10,9 @@
 
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script>
-	// getting category
+	
 	$(function(){
+		// getting category
 		$.ajax({
 			url : "getLargeCategory.lcate",
 			success : function(originText) { // mobile,1|pc/notebook,2|camera/dslr,3
@@ -40,6 +41,29 @@
 				
 			} // outside sucess end
 		});// outside ajax end
+		
+		$('#rgsearch-category1').change(function(){
+			if($('#id').val() == "null" && $('#rgsearch-category1').val() == "mylocation"){
+				if(confirm("로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?")){
+					location.href="login.mb";	
+				}
+				return false;
+			}
+			
+			if($('#rgsearch-category1').val() == "mylocation"){
+				$('input[name="keyword"]').attr('placeholder', '상품명을 입력하세요');	
+			}else if($('#rgsearch-category1').val() == "name"){
+				$('input[name="keyword"]').attr('placeholder', '상품명을 입력하세요');
+			}else if($('#rgsearch-category1').val() == "seller_name"){
+				$('input[name="keyword"]').attr('placeholder', '판매자 아이디를 입력하세요');
+			}else if($('#rgsearch-category1').val() == "all"){
+				$('input[name="keyword"]').attr('placeholder', 'Search Products');
+			}
+				
+				
+		});
+		
+		
 	}); // function end		
 	
 	function getScate(lno){
@@ -204,10 +228,11 @@
                                         <div class="searchField d-flex">
                                             <div class="search-category">
                                                 <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start" style="padding-left: 15px;">
-                                                	<option value="all"> 전체검색</option>
-                                                	<option value="name"> 상품명</option>
-                                                	<option value="seller_name"> 판매자 ID</option>
-                                                    <option value="address"> 주소명</option>
+                                                	<option value="all" <c:if test="${param.whatColumn eq 'all'}">selected</c:if>> 전체검색</option>
+                                                	<option value="mylocation"  <c:if test="${param.whatColumn eq 'mylocation'}">selected</c:if> > 내위치 기반</option> 
+                                                	<option value="name" <c:if test="${param.whatColumn eq 'name'}">selected</c:if>> 상품명</option>
+                                                	<option value="seller_name" <c:if test="${param.whatColumn eq 'seller_name'}">selected</c:if>> 판매자 ID</option>
+                                                    
                                                 
                                                     <!-- 
                                                     <option value="all" label="전체검색" selected="selected">전체검색</option>
@@ -219,7 +244,7 @@
                                                 </select>
                                             </div>
                                             <div class="input-box d-flex w-100">
-                                                <input type="text" name="keyword" value="" placeholder="Search products or #" class="input-text rounded-0 border-start-0 border-end-0">
+                                                <input type="text" name="keyword" value="" placeholder="Search products" class="input-text rounded-0 border-start-0 border-end-0">
                                                 <button type="submit" title="Search" class="action search rounded-pill-end"><i class="icon an an-search-l"></i></button>
                                             </div>
                                         </div>

@@ -39,22 +39,22 @@
 		where name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
 		</if>
  		
+		<if test="whatColumn == 'mylocation'">
+		where add2_sigungu = #{add2Name} and name like #{keyword}
+		</if>
+		
 		<if test="whatColumn == 'name'">
 		where name like #{keyword}
-		</if>
-		
-		<if test="whatColumn == 'address'">
-		where add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
-		</if>
-		
-		<if test="whatColumn == 'category'">
-		where lcategoryname = #{keyword} or scategoryname = #{keyword}
 		</if>
 		
 		<if test="whatColumn == 'seller_name'">
 		where id = #{keyword}
 		</if>	
- 		
+		
+		<if test="whatColumn == 'category'">
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
+		</if>
+		
  		order by pulled_day, no
  	</select>
  	
@@ -73,21 +73,22 @@
 		where pro4.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
 		</if>
  		
+ 		<if test="whatColumn == 'mylocation'">
+		where add2_sigungu = #{add2Name} and pro4.name like #{keyword}
+		</if>
+ 		
 		<if test="whatColumn == 'name'">
 		where pro4.name like #{keyword}
-		</if>
-		
-		<if test="whatColumn == 'address'">
-		where add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
-		</if>
-		
-		<if test="whatColumn == 'category'">
-		where lcategoryname = #{keyword} or scategoryname = #{keyword}
 		</if>
 		
 		<if test="whatColumn == 'seller_name'">
 		where id = #{keyword}
 		</if>
+		
+		<if test="whatColumn == 'category'">
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
+		</if>
+	
  	</select>
  	
  	

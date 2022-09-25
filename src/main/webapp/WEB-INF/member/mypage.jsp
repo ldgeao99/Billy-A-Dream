@@ -1086,7 +1086,7 @@ height
 											<div class="product-details text-center">
 												<!-- Product Name -->
 												<div class="product-name">
-													<a href="product-layout1.html">${p.name}</a>
+													<a href="productdetail.prd?no=${p.no }">${p.name}</a>
 												</div>
 												<!-- End Product Name -->
 												<!-- Product Price -->
@@ -1158,7 +1158,7 @@ height
 											<div class="product-details text-center">
 												<!-- Product Name -->
 												<div class="product-name">
-													<a href="product-layout1.html">${p.name}</a>
+													<a href="productdetail.prd?no=${p.no }">${p.name}</a>
 												</div>
 												<!-- End Product Name -->
 												<!-- Product Price -->
