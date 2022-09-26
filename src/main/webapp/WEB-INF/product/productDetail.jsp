@@ -418,60 +418,9 @@
 <!-- ======================================================================================================= -->
 							 <!-- Products-->
                 <!-- Grid Product -->
-						<div class="grid-products grid--view-items wishlist-grid mt-4">
-							<div class="row">
-								<c:if test="${fn:length(lists)==0 }">
-									<div align="center">
-									<i class="fa-solid fa-store-slash fa-5x"></i></i><br><br>
-									 판매자가 판매하는 다른상품이 없습니다</div>
-								</c:if>
-								
-								<!-- 반복문 시작 -->
-								<c:if test="${fn:length(lists)!=0 }">
-								<c:forEach var="p" items="${ lists}">
-								<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<input type="hidden" name="no" id="no"value="${p.no }">
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload" style="height:186px" 
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload" style="height:186px" 
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="productdetail.prd?no=${p.no }">${p.name}</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="old-price"><fmt:formatNumber value="${p.original_day_price}" pattern="#,###" />원/일</span> 
-											<span class="price"><fmt:formatNumber value="${p.discounted_day_price}" pattern="#,###" />원/일</span> 
-											<%-- <span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span> --%>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Button -->
-									</div>
-									<!-- End Product Details -->
-								
-								</div>
-								</c:forEach>
-								</c:if>
-								<!--프로덕트 끝  -->
-							</div>
-						</div>
+						
+					<iframe src="detailsellerPrd.prd?no=${param.no}" height="600px" width="100%" title="Iframe Example"></iframe> 	
+						
 						<!-- End Grid Product-->
 
 									<!-- ======================================================================================================= -->

@@ -133,5 +133,16 @@
 		where lcategory_no=#{lcategory_no} and scategory_no=#{scategory_no} and <![CDATA[rownum <= 8]]>
 	</select>
 	
+	<select id="GetTotalSellerPrdCount" resultType="int">
+		select count(*)
+		from products
+		where seller_no = #{seller_no}
+	</select>
+	
+	<select id="GetTotalSellerPrd" resultType="product.model.ProductBean">
+		select *
+		from products
+		where seller_no = #{seller_no}
+	</select>
 	
 </mapper>

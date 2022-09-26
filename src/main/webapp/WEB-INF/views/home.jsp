@@ -1048,4 +1048,4 @@
             </div>
             <!--End Body Container-->
 
-<%@include file="../member/commonBottom.jsp" %>            
+<%@include file="../member/commonBottom.jsp" %>     
