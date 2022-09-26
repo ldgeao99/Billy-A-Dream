@@ -10,7 +10,14 @@ public class ReservationBean {
 	private String accepted_date;
 	private String status;
 	private int amount; 
+	private String notice;
 	
+	public String getNotice() {
+		return notice;
+	}
+	public void setNotice(String notice) {
+		this.notice = notice;
+	}
 	private String name; // 승인내역 가져올때 필요함
 	
 	public String getName() {

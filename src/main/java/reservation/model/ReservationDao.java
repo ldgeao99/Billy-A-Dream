@@ -77,8 +77,8 @@ public class ReservationDao {
 		public void withdrawReservation(int no) {
 			sqlSessionTemplate.update(namespace+".WithdrawReservation", no);
 		}
-		public void rollbackWithdrawReservation(int no) {
-			sqlSessionTemplate.update(namespace+".RollbackWithdrawReservation", no);
+		public void rollbackWithdrawReservation(ReservationBean rs) {
+			sqlSessionTemplate.update(namespace+".RollbackWithdrawReservation", rs);
 		}
 
 

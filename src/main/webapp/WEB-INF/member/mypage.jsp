@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="categoryTop.jsp"%>
+
+<%@include file="../common/common.jsp" %>
+<%@include file="../member/commonTop.jsp" %>
+
+
 <style>
+
 #chk2 {
 	float: left;
 }
@@ -601,11 +606,9 @@ height
 		<div class="collection-hero">
 			<div class="collection-hero__image"></div>
 			<div class="collection-hero__title-wrapper container">
-				<h1 class="collection-hero__title">마이페이지</h1>
-				<div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
-					<a href="home" title="Back to the home page">&nbsp;&nbsp;홈</a><span>|</span><span
-						class="fw-bold">마이페이지</span>
-				</div>
+				<h2 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">
+				마이페이지
+				</h2>
 			</div>
 		</div>
 	</div>
@@ -677,7 +680,7 @@ height
 				<div class="tab-content dashboard-content">
 					<!-- Dashboard -->
 					<div id="dashboard" class="tab-pane fade active show">
-						<h3 align="center">승인 여부</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">승인여부</h3>
 						<div class="table-responsive order-table">
 							<table
 								class="table table-bordered table-hover align-middle text-center mb-0">
@@ -740,7 +743,7 @@ height
 
 					<!-- Orders -->
 					<div id="orders" class="product-order tab-pane fade">
-						<h3>거래 내역</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">거래내역</h3>
 						<div class="table-responsive order-table">
 							<table
 								class="table table-bordered table-hover align-middle text-center mb-0">
@@ -791,6 +794,10 @@ height
 												<c:if test="${b.is_accepted ==1}">
 													<input type="button" value="승인됨" style="background-color: black;color: white;">
 												</c:if>
+												<c:if test="${b.is_accepted ==2}">
+													철회사유:${b.notice }
+													<input type="button" value="거래취소" style="background-color: black;color: white;">
+												</c:if>
 												</td>
 											</tr>
 										</c:forEach>
@@ -808,7 +815,7 @@ height
 					
 					
 					<div id="orderstracking" class="order-tracking tab-pane fade">
-						<h3 align="center">쿠폰내역</h3>
+						<h3 align="center" style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">쿠폰내역</h3>
 						<hr>
 						<form class="orderstracking-from mt-3" method="post" action="registecoupon.mb" name="coupon">
 							<p class="mb-3"></p>
@@ -870,38 +877,38 @@ height
 
 					<!-- 회원탈퇴 -->
 					<div id="quit" class="address tab-pane">
-						<h2>회원탈퇴</h2>
+						<h2 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">회원탈퇴</h2>
 						<br>
 						<p class="xs-fon-13 margin-10px-bottom">회원탈퇴 전에 반드시 유의사항을 확인하고
 							진행해 주세요.</p>
 						<br>
 						<hr>
 						<br> <br>
-						<h3>개인정보 및 서비스 이용 기록 삭제</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">개인정보 및 서비스 이용 기록 삭제</h3>
 						<p class="xs-fon-13 margin-10px-bottom">개인정보 및 개인화 서비스 이용기록이
 							모두 삭제되며, 삭제된 데이터는 복구되지 않습니다. 필요한 데이터는 미리 백업해 주시기 바랍니다.</p>
 
 						<br> <br>
-						<h3>소셜 계정 연결 정보 삭제</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">소셜 계정 연결 정보 삭제</h3>
 						<p class="xs-fon-13 margin-10px-bottom">탈퇴시 소셜계정 정보 또한 삭제됩니다.</p>
 
 						<br> <br>
-						<h3>커뮤니티 서비스 등록 게시물 삭제</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">커뮤니티 서비스 등록 게시물 삭제</h3>
 						<p class="xs-fon-13 margin-10px-bottom">회원가입 이후 등록하신 게시물들은
 							회원탈퇴 후에는 모든 게시물들이 삭제됩니다. 필요한 데이터는 미리 백업해 주시기 바랍니다.</p>
 
 						<br> <br>
-						<h3>개인정보 보관</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">개인정보 보관</h3>
 						<p class="xs-fon-13 margin-10px-bottom">회원 탈퇴 시 일부 개인정보는
 							개인정보처리방침에 따라 탈퇴일로부터 30일간 보관되며, 그 이후 관계법령에 필요한 경우에는 별로 보관합니다.</p>
 
 						<br> <br>
-						<h3>탈퇴 후 제한</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">탈퇴 후 제한</h3>
 						<p class="xs-fon-13 margin-10px-bottom">탈퇴 처리한 아이디는 30일동안 재가입이
 							불가합니다.</p>
 						<br> <br> <br> <br>
 						<div align="center">
-							<h3>
+							<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">
 								<label for="cbtest2">모든 약관을 확인하셨으면 클릭해주세요.</label>
 							</h3>
 							<input type="checkbox" id="cbtest2"> <label for="cbtest2"
@@ -924,7 +931,7 @@ height
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
-											<div class="modal-body">
+											<div class="modal-body" style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">
 												계정을 영구적으로 삭제하기 전에 먼저 비밀번호를 입력해주세요.<br>
 												<br> <input type="hidden" value="<%=id%>" name="id"
 													id="id"><br> <input type="password" value=""
@@ -953,7 +960,7 @@ height
 									<div class="container py-4">
 										<div class="row align-items-center justify-content-between">
 											<a class="navbar-brand h1 text-center" href="index.do"> 
-											<span class="text-dark h4">회원정보 수정</span> 
+											<span class="text-dark h4" style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">회원정보 수정</span> 
 											</a>
 										</div>
 										<form method="post" action="updateMember.mb" >
@@ -1021,7 +1028,7 @@ height
 
 					<!-- Wishlist -->
 					<div id="wishlist" class="product-wishlist tab-pane fade">
-						<h3>관심목록</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">승인여부</h3>
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
@@ -1096,7 +1103,7 @@ height
 					
 					<!-- Wishlist -->
 					<div id="selllist" class="product-wishlist tab-pane fade">
-						<h3>판매상품관리</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">판매상품관리</h3>
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
@@ -1179,7 +1186,8 @@ height
 <!--End Body Container-->
 
 <!--Footer-->
-<div class="footer footer-1">
+<%@include file="../member/commonBottom.jsp" %>
+<!-- <div class="footer footer-1">
 	<div class="footer-top clearfix">
 		<div class="container">
 			<div class="row">
@@ -1284,7 +1292,7 @@ height
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--End Footer-->
 
 <!--Scoll Top-->

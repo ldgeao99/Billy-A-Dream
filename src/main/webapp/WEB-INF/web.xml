@@ -157,4 +157,20 @@
 		<servlet-name>reservation</servlet-name>
 		<url-pattern>*.rsv</url-pattern>
 	</servlet-mapping>
+	
+	<!--contect board-->
+	<servlet>
+		<servlet-name>contect</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/contect-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>contect</servlet-name>
+		<url-pattern>*.ctc</url-pattern>
+	</servlet-mapping>
 </web-app>

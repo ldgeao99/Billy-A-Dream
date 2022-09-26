@@ -110,8 +110,8 @@
             </a>
             <div class="ms-5 collapse" id="error-collapse" data-bs-parent="#mainMenu">
               <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="error-404.html">문의사항 전체 조회</a></li>
-                <li class="nav-item"><a class="nav-link" href="error-500.html">문의사항 미답변 조회</a></li>
+                <li class="nav-item"><a class="nav-link" href="contect.admin">문의사항 전체 조회</a></li>
+                <li class="nav-item"><a class="nav-link" href="contectToReply.admin">문의사항 미답변 조회</a></li>
               </ul>
             </div>
           </li>

@@ -35,7 +35,7 @@ public class memberLoginController {
 	@Autowired
 	private MemberIpDao midao;
 	
-	@RequestMapping(value = command , method = RequestMethod.GET)//·Î±×ÀÎÃ¢À¸·Î ¿À±â
+	@RequestMapping(value = command , method = RequestMethod.GET)//ï¿½Î±ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public String login() {
 		
 		return getPage;
@@ -50,37 +50,43 @@ public class memberLoginController {
 		
 		MemberBean mb = mdao.getById(id); 
 		
-		String ip = Inet4Address.getLocalHost().getHostAddress();// Áö±Ý Á¢¼ÓÇÑ ¾ÆÀÌÇÇ °¡Á®¿À±â
+		String ip = Inet4Address.getLocalHost().getHostAddress();// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		boolean flag = false;
 		
-		if (mb != null) { // ÇØ´ç ¾ÆÀÌµð°¡ ÀÖ´ÂÁö
+		if (mb != null) { // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ö´ï¿½ï¿½ï¿½
 			String getpw = mb.getPw();
 
-			if (getpw != null) { // ÇØ´ç ºñ¹Ð¹øÈ£°¡ ÀÖÀ¸¸é
+			if (getpw != null) { // ï¿½Ø´ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				
 
-				if (encoder.matches(pw, getpw)) { // º¹È£È­ÇØ¼­ ¸Â´ÂÁö È®ÀÎ
-
-					if (id.equals("admin")) { // ±× ¾ÆÀÌµð°¡ admin ÀÌ¸é adminÀ¸·Î °¨
-						session.setAttribute("id", id);
-						return "admin";// admin ÀÌ¸é indexÆÄÀÏ·Î
-					} else {
+				if (encoder.matches(pw, getpw)) { // ï¿½ï¿½È£È­ï¿½Ø¼ï¿½ ï¿½Â´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+					System.out.println("isblackList:"+mb.getIsblacklist());
+					if(mb.getIsblacklist().equals("0")) {
 						
-						List<MemberIpBean> lists = midao.getAllByMno(mb.getMno()); // mno ¿¡ ÇØ´çÇÏ´Â ipÅ×ÀÌºí ·¹ÄÚµå ´Ù °¡Á®¿À±â
-						
-						for (MemberIpBean mib : lists) {
-							if (ip.equals(mib.getIp())) { // ÇØ´ç ¾ÆÀÌµð¿¡ µî·ÏµÈ ¾ÆÀÌÇÇ°¡ Áö±Ý Á¢¼ÓÇÑ ¾ÆÀÌÇÇ¶û °°ÀºÁö È®ÀÎ
-								session.setAttribute("id", id);
-								flag = true;
-								return "yes";
+						if (id.equals("admin")) { // ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ admin ï¿½Ì¸ï¿½ adminï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+							session.setAttribute("id", id);
+							return "admin";// admin ï¿½Ì¸ï¿½ indexï¿½ï¿½ï¿½Ï·ï¿½
+						} else {
+							
+							List<MemberIpBean> lists = midao.getAllByMno(mb.getMno()); // mno ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ipï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							
+							for (MemberIpBean mib : lists) {
+								if (ip.equals(mib.getIp())) { // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+									session.setAttribute("id", id);
+									flag = true;
+									return "yes";
+								}
+							}
+							if (!flag) { // ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ùµï¿½ response
+								return "Insertip";
 							}
 						}
-						if (!flag) { // ÇØ´ç¾ÆÀÌÇÇ´Â µî·ÏµÇÁö ¾ÊÀ½. µî·ÏÇÏ´Â ÆäÀÌÁö·Î ³Ñ¾î°¡°Ô ¸¸µë. ±Ùµ¥ response
-							return "Insertip";
-						}
+						// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ mno ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ memberip ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ipï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ Ã¼Å©
 					}
-					// ÇØ´ç ¾ÆÀÌµðÀÇ mno ¿¡ ÇØ´çÇÏ´Â memberip Å×ÀÌºí¿¡¼­ ipµéÀ» °¡Á®¿Í¼­ Ã¼Å©
+					else {
+						return "black";
+					}
 				}
 			}
 		}
@@ -90,6 +96,6 @@ public class memberLoginController {
 		}
 		*/
 		
-		return "ye"; // ÇØ´çÇÏ´Â ºñ¹Ð¹øÈ£°¡ ¾øÀ¸¸é ±×³É ¾Æ¹«°Å³ª ¸®ÅÏ
+		return "ye"; // ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×³ï¿½ ï¿½Æ¹ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 }

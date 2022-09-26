@@ -5,7 +5,7 @@
 <mapper namespace="reservation.model.ReservationBean">
 
 	<insert id="InsertReservation">
-		insert into reservation values(reservation_seq.nextval,#{product_no},#{buyer_no},#{start_date},#{end_date},0,sysdate,'1',#{amount})
+		insert into reservation values(reservation_seq.nextval,#{product_no},#{buyer_no},#{start_date},#{end_date},0,sysdate,'1',#{amount},null)
 	</insert>
 
 	<select id="getAllByBuyer_no" resultType= "reservation.model.ReservationBean">
@@ -63,9 +63,9 @@
 		order by r.no desc
 	</select>
 	<update id="WithdrawReservation">
-		update reservation set is_accepted=2 where no=#{no}
+		update reservation set is_accepted=4 where no=#{no}
 	</update>
 	<update id="RollbackWithdrawReservation">
-		update reservation set is_accepted=0 where no=#{no}
+		update reservation set is_accepted=0,notice=#{notice} where no=#{no}
 	</update>
 </mapper>

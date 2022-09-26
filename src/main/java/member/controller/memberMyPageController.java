@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import contect.model.ContectBean;
+import contect.model.ContectDao;
 import coupon.model.CouponBean;
 import coupon.model.CouponDao;
 import member.model.MemberBean;
@@ -40,6 +42,9 @@ public class memberMyPageController {
 	
 	@Autowired
 	private ReservationDao rdao;
+	
+	@Autowired
+	private ContectDao contectDao;
 	
 	@RequestMapping(command)
 	public String login( Model model,HttpSession session) {
@@ -87,6 +92,8 @@ public class memberMyPageController {
 			pb.setImages(pb.getImages().split(",")[0]);
 		}
 		
+		/* get contect_list*/
+		List<ContectBean> contect_lists= contectDao.selectMyContect(mb.getMno());
 		
 		/* set model */
 		model.addAttribute("buyrb",buyrb);
@@ -95,6 +102,7 @@ public class memberMyPageController {
 		model.addAttribute("plists",plists);					// = wishlist items
 		model.addAttribute("selling_plists",selling_plists);	
 		model.addAttribute("mb",mb);
+		model.addAttribute("contect_lists",contect_lists); 
 		return gotoPage;
 	}
 }

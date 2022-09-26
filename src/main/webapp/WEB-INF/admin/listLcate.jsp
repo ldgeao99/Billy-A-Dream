@@ -251,7 +251,7 @@
                 <form class="needs-validation" novalidate id="taskForm" action="insert.lcate" method="post">
                   <div class="mb-3">
                     <label for="taskTitle" class="form-label">이름</label>
-                    <input type="text" name="name" class="form-control" id="name" required autofocus>
+                    <input type="text" name="name" id="name" class="form-control"  required autofocus>
                     <div class="invalid-feedback">이름을 입력해주세요.</div>
                   </div>
                  

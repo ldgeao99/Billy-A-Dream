@@ -190,7 +190,7 @@
                     <td>
 					<c:if test="${reservation.is_accepted eq '0'}"> 체결 대기중 </c:if>
                     <c:if test="${reservation.is_accepted eq '1'}"> 체결 됨 </c:if>
-                    <c:if test="${reservation.is_accepted eq '2'}"> 거래 취소 </c:if>
+                    <c:if test="${reservation.is_accepted eq '4'}"> 거래 취소 </c:if>
                     
 					<c:if test="${reservation.use eq '0'}">/ 만료 </c:if>
                     <c:if test="${reservation.use eq '1'}">/ 반납예정일 </c:if>
@@ -217,7 +217,7 @@
 		                철회
 		              </button>
 		            </c:if>  
-		             <c:if test="${reservation.is_accepted eq '2'}"> 
+		             <c:if test="${reservation.is_accepted eq '4'}"> 
 			             <button id="rollback" class="btn btn-outline-secondary btn-sm" type="button" onclick="location.href='withdrawReservation.admin?no=${reservation.no }'">
 			                철회 취소
 			             </button> 
@@ -247,7 +247,7 @@
                     <label for="taskTitle" class="form-label">철회 사유</label>
                     <input type="text" name="name" class="form-control" id="notice" required autofocus >
                     <input type="hidden" name="no" id="no">
-                    <div class="invalid-feedback">Task title is required.</div>
+                    <div class="invalid-feedback">철회 사유를 작성하세요.</div>
                   </div>
                  
                  
