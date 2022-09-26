@@ -7,11 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateParse {
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	private static SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
-	private static DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-	private static SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+	
 	
 	// �쇅遺��뿉�꽌 媛앹껜 �깮�꽦 湲덉� 
 	private DateParse() {}
@@ -23,6 +19,8 @@ public class DateParse {
 	
 	// yyyyMMdd -> yyyy-MM-dd	=>	input date value濡� �꽔湲� �쐞�빐 �궗�슜
 	public static String strToDate(String str) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
 		Date date;
 		try {
 			date = strFormat.parse(str);
@@ -37,6 +35,8 @@ public class DateParse {
 	
 	// getTodayPlus(int) �뙆�씪誘명꽣濡� 	0 �꽔�쑝硫� �삤�뒛, 1 �꽔�쑝硫� �궡�씪
 	public static String getTodayPlus(int plus) {
+		DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+		
 		LocalDate now = LocalDate.now(); 	// �쁽�옱�떆媛�
 		now = now.plusDays(plus);			// �쁽�옱�떆媛� + "plus"�씪
 		return now.format(localDateFormat);	// yyyyMMdd �룷留ㅽ똿
@@ -52,6 +52,8 @@ public class DateParse {
 	
 	// �궇吏� 李⑥씠 怨꾩궛 end - start
 	public static int dateDif(String start, String end) {
+		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
+		
 		if(start.contains("-") || end.contains("-")) {
 			start = DateParse.dateToStr(start);
 			end = DateParse.dateToStr(end);
@@ -71,7 +73,9 @@ public class DateParse {
 		return -1;
 	}
 	public static String time(String time) {
-			
+		SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+		
 		Date date;
 		try {
 			date = fulltimeFormat.parse(time);
@@ -83,6 +87,8 @@ public class DateParse {
 		return null;
 	}
 	public static String day(String fullTime) {
+		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		Date date;
 		try {

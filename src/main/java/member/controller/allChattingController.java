@@ -42,7 +42,7 @@ public class allChattingController {
 		model.addAttribute("name",mb.getName());
 		return gotoPage; 
 	}
-	
+     
 	@ResponseBody
 	@RequestMapping(value=command , method = RequestMethod.POST,produces = "application/text;charset=utf8")
 	public String allGetRoomList(HttpSession session) {
