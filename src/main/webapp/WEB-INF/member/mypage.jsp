@@ -460,7 +460,6 @@ height
    				
    				sendRequestCheckCode()
    				.then((data) =>{
-   					alert(data);
    					if($.trim(data)=="exist"){
    						alert("이미 사용된 쿠폰입니다.");
    						checkCode = false;
