@@ -65,7 +65,7 @@ public class chatController {
 			rbean = rdao.searchRoom(rb);//그 방을 가져온다.
 		}
 		// 그 방의 번호를 가지고 메세지들을 넣는다.
-		
+		 
 		///
 		List<chatBean> lists = cdao.getByRoom_no(rbean.getRoom_no());
 		 System.out.println("lists사이즈:"+lists.size());

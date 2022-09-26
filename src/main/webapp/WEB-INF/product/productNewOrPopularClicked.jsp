@@ -4,6 +4,47 @@
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
+
+<script src="resources/assets/js/vendor/jquery-min.js"></script>
+<script>
+	$(function(){
+		$('#pageSize').change(function(){
+			location.href="newOrPopularClicked.prd?whatColumn="+$('#what').val()+"&keyword="+$('#keyword').val()+"&pagesize="+$('#pageSize').val();
+		})
+	})
+	
+	function like(pno){
+		if($('#id').val()=="null"){
+			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+				location.href="login.mb";	
+			}
+			return false;
+		}
+		else{
+			$.ajax({
+				type : 'post',
+				url : "addOrDeletelike.wish",
+				data : {
+					id : $('#id').val(),
+					no : pno,
+				},
+				success : function(rdata) {
+					
+					//alert(rdata);
+					
+					if(rdata == "added"){
+						alert("위시리스트에 추가되었습니다.");
+						showLikeCount();	
+					}else if(rdata == "deleted"){
+						alert("위시리스트에서 제거되었습니다.");
+					}
+				}//success
+	
+			});//ajax
+		}
+	}
+</script>
+
 			<!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
@@ -456,7 +497,7 @@
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
                             <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">
-                            
+                            <input type="hidden" id = "what" value="${param.whatColumn}">
                             <c:if test="${param.whatColumn eq 'new' }">
                             최신상품
                             </c:if>
@@ -478,9 +519,18 @@
 					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
 					
 					<c:if test="${fn:length(prdList) eq 0}">
-						<p style="text-align:center">검색결과가 없습니다.</p>
+						<div align="center" style="margin-top: 100px;">
+						<i class="fa-regular fa-circle-xmark fa-6x"></i>
+						<p style="margin-top: 30px;">검색결과가 없습니다.</p>
+						</div>
 					</c:if>
-					
+					<c:if test="${fn:length(prdList) ne 0}">
+						<select style="width: 100px;height:30px; margin-left: 1100px; margin-bottom: 50px;" id="pageSize">
+							<option value="4" <c:if test="${pagesize==4 }">selected</c:if>>4개씩 보기
+							<option value="8" <c:if test="${pagesize==8 }">selected</c:if>>8개씩 보기
+							<option value="16" <c:if test="${pagesize==16 }">selected</c:if>>16개씩 보기
+						</select>
+					</c:if>
 					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
 						<c:if test="${i % 4 eq 1}">
 							<div class="grid-products row">
@@ -511,18 +561,11 @@
 	                                    <!--Product Button-->
 	                                    <div class="button-set style0 d-none d-md-block">
 	                                        <ul>
-	                                            <!--Cart Button-->
-	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-	                                            <!--End Cart Button-->
-	                                            <!--Quick View Button-->
-	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l" style="margin-top:7px"></i> <span class="tooltip-label top">Quick View</span></a></li>
-	                                            <!--End Quick View Button-->
+
 	                                            <!--Wishlist Button-->
-	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="javascript:like(${prdList[i-1].no})"><i class="icon an an-heart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
 	                                            <!--End Wishlist Button-->
-	                                            <!--Compare Button-->
-	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar" style="margin-top:7px"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-	                                            <!--End Compare Button-->
+
 	                                        </ul>
 	                                    </div>
 	                                    <!--End Product Button-->

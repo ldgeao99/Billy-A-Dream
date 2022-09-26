@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,6 +7,99 @@
 	System.out.println("id : "+id); 
 %>
 <c:set var="id" value="<%=id %>"></c:set>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="resources/assets/js/vendor/jquery-min.js"></script>
+<script>
+	
+	$(function(){
+		
+		// getting category
+		$.ajax({
+			url : "getLargeCategory.lcate",
+			success : function(originText) { // mobile,1|pc/notebook,2|camera/dslr,3
+				var lcateTextArr = []; // 모바일,PC/노트북,카메라/DSLR
+				var lcateNoArr = [];   // 1,2,3
+				
+				var originArr = originText.split('|'); //['mobile,1','pc/notebook,2', 'camera/dslr,3'] 
+				 
+				for(var i = 0; i<originArr.length; i++){
+					lcateTextArr.push(originArr[i].split(',')[0]); //[mobile, pc/notebook, camera/dslr]
+					lcateNoArr.push(originArr[i].split(',')[1]);
+					$('#cate_dropdown').append("<li id="+ originArr[i].split(',')[1] +">" 
+					+ "<a href= " + "javascript:gotoSearchByCate('" + originArr[i].split(',')[0] + "')" +  " class='site-nav'>"+ originArr[i].split(',')[0] +"<i class='an an-angle-right-l'></i></a>"
+					+ "</li>");
+				}
+				// --- makeing lcate completed 
+				
+				// solved async problem by promise(if we dont use promise, then loop will operate 2 times, even if loop size is 3)
+				for(var i = 0; i<lcateNoArr.length ;i++){
+					getScate(lcateNoArr[i])
+					.then( (index) => {
+						//console.log(index + "종료");
+					});	
+				}
+				// -- inserting scate completed
+				
+			} // outside sucess end
+		});// outside ajax end
+		
+		$('#rgsearch-category1').change(function(){
+			if($('#id').val() == "null" && $('#rgsearch-category1').val() == "mylocation"){
+				if(confirm("로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?")){
+					location.href="login.mb";	
+				}
+				return false;
+			}
+			
+			if($('#rgsearch-category1').val() == "mylocation"){
+				$('input[name="keyword"]').attr('placeholder', '상품명을 입력하세요');	
+			}else if($('#rgsearch-category1').val() == "name"){
+				$('input[name="keyword"]').attr('placeholder', '상품명을 입력하세요');
+			}else if($('#rgsearch-category1').val() == "seller_name"){
+				$('input[name="keyword"]').attr('placeholder', '판매자 아이디를 입력하세요');
+			}else if($('#rgsearch-category1').val() == "all"){
+				$('input[name="keyword"]').attr('placeholder', 'Search Products');
+			}
+				
+				
+		});
+		
+		
+	}); // function end		
+	
+	function getScate(lno){
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				url : "getSmallCategory.scate",
+				data : {
+					lcategoryNo : lno
+				},
+				success : function(originText2) { // 스마트워치,2|스마트폰,1       모니터,3|노트북,4      필름카메라,5
+					console.log(originText2);
+					
+					var scate = [];
+					var originArr2 = originText2.split('|');
+					
+					for(var i = 0; i<originArr2.length; i++){
+						scate.push(originArr2[i].split(',')[0]);
+					}
+					
+					$("li[id='"+ lno + "']").append("<ul class='dropdown'> </ul>");
+					
+					for(var i = 0; i<scate.length; i++){
+						$("li[id='"+ lno + "']" + ">" + ".dropdown").append("<li>" 
+								+ "<a href= " + "javascript:gotoSearchByCate('" + scate[i] + "')" +  " class='site-nav last'>" + scate[i] +"</a></li>"
+								+ "</li>");	
+					}
+				}
+			});// inside ajax end
+		});// promise end
+	}
+	
+	function logout() {
+	   location.href="https://kauth.kakao.com/oauth/logout?client_id=712a5c51e06bca8448c4c65b4205bb54&logout_redirect_uri=http://localhost:8080/ex/out.mb";
+	  }
+</script>
 
 <html lang="ko">
     <head>
@@ -28,41 +122,74 @@
         <link rel="stylesheet" href="resources/assets/css/style.css" />
         <link rel="stylesheet" href="resources/assets/css/responsive.css" />
         
+        <!-- Main Style CSS From CategortyTop-->
+        <link rel="stylesheet" href="resources/assets/css/style.css" />
+        <link rel="stylesheet" href="resources/assets/css/responsive.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+   		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        
+        
         <!-- 오른쪽 상단 아이콘 관련 -->
         <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
         <script>
-        	function gotoSellPage(){
-        		if($('#id').val()=="null"){
-        			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
-        				location.href="login.mb";	
-        			}
-        			return false;
-        		}
-        		else{
-        			
-        			location.href = "insert.prd";
-
-        		}
-        	}
-        	
-        	function kakaoTalk(){
-        		var idx = "${eduVO.idx}";
-    		    var windowW = 550;
-    		    var windowH = 650;
-    		    var winHeight = document.body.clientHeight;
-    		    var winWidth = document.body.clientWidth;
-    		    var winX = window.screenX || window.screenLeft || 0;
-    		    var winY = window.screenY || window.screenTop || 0;
-    		    var popX = winX + (winWidth - windowW)/2;
-    		    var popY = winY + (winHeight - windowH)/2;
-        		
-        		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
-        	}
-        	
         
-        	function gotoSearchByCate(cateName){
+        function gotoSellPage(){
+    		if($('#id').val()=="null"){
+    			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+    				location.href="login.mb";	
+    			}
+    			return false;
+    		}
+    		else{
+    			
+    			location.href = "insert.prd";
+    		}
+    	}
+    	
+    	function chat(){
+    		if($('#id').val()=="null"){
+    			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+    				location.href="login.mb";	
+    			}
+    			return false;
+    		}
+    		else{
+    			
+    			location.href = "allchatting.mb";
+    		}
+    	}
+    	
+    	function kakaoTalk(){
+    		var idx = "${eduVO.idx}";
+		    var windowW = 550;
+		    var windowH = 650;
+		    var winHeight = document.body.clientHeight;
+		    var winWidth = document.body.clientWidth;
+		    var winX = window.screenX || window.screenLeft || 0;
+		    var winY = window.screenY || window.screenTop || 0;
+		    var popX = winX + (winWidth - windowW)/2;
+		    var popY = winY + (winHeight - windowH)/2;
+    		
+    		window.open("http://pf.kakao.com/_pxcHuxj/chat","카카오톡 상담하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
+    	}
+    	
+    	function mypage(){
+    		if($('#id').val()=="null"){
+    			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+    				location.href="login.mb";	
+    			}
+    			return false;
+    		}
+    		else{
+    			
+    			location.href = "mypage.mb";
+    		}
+    	}
+    	
+    	function gotoSearchByCate(cateName){
         		location.href = "clickedCateName.prd?whatColumn="+ "category" + "&keyword=" + cateName; 	
-        	}
+        }
         	
         </script>
         <style>
@@ -105,10 +232,12 @@
                                     <div class="control">
                                         <div class="searchField d-flex">
                                             <div class="search-category">
-                                                <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start">
-                                                	<option value="all"> 전체검색</option>
-                                                	<option value="name"> 상품명</option>
-                                                    <option value="address"> 주소명</option>
+                                                <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start" style="padding-left: 15px;">
+                                                	<option value="all" <c:if test="${param.whatColumn eq 'all'}">selected</c:if>> 전체검색</option>
+                                                	<option value="mylocation"  <c:if test="${param.whatColumn eq 'mylocation'}">selected</c:if> > 내위치 기반</option> 
+                                                	<option value="name" <c:if test="${param.whatColumn eq 'name'}">selected</c:if>> 상품명</option>
+                                                	<option value="seller_name" <c:if test="${param.whatColumn eq 'seller_name'}">selected</c:if>> 판매자 ID</option>
+                                                    
                                                 
                                                     <!-- 
                                                     <option value="all" label="전체검색" selected="selected">전체검색</option>
@@ -120,7 +249,7 @@
                                                 </select>
                                             </div>
                                             <div class="input-box d-flex w-100">
-                                                <input type="text" name="keyword" value="" placeholder="Search products or #" class="input-text rounded-0 border-start-0 border-end-0">
+                                                <input type="text" name="keyword" value="" placeholder="Search products" class="input-text rounded-0 border-start-0 border-end-0">
                                                 <button type="submit" title="Search" class="action search rounded-pill-end"><i class="icon an an-search-l"></i></button>
                                             </div>
                                         </div>
@@ -138,47 +267,51 @@
                                 <!--End Wishlist-->
                                 <!--Setting Dropdown-->
                                 
-                                <!-- 상단 오른편 판매하기 버튼 -->
+                               <!-- 상단 오른편 판매하기 버튼 -->
                                 <div class="iconset flex-lg-column">
 	                                	<i class="fa-solid fa-won-sign" onClick="gotoSellPage()"></i>
 	                                	<span class="text d-none d-lg-flex" onClick="gotoSellPage()">판매하기</span>
                                 </div>
                                
+                                <!-- 상단 오른편 판매하기 버튼 -->
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-regular fa-comment"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="chat()">채팅</span>
+                                </div>
                                 
                                 <!-- 상단 오른편 마이페이지 버튼 -->
-                                <div class="user-link iconset flex-lg-column"><i class="fa-regular fa-user"></i><span class="text d-none d-lg-flex">마이페이지</span></div>
-                                <div id="userLinks" class="mt-lg-3">
+                                <div class="user-link iconset flex-lg-column">
+                                	<i class="fa-regular fa-user">
+                                		</i><span class="text d-none d-lg-flex" onclick="mypage()">마이페이지</span>
+                                </div>
+                                <%-- <div id="userLinks" class="mt-lg-3">
                                     <ul class="user-links">
                                     	<c:if test="${id == null}">
-                                       	 	<li><a href="login.mb">로그인</a></li>
                                         	<li><a href="register.mb">회원가입</a></li>
                                     	</c:if>
                                     	<c:if test="${not empty id }">
                                         	<li><a href="mypage.mb?id=<%=id%>">마이페이지</a></li>
                                         	<li><a href="my-wishlist.mb">관심목록</a></li>
-                                        	<li><a href="compare-style1.mb">Compare</a></li>
-                                        	<li><a href="out.mb">로그아웃</a></li>
                                     	</c:if>
                                     </ul>
+                                </div> 
+                                --%>
+                                
+                                <!-- 상단 오른편 로그인,로그아웃 버튼 -->
+                                <c:if test="${id == null}">
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-solid fa-lock-open"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="location.href='login.mb'">로그인</span>
                                 </div>
+                                </c:if>
+                                 <c:if test="${id != null}">
+                                <div class="iconset flex-lg-column">
+	                                	<i class="fa-solid fa-lock"></i>
+	                                	<span class="text d-none d-lg-flex" onClick="logout()">로그아웃</span>
+                                </div>
+                                </c:if>
                                 <!--End Setting Dropdown-->
                                 
-                                <!--Minicart Drawer-->
-                                
-                                <!-- 상단 오른편 대화창 버튼 -->
-                                <div class="header-cart iconset flex-lg-column">
-                                    <a href="#" class="site-header__cart btn-minicart d-flex-justify-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
-                                        <i class="fa-regular fa-heart"></i><span class="text d-none d-lg-flex">관심목록</span><span class="site-cart-count counter d-flex-center justify-content-center position-absolute rounded-circle">2</span>
-                                    </a>
-                                </div>
-                                
-                                 <!-- 상단 오른편 판매하기 버튼 -->
-                                <div class="iconset flex-lg-column">
-	                                	<i class="fa-regular fa-comment"></i>
-	                                	<span class="text d-none d-lg-flex" onClick="gotoSellPage()">채팅</span>
-                                </div>
-                                
-                                <!--End Minicart Drawer-->
                                 <!--Setting Dropdown-->
 
                                 
@@ -243,7 +376,7 @@
                             <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">                            
                                 <nav class="grid__item" id="AccessibleNav">
                                     <ul id="siteNav" class="site-nav medium center hidearrow">
-                                        <li class="lvl1 parent megamenu"><a href="#;">Home <i class="an an-angle-down-l"></i></a>
+                                        <!-- <li class="lvl1 parent megamenu"><a href="#;">Home <i class="an an-angle-down-l"></i></a>
                                             <div class="megamenu style1">
                                                 <div class="row">
                                                     <div class="col-md-8 col-lg-8">
@@ -310,27 +443,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="lvl1 parent dropdown"><a href="#;">카테고리 <i class="an an-angle-down-l"></i></a>
+                                        </li> -->
+                                        <li class="lvl1 parent dropdown"><a href="#;"><i class="fa-solid fa-bars"></i></i> <i class="an an-angle-down-l"></i></a>
                                             <!-- foreach -->
-                                            <ul class="dropdown">
-                                            <c:forEach items="${lists }" var="firstList" varStatus="j">
-                                                
-                                                	<li>
-                                                	<a href="javascript:gotoSearchByCate('${firstList.key}')" class="site-nav"> ${firstList.key} <i class="an an-angle-right-l"></i></a>
-                                                
-                                                    <ul class="dropdown">
-												<c:forEach items="${firstList.value }" var="scate" varStatus="i">
-                                                       
-                                                        <li><a href="javascript:gotoSearchByCate('${scate.name}')" class="site-nav last"> ${scate.name }</a></li>
-                                                        
-                                            	</c:forEach>
-                                                    
-                                                    </ul>
-                                                
-                                                	</li>
-                                                
-											</c:forEach>
+                                            <ul class="dropdown" id="cate_dropdown">
+                                            
+                                          	<!-- category가 ajax로 들어오는 자리 -->
+											
                                             </ul>
                                         </li>
                                         <li class="lvl1 parent megamenu"><a href="#;">Shop <i class="an an-angle-down-l"></i></a>
@@ -640,6 +759,19 @@
                                                 End Product Grid
                                             </div> -->
                                         </li>
+                                        <li class="lvl1 parent dropdown"><a href="board.evt">이벤트<i class="an an-angle-down-l"></i></a>
+                                           <!--  <ul class="dropdown">
+                                                <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
+                                                <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
+                                                <li><a href="blog-masonry.html" class="site-nav">Masonry Blog Style</a></li>
+                                                <li><a href="blog-2columns.html" class="site-nav">2 Columns</a></li>
+                                                <li><a href="blog-3columns.html" class="site-nav">3 Columns</a></li>
+                                                <li><a href="blog-4columns.html" class="site-nav">4 Columns</a></li>
+                                                <li><a href="blog-single-post.html" class="site-nav last">Article Page</a></li>
+                                            </ul> -->
+                                        </li>
+                                        
                                         <li class="lvl1 parent megamenu"><a href="board.ctc">문의게시판<i class="an an-angle-down-l"></i></a>
                                             <!-- <div class="megamenu style4">
                                                 <div class="row shop-grid-5">
@@ -708,18 +840,7 @@
                                         </li>
                                         
                                         
-                                        <li class="lvl1 parent dropdown"><a href="#;">Blog <i class="an an-angle-down-l"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                                                <li><a href="blog-masonry.html" class="site-nav">Masonry Blog Style</a></li>
-                                                <li><a href="blog-2columns.html" class="site-nav">2 Columns</a></li>
-                                                <li><a href="blog-3columns.html" class="site-nav">3 Columns</a></li>
-                                                <li><a href="blog-4columns.html" class="site-nav">4 Columns</a></li>
-                                                <li><a href="blog-single-post.html" class="site-nav last">Article Page</a></li>
-                                            </ul>
-                                        </li>
+                                        
                                     </ul>
                                 </nav>                                   
                             </div>

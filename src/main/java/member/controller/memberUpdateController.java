@@ -14,7 +14,7 @@ import member.model.MemberDao;
 public class memberUpdateController {
 
 	private final String command = "updateMember.mb";
-	private String gotoPage = "mypage";
+	private String gotoPage = "redirect:mypage.mb?select=6";
 	
 	@Autowired
 	private MemberDao mdao;

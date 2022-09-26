@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@include file = "categoryTop.jsp" %>
+
+<%@include file="../common/common.jsp" %>
+<%@include file="../member/commonTop.jsp" %>
+
 <style>
 button {
 	height: 2.5em;
@@ -68,25 +71,78 @@ td{
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+/*카카오톡 로그인   */
+//초기화 시키기. 
+$(document).ready(function(){	
+	window.Kakao.init("712a5c51e06bca8448c4c65b4205bb54");
+	Kakao.isInitialized();
+});
+
+function kakaoLogin() {
 	
-	/*카카오톡 로그인   */
-	function kakaoLogin() {
-	Kakao.Auth.login({
-		success: function (response) {
-		Kakao.API.request({
-			url: '/v2/user/me',
-			success: function (response) {
-				kakaoLoginPro(response)
-			},
-			fail: function (error) {
-				console.log(error)
-			},
-		})
-	},
-		fail: function (error) {
-			console.log(error)
-		},
-	})
+	window.Kakao.Auth.login({
+		scope:'profile_nickname,account_email',
+		success: function(authObj){
+			//console.log(authObj);
+			window.Kakao.API.request({
+				url: '/v2/user/me',
+				success: res => {
+					const email = res.kakao_account.email;
+					const name = res.properties.nickname;
+					var e = email;
+					$.ajax({
+						type : 'post',
+						url : "idcheck.mb",
+						data : {
+							id : email
+						},
+						success : function(data) {
+							if($.trim(data)=="yes"){
+								if(confirm("등록된 정보가 없습니다\n 회원가입을 진행하시겠습니까?")){
+									location.href="kakaologin.mb?name="+name+"&email="+email;
+								}
+							}
+							else{
+								$.ajax({
+									type : 'post',
+									url : "kakaoSucessLogin.mb",
+									data : {
+										email : email
+									},
+									success : function(data) {
+										if ($.trim(data) == "yes") {
+											location.href = "/ex/";
+										} 
+										else if($.trim(data) == "Insertip"){
+											location.href = "Insertip.mb?id="+email;
+										}
+										else if($.trim(data)=="black"){
+											$('#logincheck').html(
+											"<br><br><font color=red>이용 정지중인 회원입니다.<br> 안녕히가세요.</font>");
+											return false;
+										}
+										else {
+											$('#logincheck').html(
+											"<br><br><font color=red>아이디 또는 비밀번호를 잘못 입력했습니다.<br> 입력하신 내용을 다시 확인해주세요.</font>");
+											return false;
+										}//else
+									}//success
+
+								});//ajax
+							}//else
+						}//success
+
+					});//ajax
+					
+				}
+			});
+			
+		}
+	});
+}
+function kakaoExist(){
+	
 }
 
 	
@@ -148,7 +204,7 @@ td{
 	var hpClick = false;
 	
 	var AuthClick = false;
-	var confirm = false; 
+	var confirmAuth = false; 
 	
 	function findId(){
 		if ($('#popname').val() == "") {
@@ -161,7 +217,7 @@ td{
 			$('#hpmsg').show();
 			return;
 		}
-		else if(!confirm){
+		else if(!confirmAuth){
 			$('#hpnmsg').html("<br><font color=red>인증번호 확인해주세요</font>");
 			$('#hpnmsg').show();
 			return;
@@ -244,12 +300,12 @@ td{
 						},
 					success : function(data){ 
 						if($.trim(data)=="yes"){
-							confirm =true;
+							confirmAuth =true;
 							$('#hpnmsg').html("<font color=green size=2px>인증되었습니다</font>");
 							$('#hpnmsg').show();
 						}
 						else{
-							confirm = false;
+							confirmAuth = false;
 							$('#authNum').focus();
 							$('#hpnmsg').html("<font color=red size=2px>인증번호가 틀립니다</font>");
 							$('#hpnmsg').show();
@@ -444,15 +500,16 @@ td{
             <!--Body Container-->
             <div id="page-content">   
                 <!--Collection Banner-->
+                
                 <div class="collection-header">
                     <div class="collection-hero">
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
-                            <h1 class="collection-hero__title">Login</h1>
-                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/ex/" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">Login</span></div>
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">예약 및 결제</h2>
                         </div>
                     </div>
                 </div>
+                
                 <!--End Collection Banner-->
 
                 <!--Container-->
@@ -464,7 +521,7 @@ td{
                                 <div class="inner">
 <!--  ======================================================================================================================================================================== -->
                                     <form name="loginForm" method="post" class="customer-form">	
-                                        <h3 class="h4 text-uppercase">로그인</h3>
+                                        <h3 class="h4 text-uppercase" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">로그인</h3>
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group">
@@ -488,7 +545,7 @@ td{
 											</p>
 											<p>
 											<input type="button" onclick="return loginCheck()" class="btn rounded me-auto" value="로그인" style="width: 400px; height: 45px;">
-											<div id="kakaobg" style="text-align: center""><img onclick="kakaoLogin()" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" style="width: 200px; height: 45px; "></div>
+											<div id="kakaobg" style="text-align: center;"><img onclick="kakaoLogin()" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" style="width: 200px; height: 45px; "></div>
 											</p>
 
 											<!-- 아이디 찾기 팝업창  -->
@@ -631,83 +688,7 @@ td{
             <!--End Body Container-->
 
             <!--Footer-->
-            <div class="footer footer-1">
-                <div class="footer-top clearfix">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center about-col mb-4">
-                                <img src="resources/assets/images/footer-logo.png" alt="Optimal" class="mb-3"/>
-                                <p>55 Gallaxy Enque, 2568 steet, 23568 NY</p>
-                                <p class="mb-0 mb-md-3">Phone: <a href="tel:+011234567890">(+01) 123 456 7890</a> <span class="mx-1">|</span> Email: <a href="mailto:info@example.com">info@example.com</a></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-3 footer-links">
-                                <h4 class="h4">Informations</h4>
-                                <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="aboutus-style1.html">About us</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="privacy-policy.html">Privacy policy</a></li>
-                                    <li><a href="#">Terms &amp; condition</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-2 footer-links">
-                                <h4 class="h4">Quick Shop</h4>
-                                <ul>
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li><a href="#">Kids</a></li>
-                                    <li><a href="#">Sportswear</a></li>
-                                    <li><a href="#">Sale</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-3 footer-links">
-                                <h4 class="h4">Customer Services</h4>
-                                <ul>
-                                    <li><a href="#">Request Personal Data</a></li>
-                                    <li><a href="faqs-style1.html">FAQ's</a></li>
-                                    <li><a href="contact-style1.html">Contact Us</a></li>
-                                    <li><a href="#">Orders and Returns</a></li>
-                                    <li><a href="#">Support Center</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 newsletter-col">
-                                <div class="display-table pt-md-3 pt-lg-0">
-                                    <div class="display-table-cell footer-newsletter">
-                                        <form action="#" method="post">
-                                            <label class="h4">NEWSLETTER SIGN UP</label>
-                                            <p>Enter Your Email To Receive Daily News And Get 20% Off Coupon For All Items.</p>
-                                            <div class="input-group">
-                                                <input type="email" class="brounded-start input-group__field newsletter-input mb-0" name="EMAIL" value="" placeholder="Email address" required>
-                                                <span class="input-group__btn">
-                                                    <button type="submit" class="btn newsletter__submit rounded-end" name="commit" id="Subscribe"><i class="an an-envelope-l"></i></button>
-                                                </span>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <ul class="list-inline social-icons mt-3 pt-1">
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="an an-facebook" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="an an-twitter" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="an an-pinterest-p" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="an an-instagram" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="TikTok"><i class="an an-tiktok" aria-hidden="true"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Whatsapp"><i class="an an-whatsapp" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom clearfix">
-                    <div class="container">
-                        <div class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse">
-                            <img src="resources/assets/images/payment.png" alt="Paypal Visa Payments"/>
-                            <div class="copytext text-uppercase">&copy; 2022 Optimal. All Rights Reserved.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%@include file="../member/commonBottom.jsp" %>   
             <!--End Footer-->
 
             <!--Scoll Top-->

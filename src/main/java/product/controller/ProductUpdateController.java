@@ -25,24 +25,28 @@ public class ProductUpdateController {
 	
 	private final String command = "update.prd";
 	private String getPage ="productUpdateForm";
-	private String gotoPage ="redirect:/";
+	private String gotoPage ="redirect:mypage.mb?select=4";
 	
 	@Autowired
 	ProductDao productDao;
 	
 	@Autowired
-	ServletContext servletContext; // 프로젝트 1개당 하나가 자동으로 만들어줌. 그래서 그냥 Autowired만 해줘도 주입됨.
+	ServletContext servletContext; 
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String showUpdateForm(@RequestParam("no") String pno, Model model) {
+	public String showUpdateForm(@RequestParam("no") String pno, 
+								 @RequestParam("whereClicked") String whereClicked, 
+								 Model model) {
 		System.out.println("ProductUpdateController");
 		ProductBean pb = productDao.getByNo(pno);
 		model.addAttribute("pb", pb);
+		model.addAttribute("whereClicked", whereClicked);
+		
 		return getPage;
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doUpdate(ProductBean pbean) {
+	public String doUpdate(ProductBean pbean, @RequestParam("whereClicked") String whereClicked) {
 		
 		System.out.println(pbean);
 		
@@ -81,17 +85,17 @@ public class ProductUpdateController {
 		//4. appeared new files upload on server resource
 		MultipartFile[] upload = pbFromForm.getUpload();
 		String tempImages = null;
-		//resources 라는 폴더가 존재하지 않는다명 생성.
+		// if there is no resources folder create forder
 		File folder = new File(path);
 		if (!folder.exists()) {
-			folder.mkdir(); //폴더 생성합니다.
-			System.out.println(path + " 경로의 resources 폴더가 생성되었습니다.");
+			folder.mkdir(); 
+			System.out.println(path);
 		}
 		for(int i = 0; i<imgNamesFromForm.length; i++) {
 			if(Arrays.asList(imgNamesFromDB).contains(imgNamesFromForm[i]) == false) {
 				System.out.println("!!" + imgNamesFromForm[i] + "file have to be uploaded on server resource!!"); 
 				UUID uuid = UUID.randomUUID();
-				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // multi.getOriginalFilename() 대신 pbean.getImage() 를 사용해도 됨.
+				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // you can use multi.getOriginalFilename() too instead of this
 				
 				if(tempImages == null) {
 					tempImages = uuid.toString()+"_" + upload[i].getOriginalFilename();
@@ -100,7 +104,7 @@ public class ProductUpdateController {
 				}
 				
 				try {
-					upload[i].transferTo(file); // 원하는 위치에 파일을 올리고 싶을 때 사용함. 이 문장 실행과 동시에 업로드 됨.
+					upload[i].transferTo(file); 
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -121,11 +125,17 @@ public class ProductUpdateController {
 		//6. execute update
 		int cnt = productDao.updateProduct(pbFromForm);
 		if(cnt > 0 ) {
-			System.out.println("상품 수정성공");
+			System.out.println("update sucess");
 		}else {
-			System.out.println("상품 수정실패");
+			System.out.println("update failed");
 		}
 		
-		return gotoPage;
+		if(whereClicked.equals("detail")) {
+			return "redirect:/productdetail.prd?no=" + pbean.getNo();
+		}else if(whereClicked.equals("mypage")) {
+			return gotoPage;
+		}else {
+			return gotoPage;
+		}
 	}
 }

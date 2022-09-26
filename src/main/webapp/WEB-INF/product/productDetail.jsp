@@ -9,21 +9,94 @@
 		font-weight: bold;
 		font-size: 15px;
 	}
+	
+	.slick-list{
+		height: 450px !important;
+	}
+	
+	.zoomContainer{
+		display: none;
+	}
 </style>
 
 <!-- 오른쪽 상단 아이콘 관련 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
 	$(function(){
-		if($('#id').val() != ""){
+		if($('#id').val() != "null"){
 			whatButtonWillShowAboutLike();	
 		}
 		
 		showLikeCount();
+		
+		
+		window.Kakao.init("712a5c51e06bca8448c4c65b4205bb54");
+		Kakao.isInitialized();
+		
+		/* 로그인한 아이디가 상품을 구매했고 사용을 다 했으면 리뷰작성하기 뜨게 하기  */
+		$.ajax({
+			type : 'post',
+			url : "CheckReservaionPno.rsv",
+			data : {
+				pno : $('#no').val()
+			},
+			success : function(data) {
+				if($.trim(data) == "no"){
+					$('#write').hide();
+				}
+			}
+		});
+		
+		/* 이미지 여러개 */
+		
 	});
 
+	
+	/* 카카오 공유하기 */
+	function kakaoShare() {
+		/*  클립보드 복사 */
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+		
+		/* 카톡 공유 */
+		 Kakao.Link.sendDefault({
+		      objectType: 'feed',
+		      content: {
+		        title: 'Billy A Dream 상품',
+		        description:  'Billy A Dream ['+$('#pname').val()+"] 상품",
+		        imageUrl:
+		        	"https://ifh.cc/g/sRO1w5.png"
+		        	<%--  '<%=request.getContextPath()%>/resources/'+$('#pimages').val() --%>,
+		        link: {
+		          mobileWebUrl: document.location.href,
+		          webUrl: document.location.href,
+		        },
+		      },
+		      buttons: [
+		        {
+		          title: '웹으로 보기',  //첫 번째 버튼 
+		          link: {
+		            mobileWebUrl: document.location.href,  //버튼 클릭 시 이동 링크
+		            webUrl: document.location.href,
+		          },
+		        },
+		      ],
+		    })
+
+
+	}
+	
+	
 	function whatButtonWillShowAboutLike(){
 		$.ajax({
 			type : 'post',
@@ -59,7 +132,7 @@
 	}
 	
 	function like(){
-		if($('#id').val()==""){
+		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -93,7 +166,7 @@
 	}
 	
 	function buy(){
-		if($('#id').val()==""){
+		if($('#id').val() == "null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -105,7 +178,7 @@
 	}
 	
 	//채팅
-	function chat(){
+	function chatProduct(){
 		
 		var no = $('#no').val();
 		
@@ -119,7 +192,7 @@
 	    var popX = winX + (winWidth - windowW)/2;
 	    var popY = winY + (winHeight - windowH)/2;
 		
-		if($('#id').val()==""){
+		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -129,17 +202,43 @@
 			window.open("chat.prd?no="+no,"대화하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
 		}
 	}
+	
+	
+	function writeReview(){
+		
+		if($('#title').val()==""){
+			alert("제목을 입력해주세요");
+			return false;
+		}
+		else if($('input[name="rating"]:checked').length==0){
+			alert("별점을 입력해주세요");
+			return false;
+		}
+		else if($('#content').val()==""){
+			alert("후기를 입력해주세요");
+			return false;
+		}
+		
+	}
+	
 
 </script>
 			
             <!--Body Container-->
             <div id="page-content">   
                 <!--Breadcrumbs-->
-                <div class="breadcrumbs-wrapper text-uppercase">
-                    <div class="container">
-                        <div class="breadcrumbs"><a href="index.html" title="Back to the home page">홈</a><span>|</span><span class="fw-bold">상세페이지</span></div>
+                
+                
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">상세페이지</h2>
+                        </div>
                     </div>
                 </div>
+                
+                
                 <!--End Breadcrumbs-->
 
 
@@ -150,12 +249,12 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
-                                    <div class="product-thumb">
+                                    <div class="product-thumb" >
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            
+                                            <input type="hidden" id="pimages" value="${images[0] }">
                                             <!-- 이미지 들어감 -->
                                             <c:forEach var="productimages" items="${images }">
-                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}" data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
+                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}"  data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
                                                 <img class="blur-up lazyload" width="100px" height="120px" data-src="<%=request.getContextPath()%>/resources/${productimages}" src="<%=request.getContextPath()%>/resources/${productimages}" alt="product" />
                                             </a>
                                             </c:forEach>
@@ -178,8 +277,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <!-- Product Info -->
                                 <div class="product-single__meta">
-                                    <h1 class="product-single__title" style="margin-bottom:20px">${pb.name }</h1>
-                                    
+                                    <h1 class="product-single__title" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600!important; font-size:22px;color: black; margin-bottom:10px">${pb.name }</h1>
+                                    <input type="hidden" id="pname" value="${pb.name }">
                                     <!-- Product Reviews -->
                                     <!-- Product Info -->
 						<div class="product-info">
@@ -188,21 +287,30 @@
 							
 							<div class="container">
 								<div class="row">
-									<div class="col" style="padding:0px">
+									<div class="col col-lg-4" style="padding:0px">
 										<i class="fa-regular fa-clock"></i>&nbsp;
-										<fmt:parseDate var="formattedDay" value="${pb.create_day }" pattern="yyyy-MM-dd" />
-										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
+										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd HH:mm:ss" />
+										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd HH:mm:ss" />${newformattedDay }
 							    	</div>
 							    	
 							    	<div class="col" style="text-align:right">
-							      	<i class="fa-solid fa-heart"></i> 관심 
+							    	
+							    	<i class="fa-regular fa-user"></i> <a href="search.prd?whatColumn=seller_name&keyword=${pb.id}">${pb.id}</a>
+							    	&nbsp;&nbsp; 					    	
+							    	
+							      	<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
                                     
-                                    <span id="likeCount">
-	                                    
-                                    </span>
+                                     &nbsp;&nbsp; 
+                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count } 
                                     
+                                    
+                                    <c:if test="${id == pb.id}">
+                                	&nbsp;&nbsp; 
+                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }&whereClicked=detail">수정</a>
+                                	</c:if>
+                                	
                                     &nbsp;&nbsp; 
-                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }
+                                    <a href="javascript:kakaoShare()"><i class="fa-regular fa-share-from-square"></i> 공유</a>
 							    	</div>
 							</div>
 							
@@ -220,7 +328,7 @@
 							<div>
 								<div class="bigtext" style="margin-bottom: 2px"><i class="fa-solid fa-caret-right" style="margin-right:10px;"></i>카테고리</div>
 								<div>
-									<span class="variant-sku">${pb.lcategoryName}</span> &nbsp;> &nbsp;<span class="variant-sku" style="padding:0px">${pb.scategoryName }</span>		
+									<a href="javascript:gotoSearchByCate('${pb.lcategoryName}')"><span class="variant-sku">${pb.lcategoryName}</span></a> &nbsp;> &nbsp;<a href="javascript:gotoSearchByCate('${pb.scategoryName}')"><span class="variant-sku" style="padding:0px">${pb.scategoryName }</span></a>	
 								
 								</div>
 							</div>
@@ -264,28 +372,28 @@
                                     <!-- Swatches Color/Size -->
                                     <!-- Product Action -->
                                     <div class="product-action w-100 clearfix">
-                                    
-                                    
                                     <br>
-                                         <div class="row g-2">
-                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                         <div class="row row-cols-3">
+                                            <div class="col-12 col-sm-4 col-md-4 col-lg-5">
                                                 <div class="product-form__item--submit">
                                                     <input type="hidden" name="id" id="id" value="${id }">
                                                     <input type="hidden" name="no" id="no" value="${pb.no }">
                                                     <button type="button" name="add" class="btn rounded product-form__cart-submit mb-0" onclick="like()"><span id="likeText">찜하기</span></button>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-12 col-sm-4 col-md-4 col-lg-5">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button>
+                                                	<input type="button" class="btn rounded btn-outline-primary proceed-to-checkout" value="예약 및 결제하기" onclick="buy()">
+                                                    <!-- <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button> -->
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-12 col-sm-4 col-md-4 col-lg-2">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chat()">채팅</button>
+                                                    <button type="button" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chatProduct()">채팅</button>
                                                 </div>
                                             </div>
                                         </div>
+                                      
                                     </div>
                                     <!-- End Product Action -->
                                     <!-- Product Info link -->
@@ -303,7 +411,7 @@
                             <div class="col-12 col-sm-3 mb-2 sm-md-0">
                                 <div class="nav flex-column nav-pills" id="vertical-tab" role="tablist" aria-orientation="vertical">
                                     <a class="nav-link active" id="description-tab" data-bs-toggle="pill" href="#description" role="tab" aria-controls="description" aria-selected="true">상세설명</a>
-                                    <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#reviewt" role="tab" aria-controls="reviewt" aria-selected="false">상품 후기</a>
+                                    <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#reviewt" role="tab" aria-controls="reviewt" aria-selected="false" >상품 후기</a>
                                     <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#sellerProduct" role="tab" aria-controls="reviewt" aria-selected="false">판매자 상품</a>
                                 </div>
                             </div>
@@ -311,7 +419,7 @@
                                 <div class="tab-content" id="vertical-tabContent">
                                     <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                                         <div class="product-description">
-                                             <h4 class="spr-form-title text-uppercase mb-3">제품 상세설명</h4>
+                                             <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">제품 상세설명</h4>
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                     </div>
                                                     ${pb.description }
@@ -323,69 +431,86 @@
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                         <div class="product-review d-flex-center me-auto">
-                                                            <a class="reviewLink" href="#"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></a>
-                                                            <span class="spr-summary-actions-togglereviews ms-2">Based on 6 reviews 234</span>
+                                                        평점 &nbsp;&nbsp;&nbsp; 
+                                                       	<c:forEach begin="1" end="${ReviewAverage }">
+                                                       		<i class="fa-solid fa-star" style="color: orange;"></i>
+                                                       	</c:forEach>
+                                                       	<c:forEach begin="1" end="${5-ReviewAverage }">
+                                                       		<i class="fa-regular fa-star" style="color: orange;"></i>
+                                                       	</c:forEach>
+                                                       	
+                                                            <span class="spr-summary-actions-togglereviews ms-2">총 후기 <b>${totalCount } 개</b></span>
                                                         </div>
                                                         <div class="spr-summary-actions mt-3 mt-lg-0">
-                                                            <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded"><i class="icon an-1x an an-pencil-alt me-2"></i>리뷰 작성하기</a>
+                                                            <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded" id="write"><i class="icon an-1x an an-pencil-alt me-2"></i>리뷰 작성하기</a>
                                                         </div>
                                                     </div>
 
-                                                    <form method="post" action="#" class="product-review-form new-review-form mb-4">
-                                                        <h4 class="spr-form-title text-uppercase">Write A Review</h4>
+                                                    <form method="post" action="writeReview.prd" class="product-review-form new-review-form mb-4">
+                                                    	<input type="hidden" value="${pb.no }" name="pno">
+                                                        <h4 class="spr-form-title text-uppercase">상품 후기 작성</h4>
                                                         <fieldset class="spr-form-contact">
-                                                            <div class="spr-form-contact-name form-group">
-                                                                <label class="spr-form-label" for="nickname">Name <span class="required">*</span></label>
-                                                                <input class="spr-form-input spr-form-input-text" id="nickname" type="text" name="name" placeholder="John smith" required />
-                                                            </div>
-                                                            <div class="spr-form-contact-email form-group">
-                                                                <label class="spr-form-label" for="email">Email <span class="required">*</span></label>
-                                                                <input class="spr-form-input spr-form-input-email " id="email" type="email" name="email" placeholder="info@example.com" required />
-                                                            </div>
                                                             <div class="spr-form-review-rating form-group">
-                                                                <label class="spr-form-label">Rating</label>
+	                                                            <div class="spr-form-review-title form-group">
+	                                                                <label class="spr-form-label" for="title">제목 </label>
+	                                                                <input class="spr-form-input spr-form-input-text " id="title" type="text" name="title" placeholder="제목을 작성해주세요" />
+	                                                            </div>
+                                                                <label class="spr-form-label">별점</label>
                                                                 <div class="product-review pt-1">
                                                                     <div class="review-rating">
-                                                                        <input type="radio" name="rating" id="rating-5"><label for="rating-5"></label>
-                                                                        <input type="radio" name="rating" id="rating-4"><label for="rating-4"></label>
-                                                                        <input type="radio" name="rating" id="rating-3"><label for="rating-3"></label>
-                                                                        <input type="radio" name="rating" id="rating-2"><label for="rating-2"></label>
-                                                                        <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
+                                                                        <input type="radio" name="rating" id="rating-5" value="5" ><label for="rating-5"></label>
+                                                                        <input type="radio" name="rating" id="rating-4" value="4" ><label for="rating-4"></label>
+                                                                        <input type="radio" name="rating" id="rating-3" value="3"><label for="rating-3"></label>
+                                                                        <input type="radio" name="rating" id="rating-2" value="2"><label for="rating-2"></label>
+                                                                        <input type="radio" name="rating" id="rating-1" value="1"><label for="rating-1"></label>
                                                                     </div>
                                                                     <a class="reviewLink d-none" href="#"><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i></a>
                                                                 </div>
                                                             </div>
-                                                            <div class="spr-form-review-title form-group">
-                                                                <label class="spr-form-label" for="review">Review Title </label>
-                                                                <input class="spr-form-input spr-form-input-text " id="review" type="text" name="review" placeholder="Give your review a title" />
-                                                            </div>
                                                             <div class="spr-form-review-body form-group">
-                                                                <label class="spr-form-label" for="message">Body of Review <span class="spr-form-review-body-charactersremaining">(1500) characters remaining</span></label>
+                                                                <label class="spr-form-label" for="content">후기 내용 <span class="spr-form-review-body-charactersremaining">최대 1500글자</span></label>
                                                                 <div class="spr-form-input">
-                                                                    <textarea class="spr-form-input spr-form-input-textarea " id="message" name="message" rows="5" placeholder="후기 작성"></textarea>
+                                                                    <textarea class="spr-form-input spr-form-input-textarea " id="content" name="content" rows="5" placeholder="후기 내용을 작성해주세요"></textarea>
                                                                 </div>
                                                             </div>
                                                         </fieldset>
                                                         <div class="spr-form-actions clearfix">
-                                                            <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="Submit Review">
+                                                            <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="작성하기" onclick="return writeReview()">
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="spr-reviews">
-                                                        <h4 class="spr-form-title text-uppercase mb-3">상품 후기</h4>
+                                                       <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">상품 후기</h4>
+                                                       <br><br>
+                                                       	<c:if test="${fn:length(reviewlists) eq 0 }">
+                                                       		<p align="center"><i class="fa-solid fa-comment-slash fa-6x"></i><br><br>
+															등록된 후기가 없습니다.                                                       		
+                                                       		<br><br>
+                                                       		</p>
+                                                       	</c:if>
+                                                       	
+                                                       	<c:forEach var="r" items="${reviewlists }">
                                                         <div class="review-inner">
                                                             <div class="spr-review">
                                                                 <div class="spr-review-header">
-                                                                    <span class="product-review spr-starratings"><span class="reviewLink"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></span></span>
-                                                                    <h5 class="spr-review-header-title mt-1">제목</h5>
-                                                                    <span class="spr-review-header-byline">날짜</span>
+                                                                    <h5 class="spr-review-header-title mt-1">${r.title }</h5>
+                                                                	<!-- 별점 -->
+                                                                   	<c:forEach begin="1" end="${r.rating }">
+                                                       					<i class="fa-solid fa-star" style="color: orange;"></i>
+                                                       				</c:forEach>
+                                                      			 	<c:forEach begin="1" end="${5-r.rating }">
+                                                       					<i class="fa-regular fa-star" style="color: orange;"></i>
+                                                       				</c:forEach>
                                                                 </div>
                                                                 <div class="spr-review-content">
-                                                                    <p class="spr-review-content-body">내용</p>
+                                                                    <p class="spr-review-content-body">${r.content }</p>
                                                                 </div>
-                                                            </div>
+                                                                    <p align="right"><span class="spr-review-header-byline">${r.writeday }&nbsp;&nbsp;작성자 &nbsp;${r.writerName }</span></p>                                                            </div>
                                                         </div>
+                                                        <hr>
+                                                       	</c:forEach>
+                                                        <p align="center">${pageInfo.pagingHtml}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -395,7 +520,7 @@
                                         <div class="" id="reviews">
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                                	 <h4 class="spr-form-title text-uppercase mb-3">${mb.name } 님의 판매상품</h4>
+                                                	 <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">${mb.name } 님의 판매상품</h4>
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                     </div>
                                                 </div>
@@ -404,58 +529,9 @@
 <!-- ======================================================================================================= -->
 							 <!-- Products-->
                 <!-- Grid Product -->
-						<div class="grid-products grid--view-items wishlist-grid mt-4">
-							<div class="row">
-								<c:if test="${fn:length(lists)==0 }">
-									<div align="center">
-									<i class="fa-solid fa-store-slash fa-5x"></i></i><br><br>
-									 판매자가 판매하는 다른상품이 없습니다</div>
-								</c:if>
-								
-								<!-- 반복문 시작 -->
-								<c:if test="${fn:length(lists)!=0 }">
-								<c:forEach var="p" items="${ lists}">
-								<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<input type="hidden" name="no" id="no"value="${p.no }">
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="product-layout1.html">${p.name}</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Button -->
-									</div>
-									<!-- End Product Details -->
-								
-								</div>
-								</c:forEach>
-								</c:if>
-								<!--프로덕트 끝  -->
-							</div>
-						</div>
+						
+					<iframe src="detailsellerPrd.prd?no=${param.no}" height="600px" width="100%" title="Iframe Example"></iframe> 	
+						
 						<!-- End Grid Product-->
 
 									<!-- ======================================================================================================= -->
@@ -477,323 +553,79 @@
                     <!--End Product Nav-->
                 </div>
                 <!--End Container-->
-
+				<hr>
                 <!-- Products-->
                 <section class="section product-slider pb-0">
                     <div class="container">
                         <div class="row">
                             <div class="section-header col-12">
-                                <h2 class="text-transform-none">유사한 상품</h2>
+                                <h2 class="text-transform-none" style="margin-top:0px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:22px  ;color: black; margin-top:50px">유사한 상품</h2>
                             </div>
                         </div>
                         
                         <!-- 체크 -->
-                        <div class="productSlider grid-products">
+                        <div class="productSlider grid-products" style="height:400px;">
+                        <c:forEach var="equal" items="${EqualLists }">
                             <div class="item">
                                 <!--Start Product Image-->
                                 <div class="product-image">
                                     <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
+                                    <a href="productdetail.prd?no=${equal.no }" class="product-img">
                                         <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/product-1.jpg" src="resources/assets/images/products/product-1.jpg" alt="" title="">
+                                        <img class="primary blur-up lazyload" data-src="<%=request.getContextPath()%>/resources/${equal.images}" style="height:300px;"  src="<%=request.getContextPath()%>/resources/${equal.images}" alt="" title="">
                                         <!-- End image -->
                                         <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/product-1-1.jpg" src="resources/assets/images/products/product-1-1.jpg" alt="" title="">
+                                        <img class="hover blur-up lazyload" data-src="<%=request.getContextPath()%>/resources/${equal.images}" style="height:300px;"  src="<%=request.getContextPath()%>/resources/${equal.images}" alt="" title="">
                                         <!-- End hover image -->
-                                        <!-- product label -->
-                                        <div class="product-labels"><span class="lbl on-sale">50% Off</span></div>
                                         <!-- End product label -->
                                     </a>
                                     <!--End Product Image-->
 
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
                                 </div>
                                 <!--End Product Image-->
                                 <!--Start Product Details-->
                                 <div class="product-details text-center">
                                     <!--Product Name-->
                                     <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Martha Knit Top</a>
+                                        <a href="productdetail.prd?no=${equal.no }">${equal.name }</a>
                                     </div>
                                     <!--End Product Name-->
                                     <!--Product Price-->
                                     <div class="product-price">
-                                        <span class="old-price">$199.00</span>
-                                        <span class="price">$219.00</span>
+                                        <span class="old-price">${equal.original_day_price }원/일</span>
+                                        <span class="price">${equal.discounted_day_price }원/일</span>
                                     </div>
+                                    <div class="product-review m-0">
+	                                    <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i> -->
+	                                    <span class="old-price" style="text-decoration : none">
+	                                    
+	                                    <c:if test="${equal.add1_sido ne ''}">
+	                                    	${equal.add1_sido}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${equal.add2_sigungu ne ''}">
+	                                    	${equal.add2_sigungu}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${equal.add3_eubmyeon ne ''}">
+	                                    	${equal.add3_eubmyeon}
+	                                    </c:if>
+	                                    
+	                                    <c:if test="${equal.add4_donglee ne ''}">
+	                                    	${equal.add4_donglee}
+	                                    </c:if>
+	                                    
+	                                    <%-- ${recentProductList[i-1].add1_sido} ${recentProductList[i-1].add2_sigungu} ${recentProductList[i-1].add3_eubmyeon} ${recentProductList[i-1].add4_donglee} --%>
+	                                    </span>
+	                                    </div>
                                     <!--End Product Price-->
                                     <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
                                     <!--Color Variant -->
-                                    <ul class="image-swatches swatches">
-                                        <li class="rounded blue medium"><span class="swacth-btn"></span><span class="tooltip-label">Blue</span></li>
-                                        <li class="rounded pink medium"><span class="swacth-btn"></span><span class="tooltip-label">Pink</span></li>
-                                        <li class="rounded red medium"><span class="swacth-btn"></span><span class="tooltip-label">Red</span></li>
-                                    </ul>
                                     <!-- End Variant -->
                                 </div>
                                 <!--End Product Details-->
                             </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/product-1.jpg" src="resources/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/product-1-1.jpg" src="resources/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-
-                                    <!--Countdown Timer-->
-                                    <div class="saleTime desktop" data-countdown="2024/10/01"></div>
-                                    <!--End Countdown Timer-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Long Sleeve T-shirts</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$199.00</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i><i class="an an-star"></i> <i class="an an-star"></i></div>
-                                    <!--End Product Review-->
-                                    <!-- Color Variant -->
-                                    <ul class="swatches">
-                                        <li class="swatch medium rounded black"><span class="tooltip-label">Black</span></li>
-                                        <li class="swatch medium rounded navy"><span class="tooltip-label">Navy</span></li>
-                                        <li class="swatch medium rounded purple"><span class="tooltip-label">Purple</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/product-1.jpg" src="resources/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/product-1-1.jpg" src="resources/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-                                    <!--Product label-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Button Up Top Black</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$99.00</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                    <!--Color Variant -->
-                                    <ul class="swatches">
-                                        <li class="swatch medium rounded red"><span class="tooltip-label">red</span></li>
-                                        <li class="swatch medium rounded orange"><span class="tooltip-label">orange</span></li>
-                                        <li class="swatch medium rounded yellow"><span class="tooltip-label">yellow</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/product-1.jpg" src="resources/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/product-1-1.jpg" src="resources/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Sunset Sleep Scarf Top</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$88.00</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                    <!-- Color Variant -->
-                                    <ul class="image-swatches swatches">
-                                        <li class="rounded yellow medium"><span class="swacth-btn"></span><span class="tooltip-label">Yellow</span></li>
-                                        <li class="rounded blue medium"><span class="swacth-btn"></span><span class="tooltip-label">Blue</span></li>
-                                        <li class="rounded pink medium"><span class="swacth-btn"></span><span class="tooltip-label">Pink</span></li>
-                                        <li class="rounded red medium"><span class="swacth-btn"></span><span class="tooltip-label">Red</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="resources/assets/images/products/product-1.jpg" src="resources/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="resources/assets/images/products/product-1-1.jpg" src="resources/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->   
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Backpack With Contrast Bow</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$39.20</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                    <!-- Color Variant -->
-                                    <ul class="swatches">
-                                        <li class="swatch medium rounded black"><span class="tooltip-label">black</span></li>
-                                        <li class="swatch medium rounded navy"><span class="tooltip-label">navy</span></li>
-                                        <li class="swatch medium rounded darkgreen"><span class="tooltip-label">darkgreen</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
+                           </c:forEach>
                         </div>
                     </div>
                 </section>

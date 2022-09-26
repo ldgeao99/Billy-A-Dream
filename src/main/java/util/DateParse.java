@@ -82,5 +82,17 @@ public class DateParse {
 		}
 		return null;
 	}
+	public static String day(String fullTime) {
+		
+		Date date;
+		try {
+			date = fulltimeFormat.parse(fullTime);
+			return strFormat.format(date);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
 
