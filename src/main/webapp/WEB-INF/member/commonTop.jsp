@@ -10,10 +10,10 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script>
-	// getting category
+	
 	$(function(){
 		
-		
+		// getting category
 		$.ajax({
 			url : "getLargeCategory.lcate",
 			success : function(originText) { // mobile,1|pc/notebook,2|camera/dslr,3
@@ -42,6 +42,29 @@
 				
 			} // outside sucess end
 		});// outside ajax end
+		
+		$('#rgsearch-category1').change(function(){
+			if($('#id').val() == "null" && $('#rgsearch-category1').val() == "mylocation"){
+				if(confirm("로그인이 필요한 기능입니다. \n 로그인 하시겠습니까?")){
+					location.href="login.mb";	
+				}
+				return false;
+			}
+			
+			if($('#rgsearch-category1').val() == "mylocation"){
+				$('input[name="keyword"]').attr('placeholder', '상품명을 입력하세요');	
+			}else if($('#rgsearch-category1').val() == "name"){
+				$('input[name="keyword"]').attr('placeholder', '상품명을 입력하세요');
+			}else if($('#rgsearch-category1').val() == "seller_name"){
+				$('input[name="keyword"]').attr('placeholder', '판매자 아이디를 입력하세요');
+			}else if($('#rgsearch-category1').val() == "all"){
+				$('input[name="keyword"]').attr('placeholder', 'Search Products');
+			}
+				
+				
+		});
+		
+		
 	}); // function end		
 	
 	function getScate(lno){
@@ -209,10 +232,12 @@
                                     <div class="control">
                                         <div class="searchField d-flex">
                                             <div class="search-category">
-                                                <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start">
-                                                	<option value="all"> 전체검색</option>
-                                                	<option value="name"> 상품명</option>
-                                                    <option value="address"> 주소명</option>
+                                                <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start" style="padding-left: 15px;">
+                                                	<option value="all" <c:if test="${param.whatColumn eq 'all'}">selected</c:if>> 전체검색</option>
+                                                	<option value="mylocation"  <c:if test="${param.whatColumn eq 'mylocation'}">selected</c:if> > 내위치 기반</option> 
+                                                	<option value="name" <c:if test="${param.whatColumn eq 'name'}">selected</c:if>> 상품명</option>
+                                                	<option value="seller_name" <c:if test="${param.whatColumn eq 'seller_name'}">selected</c:if>> 판매자 ID</option>
+                                                    
                                                 
                                                     <!-- 
                                                     <option value="all" label="전체검색" selected="selected">전체검색</option>
@@ -224,7 +249,7 @@
                                                 </select>
                                             </div>
                                             <div class="input-box d-flex w-100">
-                                                <input type="text" name="keyword" value="" placeholder="Search products or #" class="input-text rounded-0 border-start-0 border-end-0">
+                                                <input type="text" name="keyword" value="" placeholder="Search products" class="input-text rounded-0 border-start-0 border-end-0">
                                                 <button type="submit" title="Search" class="action search rounded-pill-end"><i class="icon an an-search-l"></i></button>
                                             </div>
                                         </div>
@@ -351,7 +376,7 @@
                             <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">                            
                                 <nav class="grid__item" id="AccessibleNav">
                                     <ul id="siteNav" class="site-nav medium center hidearrow">
-                                        <li class="lvl1 parent megamenu"><a href="#;">Home <i class="an an-angle-down-l"></i></a>
+                                        <!-- <li class="lvl1 parent megamenu"><a href="#;">Home <i class="an an-angle-down-l"></i></a>
                                             <div class="megamenu style1">
                                                 <div class="row">
                                                     <div class="col-md-8 col-lg-8">
@@ -418,8 +443,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="lvl1 parent dropdown"><a href="#;">카테고리 <i class="an an-angle-down-l"></i></a>
+                                        </li> -->
+                                        <li class="lvl1 parent dropdown"><a href="#;"><i class="fa-solid fa-bars"></i></i> <i class="an an-angle-down-l"></i></a>
                                             <!-- foreach -->
                                             <ul class="dropdown" id="cate_dropdown">
                                             
@@ -734,6 +759,19 @@
                                                 End Product Grid
                                             </div> -->
                                         </li>
+                                        <li class="lvl1 parent dropdown"><a href="board.evt">이벤트<i class="an an-angle-down-l"></i></a>
+                                           <!--  <ul class="dropdown">
+                                                <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
+                                                <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
+                                                <li><a href="blog-masonry.html" class="site-nav">Masonry Blog Style</a></li>
+                                                <li><a href="blog-2columns.html" class="site-nav">2 Columns</a></li>
+                                                <li><a href="blog-3columns.html" class="site-nav">3 Columns</a></li>
+                                                <li><a href="blog-4columns.html" class="site-nav">4 Columns</a></li>
+                                                <li><a href="blog-single-post.html" class="site-nav last">Article Page</a></li>
+                                            </ul> -->
+                                        </li>
+                                        
                                         <li class="lvl1 parent megamenu"><a href="board.ctc">문의게시판<i class="an an-angle-down-l"></i></a>
                                             <!-- <div class="megamenu style4">
                                                 <div class="row shop-grid-5">
@@ -802,18 +840,7 @@
                                         </li>
                                         
                                         
-                                        <li class="lvl1 parent dropdown"><a href="#;">Blog <i class="an an-angle-down-l"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                                                <li><a href="blog-masonry.html" class="site-nav">Masonry Blog Style</a></li>
-                                                <li><a href="blog-2columns.html" class="site-nav">2 Columns</a></li>
-                                                <li><a href="blog-3columns.html" class="site-nav">3 Columns</a></li>
-                                                <li><a href="blog-4columns.html" class="site-nav">4 Columns</a></li>
-                                                <li><a href="blog-single-post.html" class="site-nav last">Article Page</a></li>
-                                            </ul>
-                                        </li>
+                                        
                                     </ul>
                                 </nav>                                   
                             </div>

@@ -4,15 +4,165 @@
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
+<!-- style for kakao map  -->
+<style>
+.area {
+	position: absolute;
+	background: #fff;
+	border: 1px solid #888;
+	border-radius: 3px;
+	font-size: 12px;
+	top: -5px;
+	left: 15px;
+	padding: 2px;
+}
 
-<script src="resources/assets/js/vendor/jquery-min.js"></script>
+.info {
+	font-size: 12px;
+	padding: 5px;
+}
+
+.info .title {
+	font-weight: bold;
+}
+</style>
+
+<!-- load kakao map -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3917634bf6e1dd73235db05524ea3ae6"></script>
 <script>
-	$(function(){
-		$('#pageSize').change(function(){
-			location.href="newOrPopularClicked.prd?whatColumn="+$('#what').val()+"&keyword="+$('#keyword').val()+"&pagesize="+$('#pageSize').val();
-		})
-	})
 	
+	// when ready body, upload kakao map
+	$(function(){
+		// 지도에 폴리곤으로 표시할 영역데이터가 담긴 배열(중구, 서대문구, 강서구, ...) 
+		var areas = [];
+		
+		/* 1. JSON 파일을 읽어들여 모든 지역구의 폴리곤 좌표들이 담긴 areas 배열을 채워넣는 작업 */
+		
+		// 1) getJSON도 ajax 메소드와 같이 async(비동기) 방식으로 동작하는데, 순차실행을 위해 이걸 강제로 sync 방식으로 동작하도록 함.
+		$.ajaxSetup({
+			async : false 
+		}); 
+		
+		var filename = "";
+		var center_point; 
+		
+		if('${areaNum}' == 11){
+			filename = "resources/only_seoul.json";
+			center_point = new kakao.maps.LatLng(37.566826, 126.9786567);
+		}else if('${areaNum}' == 28){
+			filename = "resources/only_incheon.json";
+			center_point = new kakao.maps.LatLng(37.454345, 126.6906171);
+		}
+	
+		// 2) getJSON 메소드를 이용해 JSON 파일을 파싱함
+		$.getJSON(filename, function(geojson) {
+			var units = geojson.features; // 파일에서 key값이 "features"인 것의 value를 통으로 가져옴(이것은 여러지역에 대한 정보를 모두 담고있음)			
+			$.each(units, function(index, unit) { // 1개 지역씩 꺼내서 사용함. val은 그 1개 지역에 대한 정보를 담음
+				var coordinates = []; //좌표 저장할 배열
+				var name = ''; // 지역 이름
+
+				coordinates = unit.geometry.coordinates; // 1개 지역의 영역을 구성하는 도형의 모든 좌표 배열을 가져옴 
+				name = unit.properties.SIG_KOR_NM; // 1개 지역의 이름을 가져옴
+
+				var ob = new Object();
+				ob.name = name;
+				ob.path = [];
+
+				$.each(coordinates[0], function(index, coordinate) { // []로 한번 더 감싸져 있어서 index 0번의 것을 꺼내야 배열을 접근가능.
+					ob.path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
+				});
+
+				areas[index] = ob;
+			});//each
+		});//getJSON
+
+		/* 2. 지도 띄우기 */
+		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: center_point, // 지도의 중심좌표
+	        level: 8 // 지도의 확대 레벨
+	    };	
+
+		var map = new kakao.maps.Map(mapContainer, mapOption),
+	    customOverlay = new kakao.maps.CustomOverlay({}),
+	    infowindow = new kakao.maps.InfoWindow({removable: true});
+		
+		/* 3. 폴리곤 도형을 지도위에 띄우고 마우스 이벤트 붙이기 */
+		
+		var polygons = []; // 이후에 클릭 이벤트 발생할시 지도 확대와 함께 모든 폴리곤 제거를 위해 폴리곤 객체를 담아둘 배열 생성 
+		
+		// 지도에 영역데이터를 폴리곤으로 표시합니다 
+		for (var i = 0, len = areas.length; i < len; i++) {
+			displayArea(areas[i]);
+		}
+
+		// 다각형을 생상하고 이벤트를 등록하는 함수입니다
+		function displayArea(area) {
+			
+		    // 다각형을 생성합니다 
+		    var polygon = new kakao.maps.Polygon({
+		        map: map, // 다각형을 표시할 지도 객체
+		        path: area.path,
+		        strokeWeight: 2,
+		        strokeColor: '#004c80',
+		        strokeOpacity: 0.8,
+		        fillColor: '#fff',
+		        fillOpacity: 0.7 
+		    });
+		    
+		 // 만들어진 폴리곤을 배열에 저장
+		    polygons.push(polygon); 
+		    
+
+		    // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
+		    // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
+		    kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
+		        polygon.setOptions({fillColor: '#09f'});
+
+		        customOverlay.setContent('<div class="area">' + area.name + '</div>');
+		        
+		        customOverlay.setPosition(mouseEvent.latLng); 
+		        customOverlay.setMap(map);
+		    });
+
+		    // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
+		    kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
+		        
+		        customOverlay.setPosition(mouseEvent.latLng); 
+		    });
+
+		    // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
+		    // 커스텀 오버레이를 지도에서 제거합니다 
+		    kakao.maps.event.addListener(polygon, 'mouseout', function() {
+		        polygon.setOptions({fillColor: '#fff'});
+		        customOverlay.setMap(null);
+		    }); 
+
+		    // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+		    kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
+		    	
+		    	location.href = "search_by_mylocation.prd?whatColumn=mylocation&keyword="+ "${pageInfo.keyword}" + "&add2Name=" + area.name;
+		    	
+		    	//search_by_mylocation.prd?whatColumn=mylocation&keyword=캐논&add2Name=null&pageNumber=null
+			    	
+		        /* var content = '<div class="info">' + 
+		                    '   <div class="title">' + area.name + '</div>' +
+		                    '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
+		                    '</div>';
+
+		        infowindow.setContent(content); 
+		        infowindow.setPosition(mouseEvent.latLng); 
+		        infowindow.setMap(map); */
+		    });
+		}
+	});
+
+	
+</script>
+
+<script>
 	function like(pno){
 		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
@@ -44,8 +194,7 @@
 		}
 	}
 </script>
-
-			<!--Mobile Menu-->
+<!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
                 <ul id="MobileNav" class="mobile-nav medium">
@@ -496,64 +645,50 @@
                     <div class="collection-hero">
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
-                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">
-                            <input type="hidden" id = "what" value="${param.whatColumn}">
-                            <c:if test="${param.whatColumn eq 'new' }">
-                            최신상품
-                            </c:if>
-                            
-                            <c:if test="${param.whatColumn eq 'hot' }">
-                            인기상품
-                            </c:if>
-                            
-                            </h2>
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">위치기반검색 : ${param.add2Name}, ${param.keyword}</h2>
                         </div>
                     </div>
                 </div>
 				
+				
+				<!-- map -->
+				<div class="container" id="map" style="width:90%;height:500px;">
+				</div>
+				
+				<!-- product list -->
 				<div class="container">
-                     
-					<c:set var="notCeiledQuotient" value="${fn:length(prdList)/4}"/> 
+					<c:set var="notCeiledQuotient" value="${fn:length(resultProductList)/4}"/> 
 					<%-- notCeiledQuotient : ${notCeiledQuotient} <br> --%>
 					<c:set var="ceiledQuotient" value="${(notCeiledQuotient + (1 - (notCeiledQuotient % 1)) % 1)}"/> 
 					<%-- ceiledQuotient : ${ceiledQuotient} <br> --%>
 					
-					<c:if test="${fn:length(prdList) eq 0}">
-						<div align="center" style="margin-top: 100px;">
-						<i class="fa-regular fa-circle-xmark fa-6x"></i>
-						<p style="margin-top: 30px;">검색결과가 없습니다.</p>
-						</div>
+					<c:if test="${fn:length(resultProductList) eq 0}">
+						<p style="text-align:center">검색결과가 없습니다.</p>
 					</c:if>
-					<c:if test="${fn:length(prdList) ne 0}">
-						<select style="width: 100px;height:30px; margin-left: 1100px; margin-bottom: 50px;" id="pageSize">
-							<option value="4" <c:if test="${pagesize==4 }">selected</c:if>>4개씩 보기
-							<option value="8" <c:if test="${pagesize==8 }">selected</c:if>>8개씩 보기
-							<option value="16" <c:if test="${pagesize==16 }">selected</c:if>>16개씩 보기
-						</select>
-					</c:if>
+					
 					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
 						<c:if test="${i % 4 eq 1}">
 							<div class="grid-products row">
 						</c:if>
 							
 						<!-- 비어있는 이미지 출력 -->
-						<c:if test="${i > fn:length(prdList)}">
+						<c:if test="${i > fn:length(resultProductList)}">
 							<div class="item col">
 	                        </div>
 						</c:if>
 						
 						<!-- 정상적인 이미지 출력 -->
-						<c:if test="${i <= fn:length(prdList)}">
+						<c:if test="${i <= fn:length(resultProductList)}">
 							<div class="item col">
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="productdetail.prd?no=${prdList[i-1].no}" class="product-img">
+	                                    <a href="productdetail.prd?no=${resultProductList[i-1].no}" class="product-img">
 	                                        <!--Image-->
-	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(prdList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(prdList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->
 	                                        <!--Hover Image-->
-	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(prdList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(prdList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
+	                                        <img class="hover blur-up lazyload" data-src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(resultProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Hover Image-->
 	                                    </a>
 	                                    <!-- End Product Image -->
@@ -561,11 +696,9 @@
 	                                    <!--Product Button-->
 	                                    <div class="button-set style0 d-none d-md-block">
 	                                        <ul>
-
 	                                            <!--Wishlist Button-->
-	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="javascript:like(${prdList[i-1].no})"><i class="icon an an-heart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="javascript:like(${resultProductList[i-1].no})"><i class="icon an an-heart-l" style="margin-top:7px"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
 	                                            <!--End Wishlist Button-->
-
 	                                        </ul>
 	                                    </div>
 	                                    <!--End Product Button-->
@@ -578,14 +711,14 @@
 	                                <div class="product-details text-center">
 	                                    <!--Product Name-->
 	                                    <div class="product-name">
-	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${prdList[i-1].no}">${prdList[i-1].name}</a>
+	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${resultProductList[i-1].no}">${resultProductList[i-1].name}</a>
 	                                    </div>
 	                                    <!--End Product Name-->
 	                                    <!--Product Price-->
 	                                    <div class="product-price">
-	                                        <span class="old-price"><fmt:formatNumber value="${prdList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
-	                                        <%-- <span class="old-price" style="text-decoration : none">${prdList[i-1].add1_sido} ${prdList[i-1].add2_sigungu} ${prdList[i-1].add3_eubmyeon} ${prdList[i-1].add4_donglee}</span> --%>
-	                                        <span class="price"><fmt:formatNumber value="${prdList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
+	                                        <span class="old-price"><fmt:formatNumber value="${resultProductList[i-1].original_day_price}" pattern="#,###" />원/일</span> 
+	                                        <%-- <span class="old-price" style="text-decoration : none">${resultProductList[i-1].add1_sido} ${resultProductList[i-1].add2_sigungu} ${resultProductList[i-1].add3_eubmyeon} ${resultProductList[i-1].add4_donglee}</span> --%>
+	                                        <span class="price"><fmt:formatNumber value="${resultProductList[i-1].discounted_day_price}" pattern="#,###" />원/일</span> 
 	                                    </div>
 	                                    <!-- End Product Price-->
 	                                    <!--Product Review-->
@@ -593,20 +726,20 @@
 	                                    <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i> -->
 	                                    <span class="old-price" style="text-decoration : none">
 	                                    
-	                                    <c:if test="${prdList[i-1].add1_sido ne ''}">
-	                                    	${prdList[i-1].add1_sido}
+	                                    <c:if test="${resultProductList[i-1].add1_sido ne ''}">
+	                                    	${resultProductList[i-1].add1_sido}
 	                                    </c:if>
 	                                    
-	                                    <c:if test="${prdList[i-1].add2_sigungu ne ''}">
-	                                    	${prdList[i-1].add2_sigungu}
+	                                    <c:if test="${resultProductList[i-1].add2_sigungu ne ''}">
+	                                    	${resultProductList[i-1].add2_sigungu}
 	                                    </c:if>
 	                                    
-	                                    <c:if test="${prdList[i-1].add3_eubmyeon ne ''}">
-	                                    	${prdList[i-1].add3_eubmyeon}
+	                                    <c:if test="${resultProductList[i-1].add3_eubmyeon ne ''}">
+	                                    	${resultProductList[i-1].add3_eubmyeon}
 	                                    </c:if>
 	                                    
-	                                    <c:if test="${prdList[i-1].add4_donglee ne ''}">
-	                                    	${prdList[i-1].add4_donglee}
+	                                    <c:if test="${resultProductList[i-1].add4_donglee ne ''}">
+	                                    	${resultProductList[i-1].add4_donglee}
 	                                    </c:if>
 	                                    
 	                                    <%-- ${recentProductList[i-1].add1_sido} ${recentProductList[i-1].add2_sigungu} ${recentProductList[i-1].add3_eubmyeon} ${recentProductList[i-1].add4_donglee} --%>
@@ -939,6 +1072,8 @@
 ${pageInfo.pagingHtml} <!-- 코드가 삽입되게 함 -->
 </center>
 <br>
+
+
 
 
 <%@include file="../member/commonBottom.jsp" %>

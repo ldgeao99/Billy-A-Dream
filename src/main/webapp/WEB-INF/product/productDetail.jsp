@@ -122,7 +122,7 @@
 	}
 	
 	function like(){
-		if($('#id').val()==""){
+		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -156,7 +156,7 @@
 	}
 	
 	function buy(){
-		if($('#id').val()==""){
+		if($('#id').val() == "null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -182,7 +182,7 @@
 	    var popX = winX + (winWidth - windowW)/2;
 	    var popY = winY + (winHeight - windowH)/2;
 		
-		if($('#id').val()==""){
+		if($('#id').val()=="null"){
 			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
 				location.href="login.mb";	
 			}
@@ -277,21 +277,28 @@
 							
 							<div class="container">
 								<div class="row">
-									<div class="col" style="padding:0px">
+									<div class="col col-lg-4" style="padding:0px">
 										<i class="fa-regular fa-clock"></i>&nbsp;
-										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd" />
-										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
+										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd HH:mm:ss" />
+										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd HH:mm:ss" />${newformattedDay }
 							    	</div>
 							    	
 							    	<div class="col" style="text-align:right">
-							      	<i class="fa-solid fa-heart"></i> 관심 
+							    	
+							    	<i class="fa-regular fa-user"></i> <a href="search.prd?whatColumn=seller_name&keyword=${pb.id}">${pb.id}</a>
+							    	&nbsp;&nbsp; 					    	
+							    	
+							      	<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
                                     
-                                    <span id="likeCount">
-	                                    
-                                    </span>
+                                     &nbsp;&nbsp; 
+                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count } 
                                     
-                                    &nbsp;&nbsp; 
-                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count }
+                                    
+                                    <c:if test="${id == pb.id}">
+                                	&nbsp;&nbsp; 
+                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }&whereClicked=detail">수정</a>
+                                	</c:if>
+                                	
                                     &nbsp;&nbsp; 
                                     <a href="javascript:kakaoShare()"><i class="fa-regular fa-share-from-square"></i> 공유</a>
 							    	</div>
@@ -366,7 +373,8 @@
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 col-lg-5">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button>
+                                                	<input type="button" class="btn rounded btn-outline-primary proceed-to-checkout" value="예약 및 결제하기" onclick="buy()">
+                                                    <!-- <button type="submit" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="buy()">예약 및 결제하기</button> -->
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 col-lg-2">
@@ -504,58 +512,9 @@
 <!-- ======================================================================================================= -->
 							 <!-- Products-->
                 <!-- Grid Product -->
-						<div class="grid-products grid--view-items wishlist-grid mt-4">
-							<div class="row">
-								<c:if test="${fn:length(lists)==0 }">
-									<div align="center">
-									<i class="fa-solid fa-store-slash fa-5x"></i></i><br><br>
-									 판매자가 판매하는 다른상품이 없습니다</div>
-								</c:if>
-								
-								<!-- 반복문 시작 -->
-								<c:if test="${fn:length(lists)!=0 }">
-								<c:forEach var="p" items="${ lists}">
-								<div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-									<input type="hidden" name="no" id="no"value="${p.no }">
-									<!-- Product Image -->
-									<div class="product-image">
-										<!-- Product Image -->
-										<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
-											data-src="<%=request.getContextPath()%>/resources/${p.images}"
-											src="<%=request.getContextPath()%>/resources/${p.images}"
-											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
-										</a>
-										<!-- End Product Image -->
-									</div>
-									<!-- End Product Image -->
-
-									<!-- Product Details -->
-									<div class="product-details text-center">
-										<!-- Product Name -->
-										<div class="product-name">
-											<a href="product-layout1.html">${p.name}</a>
-										</div>
-										<!-- End Product Name -->
-										<!-- Product Price -->
-										<div class="product-price">
-											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
-										</div>
-										<!-- End Product Price -->
-										<!-- Product Button -->
-									</div>
-									<!-- End Product Details -->
-								
-								</div>
-								</c:forEach>
-								</c:if>
-								<!--프로덕트 끝  -->
-							</div>
-						</div>
+						
+					<iframe src="detailsellerPrd.prd?no=${param.no}" height="600px" width="100%" title="Iframe Example"></iframe> 	
+						
 						<!-- End Grid Product-->
 
 									<!-- ======================================================================================================= -->
@@ -583,12 +542,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="section-header col-12">
-                                <h2 class="text-transform-none" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:22px  ;color: black; margin-top:50px">유사한 상품</h2>
+                                <h2 class="text-transform-none" style="margin-top:0px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:22px  ;color: black; margin-top:50px">유사한 상품</h2>
                             </div>
                         </div>
                         
                         <!-- 체크 -->
-                        <div class="productSlider grid-products">
+                        <div class="productSlider grid-products" style="height:400px;">
                         <c:forEach var="equal" items="${EqualLists }">
                             <div class="item">
                                 <!--Start Product Image-->
@@ -611,7 +570,7 @@
                                 <div class="product-details text-center">
                                     <!--Product Name-->
                                     <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">${equal.name }</a>
+                                        <a href="productdetail.prd?no=${equal.no }">${equal.name }</a>
                                     </div>
                                     <!--End Product Name-->
                                     <!--Product Price-->

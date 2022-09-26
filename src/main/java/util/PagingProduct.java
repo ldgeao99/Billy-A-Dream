@@ -18,6 +18,25 @@ public class PagingProduct {
 	
 	private String whatColumn = "" ; //�˻� ���(�ۼ���, ������, ��ü �˻��� all) ���
 	private String keyword = "" ; //�˻��� �ܾ� 
+	private String add2Name = "";
+	private String pno = ""; // pno
+	
+	
+	public String getPno() {
+		return pno;
+	}
+
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
+
+	public String getAdd2Name() {
+		return add2Name;
+	}
+
+	public void setAdd2Name(String add2Name) {
+		this.add2Name = add2Name;
+	}
 
 	public int getTotalCount() {
 		return totalCount;
@@ -172,6 +191,62 @@ public class PagingProduct {
 		this.keyword = keyword;
 	}
 
+	public PagingProduct(
+			String _pageNumber, 
+			String _pageSize,  
+			int totalCount,
+			String url,
+			String pno
+			) {		
+
+		if(  _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")  ){
+			System.out.println("_pageNumber:"+_pageNumber); // null
+			_pageNumber = "1" ; // _pageNumber�� null�̸� ���� �������� 1���������� �������� ���ڶ�� �ǹ�
+		}
+		this.pageNumber = Integer.parseInt( _pageNumber ) ; 
+
+		if( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("") ){
+			_pageSize = "8" ; // �� �������� ������ ���ڵ� ����
+		}		
+		this.pageSize = Integer.parseInt( _pageSize ) ;
+		
+		this.limit = pageSize ; // �� �������� ������ ���ڵ� ����
+
+		this.totalCount = totalCount ; 
+
+		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ������ ����� 2.5�� ���� �� �ִ°��� ������ ������ ����, ceil�� ������ �ø��ϴ� �Լ�
+		
+		//�ش� ���������� ������ ���ڵ��� ���۰� ���� ���ϴ� �κ�
+		this.beginRow = ( this.pageNumber - 1 )  * this.pageSize  + 1 ;
+		this.endRow =  this.pageNumber * this.pageSize ;
+		//�� ������ ���������ִ� ���ڵ� �ϳ��� �����Ǹ� �ٷ� ���� �������� ���������� ��.
+		if( this.pageNumber > this.totalPage ){
+			this.pageNumber = this.totalPage ;
+		}
+		
+		//offset�ǹ� : �� ���������� 2���� �������� ��Ȳ�̶� �����ϸ� 1������ ������ �ǳʶ�� ������ 0,
+		//			  2������������ �ǳʶ�� 2�� ���ڵ� �̹Ƿ� 2,
+		//			  3������������ �ǳʶ۰� 4�� ���ڵ� �̹Ƿ� 4
+		this.offset = ( pageNumber - 1 ) * pageSize ;  // ������ �̵��� ���� �ǳʶ� ���ڵ� ������ ����
+		if( this.endRow > this.totalCount ){
+			this.endRow = this.totalCount  ;
+		}
+
+		this.beginPage = ( this.pageNumber - 1 ) / this.pageCount * this.pageCount + 1  ;
+		this.endPage = this.beginPage + this.pageCount - 1 ;
+		System.out.println("pageNumber:"+pageNumber+"/totalPage:"+totalPage);	
+		
+		if( this.endPage > this.totalPage ){
+			this.endPage = this.totalPage ;
+		}
+		
+		this.url = url ; //  /ex/list.ab
+		
+		this.pno = pno;
+		
+		this.pagingHtml = getPagingHtml(url) ; // ������ �ϴ��� ������ ���� �ڵ�鿡 ���� html �ڵ尡 ���ڿ��� ��������� ��ȯ��
+	}
+	
 
 	public PagingProduct(
 			String _pageNumber, 
@@ -233,11 +308,73 @@ public class PagingProduct {
 	
 	}
 	
+	public PagingProduct(
+			String _pageNumber, 
+			String _pageSize,  
+			int totalCount,
+			String url, 
+			String whatColumn, 
+			String keyword,
+			String add2Name
+			) {		
+
+		if(  _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")  ){
+			System.out.println("_pageNumber:"+_pageNumber); // null
+			_pageNumber = "1" ; // _pageNumber�� null�̸� ���� �������� 1���������� �������� ���ڶ�� �ǹ�
+		}
+		this.pageNumber = Integer.parseInt( _pageNumber ) ; 
+
+		if( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("") ){
+			_pageSize = "8" ; // �� �������� ������ ���ڵ� ����
+		}		
+		this.pageSize = Integer.parseInt( _pageSize ) ;
+		
+		this.limit = pageSize ; // �� �������� ������ ���ڵ� ����
+
+		this.totalCount = totalCount ; 
+
+		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ������ ����� 2.5�� ���� �� �ִ°��� ������ ������ ����, ceil�� ������ �ø��ϴ� �Լ�
+		
+		//�ش� ���������� ������ ���ڵ��� ���۰� ���� ���ϴ� �κ�
+		this.beginRow = ( this.pageNumber - 1 )  * this.pageSize  + 1 ;
+		this.endRow =  this.pageNumber * this.pageSize ;
+		//�� ������ ���������ִ� ���ڵ� �ϳ��� �����Ǹ� �ٷ� ���� �������� ���������� ��.
+		if( this.pageNumber > this.totalPage ){
+			this.pageNumber = this.totalPage ;
+		}
+		
+		//offset�ǹ� : �� ���������� 2���� �������� ��Ȳ�̶� �����ϸ� 1������ ������ �ǳʶ�� ������ 0,
+		//			  2������������ �ǳʶ�� 2�� ���ڵ� �̹Ƿ� 2,
+		//			  3������������ �ǳʶ۰� 4�� ���ڵ� �̹Ƿ� 4
+		this.offset = ( pageNumber - 1 ) * pageSize ;  // ������ �̵��� ���� �ǳʶ� ���ڵ� ������ ����
+		if( this.endRow > this.totalCount ){
+			this.endRow = this.totalCount  ;
+		}
+
+		this.beginPage = ( this.pageNumber - 1 ) / this.pageCount * this.pageCount + 1  ;
+		this.endPage = this.beginPage + this.pageCount - 1 ;
+		System.out.println("pageNumber:"+pageNumber+"/totalPage:"+totalPage);	
+		
+		if( this.endPage > this.totalPage ){
+			this.endPage = this.totalPage ;
+		}
+		
+		System.out.println("pageNumber2:"+pageNumber+"/totalPage2:"+totalPage);	
+		this.url = url ; //  /ex/list.ab
+		this.whatColumn = whatColumn ;
+		this.keyword = keyword ;
+		System.out.println("whatColumn:"+whatColumn+"/keyword:"+keyword);
+		this.add2Name = add2Name;
+		
+		this.pagingHtml = getPagingHtml(url) ; // ������ �ϴ��� ������ ���� �ڵ�鿡 ���� html �ڵ尡 ���ڿ��� ��������� ��ȯ��
+	
+	}
+	
 	private String getPagingHtml( String url ){ //����¡ ���ڿ��� �����.
 		System.out.println("getPagingHtml url:"+url); // 
 		
 		String result = "" ;
-		String added_param = "&whatColumn=" + whatColumn + "&keyword=" + keyword ; 
+		String added_param = "&whatColumn=" + whatColumn + "&keyword=" + keyword + "&add2Name=" + add2Name + "&no=" + pno; 
 		
 		if (this.beginPage != 1) { // ����, pageSize:�� ȭ�鿡 ���̴� ���ڵ� ��
 			result += "&nbsp;<a href='" + url  

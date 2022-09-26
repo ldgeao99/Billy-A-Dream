@@ -31,18 +31,22 @@ public class ProductUpdateController {
 	ProductDao productDao;
 	
 	@Autowired
-	ServletContext servletContext; // ������Ʈ 1���� �ϳ��� �ڵ����� �������. �׷��� �׳� Autowired�� ���൵ ���Ե�.
+	ServletContext servletContext; 
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String showUpdateForm(@RequestParam("no") String pno, Model model) {
+	public String showUpdateForm(@RequestParam("no") String pno, 
+								 @RequestParam("whereClicked") String whereClicked, 
+								 Model model) {
 		System.out.println("ProductUpdateController");
 		ProductBean pb = productDao.getByNo(pno);
 		model.addAttribute("pb", pb);
+		model.addAttribute("whereClicked", whereClicked);
+		
 		return getPage;
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doUpdate(ProductBean pbean) {
+	public String doUpdate(ProductBean pbean, @RequestParam("whereClicked") String whereClicked) {
 		
 		System.out.println(pbean);
 		
@@ -81,17 +85,17 @@ public class ProductUpdateController {
 		//4. appeared new files upload on server resource
 		MultipartFile[] upload = pbFromForm.getUpload();
 		String tempImages = null;
-		//resources ��� ������ �������� �ʴ´ٸ� ����.
+		// if there is no resources folder create forder
 		File folder = new File(path);
 		if (!folder.exists()) {
-			folder.mkdir(); //���� �����մϴ�.
-			System.out.println(path + " ����� resources ������ �����Ǿ����ϴ�.");
+			folder.mkdir(); 
+			System.out.println(path);
 		}
 		for(int i = 0; i<imgNamesFromForm.length; i++) {
 			if(Arrays.asList(imgNamesFromDB).contains(imgNamesFromForm[i]) == false) {
 				System.out.println("!!" + imgNamesFromForm[i] + "file have to be uploaded on server resource!!"); 
 				UUID uuid = UUID.randomUUID();
-				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // multi.getOriginalFilename() ��� pbean.getImage() �� ����ص� ��.
+				File file = new File(path + "/" + uuid.toString()+"_" + upload[i].getOriginalFilename()); // you can use multi.getOriginalFilename() too instead of this
 				
 				if(tempImages == null) {
 					tempImages = uuid.toString()+"_" + upload[i].getOriginalFilename();
@@ -100,7 +104,7 @@ public class ProductUpdateController {
 				}
 				
 				try {
-					upload[i].transferTo(file); // ���ϴ� ��ġ�� ������ �ø��� ���� �� �����. �� ���� ����� ���ÿ� ���ε� ��.
+					upload[i].transferTo(file); 
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -121,11 +125,17 @@ public class ProductUpdateController {
 		//6. execute update
 		int cnt = productDao.updateProduct(pbFromForm);
 		if(cnt > 0 ) {
-			System.out.println("��ǰ ��������");
+			System.out.println("update sucess");
 		}else {
-			System.out.println("��ǰ ��������");
+			System.out.println("update failed");
 		}
 		
-		return gotoPage;
+		if(whereClicked.equals("detail")) {
+			return "redirect:/productdetail.prd?no=" + pbean.getNo();
+		}else if(whereClicked.equals("mypage")) {
+			return gotoPage;
+		}else {
+			return gotoPage;
+		}
 	}
 }

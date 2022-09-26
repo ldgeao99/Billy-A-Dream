@@ -24,27 +24,27 @@ public class ProductDao {
 	}
 	
 	public List<ProductBean> getRecentProductList(Map<String, String> map, PagingProduct pageInfo){
-		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //�ǳʶ� ���ڵ� ����(������ ��ȣ�� ���� �����)
-		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // ������(=������) ���ڵ� ����(����)
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // �ǳʶ�� ��� ���������� ���� ������ ������ ����
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); 
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); 
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
 		
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".GetRecentProductList", map, rowBounds);
 		return lists;
 	}
 	
 	public List<ProductBean> getPopularProductList(Map<String, String> map, PagingProduct pageInfo){
-		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //�ǳʶ� ���ڵ� ����(������ ��ȣ�� ���� �����)
-		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // ������(=������) ���ڵ� ����(����)
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // �ǳʶ�� ��� ���������� ���� ������ ������ ����
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); 
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); 
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); 
 		
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".GetPopularProductList", map, rowBounds);
 		return lists;
 	}
 	
 	public List<ProductBean> getProductListBySearch(Map<String, String> map, PagingProduct pageInfo) {
-		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); //�ǳʶ� ���ڵ� ����(������ ��ȣ�� ���� �����)
-		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); // ������(=������) ���ڵ� ����(����)
-		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); // �ǳʶ�� ��� ���������� ���� ������ ������ ����
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); 
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); 
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); 
 	
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".GetProductListBySearch", map, rowBounds);
 		return lists;
@@ -93,6 +93,19 @@ public class ProductDao {
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".getEqualCate",map);
 		return lists;
 	}
-
 	
+	public int getTotalSellerPrdCount(int seller_no) {
+		int cnt = sqlSessionTemplate.selectOne(namespace+".GetTotalSellerPrdCount", seller_no);
+		return cnt;
+	}
+	
+	public List<ProductBean> getTotalSellerPrd(int seller_no, PagingProduct pageInfo) {
+		System.out.println("pageInfo.getOffset(): " + pageInfo.getOffset()); 
+		System.out.println("pageInfo.getLimit(): " + pageInfo.getLimit()); 
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit()); 
+	
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace+".GetTotalSellerPrd", seller_no, rowBounds);
+		return lists;
+	}
+
 }

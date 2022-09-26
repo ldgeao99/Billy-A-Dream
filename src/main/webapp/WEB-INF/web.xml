@@ -173,4 +173,19 @@
 		<servlet-name>contect</servlet-name>
 		<url-pattern>*.ctc</url-pattern>
 	</servlet-mapping>
+	<!--event board-->
+	<servlet>
+		<servlet-name>event</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/event-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>event</servlet-name>
+		<url-pattern>*.evt</url-pattern>
+	</servlet-mapping>
 </web-app>

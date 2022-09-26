@@ -82,7 +82,7 @@ public class ProductDetailController {
 			image.setImages(image.getImages().split(",")[0]);
 		}
 		
-		MemberBean mb = mdao.getByMno(pb.getSeller_no());
+		MemberBean mb = mdao.getByMno(pb.getSeller_no());  
 		
 		String[] images = pb.getImages().split(",");
 		
@@ -117,6 +117,7 @@ public class ProductDetailController {
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("totalCount",totalCount);
 		
+		pb.setId((mb.getId()));
 		model.addAttribute("mb",mb);
 		model.addAttribute("lists",lists);
 		model.addAttribute("images",images);

@@ -40,10 +40,12 @@ public class WishlistAddOrDelete {
 		if(isExistUserInThisProduct == true) {
 			//삭제
 			int cnt = wdao.deleteWishlist(wb);
+			System.out.println("위시리스트에서" + pno + "번 상품 삭제");
 			return "deleted";
 		}else {
 			//추가
 			int cnt = wdao.insertWishlist(wb);
+			System.out.println("위시리스트에서" + pno + "번 상품 추가");
 			return "added";
 		}
 	}
