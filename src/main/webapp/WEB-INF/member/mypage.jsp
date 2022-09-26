@@ -452,6 +452,36 @@ height
    				$('#email').removeAttr("email");
    				return;
    			})
+   			
+   		//쿠폰 체크 ajax
+   			$('#checkCode').click(function(){
+   				CheckCode = false;
+   				var result = false;
+   				
+   				sendRequestCheckCode()
+   				.then((data) =>{
+   					if($.trim(data)=="exist"){
+   						alert("이미 사용된 쿠폰입니다.");
+   						checkCode = false;
+   						result = false;
+   					}
+   					
+   					else if($.trim(data)=="yes"){
+   						if(confirm("쿠폰을 등록하시겠습니까?")){
+   							CheckCode=true;
+   							result = true;
+   							document.coupon.submit();
+   						}
+   					}
+   					else if($.trim(data)==""){
+   						alert("존재하지 않는 코드입니다.");
+   						CheckCode = false;
+   						result = false;
+   					}//else
+   				});
+   				
+   				return result;
+   			});
    		 })//ready
    		 
 		function sub(){
@@ -578,43 +608,25 @@ height
 		
 		
 		///======================================================================================
-		//쿠폰 체크 ajax
 		
-		function checkCode(){
-			CheckCode = false;
 		
-			$.ajax({
+		function sendRequestCheckCode(){
+			return new Promise((resolve, reject) =>  {
+				$.ajax({
 					type:'get',
 					url : "registecoupon.mb", 
 					data : { 
 						code : $('#code').val() 
 							},
 						success : function(data){
-							if($.trim(data)=="exist"){
-								alert("이미 사용된 쿠폰입니다.");
-								checkCode = false;
-								return false;
-							}
 							
-							else if($.trim(data)=="yes"){
-								if(confirm("쿠폰을 등록하시겠습니까?")){
-									CheckCode=true;
-									coupon.submit();
-								}
-							}
-							else if($.trim(data)==""){
-								alert("존재하지 않는 코드입니다.");
-								CheckCode = false;
-								return false;
-							}//else
+							resolve(data);
+							reject(new Error("에러발생"));
 						}//success
 
 				});//ajax
-		
-			if(!CheckCode){
-				return false;
-			}
-	}
+			}).catch(alert);
+		}
 		
 		function upProduct(no){
 			
@@ -832,11 +844,13 @@ height
 												<c:if test="${b.is_accepted ==1 and b.status==1}">
 													<input type="button" value="승인됨" style="background-color: black;color: white;">
 												</c:if>
+
 												<c:if test="${b.is_accepted ==1 and b.status==2}">
 													<input type="button" value="이용중" style="background-color: black;color: white;">
 												</c:if>
 												<c:if test="${b.is_accepted ==1 and b.status==3}">
 													<input type="button" value="후기작성" style="background-color: #036635;color: white;" onclick="writeReview('${b.product_no}')">
+
 												</c:if>
 												</td>
 											</tr>
@@ -865,7 +879,7 @@ height
 										<span class="required-f">*</span>
 									</label> 
 									<input name="code" placeholder="쿠폰 코드 입력" value="" id="code" type="text" required >
-									<input type="submit" onclick = "return checkCode()" value="쿠폰 등록">
+									<input type="button" id = "checkCode" value="쿠폰 등록">
 								</div>
 							</div>
 						</form>

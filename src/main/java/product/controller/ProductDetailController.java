@@ -56,13 +56,20 @@ public class ProductDetailController {
 							HttpServletResponse response,HttpServletRequest request,
 							@RequestParam(value="pageNumber",required = false)String pageNumber,
 							HttpSession session) throws IOException {
-		String id = (String)session.getAttribute("id");
-		MemberBean loginmb = mdao.getById(id);
+		
 		
 		pdao.updateView_count(no);
 		
 		//product object will be shown
 		ProductBean pb = pdao.getByNo(no);
+		
+		String id = (String)session.getAttribute("id");
+		MemberBean loginmb = null; 
+		if(id != null) {
+			 loginmb = mdao.getById(id);
+		}else {
+			loginmb = mdao.getByMno(pb.getSeller_no());
+		}
 		
 		//seller's products
 		List<ProductBean> lists = pdao.getByseller_no(String.valueOf(pb.getSeller_no())); 
