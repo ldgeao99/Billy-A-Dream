@@ -22,7 +22,7 @@
 	display: none;
 }
 </style>
-
+ <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
  var detail = false;
@@ -36,6 +36,16 @@
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data) {
 			
+			if($.trim(data)==""){
+				$('#lists').append(
+						'<div align="center" style="margin-top: 300px;">'+
+						'<i class="fa-solid fa-comment-slash fa-3x"></i><br>'+
+						'<br>현재 진행중인 채팅방이 없습니다</div>'
+				);
+				
+			}
+			else{
+				alert(1);
 			var roomlist = data.split("|");
 			
 			for(var i=0 in roomlist){
@@ -58,6 +68,7 @@
 			              '</div>'+
 			            '</div>'); 
 			}
+			}//else
 			//append 사용
 		},//success 
 		error : function(){
@@ -180,7 +191,6 @@
               </div>
             </div>
             <!-- /Chat list -->
-
           </div>
           <div id="inner-main" >
             <div class="card">

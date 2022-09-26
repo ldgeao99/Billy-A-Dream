@@ -33,8 +33,8 @@ public class roomDao {
 	}
 
 
-	public List<roomBean> searchRoomById(String id) {
-		List<roomBean> rb = sqlSessionTemplate.selectList(namespace+".searchRoomById",id);
+	public List<roomBean> searchRoomById(int mno) {
+		List<roomBean> rb = sqlSessionTemplate.selectList(namespace+".searchRoomById",mno);
 		return rb;
 	}
 
