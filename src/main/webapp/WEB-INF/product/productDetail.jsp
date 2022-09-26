@@ -388,9 +388,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+                                            	<c:if test="${pb.seller_no!= loginmb.mno}">
                                                 <div class="product-form__item--buyit clearfix">
                                                     <button type="button" class="btn rounded btn-outline-primary proceed-to-checkout" onclick="chatProduct()">채팅</button>
                                                 </div>
+                                            	</c:if>
                                             </div>
                                         </div>
                                       

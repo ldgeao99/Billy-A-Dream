@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,10 @@ public class ProductDetailController {
 	@RequestMapping(command)
 	public String detailForm(@RequestParam("no") String no,Model model,@RequestParam(value="write",required = false)String write,
 							HttpServletResponse response,HttpServletRequest request,
-							@RequestParam(value="pageNumber",required = false)String pageNumber) throws IOException {
+							@RequestParam(value="pageNumber",required = false)String pageNumber,
+							HttpSession session) throws IOException {
+		String id = (String)session.getAttribute("id");
+		MemberBean loginmb = mdao.getById(id);
 		
 		pdao.updateView_count(no);
 		
@@ -88,7 +92,7 @@ public class ProductDetailController {
 		
 		
 		//productgetReview
-		// 페이지설정 	페이지설정 		페이지설정
+		// ���댁��ㅼ�� 	���댁��ㅼ�� 		���댁��ㅼ��
 		int totalCount = rdao.getTotalCount(no);
 				
 		String url = request.getContextPath()+"/"+command+"?no="+no+"&write=2";
@@ -121,26 +125,27 @@ public class ProductDetailController {
 		model.addAttribute("totalCount",totalCount);
 		
 		pb.setId((mb.getId()));
+		model.addAttribute("loginmb",loginmb);
 		model.addAttribute("mb",mb);
 		model.addAttribute("lists",lists);
 		model.addAttribute("images",images);
 		model.addAttribute("pb",pb);
 		model.addAttribute("EqualLists",EqualLists);
 		
-		System.out.println("여기옴");
+		System.out.println("�ш린��");
 		if(write!=null) {
 			
-		if(write.equals("1")) { // 후기작성하기 누르면 
-			response.setContentType("text/html; charset=UTF-8"); // 내보내는것의 한글처리
-			PrintWriter writer = response.getWriter(); // 웹브라우저와 연결다리 담당
+		if(write.equals("1")) { // ��湲곗���깊��湲� ��瑜대㈃ 
+			response.setContentType("text/html; charset=UTF-8"); // �대낫�대��寃��� ��湲�泥�由�
+			PrintWriter writer = response.getWriter(); // �밸��쇱�곗���� �곌껐�ㅻ━ �대��
 			writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
 			writer.println("<script>$(function(){document.getElementById('reviewt-tab').click();})</script>"); 
 			writer.println("<script>$(function(){document.getElementById('write').click();})</script>"); 
 			writer.flush();
 		}
-		else if(write.equals("2")) { // 후기작성하기 누르면 
-			response.setContentType("text/html; charset=UTF-8"); // 내보내는것의 한글처리
-			PrintWriter writer = response.getWriter(); // 웹브라우저와 연결다리 담당
+		else if(write.equals("2")) { // ��湲곗���깊��湲� ��瑜대㈃ 
+			response.setContentType("text/html; charset=UTF-8"); // �대낫�대��寃��� ��湲�泥�由�
+			PrintWriter writer = response.getWriter(); // �밸��쇱�곗���� �곌껐�ㅻ━ �대��
 			writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
 			writer.println("<script>$(function(){document.getElementById('reviewt-tab').click();})</script>"); 
 			writer.flush();
