@@ -39,21 +39,24 @@ public class memberRegisteCouponController {
 		 String id = (String)session.getAttribute("id");
 		 
 		 MemberBean mb = mdao.getById(id);
-		 System.out.println(mb.getCoupon());
+		
 		 if(cb!=null && mb.getCoupon()!=null) {
 			 if(mb.getCoupon().contains(String.valueOf(cb.getNo()))) {
+				 System.out.println("응답으로 exist 가 반환됨");
 				 return "exist";
 			 }
 			 else {
+				 System.out.println("응답으로 yes 가 반환됨");
 				 return "yes";
 			 }
 			 
 		 }
 		 else if(cb!=null && mb.getCoupon()==null) {
+			 System.out.println("응답으로 yes 가 반환됨");
 			 return "yes";
 		 }
-		 
-			 return "";
+		System.out.println("응답으로 '' 가 반환됨");
+		return "";
 		 
 		 
 		
@@ -64,6 +67,9 @@ public class memberRegisteCouponController {
 		
 		
 		 CouponBean cb = cdao.getByCode(code);
+		 
+		 if(cb!=null) {
+			 
 		 String no =  String.valueOf(cb.getNo());
 		 
 		 String id = (String)session.getAttribute("id"); 
@@ -84,6 +90,8 @@ public class memberRegisteCouponController {
 		 
 		 mdao.insertCoupon(map);
 		 
+		 return "redirect:mypage.mb?select=5";
+		 }
 		 return "redirect:mypage.mb?select=5";
 	}
 }

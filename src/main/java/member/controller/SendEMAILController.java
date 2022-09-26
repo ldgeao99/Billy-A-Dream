@@ -40,8 +40,8 @@ public class SendEMAILController {
 
 		int getEmailAuthNum = (Integer) session.getAttribute("EmailAuthNum");
 
-		System.out.println("�ο��� ������ȣ :" + getEmailAuthNum);
-		System.out.println("�Է��� ������ȣ :" + EmailauthNum);
+		System.out.println("부여된 인증번호:" + getEmailAuthNum);
+		System.out.println("입력된 인증번호 :" + EmailauthNum);
 
 		if (getEmailAuthNum == EmailauthNum) {
 			return "yes";
