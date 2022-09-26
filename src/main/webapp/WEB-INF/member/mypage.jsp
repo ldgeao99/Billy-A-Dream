@@ -1043,7 +1043,7 @@ height
 
 					<!-- Wishlist -->
 					<div id="wishlist" class="product-wishlist tab-pane fade">
-						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">승인여부</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">관심목록</h3>
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
