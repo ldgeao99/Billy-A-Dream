@@ -9,21 +9,94 @@
 		font-weight: bold;
 		font-size: 15px;
 	}
+	
+	.slick-list{
+		height: 450px !important;
+	}
+	
+	.zoomContainer{
+		display: none;
+	}
 </style>
 
 <!-- 오른쪽 상단 아이콘 관련 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
 	$(function(){
-		if($('#id').val() != ""){
+		if($('#id').val() != "null"){
 			whatButtonWillShowAboutLike();	
 		}
 		
 		showLikeCount();
+		
+		
+		window.Kakao.init("712a5c51e06bca8448c4c65b4205bb54");
+		Kakao.isInitialized();
+		
+		/* 로그인한 아이디가 상품을 구매했고 사용을 다 했으면 리뷰작성하기 뜨게 하기  */
+		$.ajax({
+			type : 'post',
+			url : "CheckReservaionPno.rsv",
+			data : {
+				pno : $('#no').val()
+			},
+			success : function(data) {
+				if($.trim(data) == "no"){
+					$('#write').hide();
+				}
+			}
+		});
+		
+		/* 이미지 여러개 */
+		
 	});
 
+	
+	/* 카카오 공유하기 */
+	function kakaoShare() {
+		/*  클립보드 복사 */
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+		
+		/* 카톡 공유 */
+		 Kakao.Link.sendDefault({
+		      objectType: 'feed',
+		      content: {
+		        title: 'Billy A Dream 상품',
+		        description:  'Billy A Dream ['+$('#pname').val()+"] 상품",
+		        imageUrl:
+		        	"https://ifh.cc/g/sRO1w5.png"
+		        	<%--  '<%=request.getContextPath()%>/resources/'+$('#pimages').val() --%>,
+		        link: {
+		          mobileWebUrl: document.location.href,
+		          webUrl: document.location.href,
+		        },
+		      },
+		      buttons: [
+		        {
+		          title: '웹으로 보기',  //첫 번째 버튼 
+		          link: {
+		            mobileWebUrl: document.location.href,  //버튼 클릭 시 이동 링크
+		            webUrl: document.location.href,
+		          },
+		        },
+		      ],
+		    })
+
+
+	}
+	
+	
 	function whatButtonWillShowAboutLike(){
 		$.ajax({
 			type : 'post',
@@ -129,6 +202,25 @@
 			window.open("chat.prd?no="+no,"대화하기","width=" + windowW + ", height=" + windowH + ", scrollbars=no, menubar=no, top=" + popY + ", left=" + popX);
 		}
 	}
+	
+	
+	function writeReview(){
+		
+		if($('#title').val()==""){
+			alert("제목을 입력해주세요");
+			return false;
+		}
+		else if($('input[name="rating"]:checked').length==0){
+			alert("별점을 입력해주세요");
+			return false;
+		}
+		else if($('#content').val()==""){
+			alert("후기를 입력해주세요");
+			return false;
+		}
+		
+	}
+	
 
 </script>
 			
@@ -157,12 +249,12 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
-                                    <div class="product-thumb">
+                                    <div class="product-thumb" >
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            
+                                            <input type="hidden" id="pimages" value="${images[0] }">
                                             <!-- 이미지 들어감 -->
                                             <c:forEach var="productimages" items="${images }">
-                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}" data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
+                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}"  data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
                                                 <img class="blur-up lazyload" width="100px" height="120px" data-src="<%=request.getContextPath()%>/resources/${productimages}" src="<%=request.getContextPath()%>/resources/${productimages}" alt="product" />
                                             </a>
                                             </c:forEach>
@@ -186,7 +278,7 @@
                                 <!-- Product Info -->
                                 <div class="product-single__meta">
                                     <h1 class="product-single__title" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600!important; font-size:22px;color: black; margin-bottom:10px">${pb.name }</h1>
-                                    
+                                    <input type="hidden" id="pname" value="${pb.name }">
                                     <!-- Product Reviews -->
                                     <!-- Product Info -->
 						<div class="product-info">
@@ -208,7 +300,7 @@
 							    	
 							      	<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
                                     
-                                    &nbsp;&nbsp; 
+                                     &nbsp;&nbsp; 
                                     <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count } 
                                     
                                     
@@ -217,6 +309,8 @@
                                     <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }&whereClicked=detail">수정</a>
                                 	</c:if>
                                 	
+                                    &nbsp;&nbsp; 
+                                    <a href="javascript:kakaoShare()"><i class="fa-regular fa-share-from-square"></i> 공유</a>
 							    	</div>
 							</div>
 							
@@ -317,7 +411,7 @@
                             <div class="col-12 col-sm-3 mb-2 sm-md-0">
                                 <div class="nav flex-column nav-pills" id="vertical-tab" role="tablist" aria-orientation="vertical">
                                     <a class="nav-link active" id="description-tab" data-bs-toggle="pill" href="#description" role="tab" aria-controls="description" aria-selected="true">상세설명</a>
-                                    <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#reviewt" role="tab" aria-controls="reviewt" aria-selected="false">상품 후기</a>
+                                    <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#reviewt" role="tab" aria-controls="reviewt" aria-selected="false" >상품 후기</a>
                                     <a class="nav-link" id="reviewt-tab" data-bs-toggle="pill" href="#sellerProduct" role="tab" aria-controls="reviewt" aria-selected="false">판매자 상품</a>
                                 </div>
                             </div>
@@ -337,69 +431,86 @@
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                         <div class="product-review d-flex-center me-auto">
-                                                            <a class="reviewLink" href="#"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></a>
-                                                            <span class="spr-summary-actions-togglereviews ms-2">Based on 6 reviews 234</span>
+                                                        평점 &nbsp;&nbsp;&nbsp; 
+                                                       	<c:forEach begin="1" end="${ReviewAverage }">
+                                                       		<i class="fa-solid fa-star" style="color: orange;"></i>
+                                                       	</c:forEach>
+                                                       	<c:forEach begin="1" end="${5-ReviewAverage }">
+                                                       		<i class="fa-regular fa-star" style="color: orange;"></i>
+                                                       	</c:forEach>
+                                                       	
+                                                            <span class="spr-summary-actions-togglereviews ms-2">총 후기 <b>${totalCount } 개</b></span>
                                                         </div>
                                                         <div class="spr-summary-actions mt-3 mt-lg-0">
-                                                            <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded"><i class="icon an-1x an an-pencil-alt me-2"></i>리뷰 작성하기</a>
+                                                            <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded" id="write"><i class="icon an-1x an an-pencil-alt me-2"></i>리뷰 작성하기</a>
                                                         </div>
                                                     </div>
 
-                                                    <form method="post" action="#" class="product-review-form new-review-form mb-4">
-                                                        <h4 class="spr-form-title text-uppercase">Write A Review</h4>
+                                                    <form method="post" action="writeReview.prd" class="product-review-form new-review-form mb-4">
+                                                    	<input type="hidden" value="${pb.no }" name="pno">
+                                                        <h4 class="spr-form-title text-uppercase">상품 후기 작성</h4>
                                                         <fieldset class="spr-form-contact">
-                                                            <div class="spr-form-contact-name form-group">
-                                                                <label class="spr-form-label" for="nickname">Name <span class="required">*</span></label>
-                                                                <input class="spr-form-input spr-form-input-text" id="nickname" type="text" name="name" placeholder="John smith" required />
-                                                            </div>
-                                                            <div class="spr-form-contact-email form-group">
-                                                                <label class="spr-form-label" for="email">Email <span class="required">*</span></label>
-                                                                <input class="spr-form-input spr-form-input-email " id="email" type="email" name="email" placeholder="info@example.com" required />
-                                                            </div>
                                                             <div class="spr-form-review-rating form-group">
-                                                                <label class="spr-form-label">Rating</label>
+	                                                            <div class="spr-form-review-title form-group">
+	                                                                <label class="spr-form-label" for="title">제목 </label>
+	                                                                <input class="spr-form-input spr-form-input-text " id="title" type="text" name="title" placeholder="제목을 작성해주세요" />
+	                                                            </div>
+                                                                <label class="spr-form-label">별점</label>
                                                                 <div class="product-review pt-1">
                                                                     <div class="review-rating">
-                                                                        <input type="radio" name="rating" id="rating-5"><label for="rating-5"></label>
-                                                                        <input type="radio" name="rating" id="rating-4"><label for="rating-4"></label>
-                                                                        <input type="radio" name="rating" id="rating-3"><label for="rating-3"></label>
-                                                                        <input type="radio" name="rating" id="rating-2"><label for="rating-2"></label>
-                                                                        <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
+                                                                        <input type="radio" name="rating" id="rating-5" value="5" ><label for="rating-5"></label>
+                                                                        <input type="radio" name="rating" id="rating-4" value="4" ><label for="rating-4"></label>
+                                                                        <input type="radio" name="rating" id="rating-3" value="3"><label for="rating-3"></label>
+                                                                        <input type="radio" name="rating" id="rating-2" value="2"><label for="rating-2"></label>
+                                                                        <input type="radio" name="rating" id="rating-1" value="1"><label for="rating-1"></label>
                                                                     </div>
                                                                     <a class="reviewLink d-none" href="#"><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i></a>
                                                                 </div>
                                                             </div>
-                                                            <div class="spr-form-review-title form-group">
-                                                                <label class="spr-form-label" for="review">Review Title </label>
-                                                                <input class="spr-form-input spr-form-input-text " id="review" type="text" name="review" placeholder="Give your review a title" />
-                                                            </div>
                                                             <div class="spr-form-review-body form-group">
-                                                                <label class="spr-form-label" for="message">Body of Review <span class="spr-form-review-body-charactersremaining">(1500) characters remaining</span></label>
+                                                                <label class="spr-form-label" for="content">후기 내용 <span class="spr-form-review-body-charactersremaining">최대 1500글자</span></label>
                                                                 <div class="spr-form-input">
-                                                                    <textarea class="spr-form-input spr-form-input-textarea " id="message" name="message" rows="5" placeholder="후기 작성"></textarea>
+                                                                    <textarea class="spr-form-input spr-form-input-textarea " id="content" name="content" rows="5" placeholder="후기 내용을 작성해주세요"></textarea>
                                                                 </div>
                                                             </div>
                                                         </fieldset>
                                                         <div class="spr-form-actions clearfix">
-                                                            <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="Submit Review">
+                                                            <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="작성하기" onclick="return writeReview()">
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="spr-reviews">
-                                                        <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">상품 후기</h4>
+                                                       <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">상품 후기</h4>
+                                                       <br><br>
+                                                       	<c:if test="${fn:length(reviewlists) eq 0 }">
+                                                       		<p align="center"><i class="fa-solid fa-comment-slash fa-6x"></i><br><br>
+															등록된 후기가 없습니다.                                                       		
+                                                       		<br><br>
+                                                       		</p>
+                                                       	</c:if>
+                                                       	
+                                                       	<c:forEach var="r" items="${reviewlists }">
                                                         <div class="review-inner">
                                                             <div class="spr-review">
                                                                 <div class="spr-review-header">
-                                                                    <span class="product-review spr-starratings"><span class="reviewLink"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></span></span>
-                                                                    <h5 class="spr-review-header-title mt-1">제목</h5>
-                                                                    <span class="spr-review-header-byline">날짜</span>
+                                                                    <h5 class="spr-review-header-title mt-1">${r.title }</h5>
+                                                                	<!-- 별점 -->
+                                                                   	<c:forEach begin="1" end="${r.rating }">
+                                                       					<i class="fa-solid fa-star" style="color: orange;"></i>
+                                                       				</c:forEach>
+                                                      			 	<c:forEach begin="1" end="${5-r.rating }">
+                                                       					<i class="fa-regular fa-star" style="color: orange;"></i>
+                                                       				</c:forEach>
                                                                 </div>
                                                                 <div class="spr-review-content">
-                                                                    <p class="spr-review-content-body">내용</p>
+                                                                    <p class="spr-review-content-body">${r.content }</p>
                                                                 </div>
-                                                            </div>
+                                                                    <p align="right"><span class="spr-review-header-byline">${r.writeday }&nbsp;&nbsp;작성자 &nbsp;${r.writerName }</span></p>                                                            </div>
                                                         </div>
+                                                        <hr>
+                                                       	</c:forEach>
+                                                        <p align="center">${pageInfo.pagingHtml}</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -71,25 +71,78 @@ td{
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+/*카카오톡 로그인   */
+//초기화 시키기. 
+$(document).ready(function(){	
+	window.Kakao.init("712a5c51e06bca8448c4c65b4205bb54");
+	Kakao.isInitialized();
+});
+
+function kakaoLogin() {
 	
-	/*카카오톡 로그인   */
-	function kakaoLogin() {
-	Kakao.Auth.login({
-		success: function (response) {
-		Kakao.API.request({
-			url: '/v2/user/me',
-			success: function (response) {
-				kakaoLoginPro(response)
-			},
-			fail: function (error) {
-				console.log(error)
-			},
-		})
-	},
-		fail: function (error) {
-			console.log(error)
-		},
-	})
+	window.Kakao.Auth.login({
+		scope:'profile_nickname,account_email',
+		success: function(authObj){
+			//console.log(authObj);
+			window.Kakao.API.request({
+				url: '/v2/user/me',
+				success: res => {
+					const email = res.kakao_account.email;
+					const name = res.properties.nickname;
+					var e = email;
+					$.ajax({
+						type : 'post',
+						url : "idcheck.mb",
+						data : {
+							id : email
+						},
+						success : function(data) {
+							if($.trim(data)=="yes"){
+								if(confirm("등록된 정보가 없습니다\n 회원가입을 진행하시겠습니까?")){
+									location.href="kakaologin.mb?name="+name+"&email="+email;
+								}
+							}
+							else{
+								$.ajax({
+									type : 'post',
+									url : "kakaoSucessLogin.mb",
+									data : {
+										email : email
+									},
+									success : function(data) {
+										if ($.trim(data) == "yes") {
+											location.href = "/ex/";
+										} 
+										else if($.trim(data) == "Insertip"){
+											location.href = "Insertip.mb?id="+email;
+										}
+										else if($.trim(data)=="black"){
+											$('#logincheck').html(
+											"<br><br><font color=red>이용 정지중인 회원입니다.<br> 안녕히가세요.</font>");
+											return false;
+										}
+										else {
+											$('#logincheck').html(
+											"<br><br><font color=red>아이디 또는 비밀번호를 잘못 입력했습니다.<br> 입력하신 내용을 다시 확인해주세요.</font>");
+											return false;
+										}//else
+									}//success
+
+								});//ajax
+							}//else
+						}//success
+
+					});//ajax
+					
+				}
+			});
+			
+		}
+	});
+}
+function kakaoExist(){
+	
 }
 
 	
@@ -151,7 +204,7 @@ td{
 	var hpClick = false;
 	
 	var AuthClick = false;
-	var confirm = false; 
+	var confirmAuth = false; 
 	
 	function findId(){
 		if ($('#popname').val() == "") {
@@ -164,7 +217,7 @@ td{
 			$('#hpmsg').show();
 			return;
 		}
-		else if(!confirm){
+		else if(!confirmAuth){
 			$('#hpnmsg').html("<br><font color=red>인증번호 확인해주세요</font>");
 			$('#hpnmsg').show();
 			return;
@@ -247,12 +300,12 @@ td{
 						},
 					success : function(data){ 
 						if($.trim(data)=="yes"){
-							confirm =true;
+							confirmAuth =true;
 							$('#hpnmsg').html("<font color=green size=2px>인증되었습니다</font>");
 							$('#hpnmsg').show();
 						}
 						else{
-							confirm = false;
+							confirmAuth = false;
 							$('#authNum').focus();
 							$('#hpnmsg').html("<font color=red size=2px>인증번호가 틀립니다</font>");
 							$('#hpnmsg').show();
@@ -492,7 +545,7 @@ td{
 											</p>
 											<p>
 											<input type="button" onclick="return loginCheck()" class="btn rounded me-auto" value="로그인" style="width: 400px; height: 45px;">
-											<div id="kakaobg" style="text-align: center""><img onclick="kakaoLogin()" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" style="width: 200px; height: 45px; "></div>
+											<div id="kakaobg" style="text-align: center;"><img onclick="kakaoLogin()" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" style="width: 200px; height: 45px; "></div>
 											</p>
 
 											<!-- 아이디 찾기 팝업창  -->

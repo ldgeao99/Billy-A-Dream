@@ -7,11 +7,12 @@
 	System.out.println("id : "+id); 
 %>
 <c:set var="id" value="<%=id %>"></c:set>
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
 <script>
 	
 	$(function(){
+		
 		// getting category
 		$.ajax({
 			url : "getLargeCategory.lcate",
@@ -94,6 +95,10 @@
 			});// inside ajax end
 		});// promise end
 	}
+	
+	function logout() {
+	   location.href="https://kauth.kakao.com/oauth/logout?client_id=712a5c51e06bca8448c4c65b4205bb54&logout_redirect_uri=http://localhost:8080/ex/out.mb";
+	  }
 </script>
 
 <html lang="ko">
@@ -302,7 +307,7 @@
                                  <c:if test="${id != null}">
                                 <div class="iconset flex-lg-column">
 	                                	<i class="fa-solid fa-lock"></i>
-	                                	<span class="text d-none d-lg-flex" onClick="location.href='out.mb'">로그아웃</span>
+	                                	<span class="text d-none d-lg-flex" onClick="logout()">로그아웃</span>
                                 </div>
                                 </c:if>
                                 <!--End Setting Dropdown-->

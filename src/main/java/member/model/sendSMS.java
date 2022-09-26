@@ -9,24 +9,23 @@ public class sendSMS {
 
 	// Find your Account Sid and Token at twilio.com/user/account
 		  public static final String ACCOUNT_SID = "ACf8a0e7a4190fdcaf641dda1638278da6";
-		  public static final String AUTH_TOKEN = "535230376be60001f8fa6398aee0b43e"
-		  		+ "\r\n"
-		  		+ "";
-		  
-		  // SMS Àü¼Û
+		  public static final String AUTH_TOKEN = "aa0d787a47fdb6dd6d6015afe33d4066";		  
+		  // SMS ë³´ë‚´ê¸°
 		  public static int sendsms (String phoneNum) {
 
 			Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		    
-		    // ÈŞ´ëÆù ÀÎÁõ¹øÈ£ »ı¼º
+		    // ì¸ì¦ë²ˆí˜¸
 		    int authNum = randomRange(100000, 999999);
-		    // Àü¼Û´ë»ó ÈŞ´ëÆù ¹øÈ£
-		    String sendTarget = "+"+"82"+ phoneNum;
-		    
-		    // Àü¼Û ¸Ş¼¼Áö
-		    String authMsg = "\n        Billy A Dream ÀÎÁõ¹øÈ£ [" + authNum + "]" ;
-		    
+		    // í•¸ë“œí°ë²ˆí˜¸
 		    /*
+		      String sendTarget = "+"+"82"+ phoneNum;
+		     
+		    
+		    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
+		    String authMsg = "\n        Billy A Dream ì¸ì¦ë²ˆí˜¸ [" + authNum + "]" ;
+		    
+		     
 		    Message message = Message.creator(
 		    	// to
 		    	new PhoneNumber(sendTarget),
@@ -39,7 +38,7 @@ public class sendSMS {
 			
 		  }
 		    
-		  // ÀÎÁõ¹øÈ£ ¹üÀ§ ÁöÁ¤
+		  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		  public static int randomRange(int n1, int n2) {
 		    int num =  (int) (Math.random() * (n2 - n1 + 1)) + n1;
 			  return num;

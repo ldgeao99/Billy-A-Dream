@@ -81,5 +81,19 @@ public class ReservationDao {
 			sqlSessionTemplate.update(namespace+".RollbackWithdrawReservation", no);
 		}
 
+		public void changeStatus2() {
+			sqlSessionTemplate.update(namespace+".changeStatus2");
+			
+		}
+		public void changeStatusfor3() {
+			sqlSessionTemplate.update(namespace+".changeStatusfor3");
+			
+		}
+
+		public int CheckReviewAuth(Map<String, String> map) {
+			int count = sqlSessionTemplate.selectOne(namespace+".CheckReviewAuth",map);
+			return count;
+		}
+
 
 }

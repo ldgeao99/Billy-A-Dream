@@ -281,6 +281,24 @@ create sequence chat_seq
 	
 
 
+drop table custumer_review cascade constraints;
+create table custumer_review(
+	no number not null,
+	pno number references products(no) on delete cascade,
+	mno number references member(mno) on delete cascade,
+	title varchar2(1000) not null,
+	rating number not null,
+	content varchar2(1000) not null
+	);
+
+drop sequence custumer_review_seq;
+create sequence custumer_review_seq
+	increment by 1
+	start with 1 
+	minvalue 1
+	maxvalue 10000000
+	nocache;
+	
 commit;
 	
 --

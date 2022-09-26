@@ -15,9 +15,8 @@ public class memberLogoutController {
 	@RequestMapping(command)
 	public String login(HttpSession session) {
 		
-		//String gotoPage = (String)request.getAttribute("destination");
 		
-		session.invalidate();//技记等芭 促 昏力
+		session.invalidate();
 		
 		return "redirect:/";
 	}

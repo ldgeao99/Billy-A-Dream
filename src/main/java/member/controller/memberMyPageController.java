@@ -89,6 +89,8 @@ public class memberMyPageController {
 		}
 		
 		
+		
+		
 		/* set model */
 		model.addAttribute("buyrb",buyrb);
 		model.addAttribute("sellrb",sellrb);

@@ -1,16 +1,16 @@
 package util;
 
 public class PagingProduct {
-	//페이징 관련 변수	
-	private int totalCount = 0 ; //총 레코드 건수
-	private int totalPage = 0 ; //전체 페이지 수
-	private int pageNumber = 0 ; //보여줄 페이지 넘버(표현 가능한 페이지는 1부터 totalPage까지이다.)
-	private int pageSize = 0 ; //한 페이지에 보여줄 건수
-	private int beginRow = 0 ; //현재 페이지의 시작 행
-	private int endRow = 0 ; //현재 페이지의 끝 행
-	private int pageCount = 3 ; // 한 화면에 보여줄 페이지 링크 수 (페이지 번호 갯수) 3개 페이지 이상 존재해야 다음 처음 끝 같은 버튼이 보여짐
-	private int beginPage = 0 ; //페이징 처리 시작 페이지 번호
-	private int endPage = 0 ; //페이징 처리 끝 페이지 번호
+	// 페이징 관련 변수
+	private int totalCount = 0; // 총 레코드 건수
+	private int totalPage = 0; // 전체 페이지 수
+	private int pageNumber = 0; // 보여줄 페이지 넘버(표현 가능한 페이지는 1부터 totalPage까지이다.)
+	private int pageSize = 0; // 한 페이지에 보여줄 건수
+	private int beginRow = 0; // 현재 페이지의 시작 행
+	private int endRow = 0; // 현재 페이지의 끝 행
+	private int pageCount = 3; // 한 화면에 보여줄 페이지 링크 수 (페이지 번호 갯수) 3개 페이지 이상 존재해야 다음 처음 끝 같은 버튼이 보여짐
+	private int beginPage = 0; // 페이징 처리 시작 페이지 번호
+	private int endPage = 0; // 페이징 처리 끝 페이지 번호
 	private int offset = 0 ;
 	private int limit = 0 ;
 	private String url = "" ; //예시 ==>  http://localhost:9191/MyServlet/list.do
@@ -162,7 +162,7 @@ public class PagingProduct {
 		
 		return pagingHtml;
 //		pagingHtml:
-//			&nbsp;<font color='red'>1</font>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=2&pageSize=2&whatColumn=null&keyword=null'>2</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=3&pageSize=2&whatColumn=null&keyword=null'>3</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=4&pageSize=2&whatColumn=null&keyword=null'>4</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=5&pageSize=2&whatColumn=null&keyword=null'>5</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=6&pageSize=2&whatColumn=null&keyword=null'>6</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=7&pageSize=2&whatColumn=null&keyword=null'>7</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=8&pageSize=2&whatColumn=null&keyword=null'>8</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=9&pageSize=2&whatColumn=null&keyword=null'>9</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=10&pageSize=2&whatColumn=null&keyword=null'>10</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=11&pageSize=2&whatColumn=null&keyword=null'>다음</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=22&pageSize=2&whatColumn=null&keyword=null'>맨 끝</a>&nbsp;
+//			&nbsp;<font color='red'>1</font>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=2&pageSize=2&whatColumn=null&keyword=null'>2</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=3&pageSize=2&whatColumn=null&keyword=null'>3</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=4&pageSize=2&whatColumn=null&keyword=null'>4</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=5&pageSize=2&whatColumn=null&keyword=null'>5</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=6&pageSize=2&whatColumn=null&keyword=null'>6</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=7&pageSize=2&whatColumn=null&keyword=null'>7</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=8&pageSize=2&whatColumn=null&keyword=null'>8</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=9&pageSize=2&whatColumn=null&keyword=null'>9</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=10&pageSize=2&whatColumn=null&keyword=null'>10</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=11&pageSize=2&whatColumn=null&keyword=null'>占쏙옙占쏙옙</a>&nbsp;&nbsp;<a href='/ex/list.ab?pageNumber=22&pageSize=2&whatColumn=null&keyword=null'>占쏙옙 占쏙옙</a>&nbsp;
 
 	}
 
@@ -283,9 +283,9 @@ public class PagingProduct {
 		}
 		
 		//offset의미 : 한 페이지에서 2개씩 보여지는 상황이라 가정하면 1페이지 에서는 건너띌게 없으로 0,
-		//			  2페이지에서는 건너띌게 2개 레코드 이므로 2,
-		//			  3페이지에서는 건너뛸게 4개 레코드 이므로 4
-		this.offset = ( pageNumber - 1 ) * pageSize ;  // 페이지 이동에 따라 건너띌 레코드 개수가 들어옴
+				//			  2페이지에서는 건너띌게 2개 레코드 이므로 2,
+				//			  3페이지에서는 건너뛸게 4개 레코드 이므로 4
+		this.offset = ( pageNumber - 1 ) * pageSize ;   // 페이지 이동에 따라 건너띌 레코드 개수가 들어옴
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}
@@ -346,7 +346,7 @@ public class PagingProduct {
 		//offset의미 : 한 페이지에서 2개씩 보여지는 상황이라 가정하면 1페이지 에서는 건너띌게 없으로 0,
 		//			  2페이지에서는 건너띌게 2개 레코드 이므로 2,
 		//			  3페이지에서는 건너뛸게 4개 레코드 이므로 4
-		this.offset = ( pageNumber - 1 ) * pageSize ;  // 페이지 이동에 따라 건너띌 레코드 개수가 들어옴
+this.offset = ( pageNumber - 1 ) * pageSize ;  // 페이지 이동에 따라 건너띌 레코드 개수가 들어옴
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}

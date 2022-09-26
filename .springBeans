@@ -12,6 +12,7 @@
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/prod-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/contect-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/admin-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/member-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
