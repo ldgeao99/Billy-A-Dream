@@ -19,7 +19,8 @@
 	<context:component-scan base-package="lcategory"/>
 	<context:component-scan base-package="chat"/>
 	<context:component-scan base-package="room"/>
-	
+	<context:component-scan base-package="review"/>
+		
 	<!-- error page 설정 -->
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<!-- views/error.jsp로 응답 -->

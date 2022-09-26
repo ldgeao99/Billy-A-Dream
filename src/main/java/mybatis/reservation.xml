@@ -76,5 +76,8 @@
 		update reservation set status=3 where is_accepted=1 and  sysdate > end_date
 	</update>
 	
+	<select id="CheckReviewAuth" resultType="int">
+		select count(*) from reservation where product_no = #{product_no} and buyer_no =#{buyer_no} and status = 3
+	</select>
 	
 	</mapper>

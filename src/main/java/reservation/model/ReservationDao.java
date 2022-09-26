@@ -90,5 +90,10 @@ public class ReservationDao {
 			
 		}
 
+		public int CheckReviewAuth(Map<String, String> map) {
+			int count = sqlSessionTemplate.selectOne(namespace+".CheckReviewAuth",map);
+			return count;
+		}
+
 
 }

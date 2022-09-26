@@ -149,7 +149,6 @@ height
 <script type="text/javascript">
 	
 	function writeReview(pno){
-		alert(pno);
 		location.href="writeReview.prd?pno="+pno;
 	}
 	
