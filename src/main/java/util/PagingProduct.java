@@ -1,23 +1,23 @@
 package util;
 
 public class PagingProduct {
-	//ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½	
-	private int totalCount = 0 ; //ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ç¼ï¿½
-	private int totalPage = 0 ; //ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-	private int pageNumber = 0 ; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½(Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ totalPageï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.)
-	private int pageSize = 0 ; //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¼ï¿½
-	private int beginRow = 0 ; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-	private int endRow = 0 ; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-	private int pageCount = 3 ; // ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½) 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private int beginPage = 0 ; //ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
-	private int endPage = 0 ; //ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	// ÆäÀÌÂ¡ °ü·Ã º¯¼ö
+	private int totalCount = 0; // ÃÑ ·¹ÄÚµå °Ç¼ö
+	private int totalPage = 0; // ÀüÃ¼ ÆäÀÌÁö ¼ö
+	private int pageNumber = 0; // º¸¿©ÁÙ ÆäÀÌÁö ³Ñ¹ö(Ç¥Çö °¡´ÉÇÑ ÆäÀÌÁö´Â 1ºÎÅÍ totalPage±îÁöÀÌ´Ù.)
+	private int pageSize = 0; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ °Ç¼ö
+	private int beginRow = 0; // ÇöÀç ÆäÀÌÁöÀÇ ½ÃÀÛ Çà
+	private int endRow = 0; // ÇöÀç ÆäÀÌÁöÀÇ ³¡ Çà
+	private int pageCount = 3; // ÇÑ È­¸é¿¡ º¸¿©ÁÙ ÆäÀÌÁö ¸µÅ© ¼ö (ÆäÀÌÁö ¹øÈ£ °¹¼ö) 3°³ ÆäÀÌÁö ÀÌ»ó Á¸ÀçÇØ¾ß ´ÙÀ½ Ã³À½ ³¡ °°Àº ¹öÆ°ÀÌ º¸¿©Áü
+	private int beginPage = 0; // ÆäÀÌÂ¡ Ã³¸® ½ÃÀÛ ÆäÀÌÁö ¹øÈ£
+	private int endPage = 0; // ÆäÀÌÂ¡ Ã³¸® ³¡ ÆäÀÌÁö ¹øÈ£
 	private int offset = 0 ;
 	private int limit = 0 ;
-	private String url = "" ; //ï¿½ï¿½ï¿½ï¿½ ==>  http://localhost:9191/MyServlet/list.do
-	private String pagingHtml = "";//ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©
+	private String url = "" ; //¿¹½Ã ==>  http://localhost:9191/MyServlet/list.do
+	private String pagingHtml = "";//ÇÏ´ÜÀÇ ¼ýÀÚ ÆäÀÌÁö ¸µÅ©
 	
-	private String whatColumn = "" ; //ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½(ï¿½Û¼ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ã¼ ï¿½Ë»ï¿½ï¿½ï¿½ all) ï¿½ï¿½ï¿½
-	private String keyword = "" ; //ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½Ü¾ï¿½ 
+	private String whatColumn = "" ; //°Ë»ö ¸ðµå(ÀÛ¼ºÀÚ, ±ÛÁ¦¸ñ, ÀüÃ¼ °Ë»öÀº all) µîµî
+	private String keyword = "" ; //°Ë»öÇÒ ´Ü¾î 
 	private String add2Name = "";
 	private String pno = ""; // pno
 	
@@ -201,33 +201,33 @@ public class PagingProduct {
 
 		if(  _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")  ){
 			System.out.println("_pageNumber:"+_pageNumber); // null
-			_pageNumber = "1" ; // _pageNumberï¿½ï¿½ nullï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ ï¿½Ç¹ï¿½
+			_pageNumber = "1" ; // _pageNumber°¡ nullÀÌ¸é ¿©·¯ ÆäÀÌÁöÁß 1ÆäÀÌÁöºÎÅÍ º¸¿©Áö°Ô ÇÏÀÚ¶ó´Â ÀÇ¹Ì
 		}
 		this.pageNumber = Integer.parseInt( _pageNumber ) ; 
 
 		if( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("") ){
-			_pageSize = "8" ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+			_pageSize = "8" ; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ ·¹ÄÚµå °¹¼ö
 		}		
 		this.pageSize = Integer.parseInt( _pageSize ) ;
 		
-		this.limit = pageSize ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+		this.limit = pageSize ; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ ·¹ÄÚµå °¹¼ö
 
 		this.totalCount = totalCount ; 
 
-		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 2.5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ceilï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ¶§¹®¿¡ °á°ú°¡ 2.5°¡ ³ª¿Ã ¼ö ÀÖ´Â°ÅÁö ¿ø·¡´Â Á¤¼ö°¡ ³ª¿È, ceilÀº ¹«Á¶°Ç ¿Ã¸²ÇÏ´Â ÇÔ¼ö
 		
-		//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
+		//ÇØ´ç ÆäÀÌÁö¿¡¼­ º¸¿©ÁÙ ·¹ÄÚµåÀÇ ½ÃÀÛ°ú ³¡À» Á¤ÇÏ´Â ºÎºÐ
 		this.beginRow = ( this.pageNumber - 1 )  * this.pageSize  + 1 ;
 		this.endRow =  this.pageNumber * this.pageSize ;
-		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+		//¸Ç ¸¶Áö¸· ÆäÀÌÁö¿¡ÀÖ´ø ·¹ÄÚµå ÇÏ³ª°¡ »èÁ¦µÇ¸é ¹Ù·Î Á÷Àü ÆäÀÌÁö°¡ º¸¿©Áöµµ·Ï ÇÔ.
 		if( this.pageNumber > this.totalPage ){
 			this.pageNumber = this.totalPage ;
 		}
 		
-		//offsetï¿½Ç¹ï¿½ : ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0,
-		//			  2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¹Ç·ï¿½ 2,
-		//			  3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Û°ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¹Ç·ï¿½ 4
-		this.offset = ( pageNumber - 1 ) * pageSize ;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//offsetÀÇ¹Ì : ÇÑ ÆäÀÌÁö¿¡¼­ 2°³¾¿ º¸¿©Áö´Â »óÈ²ÀÌ¶ó °¡Á¤ÇÏ¸é 1ÆäÀÌÁö ¿¡¼­´Â °Ç³Ê¶é°Ô ¾øÀ¸·Î 0,
+		//			  2ÆäÀÌÁö¿¡¼­´Â °Ç³Ê¶é°Ô 2°³ ·¹ÄÚµå ÀÌ¹Ç·Î 2,
+		//			  3ÆäÀÌÁö¿¡¼­´Â °Ç³Ê¶Û°Ô 4°³ ·¹ÄÚµå ÀÌ¹Ç·Î 4
+		this.offset = ( pageNumber - 1 ) * pageSize ;  // ÆäÀÌÁö ÀÌµ¿¿¡ µû¶ó °Ç³Ê¶é ·¹ÄÚµå °³¼ö°¡ µé¾î¿È
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}
@@ -244,7 +244,7 @@ public class PagingProduct {
 		
 		this.pno = pno;
 		
-		this.pagingHtml = getPagingHtml(url) ; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ html ï¿½Úµå°¡ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½
+		this.pagingHtml = getPagingHtml(url) ; // ÆäÀÌÁö ÇÏ´ÜÀÇ ÆäÀÌÁö °ü·Ã ÄÚµåµé¿¡ ´ëÇÑ html ÄÚµå°¡ ¹®ÀÚ¿­·Î ¸¸µé¾îÁ®¼­ ¹ÝÈ¯µÊ
 	}
 	
 
@@ -259,33 +259,33 @@ public class PagingProduct {
 
 		if(  _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")  ){
 			System.out.println("_pageNumber:"+_pageNumber); // null
-			_pageNumber = "1" ; // _pageNumberï¿½ï¿½ nullï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ ï¿½Ç¹ï¿½
+			_pageNumber = "1" ; // _pageNumber°¡ nullÀÌ¸é ¿©·¯ ÆäÀÌÁöÁß 1ÆäÀÌÁöºÎÅÍ º¸¿©Áö°Ô ÇÏÀÚ¶ó´Â ÀÇ¹Ì
 		}
 		this.pageNumber = Integer.parseInt( _pageNumber ) ; 
 
 		if( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("") ){
-			_pageSize = "8" ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+			_pageSize = "8" ; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ ·¹ÄÚµå °¹¼ö
 		}		
 		this.pageSize = Integer.parseInt( _pageSize ) ;
 		
-		this.limit = pageSize ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+		this.limit = pageSize ; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ ·¹ÄÚµå °¹¼ö
 
 		this.totalCount = totalCount ; 
 
-		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 2.5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ceilï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ¶§¹®¿¡ °á°ú°¡ 2.5°¡ ³ª¿Ã ¼ö ÀÖ´Â°ÅÁö ¿ø·¡´Â Á¤¼ö°¡ ³ª¿È, ceilÀº ¹«Á¶°Ç ¿Ã¸²ÇÏ´Â ÇÔ¼ö
 		
-		//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
+		//ÇØ´ç ÆäÀÌÁö¿¡¼­ º¸¿©ÁÙ ·¹ÄÚµåÀÇ ½ÃÀÛ°ú ³¡À» Á¤ÇÏ´Â ºÎºÐ
 		this.beginRow = ( this.pageNumber - 1 )  * this.pageSize  + 1 ;
 		this.endRow =  this.pageNumber * this.pageSize ;
-		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+		//¸Ç ¸¶Áö¸· ÆäÀÌÁö¿¡ÀÖ´ø ·¹ÄÚµå ÇÏ³ª°¡ »èÁ¦µÇ¸é ¹Ù·Î Á÷Àü ÆäÀÌÁö°¡ º¸¿©Áöµµ·Ï ÇÔ.
 		if( this.pageNumber > this.totalPage ){
 			this.pageNumber = this.totalPage ;
 		}
 		
-		//offsetï¿½Ç¹ï¿½ : ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0,
-		//			  2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¹Ç·ï¿½ 2,
-		//			  3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Û°ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¹Ç·ï¿½ 4
-		this.offset = ( pageNumber - 1 ) * pageSize ;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//offsetÀÇ¹Ì : ÇÑ ÆäÀÌÁö¿¡¼­ 2°³¾¿ º¸¿©Áö´Â »óÈ²ÀÌ¶ó °¡Á¤ÇÏ¸é 1ÆäÀÌÁö ¿¡¼­´Â °Ç³Ê¶é°Ô ¾øÀ¸·Î 0,
+				//			  2ÆäÀÌÁö¿¡¼­´Â °Ç³Ê¶é°Ô 2°³ ·¹ÄÚµå ÀÌ¹Ç·Î 2,
+				//			  3ÆäÀÌÁö¿¡¼­´Â °Ç³Ê¶Û°Ô 4°³ ·¹ÄÚµå ÀÌ¹Ç·Î 4
+		this.offset = ( pageNumber - 1 ) * pageSize ;   // ÆäÀÌÁö ÀÌµ¿¿¡ µû¶ó °Ç³Ê¶é ·¹ÄÚµå °³¼ö°¡ µé¾î¿È
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}
@@ -304,7 +304,7 @@ public class PagingProduct {
 		this.keyword = keyword ;
 		System.out.println("whatColumn:"+whatColumn+"/keyword:"+keyword);
 		
-		this.pagingHtml = getPagingHtml(url) ; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ html ï¿½Úµå°¡ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½
+		this.pagingHtml = getPagingHtml(url) ; // ÆäÀÌÁö ÇÏ´ÜÀÇ ÆäÀÌÁö °ü·Ã ÄÚµåµé¿¡ ´ëÇÑ html ÄÚµå°¡ ¹®ÀÚ¿­·Î ¸¸µé¾îÁ®¼­ ¹ÝÈ¯µÊ
 	
 	}
 	
@@ -320,33 +320,33 @@ public class PagingProduct {
 
 		if(  _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")  ){
 			System.out.println("_pageNumber:"+_pageNumber); // null
-			_pageNumber = "1" ; // _pageNumberï¿½ï¿½ nullï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ ï¿½Ç¹ï¿½
+			_pageNumber = "1" ; // _pageNumber°¡ nullÀÌ¸é ¿©·¯ ÆäÀÌÁöÁß 1ÆäÀÌÁöºÎÅÍ º¸¿©Áö°Ô ÇÏÀÚ¶ó´Â ÀÇ¹Ì
 		}
 		this.pageNumber = Integer.parseInt( _pageNumber ) ; 
 
 		if( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("") ){
-			_pageSize = "8" ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+			_pageSize = "8" ; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ ·¹ÄÚµå °¹¼ö
 		}		
 		this.pageSize = Integer.parseInt( _pageSize ) ;
 		
-		this.limit = pageSize ; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+		this.limit = pageSize ; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ ·¹ÄÚµå °¹¼ö
 
 		this.totalCount = totalCount ; 
 
-		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 2.5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ceilï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		this.totalPage = (int)Math.ceil((double)this.totalCount / this.pageSize) ; // double ¶§¹®¿¡ °á°ú°¡ 2.5°¡ ³ª¿Ã ¼ö ÀÖ´Â°ÅÁö ¿ø·¡´Â Á¤¼ö°¡ ³ª¿È, ceilÀº ¹«Á¶°Ç ¿Ã¸²ÇÏ´Â ÇÔ¼ö
 		
-		//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
+		//ÇØ´ç ÆäÀÌÁö¿¡¼­ º¸¿©ÁÙ ·¹ÄÚµåÀÇ ½ÃÀÛ°ú ³¡À» Á¤ÇÏ´Â ºÎºÐ
 		this.beginRow = ( this.pageNumber - 1 )  * this.pageSize  + 1 ;
 		this.endRow =  this.pageNumber * this.pageSize ;
-		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+		//¸Ç ¸¶Áö¸· ÆäÀÌÁö¿¡ÀÖ´ø ·¹ÄÚµå ÇÏ³ª°¡ »èÁ¦µÇ¸é ¹Ù·Î Á÷Àü ÆäÀÌÁö°¡ º¸¿©Áöµµ·Ï ÇÔ.
 		if( this.pageNumber > this.totalPage ){
 			this.pageNumber = this.totalPage ;
 		}
 		
-		//offsetï¿½Ç¹ï¿½ : ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0,
-		//			  2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¹Ç·ï¿½ 2,
-		//			  3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Û°ï¿½ 4ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¹Ç·ï¿½ 4
-		this.offset = ( pageNumber - 1 ) * pageSize ;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//offsetÀÇ¹Ì : ÇÑ ÆäÀÌÁö¿¡¼­ 2°³¾¿ º¸¿©Áö´Â »óÈ²ÀÌ¶ó °¡Á¤ÇÏ¸é 1ÆäÀÌÁö ¿¡¼­´Â °Ç³Ê¶é°Ô ¾øÀ¸·Î 0,
+		//			  2ÆäÀÌÁö¿¡¼­´Â °Ç³Ê¶é°Ô 2°³ ·¹ÄÚµå ÀÌ¹Ç·Î 2,
+		//			  3ÆäÀÌÁö¿¡¼­´Â °Ç³Ê¶Û°Ô 4°³ ·¹ÄÚµå ÀÌ¹Ç·Î 4
+this.offset = ( pageNumber - 1 ) * pageSize ;  // ÆäÀÌÁö ÀÌµ¿¿¡ µû¶ó °Ç³Ê¶é ·¹ÄÚµå °³¼ö°¡ µé¾î¿È
 		if( this.endRow > this.totalCount ){
 			this.endRow = this.totalCount  ;
 		}
@@ -366,32 +366,32 @@ public class PagingProduct {
 		System.out.println("whatColumn:"+whatColumn+"/keyword:"+keyword);
 		this.add2Name = add2Name;
 		
-		this.pagingHtml = getPagingHtml(url) ; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ html ï¿½Úµå°¡ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½
+		this.pagingHtml = getPagingHtml(url) ; // ÆäÀÌÁö ÇÏ´ÜÀÇ ÆäÀÌÁö °ü·Ã ÄÚµåµé¿¡ ´ëÇÑ html ÄÚµå°¡ ¹®ÀÚ¿­·Î ¸¸µé¾îÁ®¼­ ¹ÝÈ¯µÊ
 	
 	}
 	
-	private String getPagingHtml( String url ){ //ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+	private String getPagingHtml( String url ){ //ÆäÀÌÂ¡ ¹®ÀÚ¿­À» ¸¸µç´Ù.
 		System.out.println("getPagingHtml url:"+url); // 
 		
 		String result = "" ;
 		String added_param = "&whatColumn=" + whatColumn + "&keyword=" + keyword + "&add2Name=" + add2Name + "&no=" + pno; 
 		
-		if (this.beginPage != 1) { // ï¿½ï¿½ï¿½ï¿½, pageSize:ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½
+		if (this.beginPage != 1) { // ¾ÕÂÊ, pageSize:ÇÑ È­¸é¿¡ º¸ÀÌ´Â ·¹ÄÚµå ¼ö
 			result += "&nbsp;<a href='" + url  
 					+ "?pageNumber=" + ( 1 ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>ï¿½ï¿½ Ã³ï¿½ï¿½</a>&nbsp;" ;
+					+ added_param + "'>¸Ç Ã³À½</a>&nbsp;" ;
 			result += "&nbsp;<a href='" + url 
 					+ "?pageNumber=" + (this.beginPage - 1 ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>ï¿½ï¿½ï¿½ï¿½</a>&nbsp;" ;
+					+ added_param + "'>ÀÌÀü</a>&nbsp;" ;
 		}
 		
-		//ï¿½ï¿½ï¿½îµ¥(1,2,3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Úµï¿½)
+		//°¡¿îµ¥(1,2,3 ÆäÀÌÁö º¸¿©ÁÖ´Â ÄÚµå)
 		for (int i = this.beginPage; i <= this.endPage ; i++) {
 			if ( i == this.pageNumber ) {
-				result += "&nbsp;<font color='red'>" + i + "</font>&nbsp;"	; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ø¶ï¿½
+				result += "&nbsp;<font color='red'>" + i + "</font>&nbsp;"	; // ¼±ÅÃÇÑ ¹øÈ£´Â »¡°£»öÀ¸·Î º¸ÀÌ°Ô ÇØ¶ó
 						
 			} else {
-				// ï¿½ï¿½ï¿½ß¿ï¿½ result ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½. ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ result =  /ex/list.ab/?pageNum=2&pageSize=2&whatColumn=null&keyword=null
+				// ³ªÁß¿¡ result º¯¼ö ÇÑ¹ø Ãâ·ÂÇØºÁ¶ó. °Ë»öÀ» ÇÏÁö ¾ÊÀº 2ÆäÀÌÁö ¿¡¼­´Â result =  /ex/list.ab/?pageNum=2&pageSize=2&whatColumn=null&keyword=null
 				result += "&nbsp;<a href='" + url   
 						+ "?pageNumber=" + i + "&pageSize=" + this.pageSize 
 						+ added_param + "'>" + i + "</a>&nbsp;" ;
@@ -401,15 +401,15 @@ public class PagingProduct {
 		System.out.println("result:"+result);  
 		System.out.println();
 		
-		if ( this.endPage != this.totalPage) { // ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½È³ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½)
+		if ( this.endPage != this.totalPage) { // µÚÂÊ(´ÙÀ½°ú ¸Ç³¡À» Á¶°Ç¿¡ µû¶ó ³ª¿Ã¼öµµ ÀÖ°í ¾È³ª¿Ã¼öµµ ÀÖ°Ô)
 			
 			result += "&nbsp;<a href='" + url  
 					+ "?pageNumber=" + (this.endPage + 1 ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>ï¿½ï¿½ï¿½ï¿½</a>&nbsp;" ;
+					+ added_param + "'>´ÙÀ½</a>&nbsp;" ;
 			
 			result += "&nbsp;<a href='" + url  
 					+ "?pageNumber=" + (this.totalPage ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>ï¿½ï¿½ ï¿½ï¿½</a>&nbsp;" ;
+					+ added_param + "'>¸Ç ³¡</a>&nbsp;" ;
 		}		
 		System.out.println("result2:"+result);
 		

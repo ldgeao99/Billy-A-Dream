@@ -9,6 +9,14 @@
 		font-weight: bold;
 		font-size: 15px;
 	}
+	
+	.slick-list{
+		height: 450px !important;
+	}
+	
+	.zoomContainer{
+		display: none;
+	}
 </style>
 
 <!-- 오른쪽 상단 아이콘 관련 -->

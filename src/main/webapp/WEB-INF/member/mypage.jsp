@@ -845,11 +845,13 @@ height
 												<c:if test="${b.is_accepted ==1 and b.status==1}">
 													<input type="button" value="승인됨" style="background-color: black;color: white;">
 												</c:if>
+
 												<c:if test="${b.is_accepted ==1 and b.status==2}">
 													<input type="button" value="이용중" style="background-color: black;color: white;">
 												</c:if>
 												<c:if test="${b.is_accepted ==1 and b.status==3}">
 													<input type="button" value="후기작성" style="background-color: #036635;color: white;" onclick="writeReview('${b.product_no}')">
+
 												</c:if>
 												</td>
 											</tr>
@@ -1081,7 +1083,7 @@ height
 
 					<!-- Wishlist -->
 					<div id="wishlist" class="product-wishlist tab-pane fade">
-						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">승인여부</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">관심목록</h3>
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">

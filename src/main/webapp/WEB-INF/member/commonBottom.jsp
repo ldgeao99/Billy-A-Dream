@@ -4,8 +4,10 @@
 <!--Footer-->
             <div class="footer footer-1">
                 <div class="footer-top clearfix">
+                
+                
                     <div  align="center">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-4 mt-lg-5">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-4 mt-lg-5">
                                 <h4 class="h4 body-font text-transform-none">Billy A Dream</h4>
                                 <p style="font-size:12px;">상호명 &nbsp;&nbsp;&nbsp;주식회사 빌리어드림<br>
                                 대표이사 장정훈 &nbsp; | &nbsp; 개인정보보호책임자 박찬호<br>
@@ -14,8 +16,10 @@
                                 주소&nbsp;&nbsp; 서울특별시 마포구 드림로 56길 19 드림디지털타워
                                 </p>
                                 고객행복센터 <p style="text-decoration: underline; ">1588-0000</p>                         
-                            </div>
-                        </div>
+                    	</div>
+                	</div>
+                	
+                	
                 </div>
                 <div class="footer-bottom clearfix">
                     <div class="container">

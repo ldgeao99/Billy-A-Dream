@@ -171,7 +171,6 @@ create sequence wishlist_seq
 -- reservation테이블
 drop table reservation cascade constraints;
 create table reservation(
-
 	no number primary key not null,
 	product_no number references products(no) on delete cascade,
 	buyer_no number references member(mno) on delete cascade,
@@ -180,7 +179,8 @@ create table reservation(
 	is_accepted char(1),
 	accepted_date date,
 	status varchar2(20),
-	amount number
+	amount number,
+	notice varchar2(210)
 	);
 
 

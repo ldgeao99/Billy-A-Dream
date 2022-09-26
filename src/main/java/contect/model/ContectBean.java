@@ -1,16 +1,35 @@
 package contect.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ContectBean {
 	private int no;
 	private int mno;
 	private String id;
 	private String reg_date;
-	private int category_num;
+	@NotBlank(message = "카테고리를 선택해주세요.")
+	private String category_num;
+	@Size(min = 3, message = "제목을 입력해주세요.")
 	private String title;
+	@Size(min = 3, message = "내용을 입력해주세요.")
 	private String content;
 	private int is_reply;
 	private int is_replied;
 	private int readcount;
+	private String[] category
+		= {"회원 정보",
+				"결제 관련",
+				"거래 관련",
+				"상품 문의",
+				"기타"};
+	public String[] getCategory() {
+		return category;
+	}
+	public void setCategory(String[] category) {
+		this.category = category;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -35,10 +54,10 @@ public class ContectBean {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-	public int getCategory_num() {
+	public String getCategory_num() {
 		return category_num;
 	}
-	public void setCategory_num(int category_num) {
+	public void setCategory_num(String category_num) {
 		this.category_num = category_num;
 	}
 	public String getTitle() {

@@ -1,4 +1,4 @@
-package contect.controller;
+package admin.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,16 +17,16 @@ import contect.model.ContectDao;
 import util.PagingProduct;
 
 @Controller
-public class ContectViewController {
+public class AdminContectListController {
+	private final String command="contect.admin";
+	private String getPage="listContect";
 	
-	private final String command="board.ctc";
-	private String getPage="contectBoard"; 
 	
 	@Autowired
 	ContectDao contectDao;
 	
 	@RequestMapping(command)
-	public String contectView(Model model,
+	public String getMain(Model model,
 			@RequestParam(value="whatColumn",required = false) String whatColumn,
 			@RequestParam(value="keyword",required = false) String keyword,
 			@RequestParam(value="pageNumber",required = false) String pageNumber,
@@ -38,11 +38,10 @@ public class ContectViewController {
 		String url=request.getContextPath()+"/"+command;
 		PagingProduct pageInfo = new PagingProduct(pageNumber, "10", totalCount, url, whatColumn, keyword);		
 		List<ContectBean> lists = contectDao.selectAllContect(map);
-
+		
 		model.addAttribute("contectButton", new ContectBean());
 		model.addAttribute("contect_lists", lists);
 		model.addAttribute("pageInfo", pageInfo);
 		return getPage;
 	}
-
 }

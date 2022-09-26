@@ -153,101 +153,149 @@
                     <line x1="0" x2="16" y1="13" y2="13"></line>
                   </svg>
                 </button>
-                <form action="memberReservationList.admin" method="get">
 					
 				  <div class="input-group">
-	                <select class="form-select mt-0" name="whatColumn">
-						<option value="">전체 검색</option>
-						<option value="product_name">제품명</option>
-						<option value="buyer_id">구매자 아이디</option>
-						<option value="seller_id">판매자 아이디</option>
-					</select>
-	                <input type="text" name="keyword" class="form-control" placeholder="검색할 정보 입력">
-	                <button type="submit" class="btn btn-light">검색</button>
+	                <span>
+					<input type="button" class="btn btn-outline-primary btn-sm" value="전체보기" onclick="location.href='contect.admin'">
+					<c:forEach items="${contectButton.category }" var="category" varStatus="i">
+					
+					<input type="button" class="btn btn-outline-primary btn-sm" value="${category }" onclick="location.href='contect.admin?whatColumn=category_num&keyword=${i.index}'">
+					                                            			
+					</c:forEach>
+					</span>
 	              </div>
-				</form>
                
               </div>
               <div class="card-body p-0" data-simplebar>
               <div class="table-responsive">
               <table class="table">
-                  <tr>
-                    <th scope="col" width="3%"> </th>
-                    <th scope="col"width="10%">제품명</th>
-                    <th scope="col"width="13%">상태</th>
-                    <th scope="col" width="20%">기간</th>
-                    <th scope="col" width="10%">거래금액</th>
-                    <th scope="col"width="10%">판매자 정보</th>
-                    <th scope="col"width="10%">구매자 정보</th>
-                    <th scope="col" width="14%">체결일자</th>
-                    <th scope="col" width="10%">&nbsp 철회 </th>
-                  </tr>
-                  <c:forEach items="${lists }" var="reservation" varStatus="i">
-                  
-                  <tr <c:if test="${reservation.use eq '0' || reservation.is_accepted eq '2'}"> class="table-active"</c:if>>
-                    <td> </td>
-                    <td>${reservation.product_name }</td>
-                    <td>
-					<c:if test="${reservation.is_accepted eq '0'}"> 체결 대기중 </c:if>
-                    <c:if test="${reservation.is_accepted eq '1'}"> 체결 됨 </c:if>
-                    <c:if test="${reservation.is_accepted eq '4'}"> 거래 취소 </c:if>
-                    
-					<c:if test="${reservation.use eq '0'}">/ 만료 </c:if>
-                    <c:if test="${reservation.use eq '1'}">/ 반납예정일 </c:if>
-                    <c:if test="${reservation.use eq '2'}">/ 진행중 </c:if>
-                    <c:if test="${reservation.use eq '3'}">/ 시작전 </c:if>
-                    </td>
-                    <td>${reservation.start_date }~${reservation.end_date }</td>
-                    <td>
-                    <fmt:formatNumber pattern="###,###" value="${reservation.amount }" var="price"/>
-                    ${price }원
-                    </td>
-                    <td>
-                    	${reservation.seller_id }(${reservation.seller_name })
-                    </td>
-                    <td>
-                    	${reservation.buyer_id }(${reservation.buyer_name })
-                    </td>
-                    <td> 
-                    	${reservation.accepted_date }
-                   </td>
-                    <td> 
-                    <c:if test="${reservation.is_accepted eq '0' || reservation.is_accepted eq '1'}">
-                      <button id="getTaskModal" class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#taskModal" data-no="${reservation.no }">
-		                철회
-		              </button>
-		            </c:if>  
-		             <c:if test="${reservation.is_accepted eq '4'}"> 
-			             <button id="rollback" class="btn btn-outline-secondary btn-sm" type="button" onclick="location.href='withdrawReservation.admin?no=${reservation.no }'">
-			                철회 취소
-			             </button> 
-		             </c:if>
-                   </td>
-                  </tr>
-                  </c:forEach>
+                  <tr align="center">
+				    <th width="3%"></th>
+				    <th width="15%" >구분</th>
+				    <th width="25%">제목</th>
+				    <th width="15%">아이디</th>
+				    <th width="15%">조회수</th>
+				    <th width="17%">답변 및 수정</th>
+				    <th width="10%">삭제</th>
+				  </tr>
+                  <c:forEach items="${contect_lists }" var="contect" varStatus="i">
+				  <tr align="center" <c:if test="${contect.is_reply eq '1' ||contect.is_replied eq '1'}"> class="table-active" </c:if>>
+				    <td></td>
+				    <td>${contect.category[contect.category_num] } </td>
+				    <td align="left">
+				    <a href="detail.ctc?no=${contect.no }">
+				    <c:if test="${contect.is_reply eq '1' }">
+				    &nbsp;&#8627;	
+				    </c:if>
+				    <c:if test="${contect.is_replied eq '1' }">
+				    [답변 완료]	
+				    </c:if>
+				    <c:if test="${contect.is_replied eq '0' }">
+				    [답변 대기중]	
+				    </c:if>
+				    ${contect.title }</a>
+				    </td>
+				    <td>${contect.id }
+				    </td>
+				    <td>${contect.readcount }</td>
+				    <td>
+				    <c:if test="${contect.is_replied eq '0' }">
+				    <div class="dropdown">
+	                      <button id="getTaskModal2"  class="btn btn-outline-primary d-inline-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#taskModal2" 
+	                      data-no="${contect.no }" data-content="${contect.content }" data-title="${contect.title }" data-category="${contect.category[contect.category_num] }" data-catenum="${contect.category_num }">
+	                  답변 작성하기 
+	                </button>
+	                </div>
+	                </c:if>
+				    <c:if test="${contect.is_replied eq '1' && contect.is_reply eq '0' }">
+				    <div class="dropdown">
+	                      <button id="getTaskModal2" disabled="disabled" class="btn btn-outline-primary d-inline-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#taskModal2" 
+	                      data-no="${contect.no }" data-content="${contect.content }" data-title="${contect.title }" data-category="${contect.category[contect.category_num] }" data-catenum="${contect.category_num }">
+	                  답변 작성완료
+	                </button>
+	                </div>
+	                </c:if>
+				    <c:if test="${contect.is_reply eq '1' }">
+				    <div class="dropdown">
+	                      <button id="getTaskModal3"  class="btn btn-outline-primary d-inline-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#taskModal3" 
+	                      data-no2="${contect.no }" data-content2="${contect.content }" data-title2="${contect.title }" data-category2="${contect.category[contect.category_num] }" data-catenum2="${contect.category_num }">
+	                  답변 수정하기 
+	                </button>
+	                </div>
+	                </c:if>
+				    </td>
+				    <td>
+				    	
+				    	<input type="button" class="btn btn-outline-primary d-inline-flex align-items-center" value="삭제하기" onclick="location.href='deleteContect.admin?no=${contect.no}&is_reply=${contect.is_reply }'">
+				    	
+				    </td>
+				  </tr>
+				  </c:forEach>
               </table>
+             
+
+
+<center>
+${pageInfo.pagingHtml} 
+</center>
             </div>
                 
               </div>
             </div>
           </div>
         </div>
-		<!-- Task modal -->
-        <div class="modal fade" id="taskModal" tabindex="-1">
+ <!-- Task modal -->
+        <div class="modal fade" id="taskModal2" tabindex="-1">
           <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header border-0">
-                <h5 class="modal-title">철회 사유 작성</h5>
+                <h5 class="modal-title">답변 작성하기</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form class="needs-validation" novalidate id="taskForm" action="withdrawReservation.admin" method="post">
-                   
+              	<div class="mb-3">
+                    <label for="taskContent" class="form-label">제목</label>
+                    
+                    <input type="text" readonly="readonly" id="re_title" name="re_title" class="form-control">
+                                     			
+                  </div>
+              	<div class="mb-3">
+                    <label for="taskContent" class="form-label">내용</label>
+                    
+                    <textarea id="re_content" name="re_content" class="form-control" rows="3" readonly="readonly"></textarea>
+                                     			
+                  </div>
                   <div class="mb-3">
-                    <label for="taskTitle" class="form-label">철회 사유</label>
-                    <input type="text" name="name" class="form-control" id="notice" required autofocus >
+                    <label for="taskCategory" class="form-label">원 카테고리</label>
+                    <input type="text" id="category" name="category" readonly="readonly">
+				</div>	                    
+                <form class="needs-validation" novalidate id="taskForm2" action="replyContect.admin" method="post">
+                 <input type="hidden" name="category_num" id="category_num">  
+                  <div class="mb-3">
+                    <label for="taskCategory" class="form-label">카테고리 변경</label>
+                    <select class="form-select form-select-sm" name="re_cate" id="re_cate">
+            			<option value="">카테고리 변경하기</option>
+                    	<c:forEach items="${contectButton.category }" var="category" varStatus="i">
+                    	<option value="${i.index}">
+                    	${category }</option>
+                                            			
+                        </c:forEach>
+                    </select>
                     <input type="hidden" name="no" id="no">
-                    <div class="invalid-feedback">철회 사유를 작성하세요.</div>
+                    <div class="invalid-feedback">카테고리를 선택하세요.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskTitle" class="form-label">제목</label>
+                    
+                    <input type="text" id="title" name="title" class="form-control" required autofocus>
+                    <div class="invalid-feedback">제목을 입력하세요.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskContent" class="form-label">답변</label>
+                    
+                    <textarea id="content" name="content" class="form-control" required autofocus rows="4" placeholder="내용을 입력하세요."></textarea>
+                                     			
+                    <div class="invalid-feedback">답변을 입력하세요.</div>
                   </div>
                  
                  
@@ -255,13 +303,65 @@
               </div>
               <div class="modal-footer border-0">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소하기</button>
-                <button type="submit" form="taskForm" class="btn btn-secondary px-5">철회하기</button>
+                <button type="submit" form="taskForm2" class="btn btn-primary px-5">저장하기</button>
               </div>
+             </div> 
             </div>
-          </div>
-        </div>
-      </div>
-       
+           </div>  
+ <!-- Task modal -->
+        <div class="modal fade" id="taskModal3" tabindex="-1">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <h5 class="modal-title">답변 수정하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              	
+                  <div class="mb-3">
+                    <label for="taskCategory" class="form-label">원 카테고리</label>
+                    <input type="text" id="category2" name="category" readonly="readonly">
+				</div>	                    
+                <form class="needs-validation" novalidate id="taskForm3" action="replyContect.admin" method="post">
+                   
+                  <div class="mb-3">
+                    <label for="taskCategory" class="form-label">카테고리 변경</label>
+                    <select class="form-select form-select-sm" name="re_cate" id="re_cate2">
+            			<option value="">카테고리 변경하기</option>
+                    	<c:forEach items="${contectButton.category }" var="category" varStatus="i">
+                    	<option value="${i.index}">
+                    	${category }</option>
+                                            			
+                        </c:forEach>
+                    </select>
+                    <input type="hidden" name="category_num" id="category_num2">
+                    <input type="hidden" name="no" id="no2">
+                    <div class="invalid-feedback">카테고리를 선택하세요.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskTitle" class="form-label">제목</label>
+                    
+                    <input type="text" id="title2" name="title" class="form-control" required autofocus>
+                    <div class="invalid-feedback">제목을 입력하세요.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="taskContent" class="form-label">답변</label>
+                    
+                    <textarea id="content2" name="content" class="form-control" required autofocus rows="4" placeholder="내용을 입력하세요."></textarea>
+                                     			
+                    <div class="invalid-feedback">답변을 입력하세요.</div>
+                  </div>
+                 
+                 
+                </form>
+              </div>
+              <div class="modal-footer border-0">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소하기</button>
+                <button type="submit" form="taskForm3" class="btn btn-primary px-5">수정하기</button>
+              </div>
+             </div> 
+            </div> 
+       	</div>
       <!-- /Main body -->
 
       <!-- Main footer -->
@@ -316,11 +416,35 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-$(document).on("click", "#getTaskModal", function () {
-		
+
+$(document).on("click", "#getTaskModal2", function () {
 		  var data = $(this).data('no');
 		    $("#no").val(data);
-		  
+		  var data1 = $(this).data('title');
+		    $("#re_title").val(data1);
+		    $("#title").val("re:"+data1);
+		  var data2 = $(this).data('content');
+		    $("#re_content").val(data2);
+		    
+		  var data3 = $(this).data('category');
+		    $("#category").val(data3);
+		  var data4 = $(this).data('catenum');
+		    $("#category_num").val(data4);
+		 
+})
+$(document).on("click", "#getTaskModal3", function () {
+	var data5 = $(this).data('no2');
+		    $("#no2").val(data5);
+	var data6 = $(this).data('title2');
+		    $("#title2").val(data6);
+	var data7 = $(this).data('content2');
+		    $("#content2").val(data7);
+		    
+	var data8 = $(this).data('category2');
+		    $("#category2").val(data8);
+	var data9 = $(this).data('catenum2');
+		    $("#category_num2").val(data9);
+		 
 })
 
 </script>
