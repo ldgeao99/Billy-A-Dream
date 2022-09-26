@@ -43,7 +43,7 @@ public class allMsgController {
 	public String allMsg(@RequestParam("no")int room_no,HttpSession session) {
 		
 		List<chatBean>lists = cdao.getByRoom_no(room_no);
-		
+		System.out.println("여기온다");
 		int i=0;
 		String info="";
 		for(chatBean c :lists) { //상품이름 , 메세지 , 시간 상품이미지
@@ -63,7 +63,7 @@ public class allMsgController {
 			}
 			i++;
 		}
-		
+		System.out.println(info);
 		return info;
 	}
 }

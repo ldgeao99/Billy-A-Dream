@@ -18,7 +18,7 @@
 <script type="text/javascript">
 
 	$(function(){
-		if($('#id').val() != ""){
+		if($('#id').val() != "null"){
 			whatButtonWillShowAboutLike();	
 		}
 		
@@ -41,6 +41,8 @@
 				}
 			}
 		});
+		
+		/* 이미지 여러개 */
 		
 	});
 
@@ -239,12 +241,12 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
-                                    <div class="product-thumb">
+                                    <div class="product-thumb" >
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
                                             <input type="hidden" id="pimages" value="${images[0] }">
                                             <!-- 이미지 들어감 -->
                                             <c:forEach var="productimages" items="${images }">
-                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}" data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
+                                            <a data-image="<%=request.getContextPath()%>/resources/${productimages}"  data-zoom-image="<%=request.getContextPath()%>/resources/${productimages}" class="slick-slide slick-cloned active">
                                                 <img class="blur-up lazyload" width="100px" height="120px" data-src="<%=request.getContextPath()%>/resources/${productimages}" src="<%=request.getContextPath()%>/resources/${productimages}" alt="product" />
                                             </a>
                                             </c:forEach>
@@ -473,6 +475,13 @@
                                                     <div class="spr-reviews">
                                                        <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">상품 후기</h4>
                                                        <br><br>
+                                                       	<c:if test="${fn:length(reviewlists) eq 0 }">
+                                                       		<p align="center"><i class="fa-solid fa-comment-slash fa-6x"></i><br><br>
+															등록된 후기가 없습니다.                                                       		
+                                                       		<br><br>
+                                                       		</p>
+                                                       	</c:if>
+                                                       	
                                                        	<c:forEach var="r" items="${reviewlists }">
                                                         <div class="review-inner">
                                                             <div class="spr-review">

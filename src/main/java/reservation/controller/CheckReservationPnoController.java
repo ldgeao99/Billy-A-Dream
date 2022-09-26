@@ -35,16 +35,19 @@ public class CheckReservationPnoController {
 		
 		String id =(String)session.getAttribute("id");
 		
-		MemberBean mb = mdao.getById(id);
-		
-		Map<String, String>map = new HashMap<String, String>();
-		map.put("buyer_no", String.valueOf(mb.getMno()));
-		map.put("product_no", pno);
-		
-		int count = rdao.CheckReviewAuth(map);
-		
-		if(count>0) {
-			return "yes";
+		if (id != null) {
+
+			MemberBean mb = mdao.getById(id);
+
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("buyer_no", String.valueOf(mb.getMno()));
+			map.put("product_no", pno);
+
+			int count = rdao.CheckReviewAuth(map);
+
+			if (count > 0) {
+				return "yes";
+			}
 		}
 		
 		return "no";

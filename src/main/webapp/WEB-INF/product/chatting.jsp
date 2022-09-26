@@ -165,6 +165,10 @@ body {
 	 $('.chat-window').scrollTop($('.chat-window')[0].scrollHeight);
  })
  
+  const interval = setInterval(function() {
+	  location.reload();
+ 	 	}, 1000);	 
+ 
  function sendm(){
 	 var sendmsg =$('#sendmsg').val();
 	 var pno =$('#pno').val();

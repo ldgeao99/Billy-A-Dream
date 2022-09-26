@@ -100,6 +100,8 @@ public class ProductDetailController {
 		List<ReviewBean>reviewlists = rdao.getReviewList(pageInfo,no);
 		
 		//dateParse && Average
+		if(reviewlists.size()>0) {
+			
 		for(ReviewBean r : reviewlists) {
 			r.setWriteday(DateParse.strToDate(DateParse.day(r.getWriteday()))); // change time
 			
@@ -109,6 +111,7 @@ public class ProductDetailController {
 			r.setWriterName(wmb.getName());
 		}
 		ReviewAverage = Math.round(TotalStar/reviewlists.size());
+		}
 		
 		
 		

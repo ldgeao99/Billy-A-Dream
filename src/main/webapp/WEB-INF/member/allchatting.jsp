@@ -26,14 +26,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
  var detail = false;
- 
+ var rn;
  $(function(){
-	 
+
+ // 맨처음에 단 한번만 호출되며, 방 목록을 불러오는 비동기 요청.(여기는 문제없음)
  $.ajax({
 	 	type : 'post',
 		url : "allchatting.mb",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data) {
+			
 			var roomlist = data.split("|");
 			
 			for(var i=0 in roomlist){
@@ -48,7 +50,7 @@
 			                      '<img src="<%=request.getContextPath()%>/resources/'+roomlists[3]+'" alt="User" width="38" height="38" class="rounded-circle" loading="lazy">'+
 			                    '</div>'+
 			                    '<div class="vstack position-relative overflow-hidden">'+
-			                      '<p class="mb-0 small text-truncate">'+roomlists[2]+'</p>'+
+			                      '<p class="mb-0 small text-truncate">'+roomlists[2] +'('+roomlists[4]+')</p>'+
 			                      '<p class="mb-0 small text-truncate fw-bold text-dark"></p>'+
 			                    '</div>'+
 			                  '</a>'+
@@ -63,22 +65,13 @@
 		}
 
 	});//ajax
-		
- 	 const interval = setInterval(function() {
-	if(detail){
- 		detailmsg($('#roomno').val());
-	}
- 	}, 3000);	 
- })
-	 
+ });
  
- 
- 
+ 	// 방 목록 중에 하나를 선택하면 불리는 함수. 응답하고 응답 받으면 화면에 대화내용을 그림.
 	function detailmsg(no){
 	 
-	 detail = true;	
-	$('#mse').nextAll().remove();
-	 
+	rn=no;	
+ 		
 	 $.ajax({
 		 	type : 'post',
 			url : "getallmsg.mb",
@@ -87,6 +80,9 @@
 			},
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			success : function(date) {
+				detail = true;	
+				console.log("응답받음");
+				$('#mse').nextAll().remove();
 				var id = <%=session.getAttribute("id")%>;
 				var info = date.split("|");
 				
@@ -99,7 +95,8 @@
 				else{
 				$('.username').html(info[0].split(",")[5]);//대화창 위에 이름 띄우기위해
 				}
-				
+				var r = info[0].split(",");
+				$('.simplebar-content').append('<input type="hidden" id="roomno" value="'+r[7]+'">');
 				for(var i=0 in info){
 					//alert(info[i]);
 					var msg = info[i].split(",");
@@ -108,7 +105,7 @@
 					$('#msi').parent().append( // 오른쪽 나오는거
 							'<div class="popover bs-popover-start">'+
 			                  '<div class="popover-body" id="m">'+
-			                    msg[1]+'<input type="hidden" id="roomno" value="'+msg[7]+'">'+
+			                    msg[1]+
 			                    '<time>'+msg[2]+'</time>'+
 			                  '</div>'+
 			                  '</div>'
@@ -133,8 +130,6 @@
 			}
 		});//ajax
 		
-//	}//else
-		 
 	}
  
  	function sendmsg(){
@@ -154,6 +149,13 @@
 
  		});//ajax
  	}
+ 	
+ 	 const interval = setInterval(function() {
+ 		if(detail){
+ 			//alert($('#roomno').val() + "번방 데이터 가져오는 요청");
+ 	 		detailmsg(rn);
+ 		}
+ 	 	}, 1000);	 
  </script>
 <body class="preloading">
 	<input type="hidden" id="name" value="${name }">
