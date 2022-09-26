@@ -4,6 +4,39 @@
 <%@include file="../member/commonTop.jsp" %>
 
 
+<script>
+	function like(pno){
+		if($('#id').val()=="null"){
+			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+				location.href="login.mb";	
+			}
+			return false;
+		}
+		else{
+			$.ajax({
+				type : 'post',
+				url : "addOrDeletelike.wish",
+				data : {
+					id : $('#id').val(),
+					no : pno,
+				},
+				success : function(rdata) {
+					
+					//alert(rdata);
+					
+					if(rdata == "added"){
+						alert("위시리스트에 추가되었습니다.");
+						showLikeCount();	
+					}else if(rdata == "deleted"){
+						alert("위시리스트에서 제거되었습니다.");
+					}
+				}//success
+	
+			});//ajax
+		}
+	}
+</script>
+
             <!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
@@ -524,18 +557,9 @@
 	                                    <!--Product Button-->
 	                                    <div class="button-set style0 d-none d-md-block">
 	                                        <ul>
-	                                            <!--Cart Button-->
-	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-	                                            <!--End Cart Button-->
-	                                            <!--Quick View Button-->
-	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-	                                            <!--End Quick View Button-->
 	                                            <!--Wishlist Button-->
-	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="javascript:like(${recentProductList[i-1].no})"><i class="icon an an-heart-l" ></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
 	                                            <!--End Wishlist Button-->
-	                                            <!--Compare Button-->
-	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-	                                            <!--End Compare Button-->
 	                                        </ul>
 	                                    </div>
 	                                    <!--End Product Button-->
@@ -646,18 +670,10 @@
 	                                    <!--Product Button-->
 	                                    <div class="button-set style0 d-none d-md-block">
 	                                        <ul>
-	                                            <!--Cart Button-->
-	                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-	                                            <!--End Cart Button-->
-	                                            <!--Quick View Button-->
-	                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-	                                            <!--End Quick View Button-->
 	                                            <!--Wishlist Button-->
-	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
+	                                            <li><a class="btn-icon wishlist add-to-wishlist" href="javascript:like(${popularProductList[i-1].no})"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
 	                                            <!--End Wishlist Button-->
-	                                            <!--Compare Button-->
-	                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-	                                            <!--End Compare Button-->
+	                                            
 	                                        </ul>
 	                                    </div>
 	                                    <!--End Product Button-->

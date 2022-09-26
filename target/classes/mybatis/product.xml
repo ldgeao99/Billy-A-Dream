@@ -129,7 +129,8 @@
  	</update>
 	
 	<select id="getEqualCate" resultType= "product.model.ProductBean">
-		select * from products where lcategory_no=#{lcategory_no} and scategory_no=#{scategory_no}
+		select * from products 
+		where lcategory_no=#{lcategory_no} and scategory_no=#{scategory_no} and <![CDATA[rownum <= 8]]>
 	</select>
 	
 	

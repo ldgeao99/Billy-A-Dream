@@ -435,11 +435,11 @@
 									<div class="product-image">
 										<!-- Product Image -->
 										<a href="productdetail.prd?no=${p.no }" class="product-img"> <!-- image -->
-											<img class="primary blur-up lazyload"
+											<img class="primary blur-up lazyload" style="height:186px" 
 											data-src="<%=request.getContextPath()%>/resources/${p.images}"
 											src="<%=request.getContextPath()%>/resources/${p.images}"
 											alt="product" title="product" /> <!-- End image --> <!-- Hover image -->
-											<img class="hover blur-up lazyload"
+											<img class="hover blur-up lazyload" style="height:186px" 
 											data-src="<%=request.getContextPath()%>/resources/${p.images}"
 											src="<%=request.getContextPath()%>/resources/${p.images}"
 											alt="product" title="product" /> <!-- End hover image --> <!-- product label -->
@@ -452,12 +452,14 @@
 									<div class="product-details text-center">
 										<!-- Product Name -->
 										<div class="product-name">
-											<a href="product-layout1.html">${p.name}</a>
+											<a href="productdetail.prd?no=${p.no }">${p.name}</a>
 										</div>
 										<!-- End Product Name -->
 										<!-- Product Price -->
 										<div class="product-price">
-											<span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
+											<span class="old-price"><fmt:formatNumber value="${p.original_day_price}" pattern="#,###" />원/일</span> 
+											<span class="price"><fmt:formatNumber value="${p.discounted_day_price}" pattern="#,###" />원/일</span> 
+											<%-- <span class="price"><fmt:formatNumber pattern="###,###" value="${p.discounted_day_price}" var="price"/>${ price} 원 / 일</span> --%>
 										</div>
 										<!-- End Product Price -->
 										<!-- Product Button -->
@@ -497,12 +499,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="section-header col-12">
-                                <h2 class="text-transform-none" style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:22px  ;color: black; margin-top:50px">유사한 상품</h2>
+                                <h2 class="text-transform-none" style="margin-top:0px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:22px  ;color: black; margin-top:50px">유사한 상품</h2>
                             </div>
                         </div>
                         
                         <!-- 체크 -->
-                        <div class="productSlider grid-products">
+                        <div class="productSlider grid-products" style="height:400px;">
                         <c:forEach var="equal" items="${EqualLists }">
                             <div class="item">
                                 <!--Start Product Image-->
@@ -525,7 +527,7 @@
                                 <div class="product-details text-center">
                                     <!--Product Name-->
                                     <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">${equal.name }</a>
+                                        <a href="productdetail.prd?no=${equal.no }">${equal.name }</a>
                                     </div>
                                     <!--End Product Name-->
                                     <!--Product Price-->
