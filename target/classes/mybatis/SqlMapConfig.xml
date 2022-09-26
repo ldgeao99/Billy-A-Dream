@@ -17,8 +17,10 @@
     	<mapper resource="mybatis/coupon.xml"/>
     	<mapper resource="mybatis/wishlist.xml"/>
     	<mapper resource="mybatis/reservation.xml"/>
+
     	<mapper resource="mybatis/chat.xml"/>
     	<mapper resource="mybatis/room.xml"/>
     	<mapper resource="mybatis/review.xml"/>
+
 	</mappers>
 </configuration>

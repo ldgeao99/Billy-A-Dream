@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import contect.model.ContectBean;
+import contect.model.ContectDao;
 import coupon.model.CouponBean;
 import coupon.model.CouponDao;
 import member.model.MemberBean;
@@ -44,6 +46,9 @@ public class memberMyPageController {
 	
 	@Autowired
 	private ReservationDao rdao;
+	
+	@Autowired
+	private ContectDao contectDao;
 	
 	@RequestMapping(command)
 	public String login( Model model,HttpSession session,HttpServletResponse response,@RequestParam(value="select",required = false)String select) throws IOException {
@@ -88,6 +93,8 @@ public class memberMyPageController {
 			pb.setImages(pb.getImages().split(",")[0]);
 		}
 		
+		/* get contect_list*/
+		List<ContectBean> contect_lists= contectDao.selectMyContect(mb.getMno());
 		
 		
 		
@@ -98,6 +105,9 @@ public class memberMyPageController {
 		model.addAttribute("plists",plists);					// = wishlist items
 		model.addAttribute("selling_plists",selling_plists);	
 		model.addAttribute("mb",mb);
+
+		model.addAttribute("contect_lists",contect_lists); 
+
 		
 		
 		response.setContentType("text/html; charset=UTF-8"); // 내보내는것의 한글처리
@@ -127,6 +137,7 @@ public class memberMyPageController {
 		writer.flush(); 
 		
 		
+
 		return gotoPage;
 	}
 }

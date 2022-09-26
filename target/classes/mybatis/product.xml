@@ -15,16 +15,19 @@
  	
  	<select id="GetRecentProductList" resultType="product.model.ProductBean">
  		select * 
+
 		from products
 		order by pulled_day desc, no
- 	</select>
 
+ 	</select>
+ 	
  	<select id="GetPopularProductList" resultType="product.model.ProductBean">
  		select * 
  		from products
- 		order by view_count desc, no
+ 		order by view_count desc
  	</select>
  	
+
  	<select id="GetProductListBySearch" resultType="product.model.ProductBean">
  		select *
  		from(select pro3.*, upper(m.id) id    
@@ -93,6 +96,7 @@
  	
  	
  	
+
  	<select id="GetByNo" resultType="product.model.ProductBean">
  		select * from products where no = #{no}
  	</select>

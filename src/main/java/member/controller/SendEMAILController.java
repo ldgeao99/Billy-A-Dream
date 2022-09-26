@@ -20,19 +20,19 @@ public class SendEMAILController {
 	@RequestMapping(value =command, method = RequestMethod.GET)
 	public String email(@RequestParam("email") String email, HttpSession session) throws Exception {
 
-		int EmailAuthNum = sendSMS.randomRange(10000, 99999);// 6ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½Î¿ï¿½
-		String subject = "[Biily A Dream] email certification number";
-		String msg = "[Billy A Dream] email certification number [" + EmailAuthNum + "]";
+
+		int EmailAuthNum = sendSMS.randomRange(10000, 99999);// 6ÀÚ¸® ÀÎÁõ¹øÈ£ ºÎ¿©
+		String subject = "[Biily A Dream] ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£";
+		String msg = "[Billy A Dream] ÀÌ¸ŞÀÏ ÀÎÁõ ¹øÈ£´Â [" + EmailAuthNum + "] ÀÔ´Ï´Ù.";
 
 		sendEMAIL.sendMail(email, subject, msg);
 
-		System.out.println("email certification number :" + EmailAuthNum);
+		System.out.println("ºÎ¿©ÇÑ ÀÌ¸ŞÀÏÀÎÁõ¹øÈ£ :" + EmailAuthNum);
+
 		session.setAttribute("EmailAuthNum", EmailAuthNum);
 
 		return "yes";
 	}
-
-	
 
 	@ResponseBody
 	@RequestMapping(value =command, method = RequestMethod.POST)
@@ -40,8 +40,10 @@ public class SendEMAILController {
 
 		int getEmailAuthNum = (Integer) session.getAttribute("EmailAuthNum");
 
-		System.out.println("ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ :" + getEmailAuthNum);
-		System.out.println("ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ :" + EmailauthNum);
+
+		System.out.println("ºÎ¿©µÈ ÀÎÁõ¹øÈ£ :" + getEmailAuthNum);
+		System.out.println("ÀÔ·ÂÇÑ ÀÎÁõ¹øÈ£ :" + EmailauthNum);
+
 
 		if (getEmailAuthNum == EmailauthNum) {
 			return "yes";

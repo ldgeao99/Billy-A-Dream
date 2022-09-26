@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberDao;
+import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
 
 @Controller
@@ -30,9 +31,12 @@ public class AdminReservationWithdrawController {
 	}
 	@RequestMapping(value = command,method = RequestMethod.GET)
 	public String getRollback(
-			@RequestParam(value="no",required = false) int no) {
-
-		reservationDao.rollbackWithdrawReservation(no);
+			@RequestParam(value="no",required = false) int no,
+			@RequestParam(value="notice") String notice) {
+		ReservationBean rs=new ReservationBean();
+		rs.setNo(no);
+		rs.setNotice(notice);
+		reservationDao.rollbackWithdrawReservation(rs);
 
 
 		return getPage;
