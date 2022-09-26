@@ -16,7 +16,6 @@
 			where name like #{keyword}
 		</if>
 		<if test="whatColumn == 'code'">
-
 			where code like #{keyword}
 		</if>
       	order by startdate desc
