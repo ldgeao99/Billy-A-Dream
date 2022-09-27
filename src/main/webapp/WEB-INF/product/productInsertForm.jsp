@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 
-
+<%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
@@ -10,18 +10,11 @@
 	<script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-	<!-- 오른쪽 상단 아이콘 관련 -->
-      <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
       <script>
         function gotoSellPage(){
         	location.href = "insert.prd";
         }
      </script>
-     <style>
-	       i {
-	    	font-size: 1.2rem;
-		}
-	</style>
 	
 	<script type="text/javascript">
 
