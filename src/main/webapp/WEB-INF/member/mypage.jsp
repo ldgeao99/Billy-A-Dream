@@ -755,7 +755,7 @@ height
 										<c:forEach var="s" items="${sellrb }">
 											<tr>
 												<td>${s.no }</td>
-												<td>${s.name }</td>
+												<td><a href="productdetail.prd?no=${s.product_no }">${s.name }</a></td>
 												<td>
 													<fmt:parseDate var="buyday" value="${s.accepted_date }" pattern="yyyy-MM-dd"/>
 													<fmt:formatDate var="buyday" value="${buyday }" pattern="yyyy-MM-dd hh:mm"/>
@@ -809,16 +809,16 @@ height
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${fn:length(sellrb)==0 }">
+									<c:if test="${fn:length(buyrb)==0 }">
 										<tr>
-											<td colspan="6">주문 된 상품이 없습니다.</td>
+											<td colspan="6">주문 한 상품이 없습니다.</td>
 										</tr>
 									</c:if>
-									<c:if test="${fn:length(sellrb)!=0 }">
+									<c:if test="${fn:length(buyrb)!=0 }">
 										<c:forEach var="b" items="${buyrb }">
 											<tr>
 												<td>${b.no }</td>
-												<td>${b.name }</td>
+												<td><a href="productdetail.prd?no=${b.product_no }">${b.name }</a></td>
 												<td>
 													<fmt:parseDate var="buyday" value="${b.accepted_date }" pattern="yyyy-MM-dd"/>
 													<fmt:formatDate var="buyday" value="${buyday }" pattern="yyyy-MM-dd hh:mm"/>
@@ -1206,7 +1206,8 @@ height
 								
 								<c:if test="${fn:length(selling_plists) eq 0}">
 									<div align="center">
-									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
+									<br><br><br>
+									<i class="fa-regular fa-circle-xmark fa-5x"></i><br><br>
 									 판매중인 상품이 없습니다
 									</div>
 								</c:if>

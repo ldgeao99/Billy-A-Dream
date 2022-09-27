@@ -60,7 +60,7 @@ public class memberMyPageController {
 		List<ReservationBean> buyrb =  rdao.getAllByBuyer_no(String.valueOf( mb.getMno()));
 		
 		List<ReservationBean> sellrb = rdao.getAllByMno(mb.getMno()); 
-		
+		System.out.println("sellrb:"+sellrb);
 		List<CouponBean> lists = null;
 		if(mb.getCoupon()!=null) {
 			String[] couponLists = mb.getCoupon().split(",");
