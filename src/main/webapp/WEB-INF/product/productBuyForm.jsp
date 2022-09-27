@@ -21,7 +21,7 @@
 
 	})<!-- 결제창에서 달력사용 -->
 	
-	
+	//when clicked pay button
 	function sub(){
 		
 			var method = $('input[name=method]:checked').val();
@@ -35,9 +35,15 @@
 		    var popX = winX + (winWidth - windowW)/2;
 		    var popY = winY + (winHeight - windowH)/2;
 
+		    //예약일자를 선택해주세요
+		    if($('#start_date').val() == "" ||  $('#end_date').val() == ""){
+		    	alert("예약일을 선택해주세요");
+		    	return false;
+		    }
+											
 
 		    if(!$('#cart_tearm').is(":checked")){
-		    	alert("결제사항을 확인해주세요");
+		    	alert("결제사항 확인을 체크해주세요");
 		    	return false;
 		    }
 		    
@@ -98,8 +104,6 @@
                                             <th class="action">&nbsp;</th>
                                             <th colspan="2" class="text-start" style="font-size: 15px">상품명</th>
                                             <th class="text-center" style="font-size: 15px">가격</th>
-                                            <th class="text-center" style="font-size: 15px">구매기간</th>
-                                            <th class="text-center" style="font-size: 15px">총합</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -118,16 +122,10 @@
                                                    수량: 1
                                                 </div>
                                             </td>
+                                            <!-- 총합 뜨는 곳 -->
                                             <td class="cart__price-wrapper cart-flex-item text-center small--hide">
                                                 <span class="money"><fmt:formatNumber pattern="###,###" value="${pb.discounted_day_price}" var="price"/>${ price} 원 / 일</span>
-                                                <input type="hidden" id="price" value="${pb. discounted_day_price}">
-                                            </td>
-                                            <td>
-                                            	&emsp;<span class="money" id="buyDate"></span>
-                                            </td>
-                                            <td class="cart-price cart-flex-item text-center small--hide">
-                                                <span class="money fw-500" id="TotalPrice"></span>
-                                            </td>
+                                            </td>  
                                         </tr>
                                         </tbody>
                                 </table> 
@@ -138,13 +136,15 @@
 
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer">
                             <div class="cart_info">
-                                <div id="shipping-calculator" class="mb-4 cart-col">
-                                    <strong style="font-size:14px;">주문 상세</strong>
+                                <div id="shipping-calculator" class="mb-4 cart-col" style="margin-bottom:10px !important">
+                                    <strong style="font-size:18px;">주문 상세</strong>
                                     <form class="estimate-form pt-1" action="#" method="post">
+                                    
                                     </form>
                                 </div>
                                 <div class="cart-note mb-4 cart-col">
-                                    <strong style="font-size:14px;">예약기간 설정</strong>
+                                    <strong style="font-size:14px;">예약기간 설정</strong> <font color="red"> * 해당상품의 최소 예약일 : ${pb.rentday_minimum} 일</font>
+                                    
                                     <!--기간설정  -->
 									<input type="text" id="select_date" placeholder="날짜를 선택해주세요" value="예약일자 선택" readonly>
 									<input type="hidden" id="start_date" value=""><!-- 2022-09-22 -->
@@ -262,6 +262,13 @@
 												$('#start_date').val(picker.startDate.format('YYYY-MM-DD'));
 												$('#end_date').val(picker.endDate.format('YYYY-MM-DD'));
 											}	
+											
+											$('.daydiff').text(daydiff);
+											
+											var total_price = daydiff * "${pb.discounted_day_price}";
+											$('.price').text(numberWithCommas(parseInt(total_price)));
+											$('#price').val(daydiff * "${pb.discounted_day_price}");
+											
 										});
 										
 										// When i click cancel button
@@ -269,7 +276,14 @@
 											$(this).val('');
 											$('#start_date').val("");
 											$('#end_date').val("");
+											$('.daydiff').text("0");
+											$('.price').text("0");
+											$('#price').val("0");
 										});
+										
+										function numberWithCommas(x) {
+											  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+										}
 									</script>
                                     
 								</div>
@@ -284,22 +298,37 @@
                                         	<i class="fa-regular fa-credit-card fa-lg" ></i>&nbsp;신용카드  
                                         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         	
-                                        	<input type="radio" value="kakao" name="method">&nbsp;
+                                        	<input type="radio" value="kakao" name="method" checked>&nbsp;
                                         	<img src="resources/assets/images/kakaopay.png" alt="카카오페이" width="52px"/>&nbsp;카카오페이
                                         </span>
                                     </div>
                                     <br>
+                                    <div class="row" style="margin-bottom:15px">
+                                        <span class="col-6 col-sm-6 cart__subtotal-title"><strong>예약일수</strong></span>
+                                        <span class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end">
+	                                        <span class="money daydiff">
+	                                        	0
+	                                        </span> 일
+                                        </span>
+                                        <br>
+                                    </div>
                                     <div class="row">
                                         <span class="col-6 col-sm-6 cart__subtotal-title"><strong>결제금액</strong></span>
-                                        <span class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end"><span class="money">$735.00</span></span>
+                                        <span class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end">
+	                                        <span class="money price">
+	                                        	0
+	                                        </span> 원
+	                                        <input type="hidden" id="price" value="">
+                                        </span>
                                     </div>
                                     <br>
                                     <p class="cart__shipping pt-0 m-0 fst-normal freeShipclaim"><i class="me-1 align-middle icon an an-truck-l"></i><b>무료배송</b></p>
-                                    <div class="customCheckbox cart_tearm">
+                                    <div class="customCheckbox cart_tearm" style="margin-bottom:20px; margin-top:10px">
                                         <input type="checkbox" value="allen-vela" id="cart_tearm">
                                         <label for="cart_tearm">모든 결제사항을 확인했습니다</label>
                                     </div>
                                     <input type="button" class="btn rounded product-form__cart-submit mb-0"  value="결제하기" onclick="sub()">
+                                    <br>	
                                     <div class="paymnet-img text-center"><img src="resources/assets/images/safepayment.png" alt="Payment" /></div>
                                 </div>
                             </div>
