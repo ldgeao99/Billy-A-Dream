@@ -37,7 +37,7 @@ public class AdminContectToReplyListController {
 		int totalCount=contectDao.getTotalCount(map);
 		String url=request.getContextPath()+"/"+command;
 		PagingProduct pageInfo = new PagingProduct(pageNumber, "10", totalCount, url, whatColumn, keyword);		
-		List<ContectBean> lists = contectDao.selectContectToReply(map);
+		List<ContectBean> lists = contectDao.selectContectToReply(map,pageInfo);
 		
 		model.addAttribute("contectButton", new ContectBean());
 		model.addAttribute("contect_lists", lists);

@@ -20,7 +20,6 @@
     	<mapper resource="mybatis/reservation.xml"/>
     	<mapper resource="mybatis/chat.xml"/>
     	<mapper resource="mybatis/room.xml"/>
-
     	<mapper resource="mybatis/contect.xml"/>
     	<mapper resource="mybatis/review.xml"/>
     	<mapper resource="mybatis/event.xml"/>

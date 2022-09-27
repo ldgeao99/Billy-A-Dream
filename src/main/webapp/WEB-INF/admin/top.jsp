@@ -41,20 +41,15 @@
         <ul class="navbar-nav mb-4" id="mainMenu">
           <li class="nav-label px-2 small mt-3"><small>MENU</small></li>
           <li class="nav-item">
-            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle" href="#dashboard-collapse" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="dashboard-collapse">
+            <a class="nav-link px-2 d-flex align-items-center gap-3" href="main.admin">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
-              <span class="me-auto">Dashboard</span>
+              <span>Dashboard</span>
             </a>
-            <div class="ms-5 collapse" id="dashboard-collapse" data-bs-parent="#mainMenu">
-              <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="main.admin">Ecommerce</a></li>
-                <li class="nav-item"><a class="nav-link" href="dashboard-analytics.html">Analytics</a></li>
-                <li class="nav-item"><a class="nav-link" href="dashboard-crm.html">CRM</a></li>
-              </ul>
-            </div>
           </li>
+         
+          <li class="nav-label px-2 small mt-3"><small>카테고리</small></li>
            <li class="nav-item">
             <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle" href="#advanced-components-collapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="advanced-components-collapse">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -97,7 +92,6 @@
               <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="member.admin">회원 조회/이용 정지</a></li>
                 <li class="nav-item"><a class="nav-link" href="memberReservationList.admin">예약 내역 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="register.html">게시글 관리</a></li>
               </ul>
             </div>
           </li>
@@ -112,20 +106,6 @@
               <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="contect.admin">문의사항 전체 조회</a></li>
                 <li class="nav-item"><a class="nav-link" href="contectToReply.admin">문의사항 미답변 조회</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-2 d-flex align-items-center gap-3 dropdown-toggle" href="#user-collapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="user-collapse">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              <span class="me-auto">User</span>
-            </a>
-            <div class="ms-5 collapse" id="user-collapse" data-bs-parent="#mainMenu">
-              <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="user-settings.html">User settings</a></li>
-                <li class="nav-item"><a class="nav-link" href="user-list.html">User list</a></li>
               </ul>
             </div>
           </li>
@@ -165,5 +145,135 @@
       </div>
     </div>
     <!-- /Sidebar -->
+     <!-- Main -->
+    <div id="main">
+
+      <!-- Main header -->
+      <div id="main-header">
+        <nav class="navbar navbar-expand navbar-light bg-white gap-4">
+          <button type="button" class="btn btn-light d-none d-xl-flex" data-toggle="mini-sidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <button type="button" class="btn btn-light d-flex d-xl-none me-3" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <ul class="navbar-nav align-items-center ms-auto">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle no-caret" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end p-3">
+                
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header d-flex justify-content-between">
+                  Short Cut:
+                  <a href="javascript:void(0)" class="text-muted ms-5">Clear</a>
+                </h6>
+                <div class="max-h-[300px] overflow-auto">
+                  <a class="dropdown-item" href="list.lcate">대분류 카테고리 조회</a>
+                  <a class="dropdown-item" href="update.lcate">대분류 카테고리 수정</a>
+                  <a class="dropdown-item" href="list.scate">소분류 카테고리 조회</a>
+                  <a class="dropdown-item" href="update.scate">소분류 카테고리 수정</a>
+                  <a class="dropdown-item" href="member.admin">회원 리스트</a>
+                  <a class="dropdown-item" href="memberReservationList.admin">거래내역 조회</a>
+                  <a class="dropdown-item" href="insertCoupon.admin">쿠폰 발급</a>
+                  <a class="dropdown-item" href="coupon.admin">쿠폰 조회</a>
+                  <a class="dropdown-item" href="contect.admin">문의사항 전체 조회</a>
+                  <a class="dropdown-item" href="contectToReply.admin">문의사항 미답변 조회</a>
+                  <a class="dropdown-item" href="javascript:void(0)">이벤트 조회</a>
+                  <a class="dropdown-item" href="javascript:void(0)">이벤트 추가</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle no-caret" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <div class="position-relative">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                  </svg>
+                  <span class="badge bg-danger position-absolute top-0 start-100 translate-middle p-1">
+                    <span class="visually-hidden">unread notifications</span>
+                  </span>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <h6 class="dropdown-header d-flex justify-content-between">
+                  5 New notifications
+                  <a href="javascript:void(0)" class="text-muted ms-5">Clear</a>
+                </h6>
+                <div class="dropdown-divider"></div>
+                <div class="max-h-[300px] overflow-auto">
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <div class="vstack">
+                      <p class="mb-0">New customer registered</p>
+                      <small class="text-muted">5 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <div class="vstack">
+                      <p class="mb-0">New order received</p>
+                      <small class="text-muted">11 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                    </svg>
+                    <div class="vstack">
+                      <p class="mb-0">Plugin updates available <span class="badge rounded-pill ms-1 bg-secondary align-bottom">3</span></p>
+                      <small class="text-muted">30 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    <div class="vstack">
+                      <p class="mb-0">Download completed</p>
+                      <small class="text-muted">35 min ago</small>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 py-2" href="javascript:void(0)">
+                    <svg class="text-muted" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <div class="vstack">
+                      <p class="mb-0">Weekly usage report</p>
+                      <small class="text-muted">40 min ago</small>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item vr mx-3"></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle no-caret py-0 pe-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="resources/admin_asset/img/user/user1.svg" width="32" alt="User" class="rounded-circle" loading="lazy">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
+                <li><a class="dropdown-item" href="user-settings.html">Settings</a></li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- /Main header -->
     </body>
 </html>

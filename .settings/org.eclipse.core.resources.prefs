@@ -1,5 +1,4 @@
 =\=\=\=\=\=\=
-<<<<<<<=HEAD
 >>>>>>>=branch 'master' of https\://github.com/PostFace/Billy-A-Dream.git
 eclipse.preferences.version=1
 encoding//src/main/java/member/controller/SendEMAILController.java=UTF-8
@@ -11,7 +10,7 @@ encoding//src/main/java/product/controller/ProductDetailController.java=UTF-8
 encoding//src/main/java/product/controller/ProductSucessBuyController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/member/allchatting.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/member/categoryTop.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/member/commonTop.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/member/login.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
-encoding/<project>=UTF-8
 encoding/sql_tables.txt=UTF-8
