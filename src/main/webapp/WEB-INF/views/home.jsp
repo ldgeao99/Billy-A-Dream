@@ -3,6 +3,9 @@
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
 
 <script>
 	function like(pno){
@@ -350,11 +353,11 @@
                                         <div class="slideshow-content-in text-center">
                                             <div class="wrap-caption animation style2 whiteText">
                                                 <p class="ss-small-title mb-1">FRESH ADDITION</p>
-                                                <h2 class="mega-title ss-mega-title">Billy A Dream</h2>
-                                                <span class="mega-subtitle ss-sub-title">Experience it at a minimum cost</span>
+                                                <h2 class="mega-title ss-mega-title" style="font-family: 'Nunito', sans-serif !important; margin-top:10px">Billy A Dream</h2>
+                                                <span class="mega-subtitle ss-sub-title" >Experience it at a minimum cost</span>
                                                 <div class="ss-btnWrap">
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#">RENT EVERTHING</a>
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#">WHAT YOU WANT</a>
+                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#" ><span style="font-family: 'Nunito', sans-serif !important;">RENT EVERTHING</span></a>
+                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#" style="font-family: 'Nunito', sans-serif !important;">WHAT YOU WANT</a>
                                                 </div>
                                             </div>
                                         </div>
