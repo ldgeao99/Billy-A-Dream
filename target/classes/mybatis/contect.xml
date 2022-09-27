@@ -19,6 +19,12 @@
   		<if test="whatColumn == 'category_num'">
 			where category_num like #{keyword} 
 		</if>
+		<if test="whatColumn == 'title'">
+			where title like #{keyword} 
+		</if>
+  		<if test="whatColumn == 'id'">
+			where id like #{keyword} 
+		</if>
 		order by no desc
   	</select>
   	<select id="SelectContectToReply" resultType="contect.model.ContectBean"> 
@@ -28,6 +34,15 @@
   		<if test="whatColumn == 'category_num'">
 			and category_num like #{keyword} 
 		</if>
+<<<<<<< HEAD
+  		<if test="whatColumn == 'title'">
+			and title like #{keyword} 
+		</if>
+  		<if test="whatColumn == 'id'">
+			and id like #{keyword} 
+		</if>
+=======
+>>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
   		order by no
   	</select>
   	<insert id="InsertReplyContect"><!-- 관리자 답글 -->

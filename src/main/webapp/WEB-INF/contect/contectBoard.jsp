@@ -40,7 +40,7 @@
     <th width="15%">조회수</th>
     <th width="10%"></th>
   </tr>
-  <c:forEach items="${contect_lists }" var="contect" varStatus="i">
+  <c:forEach items="${contect_lists }" var="contect"  varStatus="i">
   <tr align="center" <c:if test="${contect.is_reply eq '1' }"> class="table-active" </c:if>>
     <td></td>
     <td>${contect.category[contect.category_num] } </td>
@@ -63,7 +63,11 @@
     *
     </c:if>
     </c:forEach></td>
-    <td>${contect.readcount }</td>
+    <td>
+    <c:if test="${contect.is_reply eq '0' }">
+    ${contect.readcount }	
+    </c:if>
+    </td>
     <td></td>
   </tr>
   </c:forEach>

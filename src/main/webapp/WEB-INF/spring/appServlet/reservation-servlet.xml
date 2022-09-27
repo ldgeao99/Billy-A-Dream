@@ -19,7 +19,7 @@
 	
 	<!-- 컨트롤러 및 Autowired 해줄 클래스를 찾기위해 album 패키지 하위의 모든 파일을 훑어봐라, album.xxx, album.x.y.z 등등 다 포함 -->
 	<context:component-scan base-package="product"/>
-	<context:component-scan base-package="member"/>
+	<context:component-scan base-package="member"/> 
 	<context:component-scan base-package="coupon"/> 
 	<context:component-scan base-package="lcategory"/>
 	<context:component-scan base-package="scategory"/>
