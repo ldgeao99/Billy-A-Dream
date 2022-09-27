@@ -3,17 +3,24 @@
     
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
-<div class="container contact-pstyle2">    
+
+
 <div class="collection-header">
 	<div class="collection-hero">
 		<div class="collection-hero__image"></div>
 		<div class="collection-hero__title-wrapper container">
-			<h2 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">
-			문의게시판
+			<h2
+				style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">
+				<input type="hidden" id="what" value="${param.whatColumn}">
+				문의게시판
+
 			</h2>
 		</div>
 	</div>
 </div>
+
+<div class="container contact-pstyle2">    
+
 <span>
 <input type="button" class="btn btn-outline-primary btn-sm" value="전체보기" onclick="location.href='board.ctc'">
 <c:forEach items="${contectButton.category }" var="category" varStatus="i">
@@ -51,8 +58,10 @@
     ${contect.title }</a>
     </td>
     <td>${fn:substring(contect.id,0,3) }
-    <c:forEach begin="4" end="${fn:length(contect.id) }">
+    <c:forEach begin="4" end="${fn:length(contect.id) }" varStatus="i">
+    <c:if test="${i.count < 5 }">
     *
+    </c:if>
     </c:forEach></td>
     <td>${contect.readcount }</td>
     <td></td>

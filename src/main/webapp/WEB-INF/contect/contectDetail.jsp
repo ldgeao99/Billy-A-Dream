@@ -24,8 +24,10 @@
 	<tr>
 		<td>아이디</td>
 		<td>${fn:substring(contect.id,0,3) }
-	    <c:forEach begin="4" end="${fn:length(contect.id) }">
+	    <c:forEach begin="4" end="${fn:length(contect.id) }" varStatus="i">
+	    <c:if test="${i.count < 5 }">
 	    *
+	    </c:if>
 	    </c:forEach>
 	    </td>
 	    <td>조회수</td>

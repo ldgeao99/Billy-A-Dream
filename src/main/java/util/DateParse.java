@@ -9,18 +9,18 @@ import java.util.Date;
 public class DateParse {
 	
 	
-	// �쇅遺��뿉�꽌 媛앹껜 �깮�꽦 湲덉� 
+	// 외부에서 객체 생성 금지 
 	private DateParse() {}
 	
-	// yyyy-MM-dd -> yyyyMMdd	=>	DB�뿉 �꽔湲� �쐞�빐 �궗�슜
+	// yyyy-MM-dd -> yyyyMMdd	=>	DB에 넣기 위해 사용
 	public static String dateToStr(String date) {
 		return date.replaceAll("-", "");
 	}
 	
-	// yyyyMMdd -> yyyy-MM-dd	=>	input date value濡� �꽔湲� �쐞�빐 �궗�슜
+	// yyyyMMdd -> yyyy-MM-dd	=>	input date value로 넣기 위해 사용
 	public static String strToDate(String str) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date;
 		try {
 			date = strFormat.parse(str);
@@ -33,16 +33,16 @@ public class DateParse {
 		return null;
 	}
 	
-	// getTodayPlus(int) �뙆�씪誘명꽣濡� 	0 �꽔�쑝硫� �삤�뒛, 1 �꽔�쑝硫� �궡�씪
+	// getTodayPlus(int) 파라미터로 	0 넣으면 오늘, 1 넣으면 내일
 	public static String getTodayPlus(int plus) {
 		DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
 		
-		LocalDate now = LocalDate.now(); 	// �쁽�옱�떆媛�
-		now = now.plusDays(plus);			// �쁽�옱�떆媛� + "plus"�씪
-		return now.format(localDateFormat);	// yyyyMMdd �룷留ㅽ똿
+		LocalDate now = LocalDate.now(); 	// 현재시간
+		now = now.plusDays(plus);			// 현재시간 + "plus"일
+		return now.format(localDateFormat);	// yyyyMMdd 포매팅
 	}
 	
-	// �궇吏� �뜑�븯湲� (�쓬�닔�룄 媛��뒫)
+	// 날짜 더하기 (음수도 가능)
 	public static String datePlus(String date, int plus) {
 		if(date.contains("-")) date = DateParse.dateToStr(date);
 		LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.BASIC_ISO_DATE);
@@ -50,7 +50,7 @@ public class DateParse {
 		// return yyyyMMdd
 	}
 	
-	// �궇吏� 李⑥씠 怨꾩궛 end - start
+	// 날짜 차이 계산 end - start
 	public static int dateDif(String start, String end) {
 		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
 		
@@ -63,7 +63,7 @@ public class DateParse {
 			Date startDate = strFormat.parse(start);
 			Date endDate = strFormat.parse(end);
 			int dif = (int) ((endDate.getTime()-startDate.getTime()) / (24*60*60*1000));
-			System.out.println("�궇吏� 李⑥씠 : "+dif);
+			System.out.println("날짜 차이 : "+dif);
 			return dif+1;
 			
 		} catch (ParseException e) {
@@ -72,6 +72,7 @@ public class DateParse {
 		
 		return -1;
 	}
+	// 풀타임을 시간만 나오게
 	public static String time(String time) {
 		SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -86,9 +87,10 @@ public class DateParse {
 		}
 		return null;
 	}
+	// 풀타임을 날짜만 나오게
 	public static String day(String fullTime) {
-		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat fulltimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat strFormat = new SimpleDateFormat("yyyyMMdd");
 		
 		Date date;
 		try {

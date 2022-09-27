@@ -23,6 +23,7 @@ import product.model.ProductBean;
 import product.model.ProductDao;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
+import util.DateParse;
 import wishlist.model.WishlistBean;
 import wishlist.model.WishlistDao;
 
@@ -95,10 +96,14 @@ public class memberMyPageController {
 		
 		/* get contect_list*/
 		List<ContectBean> contect_lists= contectDao.selectMyContect(mb.getMno());
-		
+		/* contect_list.reg_date dateparse*/
+		for(ContectBean c : contect_lists) {
+			c.setReg_date(DateParse.strToDate(DateParse.day(c.getReg_date())));
+		}
 		
 		
 		/* set model */
+		model.addAttribute("contectlist",contect_lists);
 		model.addAttribute("buyrb",buyrb);
 		model.addAttribute("sellrb",sellrb);
 		model.addAttribute("couponLists",lists);
