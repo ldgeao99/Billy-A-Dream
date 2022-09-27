@@ -42,13 +42,14 @@ public class allChattingController {
 		model.addAttribute("name",mb.getName());
 		return gotoPage; 
 	}
-	
+     
 	@ResponseBody
 	@RequestMapping(value=command , method = RequestMethod.POST,produces = "application/text;charset=utf8")
 	public String allGetRoomList(HttpSession session) {
 		System.out.println("요청받음");
 		String id = (String)session.getAttribute("id");
-		List<roomBean>rb = rdao.searchRoomById(id);
+		MemberBean loginmb = mdao.getById(id);
+		List<roomBean>rb = rdao.searchRoomById(loginmb.getMno());
 		
 		int i=0;
 		String listJson = "";

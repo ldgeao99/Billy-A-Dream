@@ -22,7 +22,7 @@
 	display: none;
 }
 </style>
-
+ <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
  var detail = false;
@@ -35,7 +35,15 @@
 		url : "allchatting.mb",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		success : function(data) {
-			
+			if($.trim(data)==""){
+				$('#lists').append(
+						'<div align="center" style="margin-top: 300px;">'+
+						'<i class="fa-solid fa-comment-slash fa-3x"></i><br>'+
+						'<br>현재 진행중인 채팅방이 없습니다</div>'
+				);
+				
+			}
+			else{
 			var roomlist = data.split("|");
 			
 			for(var i=0 in roomlist){
@@ -58,13 +66,14 @@
 			              '</div>'+
 			            '</div>'); 
 			}
+			}//else
 			//append 사용
 		},//success 
 		error : function(){
 			alert("에러");
 		}
 
-	});//ajax
+	})//ajax
  });
  
  	// 방 목록 중에 하나를 선택하면 불리는 함수. 응답하고 응답 받으면 화면에 대화내용을 그림.
@@ -83,7 +92,7 @@
 				detail = true;	
 				console.log("응답받음");
 				$('#mse').nextAll().remove();
-				var id = <%=session.getAttribute("id")%>;
+				var id = '<%=session.getAttribute("id")%>';
 				var info = date.split("|");
 				
 				$('#imag').attr("src","<%=request.getContextPath()%>/resources/"+info[0].split(",")[3]); 
@@ -155,7 +164,7 @@
  			//alert($('#roomno').val() + "번방 데이터 가져오는 요청");
  	 		detailmsg(rn);
  		}
- 	 	}, 1000);	 
+ 	 	}, 3000);	 
  </script>
 <body class="preloading">
 	<input type="hidden" id="name" value="${name }">
@@ -180,7 +189,6 @@
               </div>
             </div>
             <!-- /Chat list -->
-
           </div>
           <div id="inner-main" >
             <div class="card">

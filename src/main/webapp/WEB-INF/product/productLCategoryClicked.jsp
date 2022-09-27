@@ -496,7 +496,7 @@
                     <div class="collection-hero">
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
-                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">카테고리 : ${param.keyword}</h2>
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">${param.keyword}</h2>
                             <input type="hidden" id = "keyword" value="${param.keyword}">
                         </div>
                     </div>

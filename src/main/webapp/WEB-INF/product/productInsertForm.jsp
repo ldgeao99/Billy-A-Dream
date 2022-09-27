@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 
-
+<%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
 
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
@@ -10,18 +10,11 @@
 	<script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-	<!-- 오른쪽 상단 아이콘 관련 -->
-      <script src="https://kit.fontawesome.com/75769dc150.js" crossorigin="anonymous"></script>
       <script>
         function gotoSellPage(){
         	location.href = "insert.prd";
         }
      </script>
-     <style>
-	       i {
-	    	font-size: 1.2rem;
-		}
-	</style>
 	
 	<script type="text/javascript">
 
@@ -773,9 +766,23 @@
 							    
 		/* 사용자에 의한 파일 추가 이벤트가 발생하면 */					
 		btnAtt.onchange = function(e){
-
+			
 			var files = e.target.files; // object FileList
 			var fileArr = Array.prototype.slice.call(files) // Array 타입으로 변경 [object File],[object File],,
+			
+			if(fileArr.length == 0){
+				//when cancel button is clicked
+				var dt = new DataTransfer();
+				
+				// 바로 위 dt 변수에 모든 파일객체 담음
+				for(index in sel_files) {
+					var file = sel_files[index];
+					dt.items.add(file);
+				}
+				
+				btnAtt.files = dt.files; // input type file 에 담긴 FileList를 덮어씌움
+				return;
+			}
 			
 			if(sel_files.length + fileArr.length > 9){
 				alert("상품 이미지는 최대 9장 첨부 가능합니다.");	

@@ -20,13 +20,13 @@ public class GetLargeCategory {
 	@Autowired
 	LcategoryDao lcategoryDao;
 	
-	@ResponseBody // ÇØ´ç ¸Þ¼­µå°¡ ¹ÝÈ¯ÇÑ °ÍÀ» jsp ÆÄÀÏÀÌ ¾Æ´Ñ °´Ã¼ ±×´ë·Î Àü´ÞÇÑ´Ù. 
+	@ResponseBody // ï¿½Ø´ï¿½ ï¿½Þ¼ï¿½ï¿½å°¡ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ jsp ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½Ã¼ ï¿½×´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. 
 	@RequestMapping(value=command, produces="text/plain;charset=UTF-8")
 	public String getLargeCategory() {
 		
 		String result = "";
 		
-		//¸®½ºÆ®·Î ¸ðµç Á¤º¸ ¹Þ¾Æ¼­ ¹®ÀÚ¿­·Î ¸¸µéÀÚ. ±¸ºÐÀÚ·Î ÀÌ¾îºÙ¿©, 
+		//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Ì¾ï¿½Ù¿ï¿½, 
 		List<LcategoryBean> lists=lcategoryDao.selectLcategoryList();
 		
 		for(int i = 0; i<lists.size() ;i++) {
@@ -39,7 +39,7 @@ public class GetLargeCategory {
 			}
 		}
 		
-		System.out.println(result);
+		//System.out.println(result);
 		
 		return result;
 	}

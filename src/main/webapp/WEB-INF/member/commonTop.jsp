@@ -9,8 +9,14 @@
 <c:set var="id" value="<%=id %>"></c:set>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="resources/assets/js/vendor/jquery-min.js"></script>
+
+<style>
+.logo img{
+	max-width: 200px !important; /* 250 */
+}
+</style>
+
 <script>
-	
 	$(function(){
 		
 		// getting category
@@ -220,7 +226,7 @@
                                 <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
                                 <!--End Mobile Toggle-->
                                 <!--Logo-->
-                                <div class="logo"><a href="/ex/"><img class="logo-img mh-100" src="resources/assets/images/logo-demo20.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" width="120" /><span class="logo-txt d-none">Optimal</span></a></div>
+                                <div class="logo"><a href="/ex/"><img class="logo-img mh-100" src="resources/assets/images/cloud30.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" /><span class="logo-txt d-none">Optimal</span></a></div>
                                 <!--End Logo-->
                             </div>
                             <!--End Logo / Menu Toggle-->
@@ -230,7 +236,7 @@
                                 	<input type="hidden" id="id" id="id" value="<%=id %>">
                                     <label class="label d-none"><span>Search</span></label>
                                     <div class="control">
-                                        <div class="searchField d-flex">
+                                        <div class="searchField d-flex" style="margin-top:8px">
                                             <div class="search-category">
                                                 <select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start" style="padding-left: 15px;">
                                                 	<option value="all" <c:if test="${param.whatColumn eq 'all'}">selected</c:if>> 전체검색</option>

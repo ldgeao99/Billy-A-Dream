@@ -47,9 +47,9 @@ public class LcategoryUpdateController {
 	}
 	@RequestMapping(value = command,method = RequestMethod.POST)
 	public String gotoUpdate(LcategoryBean lcategory) {
-		System.out.println(1);
+		//System.out.println(1);
 		lcategoryDao.updateLcategory(lcategory);
-		System.out.println(2);
+		//System.out.println(2);
 		return gotoPage;
 	}
 }

@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="searchRoomById" resultType="room.model.roomBean">
-		select * from room where (mno1=#{id}) or (mno2=#{id}) order by no desc
+		select * from room where (mno1=#{mno}) or (mno2=#{mno}) order by no desc
 	</select>
 	
 	<select id="getByRoom_no" resultType="room.model.roomBean">

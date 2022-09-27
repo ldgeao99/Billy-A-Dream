@@ -452,6 +452,36 @@ height
    				$('#email').removeAttr("email");
    				return;
    			})
+   			
+   		//쿠폰 체크 ajax
+   			$('#checkCode').click(function(){
+   				CheckCode = false;
+   				var result = false;
+   				
+   				sendRequestCheckCode()
+   				.then((data) =>{
+   					if($.trim(data)=="exist"){
+   						alert("이미 사용된 쿠폰입니다.");
+   						checkCode = false;
+   						result = false;
+   					}
+   					
+   					else if($.trim(data)=="yes"){
+   						if(confirm("쿠폰을 등록하시겠습니까?")){
+   							CheckCode=true;
+   							result = true;
+   							document.coupon.submit();
+   						}
+   					}
+   					else if($.trim(data)==""){
+   						alert("존재하지 않는 코드입니다.");
+   						CheckCode = false;
+   						result = false;
+   					}//else
+   				});
+   				
+   				return result;
+   			});
    		 })//ready
    		 
 		function sub(){
@@ -578,43 +608,25 @@ height
 		
 		
 		///======================================================================================
-		//쿠폰 체크 ajax
 		
-		function checkCode(){
-			CheckCode = false;
 		
-			$.ajax({
+		function sendRequestCheckCode(){
+			return new Promise((resolve, reject) =>  {
+				$.ajax({
 					type:'get',
 					url : "registecoupon.mb", 
 					data : { 
 						code : $('#code').val() 
 							},
 						success : function(data){
-							if($.trim(data)=="exist"){
-								alert("이미 사용된 쿠폰입니다.");
-								checkCode = false;
-								return false;
-							}
 							
-							else if($.trim(data)=="yes"){
-								if(confirm("쿠폰을 등록하시겠습니까?")){
-									CheckCode=true;
-									coupon.submit();
-								}
-							}
-							else if($.trim(data)==""){
-								alert("존재하지 않는 코드입니다.");
-								CheckCode = false;
-								return false;
-							}//else
+							resolve(data);
+							reject(new Error("에러발생"));
 						}//success
 
 				});//ajax
-		
-			if(!CheckCode){
-				return false;
-			}
-	}
+			}).catch(alert);
+		}
 		
 		function upProduct(no){
 			
@@ -705,6 +717,7 @@ height
 					<li><a class="nav-link" data-bs-toggle="tab" href="#orders" id="order">거래내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#wishlist" id="wish">관심목록</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#selllist" id="sell">판매상품관리</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#contectlist" id="contect">문의내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking" id="coupon">쿠폰내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab"
 						href="#account-details" id="updateMem">회원정보수정</a></li>
@@ -742,7 +755,7 @@ height
 										<c:forEach var="s" items="${sellrb }">
 											<tr>
 												<td>${s.no }</td>
-												<td>${s.name }</td>
+												<td><a href="productdetail.prd?no=${s.product_no }">${s.name }</a></td>
 												<td>
 													<fmt:parseDate var="buyday" value="${s.accepted_date }" pattern="yyyy-MM-dd"/>
 													<fmt:formatDate var="buyday" value="${buyday }" pattern="yyyy-MM-dd hh:mm"/>
@@ -796,16 +809,16 @@ height
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${fn:length(sellrb)==0 }">
+									<c:if test="${fn:length(buyrb)==0 }">
 										<tr>
-											<td colspan="6">주문 된 상품이 없습니다.</td>
+											<td colspan="6">주문 한 상품이 없습니다.</td>
 										</tr>
 									</c:if>
-									<c:if test="${fn:length(sellrb)!=0 }">
+									<c:if test="${fn:length(buyrb)!=0 }">
 										<c:forEach var="b" items="${buyrb }">
 											<tr>
 												<td>${b.no }</td>
-												<td>${b.name }</td>
+												<td><a href="productdetail.prd?no=${b.product_no }">${b.name }</a></td>
 												<td>
 													<fmt:parseDate var="buyday" value="${b.accepted_date }" pattern="yyyy-MM-dd"/>
 													<fmt:formatDate var="buyday" value="${buyday }" pattern="yyyy-MM-dd hh:mm"/>
@@ -851,7 +864,48 @@ height
 					<!-- End Orders -->
 
 
-
+					<!-- contect start -->
+					<div id="contectlist" class="product-order tab-pane fade">
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">문의내역</h3>
+						<div class="table-responsive order-table">
+							<table
+								class="table table-bordered table-hover align-middle text-center mb-0">
+								<thead class="alt-font">
+									<tr>
+										<th>문의 유형</th>
+										<th>제목</th>
+										<th>작성일</th>
+										<th>처리상태</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:if test="${fn:length(contectlist)==0 }">
+									<tr>
+										<td colspan="4">문의하신 내용이 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:if test="${fn:length(contectlist)!=0 }">
+									<c:forEach var="contect" items="${contectlist }">
+									<tr>
+										<td>${contect.category[contect.category_num] }</td>
+										<td><a href="detail.ctc?no=${contect.no }">${contect.title }</a></td>
+										<td>${contect.reg_date }</td>
+										<td>
+											<c:if test="${contect.is_replied eq '1' }">
+										    [답변 완료]	
+										    </c:if>
+										    <c:if test="${contect.is_replied eq '0' }">
+										    [답변 대기중]	
+										    </c:if>
+										</td>
+									</tr>
+									</c:forEach>
+								</c:if>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- End contect -->
 
 					<!-- 쿠폰내역 -->
 					
@@ -867,7 +921,7 @@ height
 										<span class="required-f">*</span>
 									</label> 
 									<input name="code" placeholder="쿠폰 코드 입력" value="" id="code" type="text" required >
-									<input type="submit" onclick = "return checkCode()" value="쿠폰 등록">
+									<input type="button" id = "checkCode" value="쿠폰 등록">
 								</div>
 							</div>
 						</form>
@@ -1152,7 +1206,8 @@ height
 								
 								<c:if test="${fn:length(selling_plists) eq 0}">
 									<div align="center">
-									<i class="fa-solid fa-heart-circle-xmark fa-5x" ></i><br><br>
+									<br><br><br>
+									<i class="fa-regular fa-circle-xmark fa-5x"></i><br><br>
 									 판매중인 상품이 없습니다
 									</div>
 								</c:if>
