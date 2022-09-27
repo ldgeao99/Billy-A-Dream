@@ -343,17 +343,18 @@
                     <div class="home-slideshow">
                         <div class="slide slide1">
                             <div class="slideshow--large bg-size">
-                                <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/hand1920.jpg" src="resources/assets/images/slideshow/hand1920.jpg" alt="slideshow" title="" />
+                                <!-- <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/hand1920.jpg" src="resources/assets/images/slideshow/hand1920.jpg" alt="slideshow" title="" /> -->
+                                <video loop="" muted="" preload="metadata" autoplay=""><source src="resources/assets/video/headphone.mp4" type="video/mp4"></video>
                                 <div class="container">
                                     <div class="slideshow-content slideshow-overlay middle container d-flex justify-content-center align-items-center">
                                         <div class="slideshow-content-in text-center">
                                             <div class="wrap-caption animation style2 whiteText">
                                                 <p class="ss-small-title mb-1">FRESH ADDITION</p>
                                                 <h2 class="mega-title ss-mega-title">Billy A Dream</h2>
-                                                <span class="mega-subtitle ss-sub-title">Furniture that works for you with best price</span>
+                                                <span class="mega-subtitle ss-sub-title">Experience it at a minimum cost</span>
                                                 <div class="ss-btnWrap">
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#">BUY FURNITURE</a>
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#">RENT FURNITURE</a>
+                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#">RENT EVERTHING</a>
+                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#">WHAT YOU WANT</a>
                                                 </div>
                                             </div>
                                         </div>
