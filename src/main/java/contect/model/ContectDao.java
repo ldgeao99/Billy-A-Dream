@@ -31,6 +31,10 @@ public class ContectDao {
 			sqlSessionTemplate.update(namespace+".UpdateReadcount",no);  
 		}
 		ContectBean contect = sqlSessionTemplate.selectOne(namespace+".SelectContectDetail", no);
+		String reg_dates=contect.getReg_date();
+		String[] reg_date=reg_dates.split(" ");
+		
+		contect.setReg_date(reg_date[0]);
 		return contect;
 	}
 	public void insertReplyContect(ContectBean contect) {
