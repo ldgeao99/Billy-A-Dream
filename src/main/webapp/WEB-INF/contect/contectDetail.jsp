@@ -19,7 +19,8 @@
 <table class="table">
 	<tr>
 		<td colspan="1">제목</td>
-		<td colspan="3">[${contect.category[contect.category_num]}]${contect.title }</td>
+		<td colspan="2">[${contect.category[contect.category_num]}]${contect.title }</td>
+		<td colspan="1">${contect.reg_date }</td>
 	</tr>
 	<tr>
 		<td>아이디</td>

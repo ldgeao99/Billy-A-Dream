@@ -29,6 +29,7 @@
                                             			
 </c:forEach>
 <input type="button" class="btn btn-primary btn-sm" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
+
 </span>
 
 <table class="table">
