@@ -148,7 +148,9 @@ height
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
-	
+	function writeReview(pno){
+		location.href="writeReview.prd?pno="+pno;
+	}
 	
 	function acceptProduct(no){
 		$.ajax({
@@ -247,6 +249,21 @@ height
 										});//ajax
 							}
 						})
+		/* 거래내역 누르면 status change  //delay because of mypageController is too many process */				
+		$('#order').click(function(){
+			$.ajax({
+				type : 'post',
+				url : "changeStatus.rsv",
+				data : {
+					id : $('#id').val()
+				},
+				success : function(data) {
+				}//success
+
+			});//ajax
+			
+		})//click		
+						
 	})
 	
 	
@@ -598,6 +615,27 @@ height
 				return false;
 			}
 	}
+		
+		function upProduct(no){
+			
+			$.ajax({
+				type:'get',
+				url : "upProduct.prd", 
+				data : { 
+					no : no 
+						},
+					success : function(data){
+						if($.trim(data)=="yes"){
+							alert("재노출 되었습니다");
+						}
+						else if($.trim(data)=="no"){
+							alert("상단 재노출은 하루에 한 번만 가능합니다")
+							return false;
+						}
+					}//success
+
+			});//ajax
+		}
 </script>
 <!--Body Container-->
 <div id="page-content">
@@ -664,13 +702,13 @@ height
 					role="tablist">
 					<li><a class="nav-link active" data-bs-toggle="tab"
 						href="#dashboard">승인 및 철회</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#orders">거래내역</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">관심목록</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#selllist">판매상품관리</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">쿠폰내역</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#orders" id="order">거래내역</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#wishlist" id="wish">관심목록</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#selllist" id="sell">판매상품관리</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking" id="coupon">쿠폰내역</a></li>
 					<li><a class="nav-link" data-bs-toggle="tab"
-						href="#account-details">회원정보수정</a></li>
-					<li><a class="nav-link" data-bs-toggle="tab" href="#quit">회원탈퇴</a></li>
+						href="#account-details" id="updateMem">회원정보수정</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab" href="#quit" id="q">회원탈퇴</a></li>
 				</ul>
 				<!-- End Nav tabs -->
 			</div>
@@ -788,15 +826,19 @@ height
 												
 												</td>
 												<td>
-												<c:if test="${b.is_accepted ==0}">
+												<c:if test="${b.is_accepted ==0 and b.status==1}">
 													<input type="button" value="미승인"  >
 												</c:if>
-												<c:if test="${b.is_accepted ==1}">
+												<c:if test="${b.is_accepted ==1 and b.status==1}">
 													<input type="button" value="승인됨" style="background-color: black;color: white;">
 												</c:if>
-												<c:if test="${b.is_accepted ==2}">
-													철회사유:${b.notice }
-													<input type="button" value="거래취소" style="background-color: black;color: white;">
+
+												<c:if test="${b.is_accepted ==1 and b.status==2}">
+													<input type="button" value="이용중" style="background-color: black;color: white;">
+												</c:if>
+												<c:if test="${b.is_accepted ==1 and b.status==3}">
+													<input type="button" value="후기작성" style="background-color: #036635;color: white;" onclick="writeReview('${b.product_no}')">
+
 												</c:if>
 												</td>
 											</tr>
@@ -981,7 +1023,7 @@ height
 											</div>
 											<div class="form-group">
 												<label for="name" class="form-label mt-4">이름</label>
-												<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" value="${mb.name }">
+												<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" value="${mb.name }" readonly>
 											</div>
 											<div class="form-group">
 												<label for="full_address" class="form-label mt-4">주소</label>
@@ -1028,7 +1070,7 @@ height
 
 					<!-- Wishlist -->
 					<div id="wishlist" class="product-wishlist tab-pane fade">
-						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">승인여부</h3>
+						<h3 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 16px; color: black; margin-bottom: 10px;">관심목록</h3>
 						<!-- Grid Product -->
 						<div class="grid-products grid--view-items wishlist-grid mt-4">
 							<div class="row">
@@ -1071,7 +1113,7 @@ height
 											<div class="product-details text-center">
 												<!-- Product Name -->
 												<div class="product-name">
-													<a href="product-layout1.html">${p.name}</a>
+													<a href="productdetail.prd?no=${p.no }">${p.name}</a>
 												</div>
 												<!-- End Product Name -->
 												<!-- Product Price -->
@@ -1143,7 +1185,7 @@ height
 											<div class="product-details text-center">
 												<!-- Product Name -->
 												<div class="product-name">
-													<a href="product-layout1.html">${p.name}</a>
+													<a href="productdetail.prd?no=${p.no }">${p.name}</a>
 												</div>
 												<!-- End Product Name -->
 												<!-- Product Price -->
@@ -1157,8 +1199,9 @@ height
 												
 												<form method="post" action="/cart/add" class="cart-form mt-3"
 													enctype="multipart/form-data">
-													<a href="update.prd?no=${p.no}" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a>
+													<a href="update.prd?no=${p.no}&whereClicked=mypage" class="btn btn--small rounded product-form__cart-submit"><span>수정</span></a>
 													<a href="#" id="${p.no}" class="btn btn--small rounded product-form__cart-submit delete_prd"><span>삭제</span></a>
+													<input type="button" name="up" value="상단 노출" style="height: 30px; width: 145px; margin-top: 5px;" onclick="upProduct(${p.no })">
 												</form>
 												<!-- End Product Button -->
 											</div>

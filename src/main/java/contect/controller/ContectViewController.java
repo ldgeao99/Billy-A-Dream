@@ -37,8 +37,8 @@ public class ContectViewController {
 		int totalCount=contectDao.getTotalCount(map);
 		String url=request.getContextPath()+"/"+command;
 		PagingProduct pageInfo = new PagingProduct(pageNumber, "10", totalCount, url, whatColumn, keyword);		
-		List<ContectBean> lists = contectDao.selectAllContect(map);
-		
+		List<ContectBean> lists = contectDao.selectAllContect(map,pageInfo);
+
 		model.addAttribute("contectButton", new ContectBean());
 		model.addAttribute("contect_lists", lists);
 		model.addAttribute("pageInfo", pageInfo);

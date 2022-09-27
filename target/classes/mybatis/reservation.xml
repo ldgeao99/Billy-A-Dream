@@ -9,15 +9,15 @@
 	</insert>
 
 	<select id="getAllByBuyer_no" resultType= "reservation.model.ReservationBean">
-		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted  
+		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted,r.status status,r.product_no product_no 
 		from reservation r inner join products p on r.product_no = p.no where r.buyer_no=#{buyer_no}
 	</select>
 	
 	<select id="getAllByMno" resultType= "reservation.model.ReservationBean">
-		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted  
-		from (select * from products where seller_no = #{mno}) p  inner join reservation r on p.no = r.product_no
+		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted,r.status status  
+		from (select * from products where seller_no = #{mno}) p  inner join reservation r on p.no = r.product_no order by accepted_date
 	</select>
-	
+	  
 	<update id="updateAccept">
 		update reservation set is_accepted = 1 where no = #{rno}
 	</update>
@@ -68,4 +68,16 @@
 	<update id="RollbackWithdrawReservation">
 		update reservation set is_accepted=0,notice=#{notice} where no=#{no}
 	</update>
+	
+	<update id="changeStatus2">
+		update reservation set status=2 where is_accepted=1 and start_date >= sysdate
+	</update>
+	<update id="changeStatusfor3">
+		update reservation set status=3 where is_accepted=1 and  sysdate > end_date
+	</update>
+	
+	<select id="CheckReviewAuth" resultType="int">
+		select count(*) from reservation where product_no = #{product_no} and buyer_no =#{buyer_no} and status = 3
+	</select>
+	
 </mapper>

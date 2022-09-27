@@ -16,7 +16,7 @@
  	<select id="GetRecentProductList" resultType="product.model.ProductBean">
  		select * 
 		from products
-		order by pulled_day, no
+		order by pulled_day desc, no
  	</select>
 
  	<select id="GetPopularProductList" resultType="product.model.ProductBean">
@@ -26,57 +26,69 @@
  	</select>
  	
  	<select id="GetProductListBySearch" resultType="product.model.ProductBean">
- 		select pro2.*, scate.name scategoryName
-		from (select pro.*, lcate.name lcategoryName
+ 		select *
+ 		from(select pro3.*, upper(m.id) id    
+		from (select pro2.*, scate.name scategoryName
+		from (select pro.no, pro.seller_no, pro.images, upper(pro.name) name, pro.lcategory_no, pro.scategory_no, pro.add1_sido, pro.add2_sigungu, pro.add3_eubmyeon, pro.add4_donglee, pro.original_day_price, pro.discounted_day_price, pro.rentday_minimum, pro.components, pro.description, pro.end_day, pro.view_count, pro.create_day, pro.pulled_day, pro.is_hidden, lcate.name lcategoryName
 		from products pro inner join lcategory lcate
 		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
-		on pro2.scategory_no= scate.no
+		on pro2.scategory_no= scate.no) pro3 inner join member m
+    	on pro3.seller_no = m.mno)
  		
  		<if test="whatColumn == 'all' and keyword != ''">
-		where pro2.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		where name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
 		</if>
  		
-		<if test="whatColumn == 'name'">
-		where pro2.name like #{keyword}
+		<if test="whatColumn == 'mylocation'">
+		where add2_sigungu = #{add2Name} and name like #{keyword}
 		</if>
 		
-		<if test="whatColumn == 'address'">
-		where add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		<if test="whatColumn == 'name'">
+		where name like #{keyword}
 		</if>
+		
+		<if test="whatColumn == 'seller_name'">
+		where id = #{keyword}
+		</if>	
 		
 		<if test="whatColumn == 'category'">
-		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
-		</if>	
- 		
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
+		</if>
+		
  		order by pulled_day, no
  	</select>
  	
  	<select id="GetTotalSearchCount" resultType="int">
- 	
  		select count(*) 
- 		from
- 		(select pro2.*, scate.name scategoryName
-		from (select pro.*, lcate.name lcategoryName
+ 		from (select *
+ 		from((select pro3.*, upper(m.id) id    
+		from (select pro2.*, scate.name scategoryName
+		from (select pro.no, pro.seller_no, pro.images, upper(pro.name) name, pro.lcategory_no, pro.scategory_no, pro.add1_sido, pro.add2_sigungu, pro.add3_eubmyeon, pro.add4_donglee, pro.original_day_price, pro.discounted_day_price, pro.rentday_minimum, pro.components, pro.description, pro.end_day, pro.view_count, pro.create_day, pro.pulled_day, pro.is_hidden, lcate.name lcategoryName
 		from products pro inner join lcategory lcate
 		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
-		on pro2.scategory_no= scate.no
+		on pro2.scategory_no= scate.no) pro3 inner join member m
+    	on pro3.seller_no = m.mno))) pro4
  		
  		<if test="whatColumn == 'all' and keyword != ''">
-		where pro2.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		where pro4.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		</if>
+ 		
+ 		<if test="whatColumn == 'mylocation'">
+		where add2_sigungu = #{add2Name} and pro4.name like #{keyword}
 		</if>
  		
 		<if test="whatColumn == 'name'">
-		where pro2.name like #{keyword}
+		where pro4.name like #{keyword}
 		</if>
 		
-		<if test="whatColumn == 'address'">
-		where add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		<if test="whatColumn == 'seller_name'">
+		where id = #{keyword}
 		</if>
 		
 		<if test="whatColumn == 'category'">
-		where pro2.lcategoryname = #{keyword} or scate.name = #{keyword}
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
 		</if>
-		)
+	
  	</select>
  	
  	
@@ -91,6 +103,7 @@
  	
  	<select id="getByseller_no" resultType="product.model.ProductBean">
  		select * from products where seller_no = #{seller_no}
+ 		order by pulled_day desc, no
  	</select>
  	
  	<select id="getAllByNo" resultType= "product.model.ProductBean">
@@ -110,7 +123,26 @@
  		delete from products
  		where no = #{no}
  	</delete>
+ 	
+ 	<update id="updatePulledDay">
+ 		update products set pulled_day = sysdate where no = #{no}
+ 	</update>
 	
+	<select id="getEqualCate" resultType= "product.model.ProductBean">
+		select * from products 
+		where lcategory_no=#{lcategory_no} and scategory_no=#{scategory_no} and <![CDATA[rownum <= 8]]>
+	</select>
 	
+	<select id="GetTotalSellerPrdCount" resultType="int">
+		select count(*)
+		from products
+		where seller_no = #{seller_no}
+	</select>
+	
+	<select id="GetTotalSellerPrd" resultType="product.model.ProductBean">
+		select *
+		from products
+		where seller_no = #{seller_no}
+	</select>
 	
 </mapper>

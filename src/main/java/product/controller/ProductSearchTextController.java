@@ -1,10 +1,13 @@
 package product.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,51 +35,62 @@ public class ProductSearchTextController {
 	@Autowired
 	private ProductDao pdao;
 	
-//	@Autowired
-//	private MemberDao mdao; // org.springframework.beans.factory.NoSuchBeanDefinitionException: No matching bean of type [member.model.MemberDao] found for dependency
-//	
 	@Autowired
-	private LcategoryDao lcategoryDao;
-	
-	@Autowired
-	private ScategoryDao scategoryDao;
+	private MemberDao mdao;
 	
 	@RequestMapping(command)
 	public String detailForm(@RequestParam("whatColumn") String whatColumn, 
 								@RequestParam("keyword") String keyword,
+								@RequestParam(value = "add2Name", required = false) String add2Name,
 								@RequestParam(value = "pageNumber", required = false) String pageNumber,
 								HttpServletRequest request,
-								Model model){
+								Model model, HttpSession session) throws UnsupportedEncodingException{
 		
-		System.out.println("ProductSearchController 에서 넘겨받은 2개의 값");
-		System.out.println("whatColumn:" + whatColumn);
-		System.out.println("keyword: " + keyword);
+		if(whatColumn.equals("mylocation")) {
+			System.out.println("ProductSearchTextController");
+			System.out.println("keyword: " + keyword);
+			keyword = URLEncoder.encode(keyword, "UTF-8"); // when I send korean parameter with redirect, have to use
+			
+			if(add2Name == null) {
+				String id = (String)session.getAttribute("id");
+				MemberBean mb = mdao.getById(id);
+				add2Name = mb.getAdd2_sigungu();
+				add2Name= URLEncoder.encode(add2Name, "UTF-8");
+			}
+			
+			return "redirect:/search_by_mylocation.prd?whatColumn=" + whatColumn + "&keyword=" + keyword + "&add2Name=" + add2Name + "&pageNumber=" + pageNumber; //"productSearchResultByMyAddress";
+		}
+
+		//for searching without seperating upper or lower case
+		keyword = keyword.toUpperCase();
 		
+		//making map with whatColumn and keyword
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", "%"+ keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
 		
-		// 검색 조건에 맞는 레코드의 개수가 몇개인지 가져옴
+		if(whatColumn.equals("name")) { // product name search
+			map.put("keyword", "%"+ keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
+		}else {
+			map.put("keyword", keyword); // 미리 %를 붙여서 넘겨줘야 함.
+		}
+		
+		//getting getTotalCount of searchResult for paging
 		int totalCount = pdao.getTotalSearchCount(map);
+		System.out.println("totalCount of the result list by search: " + totalCount);
+		
+		
+		//gettig request url to make the link of paging number
 		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 페이지 번호에 이런걸 넣어줘야 해서.
+				
+		//making bottom paging element
 		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword); // null 대신에 3을 넘기면 한 페이지에 3개씩 보여짐
 		
+		//getting result only need to show in this page
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
-		
-		
-		/* for lcategory list & scategory list */
-		List<LcategoryBean> list = lcategoryDao.selectLcategoryList();
-		Map<String,List<ScategoryBean>> lists=new HashMap<String,List<ScategoryBean>>();
-		for(LcategoryBean lcate : list) {
-			List<ScategoryBean> scate= scategoryDao.selectScategoryList(lcate.getNo());
-			
-			lists.put(lcate.getName(),scate);
-		}
+		System.out.println("size of the list will be shown in this page: " + resultProductList.size());		
 		
 		model.addAttribute("resultProductList", resultProductList);
 		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("list", list); 	// lcategory list
-		model.addAttribute("lists", lists);	// scategory list
 		
 		return getPage;
 	}

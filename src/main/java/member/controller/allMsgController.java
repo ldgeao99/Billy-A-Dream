@@ -43,7 +43,7 @@ public class allMsgController {
 	public String allMsg(@RequestParam("no")int room_no,HttpSession session) {
 		
 		List<chatBean>lists = cdao.getByRoom_no(room_no);
-		
+		System.out.println("여기온다");
 		int i=0;
 		String info="";
 		for(chatBean c :lists) { //상품이름 , 메세지 , 시간 상품이미지
@@ -57,13 +57,13 @@ public class allMsgController {
 			String time = DateParse.time(c.getTime());
 			// 두번째mno가 판매자임
 			info += pb.getName()+","+c.getContent()+","+time+","+pb.getImages()+","+mb.getId()+","+mb.getName()+","+mb2.getName()+","+room_no+","+pb.getNo();
-			
+			 
 			if(lists.size()-1!=i) {
 				info+= "|";
 			}
 			i++;
 		}
-		
+		System.out.println(info);
 		return info;
 	}
 }

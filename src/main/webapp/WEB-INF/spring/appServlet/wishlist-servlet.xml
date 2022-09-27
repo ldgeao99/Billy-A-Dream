@@ -27,5 +27,10 @@
 	<context:component-scan base-package="reservation"/>
 	<context:component-scan base-package="chat"/>
 	<context:component-scan base-package="room"/>
+
 	<context:component-scan base-package="contect"/>
+
+	<context:component-scan base-package="review"/>
+	
+
 </beans>

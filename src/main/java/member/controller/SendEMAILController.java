@@ -20,6 +20,7 @@ public class SendEMAILController {
 	@RequestMapping(value =command, method = RequestMethod.GET)
 	public String email(@RequestParam("email") String email, HttpSession session) throws Exception {
 
+
 		int EmailAuthNum = sendSMS.randomRange(10000, 99999);// 6자리 인증번호 부여
 		String subject = "[Biily A Dream] 이메일 인증번호";
 		String msg = "[Billy A Dream] 이메일 인증 번호는 [" + EmailAuthNum + "] 입니다.";
@@ -27,6 +28,7 @@ public class SendEMAILController {
 		sendEMAIL.sendMail(email, subject, msg);
 
 		System.out.println("부여한 이메일인증번호 :" + EmailAuthNum);
+
 		session.setAttribute("EmailAuthNum", EmailAuthNum);
 
 		return "yes";
@@ -38,8 +40,10 @@ public class SendEMAILController {
 
 		int getEmailAuthNum = (Integer) session.getAttribute("EmailAuthNum");
 
+
 		System.out.println("부여된 인증번호 :" + getEmailAuthNum);
 		System.out.println("입력한 인증번호 :" + EmailauthNum);
+
 
 		if (getEmailAuthNum == EmailauthNum) {
 			return "yes";
