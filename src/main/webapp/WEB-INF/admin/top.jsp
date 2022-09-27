@@ -263,12 +263,13 @@
                 <img src="resources/admin_asset/img/user/user1.svg" width="32" alt="User" class="rounded-circle" loading="lazy">
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
+              	<li><a class="dropdown-item" href="/ex/">사용자 홈</a></li>
                 <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
                 <li><a class="dropdown-item" href="user-settings.html">Settings</a></li>
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>
-                <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
+                <li><a class="dropdown-item" href="out.mb">로그아웃</a></li>
               </ul>
             </li>
           </ul>
