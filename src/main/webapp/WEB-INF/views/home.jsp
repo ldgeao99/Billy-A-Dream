@@ -350,10 +350,10 @@
                                             <div class="wrap-caption animation style2 whiteText">
                                                 <p class="ss-small-title mb-1">FRESH ADDITION</p>
                                                 <h2 class="mega-title ss-mega-title">Billy A Dream</h2>
-                                                <span class="mega-subtitle ss-sub-title">Furniture that works for you with best price</span>
+                                                <span class="mega-subtitle ss-sub-title">Experience it at a minimum cost</span>
                                                 <div class="ss-btnWrap">
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#">BUY FURNITURE</a>
-                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#">RENT FURNITURE</a>
+                                                    <a class="btn btn-lg rounded-0 btn-outline-primary" href="#">RENT EVERTHING</a>
+                                                    <a class="btn btn-lg rounded-0 btn-outline-primary ms-2 ms-md-3" href="#">WHAT YOU WANT</a>
                                                 </div>
                                             </div>
                                         </div>
