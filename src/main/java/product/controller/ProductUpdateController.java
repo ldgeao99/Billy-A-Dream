@@ -133,9 +133,9 @@ public class ProductUpdateController {
 		if(whereClicked.equals("detail")) {
 			return "redirect:/productdetail.prd?no=" + pbean.getNo();
 		}else if(whereClicked.equals("mypage")) {
-			return gotoPage;
+			return "redirect:mypage.mb?select=4";
 		}else {
-			return gotoPage;
+			return "redirect:/";
 		}
 	}
 }

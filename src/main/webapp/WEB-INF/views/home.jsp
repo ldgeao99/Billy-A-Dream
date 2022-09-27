@@ -544,7 +544,7 @@
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="productdetail.prd?no=${recentProductList[i-1].no}" class="product-img">
+	                                    <a href="productdetail.prd?no=${recentProductList[i-1].no}&whatColumn=main" class="product-img">
 	                                        <!--Image-->
 	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(recentProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->
@@ -576,7 +576,7 @@
 	                                <div class="product-details text-center">
 	                                    <!--Product Name-->
 	                                    <div class="product-name">
-	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${recentProductList[i-1].no}">${recentProductList[i-1].name}</a>
+	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${recentProductList[i-1].no}&whatColumn=main">${recentProductList[i-1].name}</a>
 	                                    </div>
 	                                    <!--End Product Name-->
 	                                    <!--Product Price-->
@@ -657,7 +657,7 @@
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="productdetail.prd?no=${popularProductList[i-1].no}" class="product-img">
+	                                    <a href="productdetail.prd?no=${popularProductList[i-1].no}&whatColumn=main" class="product-img">
 	                                        <!--Image-->
 	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(popularProductList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->
@@ -690,7 +690,7 @@
 	                                <div class="product-details text-center">
 	                                    <!--Product Name-->
 	                                    <div class="product-name">
-	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${popularProductList[i-1].no}">${popularProductList[i-1].name}</a>
+	                                        <a class="text-uppercase fw-normal" href="productdetail.prd?no=${popularProductList[i-1].no}&whatColumn=main">${popularProductList[i-1].name}</a>
 	                                    </div>
 	                                    <!--End Product Name-->
 	                                    <!--Product Price-->

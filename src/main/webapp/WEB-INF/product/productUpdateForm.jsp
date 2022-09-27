@@ -559,7 +559,7 @@
 			<div class="col col-lg-2" style="padding : 38px 10px;">상세설명</div>
 			
 			<div class="col col-lg-6">
-				<textarea name="description" placeholder="내용을 입력해 주세요(최대 125자)" maxlength="125" style="width: 100%; height: 6.25em; resize: none;">${pb.description}</textarea>
+				<textarea name="description" placeholder="내용을 입력해 주세요(최대 300자)" maxlength="300" style="width: 100%; height: 6.25em; resize: none;">${pb.description}</textarea>
 			</div>
 		</div>
 		<div class="row justify-content-md-center">

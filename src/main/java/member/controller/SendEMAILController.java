@@ -21,13 +21,13 @@ public class SendEMAILController {
 	public String email(@RequestParam("email") String email, HttpSession session) throws Exception {
 
 
-		int EmailAuthNum = sendSMS.randomRange(10000, 99999);// 6�ڸ� ������ȣ �ο�
-		String subject = "[Biily A Dream] �̸��� ������ȣ";
-		String msg = "[Billy A Dream] �̸��� ���� ��ȣ�� [" + EmailAuthNum + "] �Դϴ�.";
+		int EmailAuthNum = sendSMS.randomRange(10000, 99999);
+		String subject = "[Biily A Dream] 占싱몌옙占쏙옙 占쏙옙占쏙옙占쏙옙호";
+		String msg = "[Billy A Dream] 占싱몌옙占쏙옙 占쏙옙占쏙옙 占쏙옙호占쏙옙 [" + EmailAuthNum + "] 占쌉니댐옙.";
 
-		sendEMAIL.sendMail(email, subject, msg);
+		//sendEMAIL.sendMail(email, subject, msg);
 
-		System.out.println("�ο��� �̸���������ȣ :" + EmailAuthNum);
+		System.out.println("占싸울옙占쏙옙 占싱몌옙占쏙옙占쏙옙占쏙옙占쏙옙호 :" + EmailAuthNum);
 
 		session.setAttribute("EmailAuthNum", EmailAuthNum);
 
@@ -40,8 +40,8 @@ public class SendEMAILController {
 
 		int getEmailAuthNum = (Integer) session.getAttribute("EmailAuthNum");
 
-		System.out.println("부여된 인증번호:" + getEmailAuthNum);
-		System.out.println("입력된 인증번호 :" + EmailauthNum);
+		System.out.println("遺��щ�� �몄�踰���:" + getEmailAuthNum);
+		System.out.println("���λ�� �몄�踰��� :" + EmailauthNum);
 
 		if (getEmailAuthNum == EmailauthNum) {
 			return "yes";

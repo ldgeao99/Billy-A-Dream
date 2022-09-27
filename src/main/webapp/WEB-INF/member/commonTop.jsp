@@ -13,6 +13,7 @@
 <style>
 .logo img{
 	max-width: 200px !important; /* 250 */
+	max-height: 60px !important; /* 250 */
 }
 </style>
 
@@ -194,9 +195,36 @@
     	}
     	
     	function gotoSearchByCate(cateName){
-        		location.href = "clickedCateName.prd?whatColumn="+ "category" + "&keyword=" + cateName; 	
+        	location.href = "clickedCateName.prd?whatColumn="+ "category" + "&keyword=" + cateName; 	
         }
-        	
+        
+    	
+    	function gotoDealHistory(){
+    		if($('#id').val()=="null"){
+    			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+    				location.href="login.mb";	
+    			}
+    			return false;
+    		}
+    		else{
+    			
+    			location.href = "mypage.mb?select=2";
+    		}
+    	}
+    	
+    	function gotoWishList(){
+    		if($('#id').val()=="null"){
+    			if(confirm("로그인이 필요한 페이지입니다. \n 로그인 하시겠습니까?")){
+    				location.href="login.mb";	
+    			}
+    			return false;
+    		}
+    		else{
+    			
+    			location.href = "mypage.mb?select=3";
+    		}
+    	}    	
+    	
         </script>
         <style>
 	        i {
@@ -215,7 +243,7 @@
         <div class="page-wrapper">
 
             <!--Header wrap-->
-            <div class="header-main header-18">
+            <div class="header-main header-18" style="margin-top:15px !important;">
                 <!--Header-->
                 <header id="header" class="header header-wrap d-flex align-items-center">
                     <div class="container">        
@@ -458,314 +486,21 @@
 											
                                             </ul>
                                         </li>
-                                        <li class="lvl1 parent megamenu"><a href="#;">Shop <i class="an an-angle-down-l"></i></a>
-                                            <div class="megamenu style4">
-                                                <div class="row">
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Category Page</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="productdetail.prd?no=5" class="site-nav lvl-2">상세페이지</a></li>
-                                                            <li class="lvl-2"><a href="category-3columns.html" class="site-nav lvl-2">3 Columns with style2</a></li>
-                                                            <li class="lvl-2"><a href="category-4columns.html" class="site-nav lvl-2">4 Columns with style3</a></li>
-                                                            <li class="lvl-2"><a href="category-5columns.html" class="site-nav lvl-2">5 Columns with style4</a></li>
-                                                            <li class="lvl-2"><a href="category-6columns.html" class="site-nav lvl-2">6 Columns with Fullwidth</a></li>
-                                                            <li class="lvl-2"><a href="category-7columns.html" class="site-nav lvl-2">7 Columns</a></li>
-                                                            <li class="lvl-2"><a href="empty-category.html" class="site-nav lvl-2">Category Empty</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Shop Page</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="shop-left-sidebar.html" class="site-nav lvl-2">Left Sidebar</a></li>
-                                                            <li class="lvl-2"><a href="shop-right-sidebar.html" class="site-nav lvl-2">Right Sidebar</a></li>
-                                                            <li class="lvl-2"><a href="shop-top-filter.html" class="site-nav lvl-2">Top Filter</a></li>
-                                                            <li class="lvl-2"><a href="shop-fullwidth.html" class="site-nav lvl-2">Fullwidth</a></li>
-                                                            <li class="lvl-2"><a href="shop-no-sidebar.html" class="site-nav lvl-2">Without Filter</a></li>
-                                                            <li class="lvl-2"><a href="shop-listview-sidebar.html" class="site-nav lvl-2">List View</a></li>
-                                                            <li class="lvl-2"><a href="shop-listview-drawer.html" class="site-nav lvl-2">List View Drawer</a></li>
-                                                            <li class="lvl-2"><a href="shop-category-slideshow.html" class="site-nav lvl-2">Category Slideshow</a></li>
-                                                            <li class="lvl-2"><a href="shop-heading-with-banner.html" class="site-nav lvl-2">Headings With Banner</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Shop Page</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="shop-sub-collections.html" class="site-nav lvl-2">Sub Collection List <span class="lbl nm_label5">Hot</span></a></li>
-                                                            <li class="lvl-2"><a href="shop-masonry-grid.html" class="site-nav lvl-2">Shop Masonry Grid</a></li>
-                                                            <li class="lvl-2"><a href="shop-left-sidebar.html" class="site-nav lvl-2">Shop Countdown</a></li>
-                                                            <li class="lvl-2"><a href="shop-hover-info.html" class="site-nav lvl-2">Shop Hover Info</a></li>
-                                                            <li class="lvl-2"><a href="shop-right-sidebar.html" class="site-nav lvl-2">Infinite Scrolling</a></li>
-                                                            <li class="lvl-2"><a href="shop-fullwidth.html" class="site-nav lvl-2">Classic Pagination</a></li>
-                                                            <li class="lvl-2"><a href="shop-swatches-style.html" class="site-nav lvl-2">Swatches Style</a></li>
-                                                            <li class="lvl-2"><a href="shop-grid-style.html" class="site-nav lvl-2">Grid Style</a></li>
-                                                            <li class="lvl-2"><a href="shop-search-results.html" class="site-nav lvl-2">Search Results</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Shop Other Page</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="my-wishlist.html" class="site-nav lvl-2">My Wishlist Style1</a></li>
-                                                            <li class="lvl-2"><a href="my-wishlist-style2.html" class="site-nav lvl-2">My Wishlist Style2</a></li>
-                                                            <li class="lvl-2"><a href="compare-style1.html" class="site-nav lvl-2">Compare Page Style1</a></li>
-                                                            <li class="lvl-2"><a href="compare-style2.html" class="site-nav lvl-2">Compare Page Style2</a></li>
-                                                            <li class="lvl-2"><a href="cart-style1.html" class="site-nav lvl-2">Cart Page Style1</a></li>
-                                                            <li class="lvl-2"><a href="cart-style2.html" class="site-nav lvl-2">Cart Page Style2</a></li>
-                                                            <li class="lvl-2"><a href="checkout-style1.html" class="site-nav lvl-2">Checkout Page Style1</a></li>
-                                                            <li class="lvl-2"><a href="checkout-style2.html" class="site-nav lvl-2">Checkout Page Style2</a></li>
-                                                            <li class="lvl-2"><a href="checkout-success.html" class="site-nav lvl-2">Checkout Success</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="row clear mt-4">
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" data-src="resources/assets/images/megamenu/megamenu-banner4-1.jpg" alt="image"/></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        
+                                        
+                                      
+                                        
+                                        <li class="lvl1 parent megamenu"><a href="newOrPopularClicked.prd?pageNumber=1&pageSize=8&whatColumn=new">최신상품<i class="an an-angle-down-l"></i><span class="navLbl new">New</span></a>
+                                            
                                         </li>
-                                        <li class="lvl1 parent megamenu"><a href="#;">Product <i class="an an-angle-down-l"></i></a>
-                                            <div class="megamenu style2">
-                                                <div class="row">
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Product Types</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="product-standard.html" class="site-nav lvl-2">Simple Product</a></li>
-                                                            <li class="lvl-2"><a href="product-variable.html" class="site-nav lvl-2">Variable Product</a></li>
-                                                            <li class="lvl-2"><a href="product-grouped.html" class="site-nav lvl-2">Grouped Product</a></li>
-                                                            <li class="lvl-2"><a href="product-external-affiliate.html" class="site-nav lvl-2">External / Affiliate Product</a></li>
-                                                            <li class="lvl-2"><a href="product-outofstock.html" class="site-nav lvl-2">Out Of Stock Product</a></li>
-                                                            <li class="lvl-2"><a href="product-layout1.html" class="site-nav lvl-2">New Product</a></li>
-                                                            <li class="lvl-2"><a href="product-layout2.html" class="site-nav lvl-2">Sale Product</a></li>
-                                                            <li class="lvl-2"><a href="product-layout1.html" class="site-nav lvl-2">Variable Image</a></li>
-                                                            <li class="lvl-2"><a href="product-accordian.html" class="site-nav lvl-2">Variable Select</a></li>
-                                                            <li class="lvl-2"><a href="prodcut-360-degree-view.html" class="site-nav lvl-2">360 Degree view</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Product Page</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="product-layout1.html" class="site-nav lvl-2">Product Layout1</a></li>
-                                                            <li class="lvl-2"><a href="product-layout2.html" class="site-nav lvl-2">Product Layout2</a></li>
-                                                            <li class="lvl-2"><a href="product-layout3.html" class="site-nav lvl-2">Product Layout3</a></li>
-                                                            <li class="lvl-2"><a href="product-layout4.html" class="site-nav lvl-2">Product Layout4</a></li>
-                                                            <li class="lvl-2"><a href="product-layout5.html" class="site-nav lvl-2">Product Layout5</a></li>
-                                                            <li class="lvl-2"><a href="product-layout6.html" class="site-nav lvl-2">Product Layout6</a></li>
-                                                            <li class="lvl-2"><a href="product-layout7.html" class="site-nav lvl-2">Product Layout7</a></li>
-                                                            <li class="lvl-2"><a href="product-accordian.html" class="site-nav lvl-2">Product Accordian</a></li>
-                                                            <li class="lvl-2"><a href="product-tabs-left.html" class="site-nav lvl-2">Product Tabs Left</a></li>
-                                                            <li class="lvl-2"><a href="product-tabs-center.html" class="site-nav lvl-2">Product Tabs Center</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Top Brands</a>
-                                                        <div class="menu-brand-logo">
-                                                            <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                            <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                            <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                        </div>
-                                                        <div class="menu-brand-logo">
-                                                            <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                            <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                            <a href="brands-style2.html"><img src="resources/assets/images/logo/brandlogo1.png" alt="image"/></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3 p-0">
-                                                        <a href="shop-left-sidebar.html"><img src="resources/assets/images/megamenu/megamenu-banner3.jpg" alt="image"/></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        
+                                        <li class="lvl1 parent megamenu"><a href="newOrPopularClicked.prd?pageNumber=1&pageSize=8&whatColumn=hot">인기상품<i class="an an-angle-down-l"></i></a><!-- class="shop-offers" -->
+                                         
                                         </li>
-                                        <li class="lvl1 parent megamenu"><a href="newOrPopularClicked.prd?whatColumn=new">최신상품<i class="an an-angle-down-l"></i><span class="navLbl new">New</span></a>
-                                            <!-- <div class="megamenu style5 container">
-                                                <ul class="row mmWrapper">
-                                                    <li class="lvl-1 col-md-3 col-lg-3">
-                                                        <a href="shop-heading-with-banner.html" class="catalogueImg mb-3"><img src="resources/assets/images/megamenu/collection-1.jpg" alt="image" /></a>
-                                                        <a href="shop-heading-with-banner.html" class="site-nav lvl-1 menu-title">Bedding</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Bedsheets</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Tablewear</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Kitchenware</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Flooring</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="lvl-1 col-md-3 col-lg-3">
-                                                        <a href="shop-fullwidth.html" class="catalogueImg mb-3"><img src="resources/assets/images/megamenu/collection-1.jpg" alt="image" /></a>
-                                                        <a href="shop-fullwidth.html" class="site-nav lvl-1 menu-title">Kids Furniture</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Table Decor</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Cushion Fillers</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Kitchen Linen</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Bedsheets</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="lvl-1 col-md-3 col-lg-3">
-                                                        <a href="shop-right-sidebar.html" class="catalogueImg mb-3"><img src="resources/assets/images/megamenu/collection-1.jpg" alt="image" /></a>
-                                                        <a href="shop-right-sidebar.html" class="site-nav lvl-1 menu-title">Shoes Rack</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Bedsheets</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Tablewear</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Kitchenware</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Flooring</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="lvl-1 col-md-3 col-lg-3">
-                                                        <a href="shop-heading-with-banner.html" class="catalogueImg mb-3"><img src="resources/assets/images/megamenu/collection-1.jpg" alt="image" /></a>
-                                                        <a href="shop-heading-with-banner.html" class="site-nav lvl-1 menu-title">Bathlinen</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Table Decor</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Cushion Fillers</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Kitchen Linen</a></li>
-                                                            <li class="lvl-2"><a href="#" class="site-nav">Bedsheets</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div> -->
-                                        </li>
-                                        <li class="lvl1 parent megamenu"><a href="newOrPopularClicked.prd?whatColumn=hot">인기상품<i class="an an-angle-down-l"></i></a><!-- class="shop-offers" -->
-                                            <!-- <div class="megamenu megamenu-gridproduct">
-                                                Product Grid
-                                                <div class="grid-products grid--view-items">
-                                                    <div class="row">
-                                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
-                                                        
-                                                            Start Product Image
-                                                            <div class="product-image">
-                                                                Start Product Image
-                                                                <a href="product-layout1.html" class="product-img">
-                                                                    image
-                                                                    <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End image
-                                                                    Hover image
-                                                                    <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End hover image
-                                                                </a>
-                                                                End Product Image
-                                                                product label
-                                                                <div class="product-labels"><span class="lbl on-sale rounded-0">Sale</span></div>
-                                                                End product label
-                                                            </div>
-                                                            End Product Image
-                                                            
-                                                            Start Product Details
-                                                            <div class="product-details text-center">
-                                                                Product Name
-                                                                <div class="product-name text-uppercase">
-                                                                    <a href="product-layout1.html">Black Flower Vase</a>
-                                                                </div>
-                                                                End Product Name
-                                                                Product Price
-                                                                <div class="product-price">
-                                                                    <span class="old-price">$100.00</span><span class="price">$70.00</span>
-                                                                </div>
-                                                                End Product Price
-                                                            </div>
-                                                            End Product Details
-                                                            
-                                                        </div>
-                                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
-                                                            Start Product Image
-                                                            <div class="product-image">
-                                                                Start Product Image
-                                                                <a href="product-layout1.html" class="product-img">
-                                                                    image
-                                                                    <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End image
-                                                                    Hover image
-                                                                    <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End hover image
-                                                                </a>
-                                                                End Product Image
-                                                            </div>
-                                                            End Product Image
-                                                            Start Product Details
-                                                            <div class="product-details text-center">
-                                                                Product Name
-                                                                <div class="product-name text-uppercase">
-                                                                    <a href="product-layout1.html">Wooden Baby Chair</a>
-                                                                </div>
-                                                                End Product Name
-                                                                Product Price
-                                                                <div class="product-price">
-                                                                    <span class="price">$200.00</span>
-                                                                </div>
-                                                                End Product Price
-                                                            </div>
-                                                            End Product Details
-                                                        </div>
-                                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
-                                                            Start Product Image
-                                                            <div class="product-image">
-                                                                Start Product Image
-                                                                <a href="product-layout1.html" class="product-img">
-                                                                    image
-                                                                    <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End image
-                                                                    Hover image
-                                                                    <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End hover image
-                                                                </a>
-                                                                End Product Image
-                                                                Product label
-                                                                <div class="product-labels"><span class="lbl pr-label1 rounded-0">New</span></div>
-                                                                Product label 
-                                                            </div>
-                                                            End Product Image
-                                                            Start Product Details
-                                                            <div class="product-details text-center">
-                                                                Product Name
-                                                                <div class="product-name text-uppercase">
-                                                                    <a href="product-layout1.html">Round Wall Clock</a>
-                                                                </div>
-                                                                End Product Name
-                                                                Product Price
-                                                                <div class="product-price">
-                                                                    <span class="price">$30.00</span>
-                                                                </div>
-                                                                End Product Price
-                                                            </div>
-                                                            End Product Details
-                                                        </div>
-                                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 item">
-                                                            Start Product Image
-                                                            <div class="product-image">
-                                                                Start Product Image
-                                                                <a href="product-layout1.html" class="product-img">
-                                                                    image
-                                                                    <img class="primary blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End image
-                                                                    Hover image
-                                                                    <img class="hover blur-up lazyload" data-src="resources/assets/images/products/800x800.jpg" src="resources/assets/images/products/800x800.jpg" alt="image" title="">
-                                                                    End hover image
-                                                                </a>
-                                                                End Product Image
-                                                                product label
-                                                                <div class="product-labels"><span class="lbl on-sale rounded-0">Sale</span></div>
-                                                                End product label
-                                                            </div>
-                                                            End Product Image
-                                                            Start Product Details
-                                                            <div class="product-details text-center">
-                                                                Product Name
-                                                                <div class="product-name text-uppercase">
-                                                                    <a href="product-layout1.html">Cushioned Office Chair</a>
-                                                                </div>
-                                                                End Product Name
-                                                                Product Price
-                                                                <div class="product-price">
-                                                                    <span class="old-price">$120.00</span><span class="price">$80.00</span>
-                                                                </div>
-                                                                End Product Price
-                                                            </div>
-                                                            End Product Details
-                                                        </div>  
-                                                    </div>
-                                                </div>
-                                                End Product Grid
-                                            </div> -->
-                                        </li>
-                                        <li class="lvl1 parent dropdown"><a href="board.evt">이벤트<i class="an an-angle-down-l"></i></a>
+                                        
+                                        
+                                        
+                                        <li class="lvl1 parent dropdown"><a href="view.evt">이벤트<i class="an an-angle-down-l"></i></a>
                                            <!--  <ul class="dropdown">
                                                 <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                                                 <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
@@ -779,74 +514,21 @@
                                         </li>
                                         
                                         <li class="lvl1 parent megamenu"><a href="board.ctc">문의게시판<i class="an an-angle-down-l"></i></a>
-                                            <!-- <div class="megamenu style4">
-                                                <div class="row shop-grid-5">
-                                                    <div class="lvl-1 col-md-3 col-lg-3 col-xl-2 item"><a href="#" class="site-nav lvl-1 menu-title">Vendor Pages</a>
-                                                        <ul class="subLinks">
-                                                            <li><a href="vendor-dashboard.html" class="site-nav">Vendor Dashboard</a></li>
-                                                            <li><a href="vendor-profile.html" class="site-nav">Vendor Profile</a></li>
-                                                            <li><a href="vendor-uploads.html" class="site-nav">Vendor Uploads</a></li>
-                                                            <li><a href="vendor-tracking.html" class="site-nav">Vendor Tracking</a></li>
-                                                            <li><a href="vendor-service.html" class="site-nav">Vendor Service</a></li>
-                                                            <li><a href="vendor-settings.html" class="site-nav last">Vendor Settings</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3 col-xl-2 item"><a href="#" class="site-nav lvl-1 menu-title">Email Template</a>
-                                                        <ul class="subLinks">
-                                                            <li><a target="_blank" href="email-template/email-order-success1.html" class="site-nav">Order Success 1</a></li>
-                                                            <li><a target="_blank" href="email-template/email-order-success2.html" class="site-nav">Order Success 2</a></li>
-                                                            <li><a target="_blank" href="email-template/email-invoice-template1.html" class="site-nav">Invoice Template 1</a></li>
-                                                            <li><a target="_blank" href="email-template/email-invoice-template2.html" class="site-nav last">Invoice Template 2</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3 col-xl-2 item"><a href="#" class="site-nav lvl-1 menu-title">Email Template</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a target="_blank" href="email-template/email-forgot-password.html" class="site-nav">Mail Reset password</a></li>
-                                                            <li class="lvl-2"><a target="_blank" href="email-template/email-confirmation.html" class="site-nav">Mail Confirmation</a></li>
-                                                            <li class="lvl-2"><a target="_blank" href="email-template/email-promotional1.html" class="site-nav">Mail Promotional 1</a></li>
-                                                            <li class="lvl-2"><a target="_blank" href="email-template/email-promotional2.html" class="site-nav last">Mail Promotional 2</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3 col-xl-2 item"><a href="#" class="site-nav lvl-1 menu-title">Elements</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="elements-typography.html" class="site-nav lvl-2">Typography</a></li>
-                                                            <li class="lvl-2"><a href="elements-buttons.html" class="site-nav lvl-2">Buttons</a></li>
-                                                            <li class="lvl-2"><a href="elements-titles.html" class="site-nav lvl-2">Titles</a></li>
-                                                            <li class="lvl-2"><a href="elements-banner-styles.html" class="site-nav lvl-2">Banner Styles</a></li>
-                                                            <li class="lvl-2"><a href="elements-testimonial.html" class="site-nav lvl-2">Testimonial</a></li>
-                                                            <li class="lvl-2"><a href="elements-accordions.html" class="site-nav lvl-2">Accordions</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="lvl-1 col-md-3 col-lg-3 col-xl-2 item"><a href="#" class="site-nav lvl-1 menu-title">Elements</a>
-                                                        <ul class="subLinks">
-                                                            <li class="lvl-2"><a href="elements-icons.html" class="site-nav lvl-2">Icons</a></li>
-                                                            <li class="lvl-2"><a href="elements-blog-posts.html" class="site-nav lvl-2">Blog Posts</a></li>
-                                                            <li class="lvl-2"><a href="elements-product.html" class="site-nav lvl-2">Product</a></li> 
-                                                            <li class="lvl-2"><a href="elements-product-tab.html" class="site-nav lvl-2">Product Tab</a></li> 
-                                                            <li class="lvl-2"><a href="elements-top-info-bar.html" class="site-nav lvl-2">Top Info Bar</a></li>
-                                                            <li class="lvl-2"><a href="elements-top-promo-bar.html" class="site-nav lvl-2">Top Promo Bar</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="row clear mt-4">
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <img src="resources/assets/images/megamenu/megamenu-store.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <img src="resources/assets/images/megamenu/megamenu-elements.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <img src="resources/assets/images/megamenu/megamenu-pages.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3">
-                                                        <img src="resources/assets/images/megamenu/megamenu-fast.png" data-src="resources/assets/images/megamenu/megamenu-elements.png" alt="image"/>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                           
                                         </li>
                                         
+                                        <li class="lvl1 parent megamenu"><a href="javascript:gotoDealHistory()">거래내역<i class="an an-angle-down-l"></i></a>
+                                            
+                                        </li>
                                         
+                                        <li class="lvl1 parent megamenu"><a href="javascript:gotoWishList()">관심목록<i class="an an-angle-down-l"></i></a>
+                                            
+                                        </li>
                                         
+                                        <c:if test="${id eq 'admin'}">
+                                        	<li class="lvl1 parent dropdown"><a href="main.admin" style="color: red">관리자페이지<i class="an an-angle-down-l"></i></a>
+                                        	</li>
+                                        </c:if>
                                     </ul>
                                 </nav>                                   
                             </div>
