@@ -343,7 +343,8 @@
                     <div class="home-slideshow">
                         <div class="slide slide1">
                             <div class="slideshow--large bg-size">
-                                <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/hand1920.jpg" src="resources/assets/images/slideshow/hand1920.jpg" alt="slideshow" title="" />
+                                <!-- <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/hand1920.jpg" src="resources/assets/images/slideshow/hand1920.jpg" alt="slideshow" title="" /> -->
+                                <video loop="" muted="" preload="metadata" autoplay=""><source src="resources/assets/video/headphone.mp4" type="video/mp4"></video>
                                 <div class="container">
                                     <div class="slideshow-content slideshow-overlay middle container d-flex justify-content-center align-items-center">
                                         <div class="slideshow-content-in text-center">
