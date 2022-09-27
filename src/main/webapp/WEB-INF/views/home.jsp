@@ -343,7 +343,7 @@
                     <div class="home-slideshow">
                         <div class="slide slide1">
                             <div class="slideshow--large bg-size">
-                                <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/demo20-banner1.jpg" src="resources/assets/images/slideshow/demo20-banner1.jpg" alt="slideshow" title="" />
+                                <img class="bg-img blur-up lazyload" data-src="resources/assets/images/slideshow/hand1920.jpg" src="resources/assets/images/slideshow/hand1920.jpg" alt="slideshow" title="" />
                                 <div class="container">
                                     <div class="slideshow-content slideshow-overlay middle container d-flex justify-content-center align-items-center">
                                         <div class="slideshow-content-in text-center">

@@ -766,9 +766,23 @@
 							    
 		/* 사용자에 의한 파일 추가 이벤트가 발생하면 */					
 		btnAtt.onchange = function(e){
-
+			
 			var files = e.target.files; // object FileList
 			var fileArr = Array.prototype.slice.call(files) // Array 타입으로 변경 [object File],[object File],,
+			
+			if(fileArr.length == 0){
+				//when cancel button is clicked
+				var dt = new DataTransfer();
+				
+				// 바로 위 dt 변수에 모든 파일객체 담음
+				for(index in sel_files) {
+					var file = sel_files[index];
+					dt.items.add(file);
+				}
+				
+				btnAtt.files = dt.files; // input type file 에 담긴 FileList를 덮어씌움
+				return;
+			}
 			
 			if(sel_files.length + fileArr.length > 9){
 				alert("상품 이미지는 최대 9장 첨부 가능합니다.");	
