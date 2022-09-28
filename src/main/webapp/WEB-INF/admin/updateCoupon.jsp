@@ -81,7 +81,7 @@
 								<div class="mb-3">
 
 
-									<button type="reset" class="btn btn-light">취소하기</button>
+									<button type="button" class="btn btn-light" onClick="history.back()">취소하기</button>
 									<button type="submit" id="btn" class="btn btn-info px-5">수정하기</button>
 								</div>
 							</form>
