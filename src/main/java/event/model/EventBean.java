@@ -8,20 +8,20 @@ import org.springframework.web.multipart.MultipartFile;
 public class EventBean {
 	private int num;
 	
-	@Length(min = 5,max = 100,message = "Á¦¸ñÀ» ÃÖ¼Ò 5ÀÚ¸® ÃÖ´ë 100ÀÚ¸® ÀÔ´Ï´Ù.")
+	@Length(min = 5,max = 100,message = "ì œëª©ì„ ìµœì†Œ 5ìë¦¬ ìµœëŒ€ 100ìë¦¬ ì…ë‹ˆë‹¤.")
     private String title;
 	
 	
 
 	private String writer;
 
-	@NotEmpty(message = "³¯Â¥¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+	@NotEmpty(message = "ë‚ ì§œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.")
 	private String eventdate;
 
-	@NotEmpty(message = "ÀÌº¥Æ® »çÁøÀ» ¾È³Ö¾ú½À´Ï´Ù.")
+	@NotEmpty(message = "ì´ë²¤íŠ¸ ì‚¬ì§„ì„ ì•ˆë„£ì—ˆìŠµë‹ˆë‹¤.")
 	private String eventImage;
 
-	@Length(min = 5, max = 1000, message = "»óÇ°¿¡ ´ëÇÑ ¼³¸íÀº ÃÖ¼Ò 5ÀÚ¸® ÃÖ´ë 1000ÀÚ¸® ÀÔ´Ï´Ù.")
+	@Length(min = 5, max = 1000, message = "ìƒí’ˆì— ëŒ€í•œ ì„¤ëª…ì€ ìµœì†Œ 5ìë¦¬ ìµœëŒ€ 1000ìë¦¬ ì…ë‹ˆë‹¤.")
 	private String write;
 
 	private int readcount;

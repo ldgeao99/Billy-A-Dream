@@ -49,8 +49,8 @@
 										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 										required="required"  value="${coupon.amount }"> <select class="form-control"
 										id="unit" name="unit">
-										<!-- <option value="">단위 선택</option> -->
-										<%-- <option value="won" <c:if test="${coupon.unit eq 'won'}"> selected </c:if>>&#8361;</option> --%>
+										<option value="">단위 선택</option>
+										<option value="won" <c:if test="${coupon.unit eq 'won'}"> selected </c:if>>&#8361;</option>
 										<option value="per" selected>%</option>
 									</select>
 								</div>
