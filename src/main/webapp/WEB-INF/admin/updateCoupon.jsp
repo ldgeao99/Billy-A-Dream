@@ -49,9 +49,9 @@
 										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 										required="required"  value="${coupon.amount }"> <select class="form-control"
 										id="unit" name="unit">
-										<option value="">단위 선택</option>
-										<option value="won" <c:if test="${coupon.unit eq 'won'}"> selected </c:if>>&#8361;</option>
-										<option value="per" <c:if test="${coupon.unit eq 'per'}"> selected </c:if>>%</option>
+										<!-- <option value="">단위 선택</option> -->
+										<%-- <option value="won" <c:if test="${coupon.unit eq 'won'}"> selected </c:if>>&#8361;</option> --%>
+										<option value="per" selected>%</option>
 									</select>
 								</div>
 
@@ -81,7 +81,7 @@
 								<div class="mb-3">
 
 
-									<button type="reset" class="btn btn-light">취소하기</button>
+									<button type="button" class="btn btn-light" onClick="history.back()">취소하기</button>
 									<button type="submit" id="btn" class="btn btn-info px-5">수정하기</button>
 								</div>
 							</form>
