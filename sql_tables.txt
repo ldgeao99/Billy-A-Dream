@@ -129,7 +129,7 @@ create table products(
 	discounted_day_price number not null,
 	rentday_minimum number not null,
 	components varchar2(700),
-	description varchar2(400),
+	description varchar2(900),
 	end_day date not null,
 	view_count number default 0,
 	create_day date default sysdate,
@@ -201,8 +201,7 @@ create table coupon(
    amount number,
    unit varchar2(9),
    startdate date default sysdate,
-   enddate date,
-   use number default 0
+   enddate date
 );
 
 drop sequence coupon_seq;
@@ -298,6 +297,28 @@ create sequence custumer_review_seq
 	minvalue 1
 	maxvalue 10000000
 	nocache;
+
+--이벤트 게시판
+drop table event;
+create table event(
+	num number primary key,
+	title varchar2(100) , 
+	writer varchar2(50) ,
+    eventdate date default sysdate ,
+    eventImage varchar2(100) ,
+    write varchar2(100) ,
+	readcount number default 0
+);
+
+drop sequence event_seq;
+create sequence event_seq 
+minvalue 1
+start with 1
+nocache;
+
+insert into event(num,title,writer,eventdate,eventImage,write,readcount)
+values(event_seq.nextval,'조던신발','관리자','2022-01-01','test.jpg','수정중입니다','2');
+
 	
 --이벤트 게시판
 drop table event;
@@ -320,6 +341,7 @@ nocache;
 commit;
 	
 --
+
 
 
 

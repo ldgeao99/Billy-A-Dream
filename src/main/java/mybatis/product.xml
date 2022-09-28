@@ -36,7 +36,7 @@
     	on pro3.seller_no = m.mno)
  		
  		<if test="whatColumn == 'all' and keyword != ''">
-		where name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		where name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword} or id like #{keyword} or lcategoryname like #{keyword} or scategoryname like #{keyword}
 		</if>
  		
 		<if test="whatColumn == 'mylocation'">

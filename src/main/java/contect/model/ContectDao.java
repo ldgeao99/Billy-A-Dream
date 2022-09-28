@@ -3,9 +3,12 @@ package contect.model;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import util.PagingProduct;
 
 @Component
 public class ContectDao {
@@ -14,8 +17,9 @@ public class ContectDao {
 	
 	private String namespace="contect.model.Contect"; 
 	
-	public List<ContectBean> selectAllContect(Map<String,String> map){
-		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectContect", map);
+	public List<ContectBean> selectAllContect(Map<String,String> map, PagingProduct pageInfo){
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectContect", map,rowBounds);
 		return lists;
 	}
 	public List<ContectBean> selectMyContect(int mno){
@@ -27,6 +31,10 @@ public class ContectDao {
 			sqlSessionTemplate.update(namespace+".UpdateReadcount",no);  
 		}
 		ContectBean contect = sqlSessionTemplate.selectOne(namespace+".SelectContectDetail", no);
+		String reg_dates=contect.getReg_date();
+		String[] reg_date=reg_dates.split(" ");
+		
+		contect.setReg_date(reg_date[0]);
 		return contect;
 	}
 	public void insertReplyContect(ContectBean contect) {
@@ -38,8 +46,9 @@ public class ContectDao {
 		System.out.println("contect.getCategory_num()2"+contect.getCategory_num());
 		sqlSessionTemplate.insert(namespace+".InsertNewContect",contect);
 	}
-	public List<ContectBean> selectContectToReply(Map<String, String> map){
-		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectContectToReply",map);
+	public List<ContectBean> selectContectToReply(Map<String, String> map, PagingProduct pageInfo){
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		List<ContectBean> lists=sqlSessionTemplate.selectList(namespace+".SelectContectToReply",map,rowBounds);
 		return lists;
 	}
 	public void deleteContect(int no) {
@@ -54,6 +63,10 @@ public class ContectDao {
 	}
 	public int getTotalCount(Map<String, String> map) {
 		int total=sqlSessionTemplate.selectOne(namespace+".GetTotalCount", map);
+		return total;
+	}
+	public int getTotalCountToReply(Map<String, String> map) {
+		int total=sqlSessionTemplate.selectOne(namespace+".GetTotalCountToReply", map);
 		return total;
 	}
 }

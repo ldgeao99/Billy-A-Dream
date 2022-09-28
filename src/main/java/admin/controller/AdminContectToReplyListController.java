@@ -34,10 +34,10 @@ public class AdminContectToReplyListController {
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("whatColumn", whatColumn);
 		map.put("keyword", "%"+keyword+"%");
-		int totalCount=contectDao.getTotalCount(map);
+		int totalCount=contectDao.getTotalCountToReply(map);
 		String url=request.getContextPath()+"/"+command;
 		PagingProduct pageInfo = new PagingProduct(pageNumber, "10", totalCount, url, whatColumn, keyword);		
-		List<ContectBean> lists = contectDao.selectContectToReply(map);
+		List<ContectBean> lists = contectDao.selectContectToReply(map,pageInfo);
 		
 		model.addAttribute("contectButton", new ContectBean());
 		model.addAttribute("contect_lists", lists);

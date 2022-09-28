@@ -1,5 +1,6 @@
 package event.model;
 
+<<<<<<< HEAD
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -65,6 +66,42 @@ public class EventBean {
 
 
 
+=======
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
+public class EventBean {
+	private int num;
+	
+	@Length(min = 5,max = 100,message = "제목을 최소 5자리 최대 100자리 입니다.")
+    private String title;
+	
+	
+
+	private String writer;
+
+	@NotEmpty(message = "날짜를 입력해주세요.")
+	private String eventdate;
+
+	@NotEmpty(message = "이벤트 사진을 안넣었습니다.")
+	private String eventImage;
+
+	@Length(min = 5, max = 1000, message = "상품에 대한 설명은 최소 5자리 최대 1000자리 입니다.")
+	private String write;
+
+	private int readcount;
+    
+
+	
+    private MultipartFile upload; // a.jpg X
+	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	
+>>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 	public void setUpload(MultipartFile upload) { // upload=a.jpg X
 		System.out.println("setUpload(MultipartFile upload)");
 		this.upload = upload;

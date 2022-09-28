@@ -11,19 +11,19 @@ public class ContectBean {
 	private String reg_date;
 	@NotBlank(message = "카테고리를 선택해주세요.")
 	private String category_num;
-	@Size(min = 3, message = "제목을 입력해주세요.")
-	private String title;
-	@Size(min = 3, message = "내용을 입력해주세요.")
+	@Size(min = 3, message = "제목을 입력해주세요.(최소 3글자 이상)")
+	   private String title;
+	@Size(min = 3, message = "내용을 입력해주세요.(최소 3글자 이상)")
 	private String content;
 	private int is_reply;
 	private int is_replied;
 	private int readcount;
 	private String[] category
-		= {"회원 정보",
-				"결제 관련",
-				"거래 관련",
-				"상품 문의",
-				"기타"};
+    = {"회원 정보",
+          "결제 관련",
+          "거래 관련",
+          "상품 문의",
+          "기타"};
 	public String[] getCategory() {
 		return category;
 	}

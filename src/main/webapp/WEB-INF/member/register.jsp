@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@include file = "categoryTop.jsp" %>
 
 <style>
@@ -387,49 +388,45 @@ tr{
 		<div id="page-content">
 			<!--Collection Banner-->
 			<div class="collection-header">
-				<div class="collection-hero">
-					<div class="collection-hero__image"></div>
-					<div class="collection-hero__title-wrapper container">
-						<h1 class="collection-hero__title">회원가입</h1>
-						<div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
-							<a href="home" title="Back to the home page">홈</a><span>|</span><span
-								class="fw-bold">회원가입</span>
-						</div>
-					</div>
-				</div>
-			</div>
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">회원가입</h2>
+                        </div>
+                    </div>
+                </div>
+			
 			<!--End Collection Banner-->
 
 			<!--Container-->
 			<div class="container">
 				<!--Main Content-->
 				<div class="row">
-					<div class="col-12 col-sm-12 col-md-12 col-lg-12 box mt-2 mt-lg-5">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 box mt-2">
 
 						<div style="width: 50%; margin-left: 300px;" >
-							<h2 class="h2 text-uppercase mb-3" align="center">회원가입</h2><br>
-							<hr>
+						
 							<form method="post" action="register.mb" name="f">
 											<div class="form-group">
-												<label for="id" class="form-label mt-4">아이디</label>
+												<label for="id" class="form-label mt-4"><b>아이디</b></label>
 												<input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp" placeholder="아이디를 입력해주세요">
 												<input type="button" value="중복체크" onclick="idCheck()">
 											</div>
 											<div class="form-group has-success">
-												<label class="form-label mt-4" for="updatepw">비밀번호</label>
+												<label class="form-label mt-4" for="updatepw"><b>비밀번호</b></label>
 												<input type="password" id="updatepw" name= "pw" placeholder="최소 8글자 / 문자 포함">
 												<div class="valid-feedback"></div>
 											</div>
 											<div class="form-group has-danger">
-												<label class="form-label mt-4" for="repw">비밀번호 재확인</label> 
+												<label class="form-label mt-4" for="repw"><b>비밀번호 재확인</b></label> 
 												<input type="password" id="repw">
 											</div>
 											<div class="form-group">
-												<label for="name" class="form-label mt-4">이름</label>
+												<label for="name" class="form-label mt-4"><b>이름</b></label>
 												<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
 											</div>
 											<div class="form-group">
-												<label for="full_address" class="form-label mt-4">주소</label>
+												<label for="full_address" class="form-label mt-4"><b>주소</b></label>
 												<input type="text" class="form-control" id="full_address" name="full_address" aria-describedby="emailHelp" readonly style="background-color: white;" placeholder="주소검색을 해주세요">
 												<input type="button" onclick="execDaumPostcode()" value="주소 검색" readonly>
 												<input type="hidden" name="add1_sido" >
@@ -440,7 +437,7 @@ tr{
 											
 											
 											<div class="form-group">
-												<label for="hp" class="form-label mt-4">전화번호</label> 
+												<label for="hp" class="form-label mt-4"><b>전화번호</b></label> 
 												<input type="text" class="form-control" id="hp" name="hp" aria-describedby="emailHelp" placeholder="ex) 01012345678" >
 												<input type="button" value="인증번호 받기" onclick="sendSMS()">
 												<br><br>
@@ -451,7 +448,7 @@ tr{
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="email" class="form-label mt-4">이메일</label> 
+												<label for="email" class="form-label mt-4"><b>이메일</b></label> 
 												<input type="email" class="form-control" name="email" id="email"aria-describedby="emailHelp" placeholder="ex) 1234@naver.com" >
 												<input type="button" value="인증번호 받기" onclick="sendEmail()" class="bt">
 											
@@ -477,114 +474,7 @@ tr{
 		<!--End Body Container-->
 
 		<!--Footer-->
-		<div class="footer footer-1">
-			<div class="footer-top clearfix">
-				<div class="container">
-					<div class="row">
-						<div
-							class="col-12 col-sm-12 col-md-12 col-lg-12 text-center about-col mb-4">
-							<img src="resources/assets/images/footer-logo.png" alt="Optimal"
-								class="mb-3" />
-							<p>55 Gallaxy Enque, 2568 steet, 23568 NY</p>
-							<p class="mb-0 mb-md-3">
-								Phone: <a href="tel:+011234567890">(+01) 123 456 7890</a> <span
-									class="mx-1">|</span> Email: <a href="mailto:info@example.com">info@example.com</a>
-							</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12 col-sm-12 col-md-4 col-lg-3 footer-links">
-							<h4 class="h4">Informations</h4>
-							<ul>
-								<li><a href="my-account.html">My Account</a></li>
-								<li><a href="aboutus-style1.html">About us</a></li>
-								<li><a href="login.html">Login</a></li>
-								<li><a href="privacy-policy.html">Privacy policy</a></li>
-								<li><a href="#">Terms &amp; condition</a></li>
-							</ul>
-						</div>
-						<div class="col-12 col-sm-12 col-md-4 col-lg-2 footer-links">
-							<h4 class="h4">Quick Shop</h4>
-							<ul>
-								<li><a href="#">Women</a></li>
-								<li><a href="#">Men</a></li>
-								<li><a href="#">Kids</a></li>
-								<li><a href="#">Sportswear</a></li>
-								<li><a href="#">Sale</a></li>
-							</ul>
-						</div>
-						<div class="col-12 col-sm-12 col-md-4 col-lg-3 footer-links">
-							<h4 class="h4">Customer Services</h4>
-							<ul>
-								<li><a href="#">Request Personal Data</a></li>
-								<li><a href="faqs-style1.html">FAQ's</a></li>
-								<li><a href="contact-style1.html">Contact Us</a></li>
-								<li><a href="#">Orders and Returns</a></li>
-								<li><a href="#">Support Center</a></li>
-							</ul>
-						</div>
-						<div class="col-12 col-sm-12 col-md-12 col-lg-4 newsletter-col">
-							<div class="display-table pt-md-3 pt-lg-0">
-								<div class="display-table-cell footer-newsletter">
-									<form action="#" method="post">
-										<label class="h4">NEWSLETTER SIGN UP</label>
-										<p>Enter Your Email To Receive Daily News And Get 20% Off
-											Coupon For All Items.</p>
-										<div class="input-group">
-											<input type="email"
-												class="brounded-start input-group__field newsletter-input mb-0"
-												name="EMAIL" value="" placeholder="Email address" required>
-											<span class="input-group__btn">
-												<button type="submit"
-													class="btn newsletter__submit rounded-end" name="commit"
-													id="Subscribe">
-													<i class="an an-envelope-l"></i>
-												</button>
-											</span>
-										</div>
-									</form>
-								</div>
-							</div>
-							<ul class="list-inline social-icons mt-3 pt-1">
-								<li class="list-inline-item"><a href="#"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									title="Facebook"><i class="an an-facebook"
-										aria-hidden="true"></i></a></li>
-								<li class="list-inline-item"><a href="#"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									title="Twitter"><i class="an an-twitter" aria-hidden="true"></i></a></li>
-								<li class="list-inline-item"><a href="#"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									title="Pinterest"><i class="an an-pinterest-p"
-										aria-hidden="true"></i></a></li>
-								<li class="list-inline-item"><a href="#"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									title="Instagram"><i class="an an-instagram"
-										aria-hidden="true"></i></a></li>
-								<li class="list-inline-item"><a href="#"
-									data-bs-toggle="tooltip" data-bs-placement="top" title="TikTok"><i
-										class="an an-tiktok" aria-hidden="true"></i></a></li>
-								<li class="list-inline-item"><a href="#"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									title="Whatsapp"><i class="an an-whatsapp"
-										aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer-bottom clearfix">
-				<div class="container">
-					<div
-						class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse">
-						<img src="resources/assets/images/payment.png"
-							alt="Paypal Visa Payments" />
-						<div class="copytext text-uppercase">&copy; 2022 Optimal.
-							All Rights Reserved.</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<%@include file="../member/commonBottom.jsp" %>    
 		<!--End Footer-->
 
 		<!--Scoll Top-->

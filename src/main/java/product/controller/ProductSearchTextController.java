@@ -68,7 +68,7 @@ public class ProductSearchTextController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn); // genre or grade or actor
 		
-		if(whatColumn.equals("name")) { // product name search
+		if(whatColumn.equals("name") || whatColumn.equals("all")) { // product name search
 			map.put("keyword", "%"+ keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
 		}else {
 			map.put("keyword", keyword); // 미리 %를 붙여서 넘겨줘야 함.

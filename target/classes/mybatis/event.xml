@@ -6,6 +6,7 @@
   
   <mapper namespace="event.model.EventBean" >
   
+<<<<<<< HEAD
        <select id="GetCount2" resultType="int">
 		select count(*) from event
 		<if test="whatColumn == 'subject'">
@@ -30,6 +31,27 @@
 		</if>
 		
 		
+=======
+       <select id="GetTotalCount" resultType="int">
+		select count(*) from event
+		<if test="whatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		
+	</select>
+	
+	<select id="SelectLists" resultType="MyEvent">
+		select num, title , writer , eventdate , eventImage , write , readcount 		        
+		from (select rownum as rank, num, title , writer , eventdate , eventImage , write , readcount 
+		from (select num, title , writer , eventdate , eventImage , write , readcount 
+		from event order by title desc, eventdate asc )) 
+		
+		<if test="whatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		
+		order by eventdate desc
+>>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 	</select>
 	
 	<update id="UpdateReadCount"  >

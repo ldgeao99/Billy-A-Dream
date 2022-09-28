@@ -48,7 +48,7 @@ public class CouponDao {
 		sqlSessionTemplate.insert(namespace+".InsertCoupon", coupon);
 		int dif = DateParse.dateDif(coupon.getStartdate(), coupon.getEnddate());
 
-		// 쿠폰 시작일 ~ 마감일 -1
+		// 荑��� ������ ~ 留�媛��� -1
 		for(int i=0; i<dif ;i++) {
 			sqlSessionTemplate.insert( namespace+".InsertCouponCount",
 					new CouponCount(coupon.getNo(),DateParse.datePlus(coupon.getStartdate(), i)));
@@ -59,7 +59,7 @@ public class CouponDao {
 		sqlSessionTemplate.delete(namespace+".DeleteCouponCount", coupon.getNo());
 		int dif = DateParse.dateDif(coupon.getStartdate(), coupon.getEnddate());
 
-		// 쿠폰 시작일 ~ 마감일 -1
+		// 荑��� ������ ~ 留�媛��� -1
 		for(int i=0; i<dif ;i++) {
 			sqlSessionTemplate.insert( namespace+".InsertCouponCount",
 					new CouponCount(coupon.getNo(),DateParse.datePlus(coupon.getStartdate(), i)));

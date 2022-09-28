@@ -30,8 +30,13 @@
 &nbsp;&nbsp;
 
 </c:forEach>
+<<<<<<< HEAD
 </div><br>
 <input type="button" class="btn rounded" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
+=======
+<input type="button" class="btn btn-primary btn-sm" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
+
+>>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 </span>
 <br><br><br>
 <table class="table">
@@ -43,12 +48,12 @@
     <th width="15%">조회수</th>
     <th width="10%"></th>
   </tr>
-  <c:forEach items="${contect_lists }" var="contect" varStatus="i">
+  <c:forEach items="${contect_lists }" var="contect"  varStatus="i">
   <tr align="center" <c:if test="${contect.is_reply eq '1' }"> class="table-active" </c:if>>
     <td></td>
     <td>${contect.category[contect.category_num] } </td>
     <td align="left">
-    <a href="detail.ctc?no=${contect.no }">
+    <a href="detail.ctc?no=${contect.no }&pageNumber=${pageInfo.pageNumber}">
     <c:if test="${contect.is_reply eq '1' }">
     &#8627;	
     </c:if>
@@ -66,7 +71,11 @@
     *
     </c:if>
     </c:forEach></td>
-    <td>${contect.readcount }</td>
+    <td>
+    <c:if test="${contect.is_reply eq '0' }">
+    ${contect.readcount }	
+    </c:if>
+    </td>
     <td></td>
   </tr>
   </c:forEach>

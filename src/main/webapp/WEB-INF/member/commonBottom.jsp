@@ -3,9 +3,7 @@
 
 <!--Footer-->
             <div class="footer footer-1">
-                <div class="footer-top clearfix">
-                
-                
+                <div class="footer-top clearfix" style="padding-top: 10px !important;">
                     <div  align="center">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-4 mt-lg-5">
                                 <h4 class="h4 body-font text-transform-none">Billy A Dream</h4>
