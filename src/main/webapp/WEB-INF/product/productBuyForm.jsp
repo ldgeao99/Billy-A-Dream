@@ -309,11 +309,11 @@
 											coupon= coupon.split("/");
 											var amount= $('#totalHidden').val();
 											if(coupon[1] == 'won'){
-												if(amount-coupon[0]>1000){
+												if(amount-coupon[0]>0){
 													$('#price').val(amount-coupon[0]);
 													$('.price').text(numberWithCommas(parseInt(amount-coupon[0])));
 												} else {
-													alert('쿠폰 혜택 적용시 결제금액 1000원 이하는 사용불가능합니다.');
+													alert('쿠폰 할인금액이 결제금액보다 커서 해당 쿠폰은 적용불가능합니다.');
 													$("#couponSelect").val("").attr("selected", "selected");
 												}
 												
