@@ -299,6 +299,24 @@ create sequence custumer_review_seq
 	maxvalue 10000000
 	nocache;
 	
+--이벤트 게시판
+drop table event;
+create table event(
+   num number primary key,
+   title varchar2(100) , 
+   writer varchar2(50) ,
+    eventdate date default sysdate ,
+    eventImage varchar2(100) ,
+    write varchar2(100) ,
+   readcount number default 0
+);
+
+drop sequence event_seq;
+create sequence event_seq 
+minvalue 1
+start with 1
+nocache;
+	
 commit;
 	
 --

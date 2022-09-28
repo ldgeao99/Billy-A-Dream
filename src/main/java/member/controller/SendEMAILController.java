@@ -21,13 +21,13 @@ public class SendEMAILController {
 	public String email(@RequestParam("email") String email, HttpSession session) throws Exception {
 
 
-		int EmailAuthNum = sendSMS.randomRange(10000, 99999);// 6�ڸ� ������ȣ �ο�
-		String subject = "[Biily A Dream] �̸��� ������ȣ";
-		String msg = "[Billy A Dream] �̸��� ���� ��ȣ�� [" + EmailAuthNum + "] �Դϴ�.";
+		int EmailAuthNum = sendSMS.randomRange(10000, 99999);//6자리 가져옴랜덤
+		String subject = "[Biily A Dream] 인증번호";
+		String msg = "[Billy A Dream] 인증번호는 [" + EmailAuthNum + "] 입니다.";
 
 		sendEMAIL.sendMail(email, subject, msg);
 
-		System.out.println("�ο��� �̸���������ȣ :" + EmailAuthNum);
+		System.out.println("부여된 인증번호 :" + EmailAuthNum);
 
 		session.setAttribute("EmailAuthNum", EmailAuthNum);
 

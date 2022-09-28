@@ -217,7 +217,7 @@
             <!--Header wrap-->
             <div class="header-main header-18">
                 <!--Header-->
-                <header id="header" class="header header-wrap d-flex align-items-center">
+                <header id="header" class="header header-wrap d-flex align-items-center" style="background-color: #FFF">
                     <div class="container">        
                         <div class="row">
                             <!--Logo / Menu Toggle-->
@@ -765,7 +765,7 @@
                                                 End Product Grid
                                             </div> -->
                                         </li>
-                                        <li class="lvl1 parent dropdown"><a href="board.evt">이벤트<i class="an an-angle-down-l"></i></a>
+                                        <li class="lvl1 parent dropdown"><a href="view.evt">이벤트<i class="an an-angle-down-l"></i></a>
                                            <!--  <ul class="dropdown">
                                                 <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                                                 <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
