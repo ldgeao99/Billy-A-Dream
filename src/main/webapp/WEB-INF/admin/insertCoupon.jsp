@@ -48,9 +48,9 @@
 										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 										required="required"> <select class="form-control" required="required"
 										id="unit" name="unit">
-										<option value="">단위 선택</option>
-										<option value="won">&#8361;</option>
-										<option value="per">%</option>
+										<!-- <option value="">단위 선택</option>
+										<option value="won">&#8361;</option> -->
+										<option value="per" selected>%</option>
 									</select>
 								</div>
 

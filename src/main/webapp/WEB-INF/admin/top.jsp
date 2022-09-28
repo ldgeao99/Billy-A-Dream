@@ -264,8 +264,6 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
               	<li><a class="dropdown-item" href="/ex/">사용자 홈</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
-                <li><a class="dropdown-item" href="user-settings.html">Settings</a></li>
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>

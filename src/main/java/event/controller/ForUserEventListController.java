@@ -33,6 +33,11 @@ public class ForUserEventListController {
 								@RequestParam(value = "pageNumber", required = false) String pageNumber, 
 								HttpServletRequest request) {
 
+		System.out.println();
+		System.out.println(whatColumn);
+		System.out.println(keyword);
+		System.out.println();
+		
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, String> map = new HashMap<String, String>();

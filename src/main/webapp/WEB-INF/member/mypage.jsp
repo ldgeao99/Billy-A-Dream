@@ -148,6 +148,13 @@ height
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	
+	function reason(msg){
+		alert("철회사유 : "+msg);
+	}
+	function reason2(msg){
+		alert("철회사유 : "+msg);
+	}
+	
 	function writeReview(pno){
 		location.href="writeReview.prd?pno="+pno;
 	}
@@ -782,8 +789,12 @@ height
 												<c:if test="${s.is_accepted ==1}">
 													<input type="button" value="승인됨" style="background-color: black;color: white;">
 												</c:if>
+												<c:if test="${s.is_accepted ==4}">
+													<input type="button" value="철회됨" style="background-color: #F96666;color: white;" onclick="reason('${s.notice}')">
+												</c:if>
 												</td>
 											</tr>
+												<!-- Modal -->
 										</c:forEach>
 									</c:if>
 								</tbody>
@@ -852,6 +863,9 @@ height
 												<c:if test="${b.is_accepted ==1 and b.status==3}">
 													<input type="button" value="후기작성" style="background-color: #036635;color: white;" onclick="writeReview('${b.product_no}')">
 
+												</c:if>
+												<c:if test="${b.is_accepted ==4 and b.status==4}">
+													<input type="button" value="철회됨" style="background-color: #F96666;color: white;" onclick="reason2('${b.notice}')" >
 												</c:if>
 												</td>
 											</tr>

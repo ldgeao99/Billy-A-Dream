@@ -245,7 +245,7 @@
             <!--Header wrap-->
             <div class="header-main header-18" style="margin-top:15px !important;">
                 <!--Header-->
-                <header id="header" class="header header-wrap d-flex align-items-center">
+                <header id="header" class="header header-wrap d-flex align-items-center" style="background-color: #FFF">
                     <div class="container">        
                         <div class="row">
                             <!--Logo / Menu Toggle-->

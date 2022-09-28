@@ -20,12 +20,8 @@
 		from (select num, title , writer , eventdate , eventImage , write , readcount 
 		from event order by title desc, eventdate asc )) 
 		
-		<if test="whatColumn == 'subject'">
+		<if test="whatColumn == 'title'">
 			where title like #{keyword}
-		</if>
-		
-		<if test="whatColumn == 'writer'">
-			where writer like #{keyword}
 		</if>
 		
 		order by eventdate desc

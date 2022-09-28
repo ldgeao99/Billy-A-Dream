@@ -14,7 +14,7 @@
 </style>
 
 <br>
-	<div style="margin: 50px 600px;">
+	<div style="margin: 50px 300px;">
 		<form:form commandName="event" method="post" action="update.evt" enctype="multipart/form-data">
 			<div class="container">
 				<div class="row">
@@ -26,21 +26,21 @@
 			<input type="hidden" name="pageNumber" value="${pageNumber}">
 			<input type="hidden" name="originalImg" value="${event.eventImage}">
 			
-			<div class="container">
+			<div class="container" style="width:600px;">
 				<div class="row">
 				
-					<div class="col" style="margin-bottom: 15px;">
+					<div class="row" style="margin-bottom: 15px;">
 						<strong>제 목</strong>	
 						<input type="text" size="50" maxlength="50" name="title" value="${event.title}">
 						<form:errors cssClass="err" path="title"/>
 					</div>
 				
-					<div class="col" style="margin-bottom: 15px;">
+					<div class="row" style="margin-bottom: 15px;">
 						<strong>작성자</strong><br>	
 						<input type="text" size="30" maxlength="10" name="writer" value="관리자" readonly>
 					</div>
 				
-					<div class="col" style="margin-bottom: 15px;">
+					<div class="row" style="margin-bottom: 15px;">
 						<strong>이벤트종료일</strong>
 						<fmt:parseDate var="formattedDay" value="${event.eventdate }" pattern="yyyy-MM-dd"/>
 	             		<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd"/><br>
@@ -48,19 +48,24 @@
 						<form:errors cssClass="err" path="eventdate"/>
 					</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
+					<div class="row" style="margin-bottom: 15px;">
 						<strong>이벤트 이미지</strong><br>
-						<img align="center" height="100" width="150" src="${pageContext.request.contextPath}/resources/images${event.eventImage}">
+						<img align="center" height="250" width="150" src="${pageContext.request.contextPath}/resources/images/${event.eventImage}">
 						<input type="file"   name="upload" id="upload"  value="${event.upload }"><br>
 	       				<form:errors cssClass="err" path="eventImage" />
 					</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
+					<div class="row" style="margin-bottom: 15px;">
 						<strong>내 용</strong>
 						<textarea name="write" id="abc" rows="13" cols="50">${event.write}</textarea><br>
 						<form:errors cssClass="err" path="write" /></td>
 					</div>
 					
+					
+				</div>
+				
+				
+				<div class="row">
 					<div class="col" style="margin-bottom: 15px;">
 						<input type="submit" value="수정하기"> 
 					</div>
@@ -68,8 +73,6 @@
 					<div class="col" style="margin-bottom: 15px;">
 						<input type="button" value="목록보기"  OnClick="window.location='list.evt?pageNumber=${pageNumber}'"> 
 					</div>
-					
-					
 				</div>
 			</div>
 		</form:form>
