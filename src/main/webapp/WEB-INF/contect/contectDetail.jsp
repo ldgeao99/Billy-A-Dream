@@ -39,7 +39,7 @@
 	</tr>
 	<tr>
 	<td>
-	<input type="button" onclick="location.href='board.ctc'" value="돌아가기" >
+	<input type="button" onclick="location.href='board.ctc?pageNumber=${pageNumber}'" value="돌아가기" >
 	</td>
 	<td></td>
 		<td>

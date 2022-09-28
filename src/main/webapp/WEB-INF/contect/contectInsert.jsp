@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                             
                                                 <input type="hidden" name="id" value="${id }"/>
-                                                <input type="text" id="ContactSubject" name="title" class="form-control" placeholder="제목을 입력하세요." />
+                                                <input type="text" id="ContactSubject" name="title" class="form-control" placeholder="제목을 입력하세요.(최소 3글자 이상)" />
                                                	<center>
                                                 <form:errors cssClass="err" path="title" class="form-control"></form:errors>
                                                 </center>
@@ -62,7 +62,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <textarea id="ContactFormMessage" name="content" class="form-control" rows="4" placeholder="내용을 입력하세요."></textarea>
+                                                <textarea id="ContactFormMessage" name="content" class="form-control" rows="4" placeholder="내용을 입력하세요.(최소 3글자 이상)"></textarea>
                                      			<center>
                                      			<form:errors cssClass="err" path="content"></form:errors>
                                      			</center>

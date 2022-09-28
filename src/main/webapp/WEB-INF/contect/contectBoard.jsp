@@ -46,7 +46,7 @@
     <td></td>
     <td>${contect.category[contect.category_num] } </td>
     <td align="left">
-    <a href="detail.ctc?no=${contect.no }">
+    <a href="detail.ctc?no=${contect.no }&pageNumber=${pageInfo.pageNumber}">
     <c:if test="${contect.is_reply eq '1' }">
     &#8627;	
     </c:if>
