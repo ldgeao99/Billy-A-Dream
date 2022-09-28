@@ -965,7 +965,10 @@ height
 												<tr>
 													<td>${c.code }</td>
 													<td>${c.name }</td>
-													<td>${c.amount }${c.unit }</td>
+													<td>${c.amount }
+													<c:if test="${c.unit eq 'won'}">원 </c:if>
+                    								<c:if test="${c.unit eq 'per'}">% </c:if>
+													</td>
 													<td>
 														<fmt:parseDate var="formattedDay" value="${c.enddate }" pattern="yyyy-MM-dd" />
 														<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />${newformattedDay }
