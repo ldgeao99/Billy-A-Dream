@@ -63,10 +63,10 @@
 		order by r.no desc
 	</select>
 	<update id="WithdrawReservation">
-		update reservation set is_accepted=4,status=4 where no=#{no}
+		update reservation set is_accepted=4,notice=#{notice},status=4 where no=#{no}
 	</update>
 	<update id="RollbackWithdrawReservation">
-		update reservation set is_accepted=0,notice=#{notice},status=1 where no=#{no}
+		update reservation set is_accepted=0,status=0 where no=#{no}
 	</update>
 	
 	<update id="changeStatus2">

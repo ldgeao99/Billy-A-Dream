@@ -22,21 +22,18 @@ public class AdminReservationWithdrawController {
 	public String getWithdraw(
 			@RequestParam(value="no",required = false) int no,
 			@RequestParam(value="notice",required = false) String notice) {
-
-		reservationDao.withdrawReservation(no);
-
-
+		ReservationBean rs=new ReservationBean();
+		rs.setNo(no);
+		rs.setNotice(notice);
+		reservationDao.withdrawReservation(rs);
 
 		return getPage;
 	}
 	@RequestMapping(value = command,method = RequestMethod.GET)
 	public String getRollback(
-			@RequestParam(value="no",required = false) int no,
-			@RequestParam(value="notice") String notice) {
-		ReservationBean rs=new ReservationBean();
-		rs.setNo(no);
-		rs.setNotice(notice);
-		reservationDao.rollbackWithdrawReservation(rs);
+			@RequestParam(value="no",required = false) int no) {
+		
+		reservationDao.rollbackWithdrawReservation(no);
 
 
 		return getPage;

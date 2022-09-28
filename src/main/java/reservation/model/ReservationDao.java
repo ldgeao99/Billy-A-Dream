@@ -74,11 +74,11 @@ public class ReservationDao {
 			int result = sqlSessionTemplate.update(namespace+".updateAccept",rno);
 			System.out.println("승인한 결과 :"+result);
 		}
-		public void withdrawReservation(int no) {
-			sqlSessionTemplate.update(namespace+".WithdrawReservation", no);
+		public void withdrawReservation(ReservationBean rs) {
+			sqlSessionTemplate.update(namespace+".WithdrawReservation", rs);
 		}
-		public void rollbackWithdrawReservation(ReservationBean rs) {
-			sqlSessionTemplate.update(namespace+".RollbackWithdrawReservation", rs);
+		public void rollbackWithdrawReservation(int no) {
+			sqlSessionTemplate.update(namespace+".RollbackWithdrawReservation", no);
 		}
 
 		public void changeStatus2() {
