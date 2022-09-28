@@ -116,7 +116,7 @@
                    
                   <div class="mb-3">
                     <label for="taskTitle" class="form-label">철회 사유</label>
-                    <input type="text" name="name" class="form-control" id="notice" required autofocus >
+                    <input type="text" name="notice" class="form-control" id="notice" required autofocus >
                     <input type="hidden" name="no" id="no">
                     <div class="invalid-feedback">철회 사유를 작성하세요.</div>
                   </div>
