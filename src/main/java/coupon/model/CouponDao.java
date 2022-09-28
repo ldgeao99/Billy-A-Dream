@@ -43,13 +43,23 @@ public class CouponDao {
 		return lists;
 	}
 	public void insertCoupon(CouponBean coupon) {
+		System.out.println(1);
 		int cno=sqlSessionTemplate.selectOne(namespace+".GetNextCno");
+		System.out.println(2+"cno"+cno);
 		coupon.setNo(cno);
+		System.out.println(coupon.getCode());
+		System.out.println(coupon.getName());
+		System.out.println(coupon.getUnit());
+		System.out.println(coupon.getStartdate());
+		System.out.println(coupon.getEnddate());
+		System.out.println(coupon.getAmount());
 		sqlSessionTemplate.insert(namespace+".InsertCoupon", coupon);
 		int dif = DateParse.dateDif(coupon.getStartdate(), coupon.getEnddate());
+		System.out.println(3);
 
-		// 쿠폰 시작일 ~ 마감일 -1
+		// 荑��� ������ ~ 留�媛��� -1
 		for(int i=0; i<dif ;i++) {
+			System.out.println(4);
 			sqlSessionTemplate.insert( namespace+".InsertCouponCount",
 					new CouponCount(coupon.getNo(),DateParse.datePlus(coupon.getStartdate(), i)));
 		}
@@ -59,7 +69,7 @@ public class CouponDao {
 		sqlSessionTemplate.delete(namespace+".DeleteCouponCount", coupon.getNo());
 		int dif = DateParse.dateDif(coupon.getStartdate(), coupon.getEnddate());
 
-		// 쿠폰 시작일 ~ 마감일 -1
+		// 荑��� ������ ~ 留�媛��� -1
 		for(int i=0; i<dif ;i++) {
 			sqlSessionTemplate.insert( namespace+".InsertCouponCount",
 					new CouponCount(coupon.getNo(),DateParse.datePlus(coupon.getStartdate(), i)));

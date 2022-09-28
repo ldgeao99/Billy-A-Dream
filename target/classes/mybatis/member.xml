@@ -39,7 +39,7 @@
 			where name like #{keyword}
 		</if>
 		<if test="whatColumn == 'id'">
-			where contents like #{keyword}
+			where id like #{keyword}
 		</if>
 		order by mno desc
 	</select>
