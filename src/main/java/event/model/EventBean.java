@@ -1,8 +1,5 @@
 package event.model;
 
-<<<<<<< HEAD
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,80 +12,16 @@ public class EventBean {
     private String title;
 	
 	
-   private String writer;
-    
-
-   private String  eventdate;
-    
-   	@NotNull
-    private String eventImage;
-    
-    @Length(min = 5,max = 1000,message = "ìƒí’ˆì— ëŒ€í•œ ì„¤ëª…ì€ ìµœì†Œ 5ìžë¦¬ ìµœëŒ€ 1000ìžë¦¬ ìž…ë‹ˆë‹¤.")
-    private String write;
-    
-    private int readcount;
-    
-    private MultipartFile upload; // a.jpg X
-	
-	public MultipartFile getUpload() {
-		return upload;
-	}
-	
-	
-	public EventBean() {
-		super();
-	}
-	public EventBean(int num, String title, String writer, String eventdate, String eventImage, String write,
-			int readcount, MultipartFile upload) {
-		super();
-		this.num = num;
-		this.title = title;
-		this.writer = writer;
-		this.eventdate = eventdate;
-		this.eventImage = eventImage;
-		this.write = write;
-		this.readcount = readcount;
-		this.upload = upload;
-	}
-
-
-	public EventBean(String title, String writer, String eventdate, String eventImage, String write,
-			MultipartFile upload) {
-		super();
-		this.title = title;
-		this.writer = writer;
-		this.eventdate = eventdate;
-		this.eventImage = eventImage;
-		this.write = write;
-		this.upload = upload;
-	}
-
-
-
-
-=======
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-
-public class EventBean {
-	private int num;
-	
-	@Length(min = 5,max = 100,message = "Á¦¸ñÀ» ÃÖ¼Ò 5ÀÚ¸® ÃÖ´ë 100ÀÚ¸® ÀÔ´Ï´Ù.")
-    private String title;
-	
-	
 
 	private String writer;
 
-	@NotEmpty(message = "³¯Â¥¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+	@NotEmpty(message = "ë‚ ì§œë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.")
 	private String eventdate;
 
-	@NotEmpty(message = "ÀÌº¥Æ® »çÁøÀ» ¾È³Ö¾ú½À´Ï´Ù.")
+	@NotEmpty(message = "ì´ë²¤íŠ¸ ì‚¬ì§„ì„ ì•ˆë„£ì—ˆìŠµë‹ˆë‹¤.")
 	private String eventImage;
 
-	@Length(min = 5, max = 1000, message = "»óÇ°¿¡ ´ëÇÑ ¼³¸íÀº ÃÖ¼Ò 5ÀÚ¸® ÃÖ´ë 1000ÀÚ¸® ÀÔ´Ï´Ù.")
+	@Length(min = 5, max = 1000, message = "ìƒí’ˆì— ëŒ€í•œ ì„¤ëª…ì€ ìµœì†Œ 5ìžë¦¬ ìµœëŒ€ 1000ìžë¦¬ ìž…ë‹ˆë‹¤.")
 	private String write;
 
 	private int readcount;
@@ -101,7 +34,6 @@ public class EventBean {
 		return upload;
 	}
 	
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 	public void setUpload(MultipartFile upload) { // upload=a.jpg X
 		System.out.println("setUpload(MultipartFile upload)");
 		this.upload = upload;

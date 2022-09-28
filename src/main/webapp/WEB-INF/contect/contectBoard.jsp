@@ -23,20 +23,16 @@
 
 <span>
 <div align="center" style="margin-top: 70px;">
-<font size="3px;"><b><a onclick="location.href='board.ctc'">전체보기 &nbsp;&nbsp;</a></b></font>
+<font size="3px;"><b><a onclick="location.href='board.ctc'" style="cursor:hand">전체보기 &nbsp;&nbsp;</a></b></font>
 <c:forEach items="${contectButton.category }" var="category" varStatus="i">
  |
-<font size="3px;"><b><a onclick="location.href='board.ctc?whatColumn=category_num&keyword=${i.index}'"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${category }</a></b></font>
+<font size="3px;"><b><a onclick="location.href='board.ctc?whatColumn=category_num&keyword=${i.index}'" style="cursor:hand"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${category }</a></b></font>
 &nbsp;&nbsp;
 
 </c:forEach>
-<<<<<<< HEAD
 </div><br>
 <input type="button" class="btn rounded" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
-=======
-<input type="button" class="btn btn-primary btn-sm" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
 
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 </span>
 <br><br><br>
 <table class="table">
