@@ -41,11 +41,11 @@ public class ProductClickedNewOrPopularController {
 	public String detailForm(@RequestParam("whatColumn") String whatColumn,
 								@RequestParam(value = "keyword", required = false) String keyword, 
 								@RequestParam(value = "pageNumber", required = false) String pageNumber,
-								@RequestParam(value = "pagesize", required = false) String pagesize,
+								@RequestParam(value = "pageSize", required = false) String pageSize,
 								HttpServletRequest request,
 								Model model){
 		
-		System.out.println("ProductClickedNewOrPopularController ���� ��û ����");
+		System.out.println("ProductClickedNewOrPopularController 占쏙옙占쏙옙 占쏙옙청 占쏙옙占쏙옙");
 		System.out.println("whatColumn: " + whatColumn);
 		System.out.println();
 		
@@ -53,15 +53,17 @@ public class ProductClickedNewOrPopularController {
 		Map<String, String> map = new HashMap<String, String>();
 		
 		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", keyword); // �̸� %�� �ٿ��� �Ѱ���� ��.
+		map.put("keyword", keyword); // 占싱몌옙 %占쏙옙 占쌕울옙占쏙옙 占싼곤옙占쏙옙占� 占쏙옙.
 		
-		// �˻� ���ǿ� �´� ���ڵ��� ������ ����� ������
+		// 占싯삼옙 占쏙옙占실울옙 占승댐옙 占쏙옙占쌘듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏘개占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 		int totalCount = pdao.getTotalSearchCount(map);
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" ������ ��ȣ�� �̷��� �־���� �ؼ�.
-		PagingProduct pageInfo = new PagingProduct(pageNumber, pagesize, totalCount, url, whatColumn, keyword); // null ��ſ� 3�� �ѱ�� �� �������� 3���� ������
+		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 占쏙옙占쏙옙占쏙옙 占쏙옙호占쏙옙 占싱뤄옙占쏙옙 占쌍억옙占쏙옙占� 占쌔쇽옙.
+		PagingProduct pageInfo = new PagingProduct(pageNumber, pageSize, totalCount, url, whatColumn, keyword); // null 占쏙옙탓占� 3占쏙옙 占싼깍옙占� 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 3占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 		
-		if(pagesize==null) {
-			pagesize = "8";
+		System.out.println("컨트롤러에서 받은 pageSize: " + pageSize);
+		
+		if(pageSize == null) {
+			pageSize = "8";
 		}
 		
 		System.out.println("---------------------------------------");
@@ -90,7 +92,7 @@ public class ProductClickedNewOrPopularController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("list", list); 	// lcategory list
 		model.addAttribute("lists", lists);	// scategory list
-		model.addAttribute("pagesize", pagesize);
+		model.addAttribute("pageSize", pageSize);
 		
 		return getPage;
 	}

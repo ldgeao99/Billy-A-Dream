@@ -286,40 +286,43 @@
 							
 							
 							<div class="container">
-								<div class="row">
+								<div class="row" style="margin-bottom:10px">
 									<div class="col col-lg-4" style="padding:0px">
 										<i class="fa-regular fa-clock"></i>&nbsp;
 										<fmt:parseDate var="formattedDay" value="${pb.pulled_day }" pattern="yyyy-MM-dd HH:mm:ss" />
 										<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd HH:mm:ss" />${newformattedDay }
 							    	</div>
 							    	
-							    	<div class="col" style="text-align:right">
-							    	
-							    	<i class="fa-regular fa-user"></i> <a href="search.prd?whatColumn=seller_name&keyword=${pb.id}">${pb.id}</a>
-							    	&nbsp;&nbsp; 					    	
-							    	
-							      	<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
-                                    
-                                     &nbsp;&nbsp; 
-                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count } 
-                                    
-                                    
-                                    <c:if test="${id == pb.id}">
-                                	&nbsp;&nbsp; 
-                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }&whereClicked=detail">수정</a>
-                                	</c:if>
-                                	
-                                    &nbsp;&nbsp; 
-                                    <a href="javascript:kakaoShare()"><i class="fa-regular fa-share-from-square"></i> 공유</a>
+							    	   
+								</div>
+								
+								<div class="row" style="margin-bottom:10px">
+									<div class="col col-lg-4" style="padding:0px">
+										<i class="fa-regular fa-user"></i> <a href="search.prd?whatColumn=seller_name&keyword=${pb.id}">${pb.id}</a>
 							    	</div>
+							    	
+							    	<div class="col" style="padding:0px; text-align:right;">
+										<i class="fa-solid fa-heart"></i> 관심 <span id="likeCount"> </span>
+	                                    
+	                                     &nbsp;&nbsp; 
+	                                    <i class="fa-regular fa-eye"></i> 조회 ${pb.view_count } 
+	                                    
+	                                    
+	                                    <c:if test="${id == pb.id}">
+	                                	&nbsp;&nbsp; 
+	                                    <i class="fa-regular fa-pen-to-square"></i> <a href="update.prd?no=${pb.no }&whereClicked=detail">수정</a>
+	                                	</c:if>
+	                                	
+	                                	<c:if test="${id == pb.id}">
+	                                	&nbsp;&nbsp; 
+	                                	<i class="fa-regular fa-trash-can"></i> <a href="deleteAndReturnView.prd?no=${pb.no }&pageNumber=${param.pageNumber}&pageSize=${param.pageSize}&whatColumn=${param.whatColumn}">삭제</a>
+	                                	</c:if>
+	                                	
+	                                    &nbsp;&nbsp; 
+	                                    <a href="javascript:kakaoShare()"><i class="fa-regular fa-share-from-square"></i> 공유</a>
+							    	</div>	   
+								</div>
 							</div>
-							
-							
-							
-						</div>
-						
-						
-						
 						
 						<hr>
 						<!-- End Product Info -->
@@ -424,7 +427,7 @@
                                              <h4 class="spr-form-title text-uppercase mb-3" style="color: #222222 !important; margin: 0 0 10px !important; font-family: 'Poppins',Arial,Tahoma !important; font-weight: 600; line-height: 1.2; letter-spacing: .02em; overflow-wrap: break-word;word-wrap: break-word;">제품 상세설명</h4>
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                     </div>
-                                                    ${pb.description }
+                                                    <textarea cols="50" rows="8" readonly><c:out value="${pb.description }" /></textarea>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="reviewt" role="tabpanel" aria-labelledby="reviewt-tab">

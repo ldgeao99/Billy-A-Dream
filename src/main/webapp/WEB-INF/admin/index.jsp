@@ -5,8 +5,6 @@
 
 <%@ include file="top.jsp" %>
 
-   
-
       <!-- Main body -->
       <div id="main-body">
 

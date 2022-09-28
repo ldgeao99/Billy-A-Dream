@@ -9,7 +9,7 @@
 <script>
 	$(function(){
 		$('#pageSize').change(function(){
-			location.href="newOrPopularClicked.prd?whatColumn="+$('#what').val()+"&keyword="+$('#keyword').val()+"&pagesize="+$('#pageSize').val();
+			location.href="newOrPopularClicked.prd?whatColumn="+$('#what').val()+"&keyword="+$('#keyword').val()+"&pageSize="+$('#pageSize').val();
 		})
 	})
 	
@@ -524,11 +524,12 @@
 						<p style="margin-top: 30px;">검색결과가 없습니다.</p>
 						</div>
 					</c:if>
+					
 					<c:if test="${fn:length(prdList) ne 0}">
-						<select style="width: 100px;height:30px; margin-left: 1100px; margin-bottom: 50px;" id="pageSize">
-							<option value="4" <c:if test="${pagesize==4 }">selected</c:if>>4개씩 보기
-							<option value="8" <c:if test="${pagesize==8 }">selected</c:if>>8개씩 보기
-							<option value="16" <c:if test="${pagesize==16 }">selected</c:if>>16개씩 보기
+						<select style="width: 100px;height:35px; margin-left: 1100px; margin-bottom: 50px; " id="pageSize">
+							<option value="4" <c:if test="${pageSize==4 }">selected</c:if>>4개씩 보기
+							<option value="8" <c:if test="${pageSize==8 }">selected</c:if>>8개씩 보기
+							<option value="16" <c:if test="${pageSize==16 }">selected</c:if>>16개씩 보기
 						</select>
 					</c:if>
 					<c:forEach var="i" begin="1" end="${ceiledQuotient * 4}" step="1">
@@ -548,7 +549,7 @@
 	                        	<!--Start Product Image-->
 	                            <div class="product-image">
 	                                    <!--Start Product Image-->
-	                                    <a href="productdetail.prd?no=${prdList[i-1].no}" class="product-img">
+	                                    <a href="productdetail.prd?no=${prdList[i-1].no}&pageNumber=${param.pageNumber}&pageSize=${param.pageSize}&whatColumn=${param.whatColumn}" class="product-img">
 	                                        <!--Image-->
 	                                        <img class="primary blur-up lazyload" data-src="<%=apath%>/${fn:split(prdList[i-1].images,',')[0]}" src="<%=apath%>/${fn:split(prdList[i-1].images,',')[0]}" alt="image" title="" style="height:300px"/>
 	                                        <!--End Image-->
