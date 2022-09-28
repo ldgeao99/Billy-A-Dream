@@ -65,4 +65,8 @@ public class ContectDao {
 		int total=sqlSessionTemplate.selectOne(namespace+".GetTotalCount", map);
 		return total;
 	}
+	public int getTotalCountToReply(Map<String, String> map) {
+		int total=sqlSessionTemplate.selectOne(namespace+".GetTotalCountToReply", map);
+		return total;
+	}
 }

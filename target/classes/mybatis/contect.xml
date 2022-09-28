@@ -80,4 +80,11 @@
 			where category_num like #{keyword} 
 		</if>
   	</select>
+  	<select id="GetTotalCountToReply" resultType="int">
+  		select count(*) from contect 
+  		where is_reply=0 and is_replied=0 
+  		<if test="whatColumn == 'category_num'">
+			and category_num like #{keyword} 
+		</if>
+  	</select>
   </mapper>

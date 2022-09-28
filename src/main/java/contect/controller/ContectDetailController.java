@@ -22,12 +22,14 @@ public class ContectDetailController {
 	
 	@RequestMapping(command)
 	public String contectView(Model model,
-			@RequestParam("no") int no) {
+			@RequestParam("no") int no,
+			@RequestParam(value="pageNumber",required = false) String pageNumber) {
 		if(no%2==1) {
 			no=no+1;
 		}
 		ContectBean contect = contectDao.selectContectDetail(no);
 		model.addAttribute("contect", contect);
+		model.addAttribute("pageNumber", pageNumber);
 		if(contect.getIs_replied()==1) {
 			ContectBean reply_contect = contectDao.selectContectDetail(no-1);
 			model.addAttribute("reply_contect",reply_contect);			

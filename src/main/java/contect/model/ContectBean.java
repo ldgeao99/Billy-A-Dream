@@ -9,21 +9,21 @@ public class ContectBean {
 	private int mno;
 	private String id;
 	private String reg_date;
-	@NotBlank(message = "Ä«Å×°í¸®¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.")
+	@NotBlank(message = "ì¹´í…Œê³ ë¦¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.")
 	private String category_num;
-	@Size(min = 3, message = "Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+	@Size(min = 3, message = "ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.(ìµœì†Œ 3ê¸€ì ì´ìƒ)")
 	   private String title;
-	@Size(min = 3, message = "³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+	@Size(min = 3, message = "ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.(ìµœì†Œ 3ê¸€ì ì´ìƒ)")
 	private String content;
 	private int is_reply;
 	private int is_replied;
 	private int readcount;
 	private String[] category
-    = {"È¸¿ø Á¤º¸",
-          "°áÁ¦ °ü·Ã",
-          "°Å·¡ °ü·Ã",
-          "»óÇ° ¹®ÀÇ",
-          "±âÅ¸"};
+    = {"íšŒì› ì •ë³´",
+          "ê²°ì œ ê´€ë ¨",
+          "ê±°ë˜ ê´€ë ¨",
+          "ìƒí’ˆ ë¬¸ì˜",
+          "ê¸°íƒ€"};
 	public String[] getCategory() {
 		return category;
 	}
