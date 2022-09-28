@@ -130,7 +130,26 @@
                                         </tbody>
                                 </table> 
                             </form>    
-
+                            <form>
+                            <select name="couponSelect" id="couponSelect" style="display:none;">
+										<c:if test="${fn:length(couponList)==0 }">
+											<option value=""> 등록된 쿠폰이 없습니다</option>
+											
+										</c:if>
+										<c:if test="${fn:length(couponList)!=0 }">
+											<option value=""> 쿠폰 적용하기.</option>
+											<c:forEach var="c" items="${couponList }">
+												<fmt:parseDate var="formattedDay" value="${c.enddate }" pattern="yyyy-MM-dd" />
+														<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd" />
+												<option value="${c.amount }/${c.unit }">${c.name }/할인혜택(${c.amount}
+												<c:if test="${c.unit eq 'won' }">원</c:if>
+												<c:if test="${c.unit eq 'per' }">%</c:if>)/${newformattedDay }</option>
+												
+											</c:forEach>
+										</c:if>
+                            </select>
+                            <input type="hidden" id="totalHidden" >	
+							</form>			
                             <div class="currencymsg">· 구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상계좌 재주문이 불가합니다.</div>
                         </div>
 
@@ -268,6 +287,8 @@
 											var total_price = daydiff * "${pb.discounted_day_price}";
 											$('.price').text(numberWithCommas(parseInt(total_price)));
 											$('#price').val(daydiff * "${pb.discounted_day_price}");
+											$('#totalHidden').val(daydiff * "${pb.discounted_day_price}");
+											$('#couponSelect').show();
 											
 										});
 										
@@ -279,8 +300,31 @@
 											$('.daydiff').text("0");
 											$('.price').text("0");
 											$('#price').val("0");
+											$('#totalHidden').val("0");
+											$('#couponSelect').hide();
+											$("#couponSelect").val("").attr("selected", "selected");
 										});
-										
+										$('#couponSelect').change(function(){
+											var coupon = $(this).val();
+											coupon= coupon.split("/");
+											var amount= $('#totalHidden').val();
+											if(coupon[1] == 'won'){
+												if(amount-coupon[0]>1000){
+													$('#price').val(amount-coupon[0]);
+													$('.price').text(numberWithCommas(parseInt(amount-coupon[0])));
+												} else {
+													alert('쿠폰 혜택 적용시 결제금액 1000원 이하는 사용불가능합니다.');
+													$("#couponSelect").val("").attr("selected", "selected");
+												}
+												
+											} else if(coupon == ""){
+												$('#price').val(amount);
+												$('.price').text(numberWithCommas(parseInt(amount)));
+											} else if(coupon[1] == 'per'){
+												$('#price').val(amount-amount*(coupon[0]/100));
+												$('.price').text(numberWithCommas(parseInt(amount-amount*(coupon[0]/100))));
+											}
+										})
 										function numberWithCommas(x) {
 											  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 										}
