@@ -201,8 +201,7 @@ create table coupon(
    amount number,
    unit varchar2(9),
    startdate date default sysdate,
-   enddate date,
-   use number default 0
+   enddate date
 );
 
 drop sequence coupon_seq;
