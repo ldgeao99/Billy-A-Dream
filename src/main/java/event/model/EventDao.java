@@ -1,6 +1,5 @@
 package event.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import util.Paging;
 
-@Component("EventDao")
+@Component
 public class EventDao {
 
 	@Autowired

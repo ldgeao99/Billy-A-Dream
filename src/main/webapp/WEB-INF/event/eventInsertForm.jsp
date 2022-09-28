@@ -14,61 +14,70 @@
 
 
 <br>
-	<div style="margin: 50px 600px;">
+	<div id="inner-main">
+				<div class="card">
+					<div class="card-header d-flex align-items-center gap-3">
+
+					</div>
+					<div class="card-body p-0" data-simplebar>
+						<div class="vstack gap-2">
 		<form:form commandName="event" method="post" name="eventInsertForm" action="insert.evt" enctype="multipart/form-data">
-			<div class="container">
-				<div class="row">
 					<center><h2>이벤트 추가</h2></center>			
-				</div>
-			</div>
 			
-			<div class="container">
-				<div class="row">
-					<div class="col" style="margin-bottom: 15px;">
-						<strong>제 목</strong>
-						<input type="text" size="50" maxlength="50" name="title" value="${event.title }">
+			<div class="mb-3">
+					<label  class="form-label fw-bold"for="title"><br>제 목</label>
+			</div>
+			<div class="input-group ">			
+						<input class="form-control" type="text" size="50" maxlength="50" name="title" value="${event.title }">
 						<form:errors cssClass="err" path="title"/>
 						<br>
 					</div>
 					
 					
-					<div class="col" style="margin-bottom: 15px;">
-						<strong>작성자</strong><br>
-						<input type="text" size="30"maxlength="10" name="writer" value="관리자" readonly>
+				<div class="mb-3">
+					<label  class="form-label fw-bold"for="title"><br>작성자</label>
+				</div>	
+				<div class="input-group ">	
+						<input class="form-control" type="text" size="30"maxlength="10" name="writer" value="관리자" readonly>
 						<form:errors cssClass="err" path="writer"/>
 						<br>
 					</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
-						<strong>이벤트종료일</strong>
-						<input type="text" size="50" maxlength="30" name="eventdate" value="${event.eventdate}" placeholder="YYYY-MM-DD">
+					<div class="mb-3">
+					<label  class="form-label fw-bold"for="title"><br>이벤트종료일</label>
+					</div>
+					<div class="input-group ">
+						<input class="form-control" type="text" size="50" maxlength="30" name="eventdate" value="${event.eventdate}" placeholder="YYYY-MM-DD">
 						<form:errors cssClass="err" path="eventdate"/>
 					</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
-						<strong>이벤트 이미지</strong><br>
+					<div class="mb-3">
+					<label  class="form-label fw-bold"for="title"><br>이벤트 이미지</label>
+					</div>
+					<div class="input-group ">	
 						<img align="center" height=100 width=100 src="${pageContext.request.contextPath}/resources/images${event.eventImage}">
-						<input type="file"   name="upload" id="eventImage"  value="${event.eventImage }"><br>
+						<input class="form-control" type="file"   name="upload" id="eventImage"  value="${event.eventImage }"><br>
 	       				<form:errors cssClass="err" path="eventImage" />
 					</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
-						<strong>내 용</strong>
-						<textarea name="write" id="abc" rows="13" cols="50">${event.write}</textarea><br>
+					<div class="mb-3">
+					<label  class="form-label fw-bold"for="title"><br>내 용</label>
+					</div>
+					<div class="input-group ">
+						<textarea class="form-control" name="write" id="abc" rows="13" cols="50">${event.write}</textarea><br>
 						<form:errors cssClass="err" path="write"/>
 					</div>
 					
-					<div class="col">
-						<input type="submit" value="글쓰기"> 
-					</div>
+					<div class="mb-3">
+						<input type="submit"  class="btn btn-info px-5" value="글쓰기"> 
 					
-					<div class="col">
-					<input type="button" value="목록보기" OnClick="window.location='list.evt?pageNumber=${pageNumber }'">
+					<input type="button" value="목록보기" class="btn btn-light" OnClick="window.location='list.evt?pageNumber=${pageNumber }'">
 					</div>
 			
+		 </form:form>
 				</div>
 			</div>
-		 </form:form>
+	</div>
 	</div>
                               
  <!-- Main footer -->

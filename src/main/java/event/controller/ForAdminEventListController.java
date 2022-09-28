@@ -42,7 +42,7 @@ public class ForAdminEventListController {
 			
 			int totalCount=eventDao.getTotalCount(map);
 			String url=request.getContextPath()+"/"+command;
-			Paging pageInfo = new Paging(pageNumber, null, totalCount, url, whatColumn, keyword);
+			Paging pageInfo = new Paging(pageNumber, "8", totalCount, url, whatColumn, keyword);
 			
 			List<EventBean> lists=new ArrayList<EventBean>();
 			lists=eventDao.selectLists(pageInfo, map);

@@ -8,11 +8,8 @@
   
        <select id="GetTotalCount" resultType="int">
 		select count(*) from event
-		<if test="whatColumn == 'subject'">
-			where title like #{keyword}
-		</if>
 		<if test="whatColumn == 'title'">
-			where writer like #{keyword}
+			where title like #{keyword}
 		</if>
 		
 	</select>
