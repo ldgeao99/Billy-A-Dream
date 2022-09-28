@@ -22,16 +22,19 @@
 <div class="container contact-pstyle2">    
 
 <span>
-<input type="button" class="btn btn-outline-primary btn-sm" value="전체보기" onclick="location.href='board.ctc'">
+<div align="center" style="margin-top: 70px;">
+<font size="3px;"><b><a onclick="location.href='board.ctc'" style="cursor:hand">전체보기 &nbsp;&nbsp;</a></b></font>
 <c:forEach items="${contectButton.category }" var="category" varStatus="i">
+ |
+<font size="3px;"><b><a onclick="location.href='board.ctc?whatColumn=category_num&keyword=${i.index}'" style="cursor:hand"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${category }</a></b></font>
+&nbsp;&nbsp;
 
-<input type="button" class="btn btn-outline-primary btn-sm" value="${category }" onclick="location.href='board.ctc?whatColumn=category_num&keyword=${i.index}'">
-                                            			
 </c:forEach>
-<input type="button" class="btn btn-primary btn-sm" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
+</div><br>
+<input type="button" class="btn rounded" style="float: right;" value="직접 문의하기" onclick="gotoContect()">
 
 </span>
-
+<br><br><br>
 <table class="table">
   <tr align="center">
     <th width="10%"></th>
@@ -76,6 +79,7 @@
 <center>
 ${pageInfo.pagingHtml} <!-- 코드가 삽입되게 함 -->
 </center>
+<br><br><br>
 </div>
 <script>
 function gotoContect(){

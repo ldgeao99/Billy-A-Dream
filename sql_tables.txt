@@ -320,6 +320,24 @@ insert into event(num,title,writer,eventdate,eventImage,write,readcount)
 values(event_seq.nextval,'조던신발','관리자','2022-01-01','test.jpg','수정중입니다','2');
 
 	
+--이벤트 게시판
+drop table event;
+create table event(
+   num number primary key,
+   title varchar2(100) , 
+   writer varchar2(50) ,
+    eventdate date default sysdate ,
+    eventImage varchar2(100) ,
+    write varchar2(100) ,
+   readcount number default 0
+);
+
+drop sequence event_seq;
+create sequence event_seq 
+minvalue 1
+start with 1
+nocache;
+	
 commit;
 	
 --

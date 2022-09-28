@@ -9,7 +9,7 @@
 
 
                               
-	 <div style="margin: 50px 500px;">
+	 <div style="margin: 50px 250px; width:60%">
 			<div class="container">
 				<div class="row">
 					<center><h2>이벤트 보기</h2></center>			
@@ -23,16 +23,20 @@
 					</div>
 					
 					<div class="col" style="margin-bottom: 15px;">
+						<strong>조회수</strong> : ${bean.readcount}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" style="margin-bottom: 15px;">
 						<strong>이벤트 종료일</strong> : 
 						<fmt:parseDate var="formattedDay" value="${bean.eventdate }" pattern="yyyy-MM-dd"/>
 						<fmt:formatDate var="newformattedDay" value="${formattedDay }" pattern="yyyy-MM-dd"/>
 						${newformattedDay}
 					</div>
+				</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
-						<strong>조회수</strong> : ${bean.readcount}
-					</div>
-				
+				<div class="row">
+					
 					<div class="row" style="margin-bottom: 15px;">
 						<strong>제목 : ${bean.title}</strong> 
 					</div>
@@ -41,13 +45,13 @@
 						<strong>글내용 : ${bean.write}</strong> 
 					</div>
 					
-					<div class="col" style="margin-bottom: 15px;">
-						<img src="${pageContext.request.contextPath}/resources/images/${bean.eventImage}">
+					<div class="row" style="margin-bottom: 15px;">
+						<img src="${pageContext.request.contextPath}/resources/images/${bean.eventImage}" style="width:100%">
 					</div>
 					
-					
+				</div>
 				
-
+				<div class="row">
 					<div class="col" style="margin-bottom: 15px;">
 						<input type="button" value="이벤트 글 수정" onclick="location.href='update.evt?num=${bean.num}&pageNumber=${pageNumber}'">
 					</div>
@@ -59,7 +63,6 @@
 					<div class="col" style="margin-bottom: 15px;">
 						 <input type="button" value="이벤트 글 목록" onclick="location.href='list.evt?pageNum=${pageNumber}'">
 					</div>
-					
 				</div>
 			</div>
 	</div>                        

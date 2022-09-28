@@ -34,9 +34,7 @@
                <form action="list.evt" method="get">
 		        <div class="input-group">
 					<select class="form-select mt-0" name="whatColumn">
-						<option value="wow">전체 검색</option>
-						<option value="subject">제목</option>
-						<option value="writer">작성자</option>
+						<option value="title" selected>제목</option>
 					</select>
 					<input type="text" name="keyword"  class="form-control" placeholder="검색할 정보 입력">
 					<input type="submit" class="btn btn-light" value="검색"><br><br>
@@ -62,8 +60,6 @@
 	<c:forEach var="event" items="${lists }" >
 		<div class="col">
            
-
-		
 			 <div class="card">
 				
 					<a href="content.evt?pageNumber=${pageInfo.pageNumber}&num=${event.num }" class="product-img"> <!--Image--> 

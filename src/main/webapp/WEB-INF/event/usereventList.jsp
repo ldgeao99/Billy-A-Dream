@@ -30,7 +30,7 @@
 		      	<div class="searchField d-flex" style="margin-top: 8px">
 					<div class="search-category" style="width:200px;">
 						<select id="rgsearch-category1" name="whatColumn" data-default="전체검색" class="rounded-pill-start" style="padding-left: 15px;">
-							<option value="subject" selected>제목</option>
+							<option value="title" selected>제목</option>
 						</select>
 					</div>
 					<div class="input-box d-flex w-100">
