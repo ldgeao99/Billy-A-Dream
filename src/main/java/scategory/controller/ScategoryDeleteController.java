@@ -19,8 +19,8 @@ public class ScategoryDeleteController {
 	ScategoryDao scategoryDao;
 	
 	@RequestMapping(value = command,method = RequestMethod.GET)
-	public String getDelete() {
-		
+	public String getDelete(@RequestParam("no") int no) {
+		scategoryDao.deleteScategory(no);
 		return gotoPage;
 	}
 	
