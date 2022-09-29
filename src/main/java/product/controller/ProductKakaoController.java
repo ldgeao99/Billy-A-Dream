@@ -62,7 +62,7 @@ public class ProductKakaoController {
 			conn.setRequestProperty("Authorization", "KakaoAK 4c0bb93a3847e475f914d28db4a3aabf");
 			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			conn.setDoOutput(true); // connection에는 doin dooutput 있는데 연결을 통해 서버한테 전해줄 것이 있는가 없는가 있으면 true
-			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name="+pname+"&quantity=1&total_amount="+price+"&vat_amount=200&tax_free_amount=0&approval_url=http://localhost:8080/ex/sucessBuy.prd&fail_url=http://localhost:8080/ex/buy.prd?no="+no+"&cancel_url=http://localhost:8080/ex/buy.prd?no="+no;
+			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name="+pname+"&quantity=1&total_amount="+price+"&vat_amount=200&tax_free_amount=0&approval_url=http://43.201.24.151:8080/realnew/sucessBuy.prd&fail_url=http://43.201.24.151:8080/realnew/buy.prd?no="+no+"&cancel_url=http://43.201.24.151:8080/realnew/buy.prd?no="+no;
 			OutputStream out = conn.getOutputStream(); //서버에 전달해야함 뭔가를 줄 수 있음.
 			DataOutputStream  dataout = new DataOutputStream(out);// 데이터 주는애
 			dataout.writeBytes(parameter); // 문자를 넣어주면 bytes로 바꿔서 해줌. // 가지고있다.

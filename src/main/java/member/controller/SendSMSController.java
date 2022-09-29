@@ -20,7 +20,7 @@ public class SendSMSController {
 	public String login(@RequestParam("PhoneNumber") String PhoneNumber, HttpSession session) {
 		
 		int authNum = sendSMS.sendsms(PhoneNumber);
-		System.out.println("ºÎ¿©µÈ ÀÎÁõ¹øÈ£ :"+authNum);
+		System.out.println("ë¶€ì—¬ëœ ì¸ì¦ë²ˆí˜¸ :"+authNum);
 		
 		session.setAttribute("authNum", authNum);
 		return "yes";
@@ -32,8 +32,8 @@ public class SendSMSController {
 		
 		int setAuthNum = (Integer) session.getAttribute("authNum");
 		
-		System.out.println("ºÎ¿©µÈ ÀÎÁõ¹øÈ£ :"+setAuthNum);
-		System.out.println("ÀÔ·ÂÇÑ ÀÎÁõ¹øÈ£ :"+authNum);
+		System.out.println("ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ :"+setAuthNum);
+		System.out.println("ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ :"+authNum);
 		
 		if(setAuthNum==authNum) {
 			return "yes";

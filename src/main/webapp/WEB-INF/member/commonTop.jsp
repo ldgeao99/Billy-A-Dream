@@ -104,7 +104,7 @@
 	}
 	
 	function logout() {
-	   location.href="https://kauth.kakao.com/oauth/logout?client_id=712a5c51e06bca8448c4c65b4205bb54&logout_redirect_uri=http://localhost:8080/ex/out.mb";
+	   location.href="https://kauth.kakao.com/oauth/logout?client_id=712a5c51e06bca8448c4c65b4205bb54&logout_redirect_uri=http://43.201.24.151:8080/realnew/out.mb";
 	  }
 </script>
 
@@ -254,7 +254,7 @@
                                 <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
                                 <!--End Mobile Toggle-->
                                 <!--Logo-->
-                                <div class="logo"><a href="/ex/"><img class="logo-img mh-100" src="resources/assets/images/cloud30.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" /><span class="logo-txt d-none">Optimal</span></a></div>
+                                <div class="logo"><a href="/realnew/"><img class="logo-img mh-100" src="resources/assets/images/cloud30.png" alt="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" title="Optimal Multipurpose eCommerce Bootstrap 5 Html Template" /><span class="logo-txt d-none">Optimal</span></a></div>
                                 <!--End Logo-->
                             </div>
                             <!--End Logo / Menu Toggle-->

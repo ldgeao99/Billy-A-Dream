@@ -112,7 +112,7 @@ function kakaoLogin() {
 									},
 									success : function(data) {
 										if ($.trim(data) == "yes") {
-											location.href = "/ex/";
+											location.href = "/realnew/";
 										} 
 										else if($.trim(data) == "Insertip"){
 											location.href = "Insertip.mb?id="+email;
@@ -470,7 +470,7 @@ function kakaoExist(){
 						},
 						success : function(data) {
 							if ($.trim(data) == "yes") {
-								location.href = "/ex/";
+								location.href = "/realnew/";
 							} else if ($.trim(data) == "admin") {
 								location.href = "main.admin";
 							} 

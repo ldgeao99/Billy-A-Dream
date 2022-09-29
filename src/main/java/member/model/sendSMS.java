@@ -9,7 +9,7 @@ public class sendSMS {
 
 	// Find your Account Sid and Token at twilio.com/user/account
 		  public static final String ACCOUNT_SID = "ACf8a0e7a4190fdcaf641dda1638278da6";
-		  public static final String AUTH_TOKEN = "aa0d787a47fdb6dd6d6015afe33d4066";		  
+		  public static final String AUTH_TOKEN = "402185e97996296bcfddaafe5269e80c";		  
 		  // SMS 보내기
 		  public static int sendsms (String phoneNum) {
 
@@ -18,7 +18,7 @@ public class sendSMS {
 		    // 인증번호
 		    int authNum = randomRange(100000, 999999);
 		    // 핸드폰번호
-		    /*
+		    
 		      String sendTarget = "+"+"82"+ phoneNum;
 		     
 		    
@@ -33,7 +33,7 @@ public class sendSMS {
 		    	new PhoneNumber("+18149147989"), 
 		        // message
 		    	authMsg).create();
-		    */
+		    
 			return authNum;
 			
 		  }

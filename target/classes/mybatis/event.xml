@@ -59,7 +59,7 @@
   
 	<insert id="InsertEvent" >
   		insert into event
-  		values(event_seq.nextval,#{title},#{writer},#{eventdate},#{eventImage,jdbcType=INTEGER},#{write},#{readcount})
+  		values(event_seq.nextval,#{title},#{writer},to_date(#{eventdate},'YY-MM-DD'),#{eventImage,jdbcType=INTEGER},#{write},#{readcount})
   	</insert>
 	
 	
@@ -80,7 +80,7 @@
 	<update id="updateEvent">
 		update event 
 		set title=#{title}, writer=#{writer}, 
-		eventdate=#{eventdate}, eventImage=#{eventImage}, 
+		eventdate=to_date(#{eventdate},'YY-MM-DD'), eventImage=#{eventImage}, 
 		 write=#{write}, readcount=#{readcount} 
 		where num=#{num}
 	</update>

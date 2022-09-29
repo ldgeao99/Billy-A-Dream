@@ -298,16 +298,15 @@ create sequence custumer_review_seq
 	maxvalue 10000000
 	nocache;
 
---이벤트 게시판
-drop table event;
+drop table event cascade constraints;
 create table event(
-	num number primary key,
-	title varchar2(100) , 
-	writer varchar2(50) ,
+   num number primary key,
+   title varchar2(200) , 
+   writer varchar2(200) ,
     eventdate date default sysdate ,
-    eventImage varchar2(100) ,
-    write varchar2(100) ,
-	readcount number default 0
+    eventImage varchar2(200) ,
+    write varchar2(900) ,
+   readcount number default 0
 );
 
 drop sequence event_seq;
