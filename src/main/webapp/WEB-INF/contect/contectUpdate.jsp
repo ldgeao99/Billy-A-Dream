@@ -53,7 +53,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <textarea id="ContactFormMessage" name="content" class="form-control" rows="4" placeholder="내용을 입력하세요.">value="${contect.content }"</textarea>
+                                                <textarea id="ContactFormMessage" name="content" class="form-control" rows="4" placeholder="내용을 입력하세요.">${contect.content }</textarea>
                                      			<center>
                                      			<form:errors cssClass="error_msg" path="content"></form:errors>
                                      			</center>

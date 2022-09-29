@@ -14,8 +14,9 @@
 		</div>
 	</div>
 </div>
-<c:set var="contect_id" value="${contect.id}"/>
-<c:set var="contect_no" value="${contect.no}"/>
+
+<input type="hidden" id="contect_id" value="${contect.id }">
+<input type="hidden" id="contect_no" value="${contect.no }">
 <table class="table">
 	<tr>
 		<td colspan="1">제목</td>
@@ -81,7 +82,7 @@ function gotoUpdate(){
 		if($('#id').val()==$('#contect_id').val()){
 			location.href = "update.ctc?no="+$('#contect_no').val();		
 		} else {
-			alert("본인만 수정 가능합니다.");
+			alert($('#id').val()+$('#contect_id').val()+"본인만 수정 가능합니다.");
 		}
 
 	}
