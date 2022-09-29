@@ -64,8 +64,7 @@
                           </svg>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" href="javascript:void(0)">Edit</a></li>
-                          <li><a class="dropdown-item" href="delete.lcate?no=${lcate.no }">Delete</a></li>
+                          <li><a class="dropdown-item" href="delete.lcate?no=${lcate.no }">삭제하기</a></li>
                         </ul>
                       </div>
                     </div>

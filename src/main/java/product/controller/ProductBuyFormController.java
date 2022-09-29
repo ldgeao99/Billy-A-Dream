@@ -55,7 +55,7 @@ public class ProductBuyFormController {
 			lists = cdao.getAllByNo(couponLists);
 			System.out.println(100);
 		}
-		System.out.println(lists.size());
+		//System.out.println(lists.size());
 		List<ReservationBean> rlist = rdao.getAllReservationOnlyDates(no);
 		
 		model.addAttribute("pb",pb);

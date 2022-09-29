@@ -45,12 +45,12 @@
 									<input class="form-control" type="text"
 										style="text-align: right" id="amount" name="amount"
 										placeholder="할인값(숫자만 입력)"
-										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-										required="required"> <select class="form-control" required="required"
-										id="unit" name="unit">
-										<!-- <option value="">단위 선택</option>
-										<option value="won">&#8361;</option> -->
-										<option value="per" selected>%</option>
+										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"										
+										required="required"> 
+										<select class="form-control" required="required" id="unit" name="unit">
+										<option value="">단위 선택</option>
+										<option value="won">&#8361;</option>
+										<option value="per">%</option>
 									</select>
 								</div>
 
