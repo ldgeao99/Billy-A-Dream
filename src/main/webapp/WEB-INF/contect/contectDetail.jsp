@@ -82,7 +82,7 @@ function gotoUpdate(){
 		if($('#id').val()==$('#contect_id').val()){
 			location.href = "update.ctc?no="+$('#contect_no').val();		
 		} else {
-			alert($('#id').val()+$('#contect_id').val()+"본인만 수정 가능합니다.");
+			alert("본인만 수정 가능합니다.");
 		}
 
 	}
