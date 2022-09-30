@@ -379,10 +379,10 @@ this.offset = ( pageNumber - 1 ) * pageSize ;  // ������ �̵��
 		if (this.beginPage != 1) { // ����, pageSize:�� ȭ�鿡 ���̴� ���ڵ� ��
 			result += "&nbsp;<a href='" + url  
 					+ "?pageNumber=" + ( 1 ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>�� ó��</a>&nbsp;" ;
+					+ added_param + "'>맨 처음</a>&nbsp;" ;
 			result += "&nbsp;<a href='" + url 
 					+ "?pageNumber=" + (this.beginPage - 1 ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>����</a>&nbsp;" ;
+					+ added_param + "'>이전</a>&nbsp;" ;
 		}
 		
 		//���(1,2,3 ������ �����ִ� �ڵ�)
@@ -405,11 +405,11 @@ this.offset = ( pageNumber - 1 ) * pageSize ;  // ������ �̵��
 			
 			result += "&nbsp;<a href='" + url  
 					+ "?pageNumber=" + (this.endPage + 1 ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>����</a>&nbsp;" ;
+					+ added_param + "'>다음</a>&nbsp;" ;
 			
 			result += "&nbsp;<a href='" + url  
 					+ "?pageNumber=" + (this.totalPage ) + "&pageSize=" + this.pageSize 
-					+ added_param + "'>�� ��</a>&nbsp;" ;
+					+ added_param + "'>맨 끝</a>&nbsp;" ;
 		}		
 		System.out.println("result2:"+result);
 		

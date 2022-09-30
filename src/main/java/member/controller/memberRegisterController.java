@@ -60,9 +60,9 @@ public class memberRegisterController {
 		
 		midao.InsertIp(map); // 占쏙옙占쏙옙占쏙옙 占쏙옙占�
 		
-		String msg = "[Biily A Dream]   "+mb.getName()+"占쏙옙占쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占싹드립占싹댐옙. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쌉뀐옙 Billy A Dream占쏙옙 占싱뀐옙占쏘갈 占쏙옙占싸곤옙占쏙옙 占실셨쏙옙占싹댐옙. 占쏙옙占쏙옙占쌌니댐옙.";
+		String msg = "[Biily A Dream]   "+mb.getName()+"님 회원가입 축하드립니다. 이제부터 Billy A Dream 과 함께 새로운 세상을 나갑시다.";
 		
-		//sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] 회占쏙옙占쏙옙占쏙옙 占쏙옙占싹드립占싹댐옙.", msg);
+		sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] 회원가입을 축하드립니다.", msg);
 		
 		return gotoPage;
 	}

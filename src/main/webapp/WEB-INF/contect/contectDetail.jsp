@@ -3,17 +3,19 @@
     
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
-<div class="container contact-pstyle2">    
+
+<div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h2 style="font-family: 'Poppins',Arial,Tahoma !important; font-weight: 700!important; font-size:25px;color: black; margin-bottom:0px">문의게시판</h2>
+                        </div>
+                    </div>
+                </div>
+
+<div class="container contact-pstyle2">  
+  
 <div class="collection-header">
-	<div class="collection-hero">
-		<div class="collection-hero__image"></div>
-		<div class="collection-hero__title-wrapper container">
-			<h2 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">
-			문의게시판
-			</h2>
-		</div>
-	</div>
-</div>
+                    
 
 <input type="hidden" id="contect_id" value="${contect.id }">
 <input type="hidden" id="contect_no" value="${contect.no }">

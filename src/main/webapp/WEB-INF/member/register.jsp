@@ -438,7 +438,7 @@ tr{
 											
 											<div class="form-group">
 												<label for="hp" class="form-label mt-4"><b>전화번호</b></label> 
-												<input type="text" class="form-control" id="hp" name="hp" aria-describedby="emailHelp" placeholder="ex) 01012345678" >
+												<input type="text" class="form-control" id="hp" name="hp" aria-describedby="emailHelp" placeholder="ex) 01012345678" value="01022533481" >
 												<input type="button" value="인증번호 받기" onclick="sendSMS()">
 												<br><br>
 												<div style="display: none;" id="authNumShow">

@@ -9,7 +9,7 @@
       <div id="main-body">
 
         <div class="row g-4">
-          <iframe src="http://43.201.24.151:8080/realnew/" height="700"></iframe>
+          <iframe src="http://13.209.31.77:8080/realnew/" height="700"></iframe>
         </div>
       </div>
       <!-- /Main body -->

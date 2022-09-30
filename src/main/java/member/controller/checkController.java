@@ -83,9 +83,9 @@ public class checkController {
 			MemberBean mb = mdao.getById(id);// 占쏙옙占싱듸옙 占쌔댐옙占싹댐옙 占싱몌옙占쏙옙 占쏙옙占쏙옙占싶쇽옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 			
 			int cnt = mdao.resetPW(map);
-			System.out.println("占쏙옙橘占싫� 占십깍옙화 占쏙옙占� :"+cnt);
+			System.out.println("임시비밀번호 발송 :"+cnt);
 			
-			sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] 占쌈시븝옙橘占싫� 占쌩쇽옙", "[Billy A Dream] 占쌈쏙옙 占쏙옙橘占싫ｏ옙占� ' "+temporaryPw+" ' 占쌉니댐옙.");
+			sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] 임시비밀번호 발송", "[Billy A Dream] 임시비밀번호는 ' "+temporaryPw+" ' 입니다.");
 			return "yes";
 		}
 		else {

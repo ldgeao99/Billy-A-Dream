@@ -243,7 +243,7 @@ height
 															.html(
 																	"<br><font color=green size=3px>감사합니다.</font>");
 													$('#pwmsg').show();
-													location.href = "home";
+													location.href = "/realnew/";
 													alert("회원탈퇴 되었습니다. \n지금까지 Billy A Dream을 이용해주셔서 감사합니다.")
 												} else if ($.trim(data) == 'null') {
 													$('#pwmsg')
@@ -1197,7 +1197,7 @@ height
 												<!-- Product Button -->
 												<form method="post" action="/cart/add" class="cart-form mt-3"
 													enctype="multipart/form-data">
-													<a href="cart-style1.html"
+													<a href="buy.prd?id=${id }&no=${p.no}"
 														class="btn btn--small rounded product-form__cart-submit"><span>구매하기</span></a>
 												</form>
 												<!-- End Product Button -->

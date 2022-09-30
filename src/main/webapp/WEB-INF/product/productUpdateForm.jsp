@@ -838,7 +838,7 @@
 			/* 여기서 반복문 3번 돌려 이미지 그리기 */				
 			var temp_img = document.createElement('img');
 			temp_img.setAttribute('style', img_style);
-			temp_img.src = "http://43.201.24.151:8080/realnew//resources/" + initialImages[i];
+			temp_img.src = "http://13.209.31.77:8080/realnew//resources/" + initialImages[i];
 			
 			makedDiv = function(temp_img, file){
 				var div = document.createElement('div')

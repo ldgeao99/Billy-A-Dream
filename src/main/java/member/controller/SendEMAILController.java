@@ -25,7 +25,7 @@ public class SendEMAILController {
 		String subject = "[Biily A Dream] 인증번호";
 		String msg = "[Billy A Dream] 인증번호는 [" + EmailAuthNum + "] 입니다.";
 
-		//sendEMAIL.sendMail(email, subject, msg);
+		sendEMAIL.sendMail(email, subject, msg);
 
 		System.out.println("부여된 인증번호 :" + EmailAuthNum);
 
