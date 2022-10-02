@@ -13,18 +13,12 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
 
 <div class="container contact-pstyle2">    
-</div>
+
 <div class="collection-header">
 
 
-
-
-
-=======
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
 <input type="hidden" id="contect_id" value="${contect.id }">
 <input type="hidden" id="contect_no" value="${contect.no }">
 <table class="table">
@@ -114,6 +108,6 @@ function gotoDelete(){
 	}
 }
 </script>
-
+</div>
 
 <%@include file="../member/commonBottom.jsp" %>
