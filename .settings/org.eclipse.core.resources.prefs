@@ -1,6 +1,7 @@
 =\=\=\=\=\=\=
 >>>>>>>=branch 'master' of https\://github.com/PostFace/Billy-A-Dream.git
 eclipse.preferences.version=1
+encoding//src/main/java/contect/model/ContectBean.java=UTF-8
 encoding//src/main/java/coupon/model/CouponDao.java=UTF-8
 encoding//src/main/java/member/controller/SendEMAILController.java=UTF-8
 encoding//src/main/java/member/controller/memberRegisterController.java=UTF-8

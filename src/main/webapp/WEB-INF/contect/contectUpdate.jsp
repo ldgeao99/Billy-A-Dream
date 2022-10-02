@@ -3,23 +3,25 @@
     
 <%@include file="../common/common.jsp" %>
 <%@include file="../member/commonTop.jsp" %>
-<div class="container contact-pstyle2">        
-<div class="collection-header">
-	<div class="collection-hero">
-		<div class="collection-hero__image"></div>
-		<div class="collection-hero__title-wrapper container">
-			<h2 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">
-			문의게시판
-			</h2>
-		</div>
+
+<div class="collection-hero">
+	<div class="collection-hero__image"></div>
+	<div class="collection-hero__title-wrapper container">
+		<h2
+			style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">문의게시판</h2>
 	</div>
 </div>
+
+
+<div class="container contact-pstyle2">    
+
+
   <!-- Contact Form - Details -->
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                             <!-- Contact Form -->
                             <div class="formFeilds contact-form form-vertical mt-2 mt-md-0">
-                                <h1 class="text-center text-capitalize mb-4">직접 문의 남기기</h1>
+                                <h1 class="text-center text-capitalize mb-4" style="font-family: 'Poppins', Arial, Tahoma !important;">문의 수정하기</h1>
                                 <form:form commandName="contect" action="update.ctc" name="contactus" method="post" id="contact-form" class="contact-form">	
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -53,7 +55,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="form-group">
-                                                <textarea id="ContactFormMessage" name="content" class="form-control" rows="4" placeholder="내용을 입력하세요.">value="${contect.content }"</textarea>
+                                                <textarea id="ContactFormMessage" name="content" class="form-control" rows="4" placeholder="내용을 입력하세요.">${contect.content }</textarea>
                                      			<center>
                                      			<form:errors cssClass="error_msg" path="content"></form:errors>
                                      			</center>

@@ -10,24 +10,23 @@
 		font-weight: bold;
 	}
 	
-</style>  
-<div class="container contact-pstyle2">        
-<div class="collection-header">
-	<div class="collection-hero">
-		<div class="collection-hero__image"></div>
-		<div class="collection-hero__title-wrapper container">
-			<h2 style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">
-			문의게시판
-			</h2>
-		</div>
+</style>
+
+<div class="collection-hero">
+	<div class="collection-hero__image"></div>
+	<div class="collection-hero__title-wrapper container">
+		<h2
+			style="font-family: 'Poppins', Arial, Tahoma !important; font-weight: 700 !important; font-size: 25px; color: black; margin-bottom: 0px">문의게시판</h2>
 	</div>
 </div>
+
+<div class="container contact-pstyle2">        
   <!-- Contact Form - Details -->
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                             <!-- Contact Form -->
                             <div class="formFeilds contact-form form-vertical mt-2 mt-md-0">
-                                <h1 class="text-center text-capitalize mb-4">직접 문의 남기기</h1>
+                                <h1 class="text-center text-capitalize mb-4" style="font-family: 'Poppins', Arial, Tahoma !important;">직접 문의 남기기</h1>
                                 <form:form commandName="contect" action="insert.ctc" name="contactus" method="post" id="contact-form" class="contact-form">	
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
