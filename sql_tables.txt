@@ -318,39 +318,6 @@ nocache;
 insert into event(num,title,writer,eventdate,eventImage,write,readcount)
 values(event_seq.nextval,'조던신발','관리자','2022-01-01','test.jpg','수정중입니다','2');
 
-<<<<<<< HEAD
---이벤트게시판	
-drop table event cascade constraints;
-=======
-	
-drop table event;
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
-create table event(
-<<<<<<< HEAD
-   num number primary key,
-   title varchar2(200) , 
-   writer varchar2(200) ,
-=======
-	num number primary key,
-	title varchar2(200) , 
-	writer varchar2(200) ,
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
-    eventdate date default sysdate ,
-    eventImage varchar2(200) ,
-    write varchar2(900) ,
-<<<<<<< HEAD
-   readcount number default 0
-=======
-	readcount number default 0
->>>>>>> branch 'master' of https://github.com/PostFace/Billy-A-Dream.git
-);
-
-drop sequence event_seq;
-create sequence event_seq 
-minvalue 1
-start with 1
-nocache;
-
 
 commit;
 	
