@@ -230,6 +230,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.1.1</version>
 		</dependency>
+		
+		<!-- 재시작 없이 자바 코드 변경 반영  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>springloaded</artifactId>	
+			<version>1.2.8.RELEASE</version>
+		</dependency>	
 		 
 	</dependencies>
 	<build>
@@ -255,7 +262,7 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
-					<compilerArgument>-Xlint:all</compilerArgument>
+			 		<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
 				</configuration>

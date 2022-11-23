@@ -6,9 +6,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@dream.cwgzchhmvgf9.ap-northeast-2.rds.amazonaws.com:1521:orcl"/>
-		<property name="username" value="dream"/>
-		<property name="password" value="dream12345"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+		<property name="username" value="billy"/>
+		<property name="password" value="dream"/>
 	</bean>	
 	
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
