@@ -63,6 +63,11 @@ td{
 	 border-radius: 5px; 
 	 background-color:#FFEB00;    
 }
+
+.loginBtn img{
+	width: 50px;
+	height: 48px;
+}
 </style>
 
 
@@ -544,8 +549,23 @@ function kakaoExist(){
 											<a href='#' onClick='showPopupPW(true); return false' style="font-size: 12px;">비밀번호 찾기</a>
 											</p>
 											<p>
-											<input type="button" onclick="return loginCheck()" class="btn rounded me-auto" value="로그인" style="width: 400px; height: 45px;">
-											<div id="kakaobg" style="text-align: center;"><img onclick="kakaoLogin()" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" style="width: 200px; height: 45px; "></div>
+											<input type="button" onclick="return loginCheck()" class="btn rounded me-auto" value="로그인" style="width:400px; height: 45px;">
+											<div class="container">
+											  <div class="row">
+											    <div class="col" style="text-align:center">
+											      <img onclick="kakaoLogin()" src="resources/assets/images/login-btn/kakao_round.png" style="cursor:pointer; width: 50px; height: 48px;">
+											    </div>
+											    <div class="col" style="text-align:center">
+											      <img src="resources/assets/images/login-btn/btnG_아이콘원형.png" style="width: 50px; height: 48px;">
+											    </div>
+											    <div class="col" style="text-align:center">
+											      <img src="resources/assets/images/login-btn/google_round.png" style="width: 50px; height: 48px;">
+											    </div>
+											    <div class="col" style="text-align:center">
+											      <img src="resources/assets/images/login-btn/facebook_login.png" style="width: 50px; height: 48px;">
+											    </div>
+											  </div>
+											</div>
 											</p>
 
 											<!-- 아이디 찾기 팝업창  -->
