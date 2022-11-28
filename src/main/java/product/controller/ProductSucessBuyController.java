@@ -20,14 +20,14 @@ public class ProductSucessBuyController {
 	private ReservationDao rdao;
 	
 	
-	@RequestMapping(value="sucessBuy.prd",method = RequestMethod.GET) //寃곗�� �깃났��硫� �댁そ�쇰�����
+	@RequestMapping(value="sucessBuy.prd",method = RequestMethod.GET) 
 	public String BeforeBuy(HttpSession session) {
 
 		return "productBeforeBuy";
 	}
 	
 	
-	@RequestMapping(value="after.prd",method = RequestMethod.GET) // jsp媛��ㅺ� �쇰��ㅼ������ productSucessBuy濡� 媛� ����李� �リ린����
+	@RequestMapping(value="after.prd",method = RequestMethod.GET) 
 	public String sucessBuy(HttpSession session,Model model) {
 		
 		
