@@ -27,7 +27,7 @@ public class ProductDeleteController {
 	ProductDao pdao;
 	
 	@Autowired
-	ServletContext servletContext; // ÇÁ·ÎÁ§Æ® 1°³´ç ÇÏ³ª°¡ ÀÚµ¿À¸·Î ¸¸µé¾îÁÜ. ±×·¡¼­ ±×³É Autowired¸¸ ÇØÁàµµ ÁÖÀÔµÊ.
+	ServletContext servletContext; 
 	
 	@RequestMapping(value=command)
 	public String deleteProduct(@RequestParam("no") String pno,
@@ -43,9 +43,9 @@ public class ProductDeleteController {
 		String path = servletContext.getRealPath("/resources");
 		System.out.println("path: " + path);
 		
-		// try·Î °¨½ÎÁÖÀÚ.
+		// tryë¡œ ê°ì‹¸ì£¼ì.
 		for(String name : imgNames) {
-			System.out.println(imgNames + "ÆÄÀÏÀ» »èÁ¦");
+			System.out.println(imgNames + " ");
 			File file = new File(path + "/" + name);
 			file.delete();
 		}
