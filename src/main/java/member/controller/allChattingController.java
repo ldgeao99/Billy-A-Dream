@@ -46,7 +46,7 @@ public class allChattingController {
 	@ResponseBody
 	@RequestMapping(value=command , method = RequestMethod.POST,produces = "application/text;charset=utf8")
 	public String allGetRoomList(HttpSession session) {
-		System.out.println("요청받음");
+		System.out.println("");
 		String id = (String)session.getAttribute("id");
 		MemberBean loginmb = mdao.getById(id);
 		List<roomBean>rb = rdao.searchRoomById(loginmb.getMno());
@@ -56,8 +56,8 @@ public class allChattingController {
 		for(roomBean r :rb) {
 			
 			MemberBean mb = mdao.getByMno(r.getMno1());
-			MemberBean mb2 = mdao.getByMno(r.getMno2()); // 두번째가 판매자임
-			ProductBean pb = pdao.getByNo(String.valueOf(r.getPno())); // 상품번호에 따른 productbean 이미지 가져오기위해
+			MemberBean mb2 = mdao.getByMno(r.getMno2()); 
+			ProductBean pb = pdao.getByNo(String.valueOf(r.getPno())); 
 			
 			String userid;
 			String name; 
@@ -69,7 +69,6 @@ public class allChattingController {
 				name = mb.getName();
 				userid=mb.getId();
 			}
-			// 이미지가 여러개이기 때문에 첫번째꺼만 넘겨줘야함.
 			String[] images = pb.getImages().split(",");
 			pb.setImages(images[0]);
 			
