@@ -34,17 +34,17 @@ public class ProductInsertController {
 	MemberDao memberDao;
 	
 	@Autowired
-	ServletContext servletContext; // ÇÁ·ÎÁ§Æ® 1°³´ç ÇÏ³ª°¡ ÀÚµ¿À¸·Î ¸¸µé¾îÁÜ. ±×·¡¼­ ±×³É Autowired¸¸ ÇØÁàµµ ÁÖÀÔµÊ.
+	ServletContext servletContext; 
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String showInsertForm() {
-		System.out.println("ProductInsertController¿¡ GET ¿äÃ» µé¾î¿È");
+		System.out.println("ProductInsertController GET");
 		return getPage;
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doInsert(ProductBean pbean, HttpSession session) { // Ä¿¸Çµå °´Ã¼ ÇüÅÂ·Î ¹ŞÀ½
-		System.out.println("ProductInsertController¿¡ POST ¿äÃ» µé¾î¿È");
+	public String doInsert(ProductBean pbean, HttpSession session) { 
+		System.out.println("ProductInsertController POST");
 		
 		String id = (String)session.getAttribute("id");
 		MemberBean mb = memberDao.getById(id);
@@ -53,31 +53,27 @@ public class ProductInsertController {
 		MultipartFile[] upload = pbean.getUpload();
 		
 		if(upload == null) {
-			System.out.println("³Ñ¾î¿Â µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+			System.out.println("");
 		}
 		else {
 			String tempImages = ""; 
 			
 			for(MultipartFile multi :upload) {
 				System.out.println(multi.getOriginalFilename());
-				//1. ÆÄÀÏ ¾÷·Îµå
-				//System.out.println("multi.getName():" + multi.getName()); // upload : <input> ÅÂ±×ÀÇ name ¼Ó¼º
-				System.out.println("multi.getOriginalFilename():" + multi.getOriginalFilename()); // ³»°¡ ¼±ÅÃÇÑ È­ÀÏÀÇ ÆÄÀÏ¸í
-				//System.out.println("pbean.getImage():" + pbean.getImage()); // ÀÌ°Í ¶ÇÇÑ ³»°¡ ¼±ÅÃÇÑ È­ÀÏ¸í, ÀÌ°É ÀÌ¿ëÇØµµ »ó°ü¾øÀ½
+				System.out.println("multi.getOriginalFilename():" + multi.getOriginalFilename()); 
 				
 				String uploadPath = servletContext.getRealPath("/resources");
 				System.out.println("uploadPath: " + uploadPath);
 				
-				//resources ¶ó´Â Æú´õ°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸í »ı¼º.
 				File folder = new File(uploadPath);
 				if (!folder.exists()) {
-					folder.mkdir(); //Æú´õ »ı¼ºÇÕ´Ï´Ù.
-					System.out.println(uploadPath + " °æ·ÎÀÇ resources Æú´õ°¡ »ı¼ºµÇ¾ú½À´Ï´Ù.");
+					folder.mkdir(); //í´ë” ìƒì„±í•©ë‹ˆë‹¤.
+					System.out.println(uploadPath);
 				}
 				
 				UUID uuid = UUID.randomUUID();
 
-				File file = new File(uploadPath + "/" + uuid.toString()+"_" + multi.getOriginalFilename()); // multi.getOriginalFilename() ´ë½Å pbean.getImage() ¸¦ »ç¿ëÇØµµ µÊ.
+				File file = new File(uploadPath + "/" + uuid.toString()+"_" + multi.getOriginalFilename()); 
 				
 				if(tempImages == "") {
 					tempImages = uuid.toString()+"_" + multi.getOriginalFilename();
@@ -86,7 +82,7 @@ public class ProductInsertController {
 				}
 				
 				try {
-					multi.transferTo(file); // ¿øÇÏ´Â À§Ä¡¿¡ ÆÄÀÏÀ» ¿Ã¸®°í ½ÍÀ» ¶§ »ç¿ëÇÔ. ÀÌ ¹®Àå ½ÇÇà°ú µ¿½Ã¿¡ ¾÷·Îµå µÊ.
+					multi.transferTo(file);
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -104,9 +100,9 @@ public class ProductInsertController {
 		cnt = productDao.insertProduct(pbean);
 		
 		if(cnt > 0 ) {
-			System.out.println("»óÇ° »ğÀÔ¼º°ø");
+			System.out.println("");
 		}else {
-			System.out.println("»óÇ° »ğÀÔ½ÇÆĞ");
+			System.out.println("");
 		}
 		
 		return gotoPage;
