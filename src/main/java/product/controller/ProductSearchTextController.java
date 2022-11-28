@@ -69,9 +69,9 @@ public class ProductSearchTextController {
 		map.put("whatColumn", whatColumn); // genre or grade or actor
 		
 		if(whatColumn.equals("name") || whatColumn.equals("all")) { // product name search
-			map.put("keyword", "%"+ keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
+			map.put("keyword", "%"+ keyword + "%"); 
 		}else {
-			map.put("keyword", keyword); // 미리 %를 붙여서 넘겨줘야 함.
+			map.put("keyword", keyword); 
 		}
 		
 		//getting getTotalCount of searchResult for paging
@@ -80,10 +80,10 @@ public class ProductSearchTextController {
 		
 		
 		//gettig request url to make the link of paging number
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 페이지 번호에 이런걸 넣어줘야 해서.
+		String url = request.getContextPath() + "/" + command; 
 				
 		//making bottom paging element
-		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword); // null 대신에 3을 넘기면 한 페이지에 3개씩 보여짐
+		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword); 
 		
 		//getting result only need to show in this page
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
