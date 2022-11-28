@@ -35,7 +35,7 @@ public class memberLoginController {
 	@Autowired
 	private MemberIpDao midao;
 	
-	@RequestMapping(value = command , method = RequestMethod.GET)//�α���â���� ����
+	@RequestMapping(value = command , method = RequestMethod.GET)
 	public String login() {
 		
 		return getPage;
@@ -50,39 +50,39 @@ public class memberLoginController {
 		
 		MemberBean mb = mdao.getById(id); 
 		
-		String ip = Inet4Address.getLocalHost().getHostAddress();// ���� ������ ������ ��������
+		String ip = Inet4Address.getLocalHost().getHostAddress();
 		
 		boolean flag = false;
 		
-		if (mb != null) { // �ش� ���̵� �ִ���
+		if (mb != null) { 
 			String getpw = mb.getPw();
 
-			if (getpw != null) { // �ش� ��й�ȣ�� ������
+			if (getpw != null) {
 				
 
-				if (encoder.matches(pw, getpw)) { // ��ȣȭ�ؼ� �´��� Ȯ��
+				if (encoder.matches(pw, getpw)) {
 					System.out.println("isblackList:"+mb.getIsblacklist());
 					if(mb.getIsblacklist().equals("0")) {
 						
-						if (id.equals("admin")) { // �� ���̵� admin �̸� admin���� ��
+						if (id.equals("admin")) {
 							session.setAttribute("id", id);
-							return "admin";// admin �̸� index���Ϸ�
+							return "admin";
 						} else {
 							
-							List<MemberIpBean> lists = midao.getAllByMno(mb.getMno()); // mno �� �ش��ϴ� ip���̺� ���ڵ� �� ��������
+							List<MemberIpBean> lists = midao.getAllByMno(mb.getMno()); 
 							
 							for (MemberIpBean mib : lists) {
-								if (ip.equals(mib.getIp())) { // �ش� ���̵� ��ϵ� �����ǰ� ���� ������ �����Ƕ� ������ Ȯ��
+								if (ip.equals(mib.getIp())) { 
 									session.setAttribute("id", id);
 									flag = true;
 									return "yes";
 								}
 							}
-							if (!flag) { // �ش�����Ǵ� ��ϵ��� ����. ����ϴ� �������� �Ѿ�� ����. �ٵ� response
+							if (!flag) { 
 								return "Insertip";
 							}
 						}
-						// �ش� ���̵��� mno �� �ش��ϴ� memberip ���̺��� ip���� �����ͼ� üũ
+						
 					}
 					else {
 						return "black";
@@ -96,6 +96,6 @@ public class memberLoginController {
 		}
 		*/
 		
-		return "ye"; // �ش��ϴ� ��й�ȣ�� ������ �׳� �ƹ��ų� ����
+		return "ye"; 
 	}
 }
