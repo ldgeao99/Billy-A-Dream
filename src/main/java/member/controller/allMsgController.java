@@ -45,16 +45,15 @@ public class allMsgController {
 		List<chatBean>lists = cdao.getByRoom_no(room_no);
 		int i=0;
 		String info="";
-		for(chatBean c :lists) { //상품이름 , 메세지 , 시간 상품이미지
+		for(chatBean c :lists) { 
 			ProductBean pb = pdao.getByNo(String.valueOf(c.getPno()));
 			
 			String[] images = pb.getImages().split(",");
-			pb.setImages(images[0]); // 이미지 하나만 가져오기위해
-			MemberBean mb = mdao.getByMno(c.getSend_mno()); // 보낸사람
+			pb.setImages(images[0]); 
+			MemberBean mb = mdao.getByMno(c.getSend_mno()); 
 			MemberBean mb2 = mdao.getByMno(c.getRead_mno());
 			
 			String time = DateParse.time(c.getTime());
-			// 두번째mno가 판매자임
 			info += pb.getName()+","+c.getContent()+","+time+","+pb.getImages()+","+mb.getId()+","+mb.getName()+","+mb2.getName()+","+room_no+","+pb.getNo();
 			 
 			if(lists.size()-1!=i) {
