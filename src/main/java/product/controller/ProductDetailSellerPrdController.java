@@ -28,16 +28,13 @@ public class ProductDetailSellerPrdController {
 								@RequestParam(value = "pageNumber", required = false) String pageNumber,
 								HttpServletRequest request, Model model) {
 		
-		//상품번호로 판매자 id 얻고  얻은 판매자 id로 그사람의 판매 물품 다 가져오기 이건
-		// product object will be shown
 		ProductBean pb = pdao.getByNo(pno);
 
 		
 		
-		// 총 레코드의 개수가 몇개인지 가져옴
 		int totalCount = pdao.getTotalSellerPrdCount(pb.getSeller_no());
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 페이지 번호에 이런걸 넣어줘야 해서.
-		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, pno); // null 대신에 3을 넘기면 한 페이지에 3개씩 보여짐
+		String url = request.getContextPath() + "/" + command; 
+		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, pno); 
 		
 		// seller's products
 		List<ProductBean> lists = pdao.getTotalSellerPrd(pb.getSeller_no(), pageInfo);
