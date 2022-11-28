@@ -42,7 +42,7 @@ public class ProductSearchLocationController {
 								Model model,
 								HttpSession session) {
 		
-		System.out.println("\n + ProductSearchLocationController 에서 넘겨받은 4개의 값");
+		System.out.println("\n + ProductSearchLocationController");
 		System.out.println("whatColumn:" + whatColumn);
 		System.out.println("keyword: " + keyword);
 		System.out.println("add2Name: " + add2Name);
@@ -54,7 +54,7 @@ public class ProductSearchLocationController {
 		//making map with whatColumn and keyword
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", "%" + keyword + "%"); // 미리 %를 붙여서 넘겨줘야 함.
+		map.put("keyword", "%" + keyword + "%"); 
 		map.put("add2Name", add2Name);
 		
 		//getting getTotalCount of searchResult for paging
@@ -62,11 +62,10 @@ public class ProductSearchLocationController {
 		System.out.println("totalCount of the result list by search: " + totalCount);
 		
 		//gettig request url to make the link of paging number
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 페이지 번호에 이런걸 넣어줘야 해서.
+		String url = request.getContextPath() + "/" + command; 
 				
 		
-		//making bottom paging element                 페이징ㅇㅇㅇㅇㅇㅇㅇㅇ 이거 내거에 맞게 수정해야함. 사용하는 클래스 자체를 다른걸로 사용하자.
-		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword, add2Name); // null 대신에 3을 넘기면 한 페이지에 3개씩 보여짐
+		PagingProduct pageInfo = new PagingProduct(pageNumber, null, totalCount, url, whatColumn, keyword, add2Name); 
 		
 		//getting result only need to show in this page
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
@@ -77,18 +76,7 @@ public class ProductSearchLocationController {
 		
 		
 		
-//		//to get Addr1
-//		String id = (String)session.getAttribute("id");
-//		MemberBean mb = mdao.getById(id);
-//		
-//		String areaNum = null;
-//		String addr1 = mb.getAdd1_sido();
-//		System.out.println("\n" + "addr1 : " + addr1);
-//		if(addr1.equals("서울")) {
-//			areaNum = "11";
-//		}else if(addr1.equals("인천")) {
-//			areaNum = "28";
-//		}
+
 		
 		model.addAttribute("areaNum", 11);
 		
