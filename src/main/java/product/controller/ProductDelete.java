@@ -27,7 +27,7 @@ public class ProductDelete {
 	ProductDao pdao;
 	
 	@Autowired
-	ServletContext servletContext; // 프로젝트 1개당 하나가 자동으로 만들어줌. 그래서 그냥 Autowired만 해줘도 주입됨.
+	ServletContext servletContext; 
 	
 	@ResponseBody
 	@RequestMapping(value=command, produces="text/plain;charset=UTF-8")
@@ -41,9 +41,8 @@ public class ProductDelete {
 		String path = servletContext.getRealPath("/resources");
 		System.out.println("path: " + path);
 		
-		// try로 감싸주자.
 		for(String name : imgNames) {
-			System.out.println(imgNames + "파일을 삭제");
+			System.out.println(imgNames + "");
 			File file = new File(path + "/" + name);
 			file.delete();
 		}
