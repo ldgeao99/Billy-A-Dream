@@ -47,14 +47,12 @@ public class chatSendMsg {
 		MemberBean mb =  mdao.getById(id);
 		int loginmno = mb.getMno();
 		
-		// 두 아이디와 상품번호에 해당하는 방이 있는지 확인
 		roomBean rb = new roomBean();
 		
 		rb.setMno1(loginmno);
 		rb.setMno2(pb.getSeller_no());
 		rb.setPno(Integer.parseInt(pno));
 		
-		// 두 아이디와 상품번호에 해당하는 방이 있는지 확인
 		roomBean rbean = rdao.searchRoom(rb);
 		
 		chatBean cbean = new chatBean();
