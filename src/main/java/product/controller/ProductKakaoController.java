@@ -61,7 +61,7 @@ public class ProductKakaoController {
 			conn.setRequestProperty("Authorization", "KakaoAK 4c0bb93a3847e475f914d28db4a3aabf");
 			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			conn.setDoOutput(true); 
-			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name="+pname+"&quantity=1&total_amount="+price+"&vat_amount=200&tax_free_amount=0&approval_url=http://localhost:8080/sucessBuy.prd&fail_url=http://localhost:8080/buy.prd?no="+no+"&cancel_url=http://localhost:8080/buy.prd?no="+no;
+			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name="+pname+"&quantity=1&total_amount="+price+"&vat_amount=200&tax_free_amount=0&approval_url=http://15.165.105.57:8080/sucessBuy.prd&fail_url=http://15.165.105.57:8080/buy.prd?no="+no+"&cancel_url=http://15.165.105.57:8080/buy.prd?no="+no;
 			OutputStream out = conn.getOutputStream(); 
 			DataOutputStream  dataout = new DataOutputStream(out);
 			dataout.writeBytes(parameter);

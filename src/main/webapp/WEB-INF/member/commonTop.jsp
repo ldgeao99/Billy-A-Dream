@@ -104,7 +104,7 @@
 	}
 	
 	function logout() {
-	   location.href="https://kauth.kakao.com/oauth/logout?client_id=712a5c51e06bca8448c4c65b4205bb54&logout_redirect_uri=http://localhost:8080/out.mb";
+	   location.href="https://kauth.kakao.com/oauth/logout?client_id=712a5c51e06bca8448c4c65b4205bb54&logout_redirect_uri=http://15.165.105.57:8080/out.mb";
 	  }
 </script>
 
