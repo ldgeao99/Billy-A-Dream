@@ -48,11 +48,11 @@ public class ForAdminEventInsertController {
 	public ModelAndView insert(@ModelAttribute("event") @Valid EventBean event, 	
 							BindingResult result) {
 		
-		System.out.println("?´ë?¸ì?:"+event.getEventImage());
-		System.out.println("??ëª?:"+ event.getTitle());
-		System.out.println("???±ì??:"+event.getWriter());
-		System.out.println("?´ë²¤?¸ë??ì§?:"+event.getEventdate());
-		System.out.println("?´ì??:"+event.getWrite());
+		System.out.println("?ëŒ€?ëª„?:"+event.getEventImage());
+		System.out.println("??ï§?:"+ event.getTitle());
+		System.out.println("???ê¹†??:"+event.getWriter());
+		System.out.println("?ëŒ€ê¹½?ëªƒ??ï§?:"+event.getEventdate());
+		System.out.println("?ëŒ??:"+event.getWrite());
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -78,18 +78,16 @@ public class ForAdminEventInsertController {
 		System.out.println("uploadPath:"+uploadPath);
 		
 		String uploadPath2 = servletContext.getRealPath("/resources");
-		//resources ¶ó´Â Æú´õ°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸í »ı¼º.
 		File folder = new File(uploadPath2);
 		if (!folder.exists()) {
-			folder.mkdir(); //Æú´õ »ı¼ºÇÕ´Ï´Ù.
-			System.out.println(uploadPath + " °æ·ÎÀÇ resources Æú´õ°¡ »ı¼ºµÇ¾ú½À´Ï´Ù.");
+			folder.mkdir(); 
+			System.out.println(uploadPath + "  resources ");
 		}
 		
-		//resources/images ¶ó´Â Æú´õ°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸í »ı¼º.
 		File folder2 = new File(uploadPath);
 		if (!folder2.exists()) {
-			folder2.mkdir(); //Æú´õ »ı¼ºÇÕ´Ï´Ù.
-			System.out.println(uploadPath + " °æ·ÎÀÇ images Æú´õ°¡ »ı¼ºµÇ¾ú½À´Ï´Ù.");
+			folder2.mkdir(); 
+			System.out.println(uploadPath + "  images ");
 		}
 		
 		
