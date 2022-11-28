@@ -42,20 +42,16 @@ public class memberRegisteCouponController {
 		
 		 if(cb!=null && mb.getCoupon()!=null) {
 			 if(mb.getCoupon().contains(String.valueOf(cb.getNo()))) {
-				 System.out.println("응답으로 exist 가 반환됨");
 				 return "exist";
 			 }
 			 else {
-				 System.out.println("응답으로 yes 가 반환됨");
 				 return "yes";
 			 }
 			 
 		 }
 		 else if(cb!=null && mb.getCoupon()==null) {
-			 System.out.println("응답으로 yes 가 반환됨");
 			 return "yes";
 		 }
-		System.out.println("응답으로 '' 가 반환됨");
 		return "";
 		 
 		 
