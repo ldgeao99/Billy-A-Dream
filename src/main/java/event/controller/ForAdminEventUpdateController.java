@@ -57,11 +57,11 @@ public class ForAdminEventUpdateController {
 			@RequestParam("originalImg") String originalImg,
 			Model model) {
 		
-		System.out.println("?´ë?¸ì?:"+event.getEventImage());
-		System.out.println("??ëª?:"+ event.getTitle());
-		System.out.println("???±ì??:"+event.getWriter());
-		System.out.println("?´ë²¤?¸ë??ì§?:"+event.getEventdate());
-		System.out.println("?´ì??:"+event.getWrite());
+		System.out.println(":"+event.getEventImage());
+		System.out.println(":"+ event.getTitle());
+		System.out.println(":"+event.getWriter());
+		System.out.println(":"+event.getEventdate());
+		System.out.println(":"+event.getWrite());
 		
 		
 		
