@@ -24,7 +24,7 @@ public class GetReservedDates {
 	@Autowired
 	ReservationDao rdao;
 	
-	@ResponseBody // 해당 메서드가 반환한 것을 jsp 파일이 아닌 객체 그대로 전달한다. 
+	@ResponseBody 
 	@RequestMapping(value=command, produces="text/plain;charset=UTF-8")
 	public String getReservedDates(@RequestParam("no") String pno) {
 		
