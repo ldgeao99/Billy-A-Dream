@@ -17,7 +17,7 @@ public class AdminMemberBlacklistController {
 	MemberDao memberDao; 
 	@RequestMapping(command)
 	public String changeBlacklist(@RequestParam("mno") int mno,
-			@RequestParam("check") String check) {//check =1 =>정지로 전환
+			@RequestParam("check") String check) {
 		MemberBean member=new MemberBean();
 		member.setMno(mno);
 		member.setIsblacklist(check);
