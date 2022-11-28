@@ -45,22 +45,21 @@ public class ProductClickedNewOrPopularController {
 								HttpServletRequest request,
 								Model model){
 		
-		System.out.println("ProductClickedNewOrPopularController 占쏙옙占쏙옙 占쏙옙청 占쏙옙占쏙옙");
+		System.out.println("ProductClickedNewOrPopularController");
 		System.out.println("whatColumn: " + whatColumn);
 		System.out.println();
 		
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
-		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", keyword); // 占싱몌옙 %占쏙옙 占쌕울옙占쏙옙 占싼곤옙占쏙옙占� 占쏙옙.
+		map.put("whatColumn", whatColumn); 
+		map.put("keyword", keyword); 
 		
-		// 占싯삼옙 占쏙옙占실울옙 占승댐옙 占쏙옙占쌘듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏘개占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 		int totalCount = pdao.getTotalSearchCount(map);
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" 占쏙옙占쏙옙占쏙옙 占쏙옙호占쏙옙 占싱뤄옙占쏙옙 占쌍억옙占쏙옙占� 占쌔쇽옙.
-		PagingProduct pageInfo = new PagingProduct(pageNumber, pageSize, totalCount, url, whatColumn, keyword); // null 占쏙옙탓占� 3占쏙옙 占싼깍옙占� 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 3占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+		String url = request.getContextPath() + "/" + command; 
+		PagingProduct pageInfo = new PagingProduct(pageNumber, pageSize, totalCount, url, whatColumn, keyword); 
 		
-		System.out.println("컨트롤러에서 받은 pageSize: " + pageSize);
+		System.out.println("pageSize: " + pageSize);
 		
 		if(pageSize == null) {
 			pageSize = "8";
