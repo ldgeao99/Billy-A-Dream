@@ -15,9 +15,9 @@ public class MemberIpDao {
 	SqlSessionTemplate sqlSessionTemplate; 
 
 	
-	public void InsertIp(Map<String, String> map){//해당 id의 mno와 ip 를 등록
+	public void InsertIp(Map<String, String> map){
 		int result = sqlSessionTemplate.insert(namespace+".InsertIp",map);
-		System.out.println("ip 삽입 결과 :"+result);
+		System.out.println("ip   :"+result);
 	}
 	
 	public List<MemberIpBean> getAllByMno(int mno) {
