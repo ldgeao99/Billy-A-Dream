@@ -24,7 +24,7 @@ public class AdminContectReplyController {
 			@RequestParam(value="re_cate",required = false) String re_cate) {
 		if(!re_cate.equals("")) {
 			if(!re_cate.equals(contect.getCategory_num())) {
-				System.out.println("카테고리 바뀜");
+				System.out.println("");
 				contect.setCategory_num(re_cate);
 				
 			} 
