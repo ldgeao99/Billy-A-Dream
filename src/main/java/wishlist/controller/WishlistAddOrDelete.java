@@ -38,14 +38,12 @@ public class WishlistAddOrDelete {
 		Boolean isExistUserInThisProduct = wdao.isExistUserInThisProduct(wb);
 		
 		if(isExistUserInThisProduct == true) {
-			//»èÁ¦
+			//ì‚­ì œ
 			int cnt = wdao.deleteWishlist(wb);
-			System.out.println("À§½Ã¸®½ºÆ®¿¡¼­" + pno + "¹ø »óÇ° »èÁ¦");
 			return "deleted";
 		}else {
-			//Ãß°¡
+			//ì¶”ê°€
 			int cnt = wdao.insertWishlist(wb);
-			System.out.println("À§½Ã¸®½ºÆ®¿¡¼­" + pno + "¹ø »óÇ° Ãß°¡");
 			return "added";
 		}
 	}
