@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member.MemberBean"> 
+	<select id="login" resultType="MyMember">
+		select * from member where id=#{id}
+	</select>
+	
+	<select id="idCheck" resultType="int">
+		select count(*) from member where id=#{id}
+	</select>
+	
+	<insert id="InsertMember">
+		insert into member(mno,id,pw,name,add1_sido,add2_sigungu,add3_eubmyeon,add4_donglee,email,hp) values(member_seq.nextval,#{id} , 
+		#{pw}, #{name}, #{add1_sido}, #{add2_sigungu}, 
+		#{add3_eubmyeon},#{add4_donglee}, #{email}, #{hp})
+	</insert>
+	<select id="FindId" resultType="String">
+		select id from member where name=#{name} and hp = #{hp}
+	</select>
+	
+	<select id="FindPw" resultType="int">
+		select count(*) from member where id=#{id} and hp = #{hp}
+	</select>
+	
+	<update id="resetPw">
+		update member set pw =#{securePassword} where id =  #{id}
+	</update>
+	
+	<delete id="deleteMember">
+		delete member where id = #{id}
+	</delete>
+	<select id="SelectMemberList" resultType="member.model.MemberBean">
+		select * from member 
+		<if test="whatColumn == 'name'">
+			where name like #{keyword}
+		</if>
+		<if test="whatColumn == 'id'">
+			where id like #{keyword}
+		</if>
+		order by mno desc
+	</select>
+	<update id="ChangeBlacklist">
+		update member set isblacklist=#{isblacklist} where mno=#{mno}
+	</update>
+	
+	<update id="updateMember">
+		update member set id=#{id}, pw = #{pw} , add1_sido = #{add1_sido} , add2_sigungu = #{add2_sigungu} , add3_eubmyeon = #{add3_eubmyeon},
+		add4_donglee = #{add4_donglee} , email = #{email} , hp = #{hp} where mno = #{mno}
+	</update>
+	
+	
+	
+	<update id="insertCoupon">
+		update member set coupon = #{no} where id = #{id}
+	</update>
+	
+	<select id="getMemberAddress" resultType="member.model.MemberBean">
+		select * from member 
+		where id = #{id}
+	</select>
+	
+	<select id="ipHpCheck" resultType="int">
+		select count(*) from member where id=#{id} and hp = #{hp}
+	</select>
+
+	<select id="getByMno" resultType="member.model.MemberBean">
+		select * from member where mno = #{seller_no}
+	</select>
+	
+</mapper>

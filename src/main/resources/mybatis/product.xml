@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 복사해서 가져온 부분 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product.model.SQL"> <!-- 여기에서 namespace 속성으로  들어간 텍스트는 AlbumBean 클래스와 아무상관이 없다. 마음대로 아무거나 써도 됨 -->
+	
+ 	<!-- category를 입력받고 있지 않으므로 category 를 null로 입력하라는 의미임. jdbcType=VARCHAR는. -->
+ 	<insert id="InsertProduct">
+ 		insert into products(no, seller_no, images, name, lcategory_no, scategory_no, add1_sido, add2_sigungu, add3_eubmyeon, add4_donglee, original_day_price, discounted_day_price, rentday_minimum, components, description, end_day)
+ 		values(products_seq.nextval, #{seller_no}, #{images}, #{name}, #{lcategory_no}, #{scategory_no}, #{add1_sido}, #{add2_sigungu}, #{add3_eubmyeon}, #{add4_donglee}, #{original_day_price}, #{discounted_day_price}, #{rentday_minimum}, #{components}, #{description}, #{end_day})
+ 	</insert>
+ 	
+ 	<select id="GetRecentProductList" resultType="product.model.ProductBean">
+ 		select * 
+		from products
+		order by pulled_day desc, no
+ 	</select>
+
+ 	<select id="GetPopularProductList" resultType="product.model.ProductBean">
+ 		select * 
+ 		from products
+ 		order by view_count desc, no
+ 	</select>
+ 	
+ 	<select id="GetProductListBySearch" resultType="product.model.ProductBean">
+ 		select *
+ 		from(select pro3.*, upper(m.id) id    
+		from (select pro2.*, scate.name scategoryName
+		from (select pro.no, pro.seller_no, pro.images, upper(pro.name) name, pro.lcategory_no, pro.scategory_no, pro.add1_sido, pro.add2_sigungu, pro.add3_eubmyeon, pro.add4_donglee, pro.original_day_price, pro.discounted_day_price, pro.rentday_minimum, pro.components, pro.description, pro.end_day, pro.view_count, pro.create_day, pro.pulled_day, pro.is_hidden, lcate.name lcategoryName
+		from products pro inner join lcategory lcate
+		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
+		on pro2.scategory_no= scate.no) pro3 inner join member m
+    	on pro3.seller_no = m.mno)
+ 		
+ 		<if test="whatColumn == 'all' and keyword != ''">
+		where name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword} or id like #{keyword} or lcategoryname like #{keyword} or scategoryname like #{keyword}
+		</if>
+ 		
+		<if test="whatColumn == 'mylocation'">
+		where add2_sigungu = #{add2Name} and name like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'name'">
+		where name like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'seller_name'">
+		where id = #{keyword}
+		</if>	
+		
+		<if test="whatColumn == 'category'">
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
+		</if>
+		
+ 		order by pulled_day, no
+ 	</select>
+ 	
+ 	<select id="GetTotalSearchCount" resultType="int">
+ 		select count(*) 
+ 		from (select *
+ 		from((select pro3.*, upper(m.id) id    
+		from (select pro2.*, scate.name scategoryName
+		from (select pro.no, pro.seller_no, pro.images, upper(pro.name) name, pro.lcategory_no, pro.scategory_no, pro.add1_sido, pro.add2_sigungu, pro.add3_eubmyeon, pro.add4_donglee, pro.original_day_price, pro.discounted_day_price, pro.rentday_minimum, pro.components, pro.description, pro.end_day, pro.view_count, pro.create_day, pro.pulled_day, pro.is_hidden, lcate.name lcategoryName
+		from products pro inner join lcategory lcate
+		on pro.lcategory_no= lcate.no) pro2 inner join scategory scate
+		on pro2.scategory_no= scate.no) pro3 inner join member m
+    	on pro3.seller_no = m.mno))) pro4
+ 		
+ 		<if test="whatColumn == 'all' and keyword != ''">
+		where pro4.name like #{keyword} or add1_sido like #{keyword} or add2_sigungu like #{keyword} or add3_eubmyeon like #{keyword} or add4_donglee like #{keyword}
+		</if>
+ 		
+ 		<if test="whatColumn == 'mylocation'">
+		where add2_sigungu = #{add2Name} and pro4.name like #{keyword}
+		</if>
+ 		
+		<if test="whatColumn == 'name'">
+		where pro4.name like #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'seller_name'">
+		where id = #{keyword}
+		</if>
+		
+		<if test="whatColumn == 'category'">
+		where lcategoryname = #{keyword} or scategoryname = #{keyword}
+		</if>
+	
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="GetByNo" resultType="product.model.ProductBean">
+ 		select * from products where no = #{no}
+ 	</select>
+ 	
+ 	<update id="updateView_count">
+ 		update products set view_count = view_count+1 where no = #{no}
+ 	</update>
+ 	
+ 	<select id="getByseller_no" resultType="product.model.ProductBean">
+ 		select * from products where seller_no = #{seller_no}
+ 		order by pulled_day desc, no
+ 	</select>
+ 	
+ 	<select id="getAllByNo" resultType= "product.model.ProductBean">
+		select * from products where no in
+		<foreach collection="array" item="lists" separator="," open="(" close=")">
+		 #{lists}
+		</foreach>
+	</select>
+	
+	<insert id="UpdateProduct">
+ 		update products
+ 		set images=#{images}, name=#{name}, lcategory_no=#{lcategory_no}, scategory_no=#{scategory_no}, add1_sido=#{add1_sido}, add2_sigungu=#{add2_sigungu}, add3_eubmyeon=#{add3_eubmyeon}, add4_donglee=#{add4_donglee}, original_day_price=#{original_day_price}, discounted_day_price=#{discounted_day_price}, rentday_minimum=#{rentday_minimum}, components=#{components}, description=#{description}, end_day=#{end_day}   
+ 		where no=#{no}
+ 	</insert>
+ 	
+ 	<delete id="DeleteProduct">
+ 		delete from products
+ 		where no = #{no}
+ 	</delete>
+ 	
+ 	<update id="updatePulledDay">
+ 		update products set pulled_day = sysdate where no = #{no}
+ 	</update>
+	
+	<select id="getEqualCate" resultType= "product.model.ProductBean">
+		select * from products 
+		where lcategory_no=#{lcategory_no} and scategory_no=#{scategory_no} and <![CDATA[rownum <= 8]]>
+	</select>
+	
+	<select id="GetTotalSellerPrdCount" resultType="int">
+		select count(*)
+		from products
+		where seller_no = #{seller_no}
+	</select>
+	
+	<select id="GetTotalSellerPrd" resultType="product.model.ProductBean">
+		select *
+		from products
+		where seller_no = #{seller_no}
+	</select>
+	
+</mapper>

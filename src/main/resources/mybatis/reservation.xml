@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reservation.model.ReservationBean">
+
+	<insert id="InsertReservation">
+		insert into reservation values(reservation_seq.nextval,#{product_no},#{buyer_no},#{start_date},#{end_date},0,sysdate,'1',#{amount},null)
+	</insert>
+
+	<select id="getAllByBuyer_no" resultType= "reservation.model.ReservationBean">
+		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted,r.status status,r.product_no product_no,r.notice notice 
+		from reservation r inner join products p on r.product_no = p.no where r.buyer_no=#{buyer_no}
+	</select>
+	
+	<select id="getAllByMno" resultType= "reservation.model.ReservationBean">
+		select r.no no, p.name name,r.ACCEPTED_DATE accepted_date,r.amount amount,r.START_DATE start_date, r.END_DATE end_date,r.IS_ACCEPTED is_accepted,r.status status,r.product_no product_no,r.notice notice
+		from (select * from products where seller_no = #{mno}) p  inner join reservation r on p.no = r.product_no order by accepted_date
+	</select>
+	  
+	<update id="updateAccept">
+		update reservation set is_accepted = 1 where no = #{rno}
+	</update>
+		
+	<select id="GetAllReservationOnlyDates" resultType="reservation.model.ReservationBean">
+		select TO_CHAR(start_date, 'YYYY-MM-DD') as start_date, TO_CHAR(end_date, 'YYYY-MM-DD') as end_date
+		from reservation 
+		where product_no = #{pno}
+	</select>
+	<select id="getAllResrvation" resultType="reservation.model.ReservationDetailBean">
+		select r.no,p.name as product_name,
+		r.start_date,
+		r.end_date,
+		r.amount,r.status,
+		r.is_accepted,
+		r.accepted_date,
+		buy.name as buyer_name,
+		buy.id as buyer_id,
+		buy.mno as buyer_no,
+		sell.name  as seller_name,
+		sell.id  as  seller_id,
+		sell.mno as   seller_no  
+		from reservation r
+		inner join products p
+		on r.product_no=p.no
+		inner join 
+		(select  mno, id, name 
+		   from member ) buy
+		on r.buyer_no =  buy.mno  
+		inner join 
+		(select mno, id, name 
+		   from member ) sell 
+		on p.seller_no = sell.mno
+		<if test="whatColumn == 'product_name'">
+			where p.name like #{keyword} 
+		</if>
+		<if test="whatColumn == 'buyer_id'">
+			where buy.id like #{keyword} 
+		</if>
+		<if test="whatColumn == 'seller_id'">
+			where sell.id like #{keyword} 
+		</if>
+		order by r.no desc
+	</select>
+	<update id="WithdrawReservation">
+		update reservation set is_accepted='4',notice=#{notice},status=4 where no=#{no}
+	</update>
+	<update id="RollbackWithdrawReservation">
+		update reservation set is_accepted=0,status=1 where no=#{no}
+	</update>
+	
+	<update id="changeStatus2">
+		update reservation set status=2 where is_accepted=1 and start_date >= sysdate
+	</update>
+	<update id="changeStatusfor3">
+		update reservation set status=3 where is_accepted=1 and  sysdate > end_date
+	</update>
+	
+	<select id="CheckReviewAuth" resultType="int">
+		select count(*) from reservation where product_no = #{product_no} and buyer_no =#{buyer_no} and status = 3
+	</select>
+	
+</mapper>
