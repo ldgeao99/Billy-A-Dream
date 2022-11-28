@@ -39,7 +39,7 @@ public class ProductDetailController {
 	private ProductDao pdao;
 	
 	@Autowired
-	private MemberDao mdao; // org.springframework.beans.factory.NoSuchBeanDefinitionException: No matching bean of type [member.model.MemberDao] found for dependency
+	private MemberDao mdao; 
 	
 	@Autowired
 	private LcategoryDao ldao;
@@ -99,7 +99,6 @@ public class ProductDetailController {
 		
 		
 		//productgetReview
-		// ���댁��ㅼ�� 	���댁��ㅼ�� 		���댁��ㅼ��
 		int totalCount = rdao.getTotalCount(no);
 				
 		String url = request.getContextPath()+"/"+command+"?no="+no+"&write=2";
@@ -142,17 +141,17 @@ public class ProductDetailController {
 		System.out.println("�ш린��");
 		if(write!=null) {
 			
-		if(write.equals("1")) { // ��湲곗���깊��湲� ��瑜대㈃ 
-			response.setContentType("text/html; charset=UTF-8"); // �대낫�대��寃��� ��湲�泥�由�
-			PrintWriter writer = response.getWriter(); // �밸��쇱�곗���� �곌껐�ㅻ━ �대��
+		if(write.equals("1")) { 
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter(); 
 			writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
 			writer.println("<script>$(function(){document.getElementById('reviewt-tab').click();})</script>"); 
 			writer.println("<script>$(function(){document.getElementById('write').click();})</script>"); 
 			writer.flush();
 		}
-		else if(write.equals("2")) { // ��湲곗���깊��湲� ��瑜대㈃ 
-			response.setContentType("text/html; charset=UTF-8"); // �대낫�대��寃��� ��湲�泥�由�
-			PrintWriter writer = response.getWriter(); // �밸��쇱�곗���� �곌껐�ㅻ━ �대��
+		else if(write.equals("2")) { 
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter(); 
 			writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
 			writer.println("<script>$(function(){document.getElementById('reviewt-tab').click();})</script>"); 
 			writer.flush();
