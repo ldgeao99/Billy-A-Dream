@@ -43,7 +43,6 @@ public class ProductDeleteController {
 		String path = servletContext.getRealPath("/resources");
 		System.out.println("path: " + path);
 		
-		// try로 감싸주자.
 		for(String name : imgNames) {
 			System.out.println(imgNames + " ");
 			File file = new File(path + "/" + name);
