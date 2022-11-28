@@ -10,20 +10,20 @@ public class sendSMS {
 	// Find your Account Sid and Token at twilio.com/user/account
 		  public static final String ACCOUNT_SID = "ACf8a0e7a4190fdcaf641dda1638278da6";
 		  public static final String AUTH_TOKEN = "aa0d787a47fdb6dd6d6015afe33d4066";		  
-		  // SMS 보내기
+		  
 		  public static int sendsms (String phoneNum) {
 
 			Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		    
-		    // 인증번호
+		    
 		    int authNum = randomRange(100000, 999999);
-		    // 핸드폰번호
+		    
 		    /*
 		      String sendTarget = "+"+"82"+ phoneNum;
 		     
 		    
-		    // ���� �޼���
-		    String authMsg = "\n        Billy A Dream 인증번호 [" + authNum + "]" ;
+		    
+		    String authMsg = "\n        Billy A Dream  [" + authNum + "]" ;
 		    
 		     
 		    Message message = Message.creator(
@@ -38,7 +38,6 @@ public class sendSMS {
 			
 		  }
 		    
-		  // ������ȣ ���� ����
 		  public static int randomRange(int n1, int n2) {
 		    int num =  (int) (Math.random() * (n2 - n1 + 1)) + n1;
 			  return num;
