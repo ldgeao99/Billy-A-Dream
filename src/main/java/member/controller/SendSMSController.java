@@ -20,7 +20,7 @@ public class SendSMSController {
 	public String login(@RequestParam("PhoneNumber") String PhoneNumber, HttpSession session) {
 		
 		int authNum = sendSMS.sendsms(PhoneNumber);
-		System.out.println("부여된 인증번호 :"+authNum);
+		System.out.println("  :"+authNum);
 		
 		session.setAttribute("authNum", authNum);
 		return "yes";
@@ -32,8 +32,8 @@ public class SendSMSController {
 		
 		int setAuthNum = (Integer) session.getAttribute("authNum");
 		
-		System.out.println("부여된 인증번호 :"+setAuthNum);
-		System.out.println("입력한 인증번호 :"+authNum);
+		System.out.println("  :"+setAuthNum);
+		System.out.println("  :"+authNum);
 		
 		if(setAuthNum==authNum) {
 			return "yes";
