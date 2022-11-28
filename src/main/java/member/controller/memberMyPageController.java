@@ -115,8 +115,8 @@ public class memberMyPageController {
 
 		
 		
-		response.setContentType("text/html; charset=UTF-8"); // 내보내는것의 한글처리
-		PrintWriter writer = response.getWriter(); // 웹브라우저와 연결다리 담당
+		response.setContentType("text/html; charset=UTF-8"); 
+		PrintWriter writer = response.getWriter(); 
 		
 		System.out.println("select:"+select);
 		writer.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>");
