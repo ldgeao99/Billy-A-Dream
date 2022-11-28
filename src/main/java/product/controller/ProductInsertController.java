@@ -67,7 +67,7 @@ public class ProductInsertController {
 				
 				File folder = new File(uploadPath);
 				if (!folder.exists()) {
-					folder.mkdir(); //폴더 생성합니다.
+					folder.mkdir(); 
 					System.out.println(uploadPath);
 				}
 				
