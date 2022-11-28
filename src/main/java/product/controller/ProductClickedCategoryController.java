@@ -41,13 +41,12 @@ public class ProductClickedCategoryController {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
-		map.put("whatColumn", whatColumn); // genre or grade or actor
-		map.put("keyword", keyword); // �̸� %�� �ٿ��� �Ѱ���� ��.
+		map.put("whatColumn", whatColumn);
+		map.put("keyword", keyword); 
 		
-		// �˻� ���ǿ� �´� ���ڵ��� ������ ����� ������
 		int totalCount = pdao.getTotalSearchCount(map);
-		String url = request.getContextPath() + "/" + command; // url = "/ex/list.tv" ������ ��ȣ�� �̷��� �־���� �ؼ�.
-		PagingProduct pageInfo = new PagingProduct(pageNumber, pagesize, totalCount, url, whatColumn, keyword); // null ��ſ� 3�� �ѱ�� �� �������� 3���� ������
+		String url = request.getContextPath() + "/" + command;
+		PagingProduct pageInfo = new PagingProduct(pageNumber, pagesize, totalCount, url, whatColumn, keyword); 
 		
 		List<ProductBean> resultProductList = pdao.getProductListBySearch(map, pageInfo);
 		
