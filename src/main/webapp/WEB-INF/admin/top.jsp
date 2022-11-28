@@ -263,7 +263,7 @@
                 <img src="resources/admin_asset/img/user/user1.svg" width="32" alt="User" class="rounded-circle" loading="lazy">
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-              	<li><a class="dropdown-item" href="/ex/">사용자 홈</a></li>
+              	<li><a class="dropdown-item" href="/">사용자 홈</a></li>
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>

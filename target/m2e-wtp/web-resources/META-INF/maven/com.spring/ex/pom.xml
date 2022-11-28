@@ -13,6 +13,8 @@
 		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 	</properties>
 	<repositories>
 		<repository>
@@ -225,11 +227,6 @@
 			<artifactId>json</artifactId>
 			<version>20180813</version>
 		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.1.1</version>
-		</dependency>
 		 
 	</dependencies>
 	<build>
@@ -258,6 +255,7 @@
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -267,6 +265,12 @@
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
 			</plugin>
 		</plugins>
 	</build>
