@@ -24,7 +24,7 @@
 
 ## 3.1 시퀀스 다이어그램
 <p align="center">
-  <img src="https://github.com/ldgeao99/Billy-A-Dream/blob/master/sequence%20diagram.PNG" width="400" height="400">
+  <img src="https://github.com/ldgeao99/Billy-A-Dream/blob/master/sequence%20diagram.PNG" width="550" height="450">
   </p>
   <br>
 
