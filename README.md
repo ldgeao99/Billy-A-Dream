@@ -1,4 +1,4 @@
-# Billy-A-Dream : 개인간 렌탈 거래 플랫폼
+# :pushpin: Billy-A-Dream(개인간 렌탈 거래 플랫폼)
 
 </br>
 
